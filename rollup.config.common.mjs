@@ -40,7 +40,7 @@ const banner = `window.require = function(name) {
 }`;
 
 export default {
-  input: "src/main.tsx",
+  input: "src/main.ts",
   output: {
     banner,
     file: dest + "/" + pluginID + ".js",
