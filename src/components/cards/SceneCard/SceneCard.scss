@@ -1,0 +1,22 @@
+.valkyr-scene-card {
+  width: 100%;
+
+  /** Max widths based on Stash -
+   * https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Scenes/SceneCardsGrid.tsx#L19
+   */
+  &.zoom-0 {
+    max-width: 280px;
+  }
+
+  &.zoom-1 {
+    max-width: 340px;
+  }
+
+  &.zoom-2 {
+    max-width: 480px;
+  }
+
+  &.zoom-3 {
+    max-width: 640px;
+  }
+}
