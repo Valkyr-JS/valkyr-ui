@@ -5,6 +5,21 @@ import { Redirect, useLocation } from "react-router-dom";
 import { ROUTE } from "@/constants";
 const { PluginApi } = window;
 
+interface TabData {
+  key: string;
+  component: React.ReactNode;
+  title: string;
+}
+
+const tabs: TabData[] = [
+  {
+    key: "about",
+    component: <h1>About Valkyr UI</h1>,
+    title: "About",
+  },
+  { key: "cards", component: "This is the cards panel", title: "Cards" },
+] as const;
+
 const validTabs = ["about", "cards"] as const;
 type TabKey = (typeof validTabs)[number];
 
@@ -20,16 +35,13 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
       <Row>
         <Col id="valkyr-ui-settings-menu-container" sm={3} xl={2}>
           <Nav variant="pills" className="flex-column">
-            <Nav.Item>
-              <LinkContainer to={`${ROUTE.INDEX}?tab=about`}>
-                <Nav.Link eventKey="about">About Valkyr UI</Nav.Link>
-              </LinkContainer>
-            </Nav.Item>
-            <Nav.Item>
-              <LinkContainer to={`${ROUTE.INDEX}?tab=cards`}>
-                <Nav.Link eventKey="cards">Cards</Nav.Link>
-              </LinkContainer>
-            </Nav.Item>
+            {tabs.map((t, i) => (
+              <Nav.Item key={i}>
+                <LinkContainer to={`${ROUTE.INDEX}?tab=${t.key}`}>
+                  <Nav.Link eventKey={t.key}>{t.title}</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+            ))}
           </Nav>
         </Col>
         <Col
@@ -38,8 +50,11 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
           xl={{ offset: 2 }}
         >
           <Tab.Content className="mx-auto">
-            <Tab.Pane eventKey="about">All about Valkyr UI</Tab.Pane>
-            <Tab.Pane eventKey="cards">This is the cards panel</Tab.Pane>
+            {tabs.map((t, i) => (
+              <Tab.Pane eventKey={t.key} key={i}>
+                {t.component}
+              </Tab.Pane>
+            ))}
           </Tab.Content>
         </Col>
       </Row>
