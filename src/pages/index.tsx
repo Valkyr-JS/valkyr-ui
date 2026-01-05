@@ -3,6 +3,8 @@ import { Tab, Nav, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, useLocation } from "react-router-dom";
 import { ROUTE } from "@/constants";
+import CardsTab from "./cards";
+import "./pages.scss";
 const { PluginApi } = window;
 
 interface TabData {
@@ -17,7 +19,7 @@ const tabs: TabData[] = [
     component: <h1>About Valkyr UI</h1>,
     title: "About",
   },
-  { key: "cards", component: "This is the cards panel", title: "Cards" },
+  { key: "cards", component: <CardsTab />, title: "Cards" },
 ] as const;
 
 const validTabs = ["about", "cards"] as const;
@@ -33,7 +35,12 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
   return (
     <Tab.Container activeKey={tab} id="valkyr-ui-configuration-tabs">
       <Row>
-        <Col id="valkyr-ui-settings-menu-container" sm={3} xl={2}>
+        <Col
+          id="valkyr-ui-settings-menu-container"
+          className="settings-menu-container"
+          sm={3}
+          xl={2}
+        >
           <Nav variant="pills" className="flex-column">
             {tabs.map((t, i) => (
               <Nav.Item key={i}>
@@ -62,7 +69,7 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
   );
 };
 
-export const Settings: React.FC = () => {
+const Settings: React.FC = () => {
   const location = useLocation();
   const tab = new URLSearchParams(location.search).get("tab");
 
