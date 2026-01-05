@@ -49,7 +49,7 @@ PluginApi.patch.instead<PropsWithChildren<IPerformerDetails>>(
 
     // If the user has toggled the plugin off via the config settings, render
     // the original component unchanged.
-    if (!qConfig.data.configuration.plugins.stashplugintemplate?.enablePlugin) {
+    if (!qConfig.data.configuration.plugins["valkyr-ui"]?.enablePlugin) {
       return [<Original {...props} />];
     }
 

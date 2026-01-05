@@ -9,7 +9,6 @@ import * as pkg from "./package.json" with { type: "json" };
 import "dotenv/config"
 
 const dest = process.env.STASH_PLUGIN_DEST ?? "dist";
-
 const pluginID = pkg.default.name;
 
 // Replace require imports with Plugin API library references
@@ -50,9 +49,7 @@ export default {
   plugins: [
     commonjs(),
     copy({
-      targets: [
-        { src: "src/source.yml", dest, rename: pluginID + ".yml" },
-      ],
+      targets: [{ src: "src/source.yml", dest, rename: pluginID + ".yml" }],
     }),
     del({ targets: dest, force: true }),
     nodeResolve(),
