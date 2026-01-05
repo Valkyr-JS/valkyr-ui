@@ -1,5 +1,6 @@
 import React from "react";
 import { Tab, Nav, Row, Col } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, useLocation } from "react-router-dom";
 import { ROUTE } from "@/constants";
 const { PluginApi } = window;
@@ -7,7 +8,7 @@ const { PluginApi } = window;
 const validTabs = ["about", "cards"] as const;
 type TabKey = (typeof validTabs)[number];
 
-const defaultTab: TabKey = "cards";
+const defaultTab: TabKey = "about";
 
 function isTabKey(tab: string | null): tab is TabKey {
   return validTabs.includes(tab as TabKey);
@@ -20,10 +21,14 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
         <Col id="valkyr-ui-settings-menu-container" sm={3} xl={2}>
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
-              <Nav.Link eventKey="about">About Valkyr UI</Nav.Link>
+              <LinkContainer to={`${ROUTE.INDEX}?tab=about`}>
+                <Nav.Link eventKey="about">About Valkyr UI</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="cards">Cards</Nav.Link>
+              <LinkContainer to={`${ROUTE.INDEX}?tab=cards`}>
+                <Nav.Link eventKey="cards">Cards</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
           </Nav>
         </Col>
