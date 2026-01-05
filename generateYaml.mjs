@@ -22,7 +22,7 @@ fs.readdir(dest + '/', (_err, files) => {
 });
 
 const json = {
-  name: pkg.default.name,
+  name: "Valkyr UI",
   description: pkg.default.description,
   url: pkg.default.homepage,
   version: pkg.default.version,
