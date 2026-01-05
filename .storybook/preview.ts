@@ -1,5 +1,8 @@
 import type { Preview } from '@storybook/react-vite'
 
+// Stash app CSS bundle - v0.30.1
+import "./index-DkM4iYzr.css"
+
 const preview: Preview = {
   parameters: {
     controls: {
