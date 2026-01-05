@@ -73,6 +73,7 @@
     "write-yaml-file": "^5.0.0"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "dotenv": "^17.2.3"
   }
 }
