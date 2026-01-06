@@ -4,3 +4,6 @@ node_modules
 
 *storybook.log
 storybook-static
+
+# May contain personal data
+.storybook/mocks

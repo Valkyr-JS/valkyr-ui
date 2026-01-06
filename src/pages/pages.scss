@@ -1,0 +1,11 @@
+#valkyr-ui-settings-menu-container {
+  @media (min-width: 576px) {
+    position: fixed;
+  }
+}
+
+#valkyr-ui-settings-container {
+  .tab-content {
+    max-width: 780px;
+  }
+}

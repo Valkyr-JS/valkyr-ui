@@ -1,5 +1,4 @@
 import writeYamlFile from 'write-yaml-file'
-import pluginSettings from "./src/settings.json" with { type: "json" }
 import * as pkg from "./package.json" with { type: "json" };
 import fs from 'fs';
 import "dotenv/config"
@@ -29,8 +28,7 @@ const json = {
   ui: {
     javascript: jsFiles,
     css: cssFiles
-  },
-  settings: pluginSettings
+  }
 }
 
 writeYamlFile(dest + '/' + filename, json).then(() => {
