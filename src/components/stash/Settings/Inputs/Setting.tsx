@@ -1,16 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import cx from "classnames";
 
-interface ISetting {
-  id?: string;
-  className?: string;
-  heading?: React.ReactNode;
-  subHeading?: React.ReactNode;
-  tooltip?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-  disabled?: boolean;
-}
-
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Settings/Inputs.tsx#L24 */
 const Setting: React.FC<PropsWithChildren<ISetting>> = (props) => {
   function renderHeading() {

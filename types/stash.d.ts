@@ -23,6 +23,16 @@ interface ISceneCardProps {
   fromGroupId?: string;
 }
 
+interface ISetting {
+  id?: string;
+  className?: string;
+  heading?: React.ReactNode;
+  subHeading?: React.ReactNode;
+  tooltip?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  disabled?: boolean;
+}
+
 interface SlimSceneDataFragment {
   __typename: Scene["__typename"];
   id: Scene["id"];
