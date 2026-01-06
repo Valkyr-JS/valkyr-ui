@@ -23,6 +23,14 @@ interface ISceneCardProps {
   fromGroupId?: string;
 }
 
+interface ISceneCardsGrid {
+  scenes: SlimSceneDataFragment[];
+  queue?: SceneQueue;
+  selectedIds: Set<string>;
+  zoomIndex: number;
+  onSelectChange: (id: string, selected: boolean, shiftKey: boolean) => void;
+  fromGroupId?: string;
+}
 interface ISetting {
   id?: string;
   className?: string;

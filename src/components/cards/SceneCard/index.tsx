@@ -3,7 +3,11 @@ import cx from "classnames";
 import { Card } from "react-bootstrap";
 import "./SceneCard.scss";
 
-export const SceneCard: React.FC<ISceneCardProps> = (props) => {
+interface ValkyrUiSceneCardProps {
+  zoomIndex: ISceneCardsGrid["zoomIndex"];
+}
+
+export const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
   console.log("props: ", props);
   const classes = cx(
     "scene-card",
