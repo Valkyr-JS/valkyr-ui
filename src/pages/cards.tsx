@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { SettingSection } from "@/components/forms/SettingsSection";
+import { SettingSection } from "@/components/stash/Settings/SettingSection";
 
 const CardsTab: React.FC = () => {
   return (
