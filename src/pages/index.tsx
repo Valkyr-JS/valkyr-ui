@@ -35,12 +35,7 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
   return (
     <Tab.Container activeKey={tab} id="valkyr-ui-configuration-tabs">
       <Row>
-        <Col
-          id="valkyr-ui-settings-menu-container"
-          className="settings-menu-container"
-          sm={3}
-          xl={2}
-        >
+        <Col id="valkyr-ui-settings-menu-container" sm={3} xl={2}>
           <Nav variant="pills" className="flex-column">
             {tabs.map((t, i) => (
               <Nav.Item key={i}>
