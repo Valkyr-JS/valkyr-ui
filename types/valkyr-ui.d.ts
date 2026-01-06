@@ -1,4 +1,4 @@
-interface ConfigResult extends ConfigResult {
+interface ExtendedConfigResult extends ConfigResult {
   plugins: {
     "valkyr-ui"?: ValkyrUiConfigMap;
   };

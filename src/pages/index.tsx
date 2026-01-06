@@ -1,26 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tab, Nav, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, useLocation } from "react-router-dom";
-import { ROUTE } from "@/constants";
+import { PLUGIN, ROUTE } from "@/constants";
+import { useConfigurePlugin } from "@/hooks";
 import CardsTab from "./cards";
 import "./pages.scss";
 const { PluginApi } = window;
+const { LoadingIndicator } = PluginApi.components;
 
 interface TabData {
   key: string;
   component: React.ReactNode;
   title: string;
 }
-
-const tabs: TabData[] = [
-  {
-    key: "about",
-    component: <h1>About Valkyr UI</h1>,
-    title: "About",
-  },
-  { key: "cards", component: <CardsTab />, title: "Cards" },
-] as const;
 
 const validTabs = ["about", "cards"] as const;
 type TabKey = (typeof validTabs)[number];
@@ -32,6 +25,51 @@ function isTabKey(tab: string | null): tab is TabKey {
 }
 
 const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
+  /* -------------------------------------- Fetch config data ------------------------------------- */
+
+  const qConfig = PluginApi.GQL.useConfigurationQuery();
+  if (qConfig.loading) return <LoadingIndicator />;
+
+  const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
+
+  const [updatePluginConfig] = useConfigurePlugin();
+  const [pluginConfig, setPluginConfig] = useState(
+    stashConfig.plugins[PLUGIN.ID] ?? {}
+  );
+
+  const handlePluginConfigUpdate = async (updatedConfig: ValkyrUiConfigMap) => {
+    const updated = await updatePluginConfig({
+      variables: {
+        plugin_id: PLUGIN.ID,
+        input: updatedConfig,
+      },
+    });
+    console.log(updated);
+    setPluginConfig(updated.data.configurePlugin);
+  };
+
+  /* ------------------------------------------ Tab data ------------------------------------------ */
+
+  const tabs: TabData[] = [
+    {
+      key: "about",
+      component: <h1>About Valkyr UI</h1>,
+      title: "About",
+    },
+    {
+      key: "cards",
+      component: (
+        <CardsTab
+          configUpdateHandler={handlePluginConfigUpdate}
+          pluginConfig={pluginConfig}
+        />
+      ),
+      title: "Cards",
+    },
+  ] as const;
+
+  /* ------------------------------------------ Component ----------------------------------------- */
+
   return (
     <Tab.Container activeKey={tab} id="valkyr-ui-configuration-tabs">
       <Row>
