@@ -13,6 +13,13 @@ interface GalleryFileData {
   }>;
 }
 
+interface IGalleryCardGrid {
+  galleries: SlimGalleryDataFragment[];
+  selectedIds: Set<string>;
+  zoomIndex: number;
+  onSelectChange: (id: string, selected: boolean, shiftKey: boolean) => void;
+}
+
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Galleries/GalleryCard.tsx#L57 */
 interface IGalleryCardProps {
   gallery: Gallery;
@@ -86,7 +93,7 @@ interface SlimGalleryDataFragment {
   scenes: Array<SlimSceneDataFragment>;
   studio?: Maybe<{
     id: Studio["id"];
-    image_path: Studio["image_path"];
+    image_path?: Studio["image_path"];
     name: Studio["name"];
   }>;
   tags: Array<{
@@ -165,7 +172,7 @@ interface SlimSceneDataFragment {
   }>;
   studio?: Maybe<{
     id: Studio["id"];
-    image_path: Studio["image_path"];
+    image_path?: Studio["image_path"];
     name: Studio["name"];
   }>;
   tags: Array<{
