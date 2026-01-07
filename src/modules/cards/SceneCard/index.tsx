@@ -1,6 +1,6 @@
 import React from "react";
 import CardGrid from "@/components/cards/CardGrid";
-import { SceneCard } from "@/components/cards/SceneCard";
+import SceneCard from "@/components/cards/SceneCard";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<ISceneCardsGrid>(
@@ -13,12 +13,28 @@ PluginApi.patch.instead<ISceneCardsGrid>(
 
       if (stashConfig.plugins["valkyr-ui"]?.cards__sceneCards__enabled)
         return [
-          <CardGrid>
-            {props.scenes.map((_sc, i) => (
-              <SceneCard key={i} zoomIndex={props.zoomIndex} />
+          <CardGrid
+            cards={props.scenes.map((sc, i) => (
+              <SceneCard key={i} scene={sc} />
             ))}
-          </CardGrid>,
+            zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
+          />,
         ];
+    }
+
+    return [<Original {...props} />];
+  }
+);
+
+PluginApi.patch.instead<ISceneCardProps>(
+  "SceneCard",
+  function (props, _, Original) {
+    const qConfig = PluginApi.GQL.useConfigurationQuery();
+    if (!qConfig.loading) {
+      const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
+
+      if (stashConfig.plugins["valkyr-ui"]?.cards__sceneCards__enabled)
+        return [<SceneCard {...props} />];
     }
 
     return [<Original {...props} />];
