@@ -1,3 +1,25 @@
+interface FolderData {
+  id: Folder["id"];
+  path: Folder["path"];
+}
+interface GalleryFileData {
+  id: GalleryFile["id"];
+  path: GalleryFile["path"];
+  size: GalleryFile["size"];
+  mod_time: GalleryFile["mod_time"];
+  fingerprints: Array<{
+    type: Fingerprint["type"];
+    value: Fingerprint["value"];
+  }>;
+}
+
+interface IGalleryCardGrid {
+  galleries: SlimGalleryDataFragment[];
+  selectedIds: Set<string>;
+  zoomIndex: number;
+  onSelectChange: (id: string, selected: boolean, shiftKey: boolean) => void;
+}
+
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Galleries/GalleryCard.tsx#L57 */
 interface IGalleryCardProps {
   gallery: Gallery;
@@ -6,6 +28,14 @@ interface IGalleryCardProps {
   selected?: boolean | undefined;
   zoomIndex?: number;
   onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
+}
+
+interface IPlaySceneOptions {
+  sceneIndex?: number;
+  newPage?: number;
+  autoPlay?: boolean;
+  continue?: boolean;
+  start?: number;
 }
 
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Scenes/SceneCard.tsx#L94 */
@@ -39,6 +69,47 @@ interface ISetting {
   tooltip?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   disabled?: boolean;
+}
+
+interface SlimGalleryDataFragment {
+  chapters: Array<{
+    id: GalleryChapter["id"];
+    title: GalleryChapter["title"];
+    image_index: GalleryChapter["image_index"];
+  }>;
+  code?: Gallery["code"];
+  date?: Gallery["date"];
+  details?: Gallery["details"];
+  files: Array<GalleryFileData>;
+  folder?: Maybe<FolderData>;
+  id: Gallery["id"];
+  image_count: Gallery["image_count"];
+  organized: Gallery["organized"];
+  paths: {
+    cover: GalleryPathsType["cover"];
+    preview: GalleryPathsType["preview"];
+  };
+  performers: Array<{
+    favorite: Performer["favorite"];
+    gender?: Performer["gender"];
+    id: Performer["id"];
+    image_path?: Performer["image_path"];
+    name: Performer["name"];
+  }>;
+  photographer?: Gallery["photographer"];
+  rating100?: Gallery["rating100"];
+  scenes: Array<SlimSceneDataFragment>;
+  studio?: Maybe<{
+    id: Studio["id"];
+    image_path?: Studio["image_path"];
+    name: Studio["name"];
+  }>;
+  tags: Array<{
+    id: Tag["id"];
+    name: Tag["name"];
+  }>;
+  title?: Gallery["title"];
+  urls: Gallery["urls"];
 }
 
 interface SlimSceneDataFragment {
@@ -109,7 +180,7 @@ interface SlimSceneDataFragment {
   }>;
   studio?: Maybe<{
     id: Studio["id"];
-    image_path: Studio["image_path"];
+    image_path?: Studio["image_path"];
     name: Studio["name"];
   }>;
   tags: Array<{
