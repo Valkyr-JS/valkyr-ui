@@ -1,0 +1,12 @@
+@use "./variables";
+
+$prefix: variables.$prefix;
+
+:root {
+  --#{$prefix}-body-color: #f5f8fa;
+
+  --#{$prefix}-title-color: var(--#{$prefix}-body-color);
+
+  --#{$prefix}-card-title-color: var(--#{$prefix}-title-color);
+  --#{$prefix}-card-title-font-size: 1.25rem;
+}
