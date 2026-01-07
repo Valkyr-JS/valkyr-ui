@@ -9,3 +9,24 @@ export const getTitleFromObject = (object: SlimStashObject): string => {
 
   return title;
 };
+
+/** Create a url link to a scene page. */
+export const makeSceneUrl = ({ cont, index, scene, queue }: ImakeSceneUrl) => {
+  const link = queue
+    ? queue.makeLink(scene.id, {
+        sceneIndex: index,
+        continue: cont,
+      })
+    : `/scenes/${scene.id}`;
+
+  return link as string;
+};
+
+interface ImakeSceneUrl {
+  cont?: IPlaySceneOptions["continue"];
+  queue?: {
+    makeLink(sceneID: string, options: IPlaySceneOptions): string;
+  };
+  scene: SlimSceneDataFragment;
+  index?: number;
+}

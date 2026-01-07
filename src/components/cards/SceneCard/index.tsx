@@ -1,13 +1,31 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { getTitleFromObject, makeSceneUrl } from "@/helpers";
+import CardTitle from "../Title";
 
 interface ValkyrUiSceneCardProps {
+  continuePlaylist?: Maybe<boolean> | undefined;
+  index?: ISceneCardProps["index"];
+  queue?: ISceneCardProps["queue"];
   scene: SlimSceneDataFragment;
 }
 
 const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
   console.log(`props - '${props.scene.title || props.scene.id}': `, props);
-  return <Card>Scene Card</Card>;
+
+  const title = getTitleFromObject(props.scene);
+  const sceneLink = makeSceneUrl({
+    cont: props.continuePlaylist ?? false,
+    index: props.index,
+    scene: props.scene,
+    queue: props.queue,
+  });
+
+  return (
+    <Card>
+      <CardTitle link={sceneLink} text={title} />
+    </Card>
+  );
 };
 
 export default SceneCard;

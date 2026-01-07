@@ -19,7 +19,13 @@ PluginApi.patch.instead<ISceneCardsGrid>(
         return [
           <CardGrid
             cards={props.scenes.map((sc, i) => (
-              <SceneCard key={i} scene={sc} />
+              <SceneCard
+                key={i}
+                continuePlaylist={stashConfig.interface.continuePlaylistDefault}
+                index={i}
+                queue={props.queue}
+                scene={sc}
+              />
             ))}
             zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
           />,
@@ -39,7 +45,14 @@ PluginApi.patch.instead<ISceneCardProps>(
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
       if (pluginConfig?.cards__sceneCards__enabled)
-        return [<SceneCard {...props} />];
+        return [
+          <SceneCard
+            continuePlaylist={stashConfig.interface.continuePlaylistDefault}
+            index={props.index}
+            queue={props.queue}
+            scene={props.scene}
+          />,
+        ];
     }
 
     return [<Original {...props} />];

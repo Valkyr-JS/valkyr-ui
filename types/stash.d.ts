@@ -30,6 +30,14 @@ interface IGalleryCardProps {
   onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
 }
 
+interface IPlaySceneOptions {
+  sceneIndex?: number;
+  newPage?: number;
+  autoPlay?: boolean;
+  continue?: boolean;
+  start?: number;
+}
+
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Scenes/SceneCard.tsx#L94 */
 interface ISceneCardProps {
   scene: SlimSceneDataFragment;
