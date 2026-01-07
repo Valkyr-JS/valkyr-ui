@@ -9,6 +9,21 @@ interface CardsTabProps {
 }
 
 const CardsTab: React.FC<CardsTabProps> = (props) => {
+  const GalleryCardsEnabled = () => (
+    <BooleanSetting
+      checked={props.pluginConfig.cards__galleryCards__enabled ?? false}
+      heading="Enable gallery cards"
+      id="valkyr-ui-cards__galleryCards__enabled"
+      onChange={() =>
+        props.configUpdateHandler({
+          ...props.pluginConfig,
+          cards__galleryCards__enabled:
+            !props.pluginConfig.cards__galleryCards__enabled,
+        })
+      }
+    />
+  );
+
   const SceneCardsEnabled = () => (
     <BooleanSetting
       checked={props.pluginConfig.cards__sceneCards__enabled ?? false}
@@ -43,6 +58,7 @@ const CardsTab: React.FC<CardsTabProps> = (props) => {
   return (
     <Form.Group>
       <SettingSection id="cards-enable" heading="Enable cards">
+        <GalleryCardsEnabled />
         <SceneCardsEnabled />
         <CardGridsEnabled />
       </SettingSection>

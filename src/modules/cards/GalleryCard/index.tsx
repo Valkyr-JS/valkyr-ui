@@ -8,13 +8,13 @@ PluginApi.patch.instead<IGalleryCardGrid>(
   function (props, _, Original) {
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
-      console.log("ISceneCardsGrid: ", props);
+      console.log("IGalleryCardGrid: ", props);
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
       if (
         pluginConfig?.cards__cardGrids__enabled &&
-        pluginConfig?.cards__sceneCards__enabled
+        pluginConfig?.cards__galleryCards__enabled
       )
         return [
           <CardGrid
@@ -38,7 +38,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
-      if (pluginConfig?.cards__sceneCards__enabled)
+      if (pluginConfig?.cards__galleryCards__enabled)
         return [<GalleryCard {...props} />];
     }
 
