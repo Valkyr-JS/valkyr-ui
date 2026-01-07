@@ -12,11 +12,7 @@ const CardGrid: React.FC<CardGridProps> = (props) => {
   const componentClassname = CLASSNAME.NAMESPACE + "__card-grid";
   const zoomClassname = componentClassname + "--zoom-" + props.zoomIndex;
 
-  const classes = cx(
-    "justify-content-center",
-    componentClassname,
-    zoomClassname
-  );
+  const classes = cx(componentClassname, zoomClassname);
   const cardWrapperClassname = CLASSNAME.NAMESPACE + "__card-wrapper";
 
   return (

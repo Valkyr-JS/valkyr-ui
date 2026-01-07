@@ -14,6 +14,7 @@ $maxScreenWidth: 2160px;
   &__card-grid {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin-left: $cardSpacer * -1;
     margin-right: $cardSpacer * -1;
   }
