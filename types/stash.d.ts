@@ -23,6 +23,14 @@ interface ISceneCardProps {
   fromGroupId?: string;
 }
 
+interface ISceneCardsGrid {
+  scenes: SlimSceneDataFragment[];
+  queue?: SceneQueue;
+  selectedIds: Set<string>;
+  zoomIndex: number;
+  onSelectChange: (id: string, selected: boolean, shiftKey: boolean) => void;
+  fromGroupId?: string;
+}
 interface ISetting {
   id?: string;
   className?: string;
@@ -34,71 +42,98 @@ interface ISetting {
 }
 
 interface SlimSceneDataFragment {
-  __typename: Scene["__typename"];
+  code?: Scene["code"];
+  date?: Scene["date"];
+  details?: Scene["details"];
+  director?: Scene["director"];
+  files: Array<VideoFileData>;
+  galleries: Array<{
+    id: Gallery["id"];
+    files: Array<{
+      path: GalleryFile["path"];
+    }>;
+    folder?: Maybe<{
+      path: Folder["path"];
+    }>;
+    title?: Gallery["title"];
+  }>;
+  groups: Array<{
+    group: {
+      front_image_path?: Group["front_image_path"];
+      id: Group["id"];
+      name: Group["name"];
+    };
+    scene_index?: SceneGroup["scene_index"];
+  }>;
   id: Scene["id"];
-  title: Scene["title"];
-  code: Scene["code"];
-  details: Scene["details"];
-  director: Scene["director"];
-  urls: Scene["urls"];
-  date: Scene["date"];
-  rating100: Scene["rating100"];
-  o_counter: Scene["o_counter"];
-  organized: Scene["organized"];
   interactive: Scene["interactive"];
-  interactive_speed: Scene["interactive_speed"];
-  resume_time: Scene["resume_time"];
-  play_duration: Scene["play_duration"];
-  play_count: Scene["play_count"];
-  files: {
-    __typename: VideoFile["__typename"];
-    id: VideoFile["id"];
-    path: VideoFile["path"];
-    size: VideoFile["size"];
-    mod_time: VideoFile["mod_time"];
-    duration: VideoFile["duration"];
-    video_codec: VideoFile["video_codec"];
-    audio_codec: VideoFile["audio_codec"];
-    width: VideoFile["width"];
-    height: Scene["files"]["height"];
-    frame_rate: VideoFile["frame_rate"];
-    bit_rate: VideoFile["bit_rate"];
-    fingerprints: Fingerprint[];
-  }[];
+  interactive_speed?: Scene["interactive_speed"];
+  o_counter?: Scene["o_counter"];
+  organized: Scene["organized"];
   paths: {
-    __typename: Scene["paths"]["__typename"];
-    screenshot: Scene["paths"]["screenshot"];
-    preview: Scene["paths"]["preview"];
-    stream: Scene["paths"]["stream"];
-    webp: Scene["paths"]["webp"];
-    vtt: Scene["paths"]["vtt"];
-    sprite: Scene["paths"]["sprite"];
-    funscript: Scene["paths"]["funscript"];
-    interactive_heatmap: Scene["paths"]["interactive_heatmap"];
-    caption: Scene["paths"]["caption"];
+    caption?: ScenePathsType["caption"];
+    funscript?: ScenePathsType["funscript"];
+    interactive_heatmap?: ScenePathsType["interactive_heatmap"];
+    preview?: ScenePathsType["preview"];
+    screenshot?: ScenePathsType["screenshot"];
+    sprite?: ScenePathsType["sprite"];
+    stream?: ScenePathsType["stream"];
+    webp?: ScenePathsType["webp"];
+    vtt?: ScenePathsType["vtt"];
   };
-  scene_markers: Scene["scene_markers"];
-  galleries: Scene["galleries"];
-  studio: {
-    __typename: Studio["__typename"];
+  performers: Array<{
+    disambiguation?: Performer["disambiguation"];
+    favorite: Performer["favorite"];
+    gender?: Performer["gender"];
+    id: Performer["id"];
+    image_path?: Performer["image_path"];
+    name: Performer["name"];
+  }>;
+  play_count?: Scene["play_count"];
+  play_duration?: Scene["play_duration"];
+  rating100?: Scene["rating100"];
+  resume_time?: Scene["resume_time"];
+  scene_markers: Array<{
+    id: SceneMarker["id"];
+    primary_tag: {
+      id: Tag["id"];
+      name: Tag["name"];
+    };
+    seconds: SceneMarker["seconds"];
+    title: SceneMarker["title"];
+  }>;
+  stash_ids: Array<{
+    endpoint: StashId["endpoint"];
+    stash_id: StashId["stash_id"];
+    updated_at: StashId["updated_at"];
+  }>;
+  studio?: Maybe<{
     id: Studio["id"];
-    name: Studio["name"];
     image_path: Studio["image_path"];
-  } | null;
-  groups: Scene["groups"];
-  tags: {
-    __typename: Tag["__typename"];
+    name: Studio["name"];
+  }>;
+  tags: Array<{
     id: Tag["id"];
     name: Tag["name"];
+  }>;
+  title?: Scene["title"];
+  urls: Scene["urls"];
+}
+
+interface VideoFileData {
+  id: VideoFile["id"];
+  path: VideoFile["path"];
+  size: VideoFile["size"];
+  mod_time: VideoFile["mod_time"];
+  duration: VideoFile["duration"];
+  video_codec: VideoFile["video_codec"];
+  audio_codec: VideoFile["audio_codec"];
+  width: VideoFile["width"];
+  height: VideoFile["height"];
+  frame_rate: VideoFile["frame_rate"];
+  bit_rate: VideoFile["bit_rate"];
+  fingerprints: {
+    type: Fingerprint["type"];
+    value: Fingerprint["value"];
   }[];
-  performers: {
-    __typename: Performer["__typename"];
-    id: Performer["id"];
-    name: Performer["name"];
-    disambiguation: Performer["disambiguation"];
-    gender: "FEMALE" | "MALE";
-    favorite: Performer["favorite"];
-    image_path: Performer["image_path"];
-  }[];
-  stash_ids: Scene["stash_ids"];
 }

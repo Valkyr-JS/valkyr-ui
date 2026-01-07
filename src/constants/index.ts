@@ -1,3 +1,7 @@
+export const CLASSNAME = {
+  NAMESPACE: "valkyr-ui",
+} as const;
+
 export const PLUGIN = {
   ID: "valkyr-ui",
 } as const;
