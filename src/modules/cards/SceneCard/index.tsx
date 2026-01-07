@@ -10,8 +10,12 @@ PluginApi.patch.instead<ISceneCardsGrid>(
     if (!qConfig.loading) {
       console.log("ISceneCardsGrid: ", props);
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
+      const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
-      if (stashConfig.plugins["valkyr-ui"]?.cards__sceneCards__enabled)
+      if (
+        pluginConfig?.cards__cardGrids__enabled &&
+        pluginConfig?.cards__sceneCards__enabled
+      )
         return [
           <CardGrid
             cards={props.scenes.map((sc, i) => (
@@ -32,8 +36,9 @@ PluginApi.patch.instead<ISceneCardProps>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
+      const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
-      if (stashConfig.plugins["valkyr-ui"]?.cards__sceneCards__enabled)
+      if (pluginConfig?.cards__sceneCards__enabled)
         return [<SceneCard {...props} />];
     }
 
