@@ -1,0 +1,14 @@
+@use "../../../scss/variables";
+
+$prefix: variables.$prefix;
+
+.valkyr-ui__card-title {
+  &:hover {
+    text-decoration: none;
+  }
+
+  h5 {
+    color: var(--#{$prefix}-card-title-color);
+    font-size: var(--#{$prefix}-card-title-font-size);
+  }
+}
