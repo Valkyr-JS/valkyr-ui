@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SceneCard } from ".";
+import scene2414 from "../../../../mocks/scenes/2414.json";
+import scene10613 from "../../../../mocks/scenes/10613.json";
 
 const meta = {
   title: "Modules/Cards/SceneCard",
@@ -8,6 +10,11 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  argTypes: {
+    zoomIndex: {
+      control: "number",
+    },
+  },
   args: {
     zoomIndex: 1,
   },
@@ -16,10 +23,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Minimal: Story = {
-  args: {},
+export const Scene2414: Story = {
+  args: {
+    scene: scene2414 as SlimSceneDataFragment,
+  },
 };
 
-export const WhiteYogaPantsRemastered: Story = {
-  args: {},
+export const Scene10613: Story = {
+  args: {
+    scene: scene10613 as SlimSceneDataFragment,
+  },
 };
