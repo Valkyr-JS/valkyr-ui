@@ -1,17 +1,28 @@
 import React from "react";
 import cx from "classnames";
+import { CLASSNAME } from "@/constants";
 
 interface CardGridProps {
   cards: React.ReactNode[];
-  zoomIndex: 0 | 1 | 2 | 3;
+  zoomIndex: StashCardGridZoom;
 }
 
 const CardGrid: React.FC<CardGridProps> = (props) => {
-  const classes = cx("col-12", "col-md-6");
+  const componentClassname = CLASSNAME.NAMESPACE + "__card-grid";
+  const zoomClassname = componentClassname + "--zoom-" + props.zoomIndex;
+
+  const classes = cx(
+    "row",
+    "justify-content-center",
+    componentClassname,
+    zoomClassname
+  );
+  const cardWrapperClasses = cx("col-12", "col-md-6");
+
   return (
-    <div className="row justify-content-center">
+    <div className={classes}>
       {props.cards.map((ob, i) => (
-        <div className={classes} key={i}>
+        <div className={cardWrapperClasses} key={i}>
           {ob}
         </div>
       ))}
