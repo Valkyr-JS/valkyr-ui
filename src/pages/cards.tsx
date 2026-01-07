@@ -24,10 +24,27 @@ const CardsTab: React.FC<CardsTabProps> = (props) => {
     />
   );
 
+  const CardGridsEnabled = () => (
+    <BooleanSetting
+      checked={props.pluginConfig.cards__cardGrids__enabled ?? false}
+      heading="Enable card grids"
+      id="valkyr-ui-cards__cardGrids__enabled"
+      onChange={() =>
+        props.configUpdateHandler({
+          ...props.pluginConfig,
+          cards__cardGrids__enabled:
+            !props.pluginConfig.cards__cardGrids__enabled,
+        })
+      }
+      subHeading="Enables a smoother card grid component for enabled Valkyr UI card types. Closely resembles the native Stash card grids."
+    />
+  );
+
   return (
     <Form.Group>
       <SettingSection id="cards-enable" heading="Enable cards">
         <SceneCardsEnabled />
+        <CardGridsEnabled />
       </SettingSection>
     </Form.Group>
   );
