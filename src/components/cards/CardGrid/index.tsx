@@ -13,7 +13,6 @@ const CardGrid: React.FC<CardGridProps> = (props) => {
   const zoomClassname = componentClassname + "--zoom-" + props.zoomIndex;
 
   const classes = cx(
-    "row",
     "justify-content-center",
     componentClassname,
     zoomClassname
