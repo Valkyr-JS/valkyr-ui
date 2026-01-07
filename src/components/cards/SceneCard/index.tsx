@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import "./SceneCard.scss";
 
 interface ValkyrUiSceneCardProps {
   scene: SlimSceneDataFragment;
@@ -11,4 +10,4 @@ const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
   return <Card>Scene Card</Card>;
 };
 
-export default SceneCard
+export default SceneCard;
