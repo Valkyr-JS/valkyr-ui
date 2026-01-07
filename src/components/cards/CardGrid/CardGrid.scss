@@ -1,0 +1,40 @@
+@use "sass:math";
+
+$cardPaddingX: 15px;
+$zoomBreakpoints: (
+  0: 240px,
+  1: 340px,
+  2: 480px,
+  3: 640px,
+);
+
+$maxScreenWidth: 2160px;
+
+.valkyr-ui {
+  &__card-wrapper {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+
+    // Cards take up 100% width by default
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  // Generate card widths
+  @each $zoom, $maxCardWidth in $zoomBreakpoints {
+    $maxCardWidthWidthPadding: $maxCardWidth + (2 * $cardPaddingX);
+    $breakpointsIn4k: math.ceil(
+      math.div($maxScreenWidth, $maxCardWidthWidthPadding)
+    );
+    @for $i from 1 through $breakpointsIn4k {
+      &__card-grid--zoom-#{$zoom} &__card-wrapper {
+        @media (min-width: #{$i * $maxCardWidthWidthPadding}) {
+          flex: 0 0 math.div(100%, $i + 1);
+          max-width: math.div(100%, $i + 1);
+        }
+      }
+    }
+  }
+}

@@ -11,19 +11,75 @@ const meta = {
   parameters: {
     layout: "centered",
   },
+  argTypes: {
+    zoomIndex: {
+      control: "number",
+    },
+  },
   tags: ["autodocs"],
 } satisfies Meta<typeof CardGrid>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Zoom0: Story = {
+  args: {
+    cards: [
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+    ],
+    zoomIndex: 0,
+  },
+  parameters: {
+    layout: "padded",
+  },
+};
+
 export const Zoom1: Story = {
   args: {
     cards: [
       <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
       <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
     ],
     zoomIndex: 1,
+  },
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const Zoom2: Story = {
+  args: {
+    cards: [
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+    ],
+    zoomIndex: 2,
+  },
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const Zoom3: Story = {
+  args: {
+    cards: [
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
+      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+    ],
+    zoomIndex: 3,
   },
   parameters: {
     layout: "padded",
