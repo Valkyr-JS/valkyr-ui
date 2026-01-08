@@ -16,6 +16,8 @@ const meta = {
   args: {
     closeHandler: fn(),
     link: "#",
+    section: "details",
+    setSection: fn(),
     show: true,
   },
   tags: ["autodocs"],

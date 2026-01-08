@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
 import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
@@ -11,6 +13,12 @@ interface ValkyrUiCardModalProps {
 
   /** The link to the object page. */
   link: string;
+
+  /** The currently displayed modal section. */
+  section: CardModalSection;
+
+  /** Handler that sets the currently displayed modal section. */
+  setSection: (section: CardModalSection) => void;
 
   /** Whether the modal is currently rendered. */
   show: boolean;
@@ -29,6 +37,8 @@ const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
   const intl = useIntl();
   const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
 
+  const handleSetDetailsSection = () => props.setSection("details");
+
   return (
     <Modal
       className={componentClass}
@@ -40,6 +50,16 @@ const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
         <CardTitle id={props.titleID} link={props.link} text={props.title} />
       </Modal.Body>
       <Modal.Footer>
+        <div>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleSetDetailsSection}
+            title={intl.formatMessage({ id: "details" })}
+          >
+            <FontAwesomeIcon icon={faCircleInfo} />
+          </button>
+        </div>
         <div>
           <button
             className="btn btn-secondary"
