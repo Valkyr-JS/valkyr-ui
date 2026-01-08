@@ -5,20 +5,24 @@ import GridCard from "../GridCard";
 import "./GalleryCard.scss";
 
 interface ValkyrUiGalleryCardProps {
+  /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
 }
 
 const GalleryCard: React.FC<ValkyrUiGalleryCardProps> = (props) => {
   console.log(`props - '${props.gallery.title || props.gallery.id}': `, props);
 
+  const id = createGalleryCardID(props.gallery.id);
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
   return (
     <GridCard
+      id={id}
       link={galleryLink}
       thumbnail={
         <GalleryCardThumbnail
+          id={id}
           link={galleryLink}
           src={props.gallery.paths.cover}
         />
@@ -35,7 +39,13 @@ export default GalleryCard;
 /* ---------------------------------------------------------------------------------------------- */
 
 interface GalleryCardThumbnailProps {
+  /** HTML ID used for aria labelling. */
+  id: string;
+
+  /** The link to the object page. */
   link: string;
+
+  /** The link to the gallery cover thumbnail. */
   src: string;
 }
 
@@ -48,7 +58,7 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
 
   return (
     <div className={componentClass}>
-      <a href={props.link}>
+      <a href={props.link} aria-labelledby={props.id}>
         <div className={coverClass}>
           <img className={imgClass} loading="lazy" alt="" src={props.src} />
         </div>
@@ -56,3 +66,11 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
     </div>
   );
 };
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                             Helpers                                            */
+/* ---------------------------------------------------------------------------------------------- */
+
+/** Helper function to create consitently formatted gallery IDs. */
+export const createGalleryCardID = (stashID: string) =>
+  "galleryCard-" + stashID;

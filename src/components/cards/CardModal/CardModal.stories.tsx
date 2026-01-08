@@ -4,7 +4,7 @@ import CardModal from ".";
 import { SceneCardThumbnail } from "../SceneCard";
 import gallery4521 from "../../../../mocks/galleries/4521.json";
 import scene2414 from "../../../../mocks/scenes/2414.json";
-import { GalleryCardThumbnail } from "../GalleryCard";
+import { createGalleryCardID, GalleryCardThumbnail } from "../GalleryCard";
 import { fn } from "storybook/test";
 
 const meta = {
@@ -24,15 +24,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const gallery4521ID = createGalleryCardID(gallery4521.id);
 const Gallery4521Thumbnail = () => (
-  <GalleryCardThumbnail link="#" src={gallery4521.paths.cover} />
+  <GalleryCardThumbnail
+    id={gallery4521ID}
+    link="#"
+    src={gallery4521.paths.cover}
+  />
 );
 
 export const Gallery4521: Story = {
   args: {
     thumbnail: <Gallery4521Thumbnail />,
     title: gallery4521.title,
-    titleID: "Gallery4521Modal",
+    titleID: gallery4521ID,
   },
 };
 

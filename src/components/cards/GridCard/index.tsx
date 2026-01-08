@@ -5,8 +5,16 @@ import CardTitle from "../Title";
 import "./GridCard.scss";
 
 interface ValkyrUiGridCardProps {
+  /** HTML ID used for aria labelling. */
+  id: string;
+
+  /** The link to the object page. */
   link: string;
+
+  /** A component used for displaying the object thumbnail. */
   thumbnail: React.ReactNode;
+
+  /** The title text. */
   title: string;
 }
 
@@ -18,7 +26,7 @@ const GridCard: React.FC<ValkyrUiGridCardProps> = (props) => {
     <Card className={componentClass}>
       {props.thumbnail}
       <div className={bodyClass}>
-        <CardTitle link={props.link} text={props.title} />
+        <CardTitle id={props.id} link={props.link} text={props.title} />
       </div>
     </Card>
   );
