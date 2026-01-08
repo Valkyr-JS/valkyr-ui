@@ -38,12 +38,18 @@ const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
 
 export default SceneCard;
 
+/* ---------------------------------------------------------------------------------------------- */
+/*                                 Scene card thumbnail component                                 */
+/* ---------------------------------------------------------------------------------------------- */
+
 interface SceneCardThumbnailProps {
   link: string;
   src: string;
 }
 
-const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (props) => {
+export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
+  props
+) => {
   const componentClass = CLASSNAME.NAMESPACE + "__scene-card-thumbnail";
   const previewClass = CLASSNAME.NAMESPACE + "__scene-card-thumbnail-preview";
 

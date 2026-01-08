@@ -1,0 +1,10 @@
+.valkyr-ui {
+  &__card-modal {
+    .modal-header {
+      border-bottom: 0;
+      overflow: hidden;
+      flex-direction: column;
+      padding: 0;
+    }
+  }
+}

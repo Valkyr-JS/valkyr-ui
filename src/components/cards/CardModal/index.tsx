@@ -1,0 +1,28 @@
+import React from "react";
+import { Modal } from "react-bootstrap";
+import { CLASSNAME } from "@/constants";
+import CardTitle from "../Title";
+import "./CardModal.scss";
+
+interface ValkyrUiCardModalProps {
+  link: string;
+  show: boolean;
+  thumbnail: React.ReactNode;
+  title: string;
+}
+
+const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
+  const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
+
+  return (
+    <Modal className={componentClass} show={props.show}>
+      <Modal.Header>{props.thumbnail}</Modal.Header>
+      <Modal.Body>
+        <CardTitle link={props.link} text={props.title} />
+      </Modal.Body>
+      <Modal.Footer></Modal.Footer>
+    </Modal>
+  );
+};
+
+export default CardModal;
