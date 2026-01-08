@@ -41,14 +41,19 @@ export const Gallery4521: Story = {
   },
 };
 
+const scene2414ID = createGalleryCardID(scene2414.id);
 const Scene2414Thumbnail = () => (
-  <SceneCardThumbnail link="#" src={scene2414.paths.screenshot} />
+  <SceneCardThumbnail
+    id={scene2414ID}
+    link="#"
+    src={scene2414.paths.screenshot}
+  />
 );
 
 export const Scene2414: Story = {
   args: {
     thumbnail: <Scene2414Thumbnail />,
     title: scene2414.title,
-    titleID: "Scene2414Modal",
+    titleID: scene2414ID,
   },
 };

@@ -14,6 +14,7 @@ interface ValkyrUiSceneCardProps {
 const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
   console.log(`props - '${props.scene.title || props.scene.id}': `, props);
 
+  const id = createSceneCardID(props.scene.id);
   const title = getTitleFromObject(props.scene);
   const sceneLink = makeSceneUrl({
     cont: props.continuePlaylist ?? false,
@@ -24,9 +25,11 @@ const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
 
   return (
     <GridCard
+      id={id}
       link={sceneLink}
       thumbnail={
         <SceneCardThumbnail
+          id={id}
           link={sceneLink}
           src={props.scene.paths.screenshot ?? ""}
         />
@@ -43,7 +46,13 @@ export default SceneCard;
 /* ---------------------------------------------------------------------------------------------- */
 
 interface SceneCardThumbnailProps {
+  /** HTML ID used for aria labelling. */
+  id: string;
+
+  /** The link to the object page. */
   link: string;
+
+  /** The link to the gallery cover thumbnail. */
   src: string;
 }
 
@@ -55,7 +64,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
 
   return (
     <div className={componentClass}>
-      <a href={props.link}>
+      <a href={props.link} aria-labelledby={props.id}>
         <div className={previewClass}>
           <img loading="lazy" alt="" src={props.src} />
         </div>
@@ -63,3 +72,10 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
     </div>
   );
 };
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                             Helpers                                            */
+/* ---------------------------------------------------------------------------------------------- */
+
+/** Helper function to create consitently formatted scene IDs. */
+export const createSceneCardID = (stashID: string) => "sceneCard-" + stashID;
