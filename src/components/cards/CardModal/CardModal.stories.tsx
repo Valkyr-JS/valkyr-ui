@@ -5,6 +5,7 @@ import { SceneCardThumbnail } from "../SceneCard";
 import gallery4521 from "../../../../mocks/galleries/4521.json";
 import scene2414 from "../../../../mocks/scenes/2414.json";
 import { GalleryCardThumbnail } from "../GalleryCard";
+import { fn } from "storybook/test";
 
 const meta = {
   title: "Modules/Cards/CardModal",
@@ -13,6 +14,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    closeHandler: fn(),
     link: "#",
     show: true,
   },

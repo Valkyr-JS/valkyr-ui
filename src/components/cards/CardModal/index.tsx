@@ -3,8 +3,10 @@ import { Modal } from "react-bootstrap";
 import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
 import "./CardModal.scss";
+import { useIntl } from "react-intl";
 
 interface ValkyrUiCardModalProps {
+  closeHandler: () => void;
   link: string;
   show: boolean;
   thumbnail: React.ReactNode;
@@ -12,6 +14,7 @@ interface ValkyrUiCardModalProps {
 }
 
 const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
+  const intl = useIntl();
   const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
 
   return (
@@ -20,7 +23,17 @@ const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
       <Modal.Body>
         <CardTitle link={props.link} text={props.title} />
       </Modal.Body>
-      <Modal.Footer></Modal.Footer>
+      <Modal.Footer>
+        <div>
+          <button
+            className="btn btn-secondary"
+            onClick={props.closeHandler}
+            type="button"
+          >
+            {intl.formatMessage({ id: "actions.close" })}
+          </button>
+        </div>
+      </Modal.Footer>
     </Modal>
   );
 };
