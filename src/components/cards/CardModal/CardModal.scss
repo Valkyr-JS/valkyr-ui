@@ -5,6 +5,11 @@
       overflow: hidden;
       flex-direction: column;
       padding: 0;
+      align-items: center;
     }
+  }
+
+  &__card-modal &__gallery-card-thumbnail-img {
+    max-height: 360px;
   }
 }

@@ -30,12 +30,18 @@ const GalleryCard: React.FC<ValkyrUiGalleryCardProps> = (props) => {
 
 export default GalleryCard;
 
+/* ---------------------------------------------------------------------------------------------- */
+/*                                Gallery card thumbnail component                                */
+/* ---------------------------------------------------------------------------------------------- */
+
 interface GalleryCardThumbnailProps {
   link: string;
   src: string;
 }
 
-const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (props) => {
+export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
+  props
+) => {
   const componentClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail";
   const coverClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail-cover";
   const imgClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail-img";

@@ -1,8 +1,10 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import CardModal from ".";
-import scene2414 from "../../../../mocks/scenes/2414.json";
 import { SceneCardThumbnail } from "../SceneCard";
+import gallery4521 from "../../../../mocks/galleries/4521.json";
+import scene2414 from "../../../../mocks/scenes/2414.json";
+import { GalleryCardThumbnail } from "../GalleryCard";
 
 const meta = {
   title: "Modules/Cards/CardModal",
@@ -19,6 +21,17 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+const Gallery4521Thumbnail = () => (
+  <GalleryCardThumbnail link="#" src={gallery4521.paths.cover} />
+);
+
+export const Gallery4521: Story = {
+  args: {
+    thumbnail: <Gallery4521Thumbnail />,
+    title: gallery4521.title,
+  },
+};
 
 const Scene2414Thumbnail = () => (
   <SceneCardThumbnail link="#" src={scene2414.paths.screenshot} />
