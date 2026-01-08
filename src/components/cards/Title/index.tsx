@@ -1,5 +1,5 @@
-import { CLASSNAME } from "@/constants";
 import React from "react";
+import { CLASSNAME } from "@/constants";
 import "./Title.scss";
 
 interface CardTitleProps {

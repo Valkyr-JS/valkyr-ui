@@ -1,0 +1,19 @@
+.valkyr-ui__card-thumbnail {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  width: 100%;
+  height: auto;
+
+  &--scene {
+    aspect-ratio: 16 / 9;
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    width: 100%;
+  }
+}

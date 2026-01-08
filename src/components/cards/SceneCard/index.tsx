@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
 import CardTitle from "../Title";
+import CardThumbnail from "../Thumbnail";
 
 interface ValkyrUiSceneCardProps {
   continuePlaylist?: Maybe<boolean> | undefined;
@@ -23,6 +24,11 @@ const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
 
   return (
     <Card>
+      <CardThumbnail
+        link={sceneLink}
+        objectType="scene"
+        src={props.scene.paths.screenshot ?? ""}
+      />
       <CardTitle link={sceneLink} text={title} />
     </Card>
   );
