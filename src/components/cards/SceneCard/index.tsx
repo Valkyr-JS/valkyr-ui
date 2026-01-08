@@ -1,7 +1,8 @@
 import React from "react";
-import { Card } from "react-bootstrap";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
-import CardTitle from "../Title";
+import GridCard from "../GridCard";
+import { CLASSNAME } from "@/constants";
+import "./SceneCard.scss";
 
 interface ValkyrUiSceneCardProps {
   continuePlaylist?: Maybe<boolean> | undefined;
@@ -22,10 +23,37 @@ const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
   });
 
   return (
-    <Card>
-      <CardTitle link={sceneLink} text={title} />
-    </Card>
+    <GridCard
+      link={sceneLink}
+      thumbnail={
+        <SceneCardThumbnail
+          link={sceneLink}
+          src={props.scene.paths.screenshot ?? ""}
+        />
+      }
+      title={title}
+    />
   );
 };
 
 export default SceneCard;
+
+interface SceneCardThumbnailProps {
+  link: string;
+  src: string;
+}
+
+const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (props) => {
+  const componentClass = CLASSNAME.NAMESPACE + "__scene-card-thumbnail";
+  const previewClass = CLASSNAME.NAMESPACE + "__scene-card-thumbnail-preview";
+
+  return (
+    <div className={componentClass}>
+      <a href={props.link}>
+        <div className={previewClass}>
+          <img loading="lazy" alt="" src={props.src} />
+        </div>
+      </a>
+    </div>
+  );
+};
