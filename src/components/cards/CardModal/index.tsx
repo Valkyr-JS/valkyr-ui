@@ -6,11 +6,23 @@ import "./CardModal.scss";
 import { useIntl } from "react-intl";
 
 interface ValkyrUiCardModalProps {
+  /** Handler for closing the modal. */
   closeHandler: () => void;
+
+  /** The link to the object page. */
   link: string;
+
+  /** Whether the modal is currently rendered. */
   show: boolean;
+
+  /** A component used for displaying the object thumbnail. */
   thumbnail: React.ReactNode;
+
+  /** The title text. */
   title: string;
+
+  /** HTML ID used for aria labelling on the modal title. */
+  titleID: string;
 }
 
 const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
@@ -18,10 +30,14 @@ const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
   const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
 
   return (
-    <Modal className={componentClass} show={props.show}>
+    <Modal
+      className={componentClass}
+      show={props.show}
+      aria-labelledby={props.titleID}
+    >
       <Modal.Header>{props.thumbnail}</Modal.Header>
       <Modal.Body>
-        <CardTitle link={props.link} text={props.title} />
+        <CardTitle id={props.titleID} link={props.link} text={props.title} />
       </Modal.Body>
       <Modal.Footer>
         <div>

@@ -3,7 +3,13 @@ import { CLASSNAME } from "@/constants";
 import "./Title.scss";
 
 interface CardTitleProps {
+  /** HTML ID used for aria labelling. */
+  id?: string;
+
+  /** The link to the object page. */
   link: string;
+
+  /** The title text. */
   text: string;
 }
 
@@ -11,7 +17,7 @@ const CardTitle: React.FC<CardTitleProps> = (props) => {
   const componentClass = CLASSNAME.NAMESPACE + "__card-title";
 
   return (
-    <a href={props.link} className={componentClass}>
+    <a href={props.link} className={componentClass} id={props.id}>
       <h5>{props.text}</h5>
     </a>
   );

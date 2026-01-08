@@ -32,6 +32,7 @@ export const Gallery4521: Story = {
   args: {
     thumbnail: <Gallery4521Thumbnail />,
     title: gallery4521.title,
+    titleID: "Gallery4521Modal",
   },
 };
 
@@ -43,5 +44,6 @@ export const Scene2414: Story = {
   args: {
     thumbnail: <Scene2414Thumbnail />,
     title: scene2414.title,
+    titleID: "Scene2414Modal",
   },
 };
