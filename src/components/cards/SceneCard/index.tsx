@@ -1,13 +1,24 @@
 import React from "react";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
-import GridCard from "../GridCard";
+import GridCard, { ValkyrUiCardFooterProps } from "../GridCard";
 import { CLASSNAME } from "@/constants";
 import "./SceneCard.scss";
 
 interface ValkyrUiSceneCardProps {
+  /** Stash user setting for whether to continue to the next scene when the
+   * current one ends. */
   continuePlaylist?: Maybe<boolean> | undefined;
+
+  /** Footer props. Leave `undefined` to not render the footer. */
+  footer?: ValkyrUiCardFooterProps;
+
+  /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
+
+  /** The scenes in the current query. */
   queue?: ISceneCardProps["queue"];
+
+  /** The Stash scene data. */
   scene: SlimSceneDataFragment;
 }
 

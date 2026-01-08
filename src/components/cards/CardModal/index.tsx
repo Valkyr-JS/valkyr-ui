@@ -2,10 +2,10 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
+import { useIntl } from "react-intl";
 import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
 import "./CardModal.scss";
-import { useIntl } from "react-intl";
 
 interface ValkyrUiCardModalProps {
   /** Handler for closing the modal. */

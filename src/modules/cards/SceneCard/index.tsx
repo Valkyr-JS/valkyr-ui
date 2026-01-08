@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CardGrid from "@/components/cards/CardGrid";
 import SceneCard from "@/components/cards/SceneCard";
 const { PluginApi } = window;
@@ -12,23 +12,35 @@ PluginApi.patch.instead<ISceneCardsGrid>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
+      const [modalOpen, setModalOpen] = useState(false);
+      const [modalSection, setModalSection] =
+        useState<CardModalSection>("details");
+
       if (
         pluginConfig?.cards__cardGrids__enabled &&
         pluginConfig?.cards__sceneCards__enabled
       )
         return [
-          <CardGrid
-            cards={props.scenes.map((sc, i) => (
-              <SceneCard
-                key={i}
-                continuePlaylist={stashConfig.interface.continuePlaylistDefault}
-                index={i}
-                queue={props.queue}
-                scene={sc}
-              />
-            ))}
-            zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
-          />,
+          <>
+            <CardGrid
+              cards={props.scenes.map((sc, i) => (
+                <SceneCard
+                  key={i}
+                  continuePlaylist={
+                    stashConfig.interface.continuePlaylistDefault
+                  }
+                  footer={{
+                    openHandler: () => setModalOpen(!modalOpen),
+                    setSection: setModalSection,
+                  }}
+                  index={i}
+                  queue={props.queue}
+                  scene={sc}
+                />
+              ))}
+              zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
+            />
+          </>,
         ];
     }
 
