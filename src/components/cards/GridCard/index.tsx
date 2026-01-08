@@ -2,13 +2,12 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
-import CardThumbnail from "../Thumbnail";
 import "./GridCard.scss";
 
 interface ValkyrUiGridCardProps {
-  imgSrc: string;
   link: string;
   objectType: "gallery" | "scene";
+  thumbnail: React.ReactNode;
   title: string;
 }
 
@@ -18,11 +17,7 @@ const GridCard: React.FC<ValkyrUiGridCardProps> = (props) => {
 
   return (
     <Card className={componentClass}>
-      <CardThumbnail
-        link={props.link}
-        objectType={props.objectType}
-        src={props.imgSrc}
-      />
+      {props.thumbnail}
       <div className={bodyClass}>
         <CardTitle link={props.link} text={props.title} />
       </div>
