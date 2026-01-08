@@ -4,6 +4,8 @@ import scene2414 from "../../../../mocks/scenes/2414.json";
 import scene10613 from "../../../../mocks/scenes/10613.json";
 import CardGrid from ".";
 import SceneCard from "../SceneCard";
+import GalleryCard from "../GalleryCard";
+import gallery4521 from "../../../../mocks/galleries/4521.json";
 
 const meta = {
   title: "Modules/Cards/CardGrid",
@@ -22,7 +24,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Zoom0: Story = {
+export const ScenesZoom0: Story = {
   args: {
     cards: [
       <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
@@ -38,7 +40,7 @@ export const Zoom0: Story = {
   },
 };
 
-export const Zoom1: Story = {
+export const ScenesZoom1: Story = {
   args: {
     cards: [
       <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
@@ -54,7 +56,7 @@ export const Zoom1: Story = {
   },
 };
 
-export const Zoom2: Story = {
+export const ScenesZoom2: Story = {
   args: {
     cards: [
       <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
@@ -70,7 +72,7 @@ export const Zoom2: Story = {
   },
 };
 
-export const Zoom3: Story = {
+export const ScenesZoom3: Story = {
   args: {
     cards: [
       <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
@@ -79,6 +81,46 @@ export const Zoom3: Story = {
       <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
       <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
     ],
+    zoomIndex: 3,
+  },
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const GalleriesZoom0: Story = {
+  args: {
+    cards: [<GalleryCard gallery={gallery4521 as SlimGalleryDataFragment} />],
+    zoomIndex: 0,
+  },
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const GalleriesZoom1: Story = {
+  args: {
+    cards: [<GalleryCard gallery={gallery4521 as SlimGalleryDataFragment} />],
+    zoomIndex: 1,
+  },
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const GalleriesZoom2: Story = {
+  args: {
+    cards: [<GalleryCard gallery={gallery4521 as SlimGalleryDataFragment} />],
+    zoomIndex: 2,
+  },
+  parameters: {
+    layout: "padded",
+  },
+};
+
+export const GalleriesZoom3: Story = {
+  args: {
+    cards: [<GalleryCard gallery={gallery4521 as SlimGalleryDataFragment} />],
     zoomIndex: 3,
   },
   parameters: {

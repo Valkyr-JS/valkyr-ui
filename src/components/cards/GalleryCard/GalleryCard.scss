@@ -1,0 +1,26 @@
+.valkyr-ui {
+  &__gallery-card-thumbnail-cover {
+    position: relative;
+  }
+  &__gallery-card-thumbnail-img {
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  &__card-grid--zoom-0 &__gallery-card-thumbnail-img {
+    height: 180px;
+  }
+
+  &__card-grid--zoom-1 &__gallery-card-thumbnail-img {
+    height: 240px;
+  }
+
+  &__card-grid--zoom-2 &__gallery-card-thumbnail-img {
+    height: 360px;
+  }
+
+  &__card-grid--zoom-3 &__gallery-card-thumbnail-img {
+    height: 480px;
+  }
+}

@@ -1,23 +1,23 @@
-.valkyr-ui__scene-card-thumbnail {
-  position: relative;
-
-  &--scene .valkyr-ui__card-thumbnail-preview {
-    aspect-ratio: 16 / 9;
+.valkyr-ui {
+  &__scene-card-thumbnail {
+    position: relative;
   }
-}
 
-.valkyr-ui__scene-card-thumbnail-preview {
-  display: flex;
-  justify-content: center;
-  position: relative;
+  &__scene-card-thumbnail-preview {
+    display: flex;
+    justify-content: center;
+    position: relative;
 
-  width: 100%;
-  height: auto;
-
-  img {
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
+    height: auto;
     width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      width: 100%;
+    }
   }
 }
