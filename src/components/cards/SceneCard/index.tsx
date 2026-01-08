@@ -25,7 +25,6 @@ const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
   return (
     <GridCard
       link={sceneLink}
-      objectType="scene"
       thumbnail={
         <SceneCardThumbnail
           link={sceneLink}

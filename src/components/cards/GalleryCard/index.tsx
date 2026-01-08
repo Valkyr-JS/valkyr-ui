@@ -2,7 +2,7 @@ import React from "react";
 import { CLASSNAME } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import GridCard from "../GridCard";
-import "./GalleryCard.scss"
+import "./GalleryCard.scss";
 
 interface ValkyrUiGalleryCardProps {
   gallery: SlimGalleryDataFragment;
@@ -17,7 +17,6 @@ const GalleryCard: React.FC<ValkyrUiGalleryCardProps> = (props) => {
   return (
     <GridCard
       link={galleryLink}
-      objectType="gallery"
       thumbnail={
         <GalleryCardThumbnail
           link={galleryLink}

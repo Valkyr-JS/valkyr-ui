@@ -6,7 +6,6 @@ import "./GridCard.scss";
 
 interface ValkyrUiGridCardProps {
   link: string;
-  objectType: "gallery" | "scene";
   thumbnail: React.ReactNode;
   title: string;
 }
