@@ -53,7 +53,7 @@ const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
         <div>
           <button
             type="button"
-            className="btn btn-secondary"
+            className="minimal btn"
             onClick={handleSetDetailsSection}
             title={intl.formatMessage({ id: "details" })}
           >
