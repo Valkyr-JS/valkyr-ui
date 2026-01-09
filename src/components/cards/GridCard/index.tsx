@@ -49,6 +49,9 @@ export interface CardFooterProps {
   /** Handler for opening the modal. */
   openHandler: () => void;
 
+  /** Handler that sets data set for the modal. */
+  setData: () => void;
+
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
 }
@@ -57,6 +60,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
   const intl = useIntl();
 
   const handleOpenDetailsSection = () => {
+    props.setData();
     props.setSection("details");
     props.openHandler();
   };

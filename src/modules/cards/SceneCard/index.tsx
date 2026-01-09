@@ -32,6 +32,7 @@ PluginApi.patch.instead<ISceneCardsGrid>(
                   }
                   footer={{
                     openHandler: () => setModalOpen(!modalOpen),
+                    setData: () => setModalSceneIndex(i),
                     setSection: setModalSection,
                   }}
                   index={i}
