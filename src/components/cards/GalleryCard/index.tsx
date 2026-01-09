@@ -4,12 +4,12 @@ import { getTitleFromObject } from "@/helpers";
 import GridCard from "../GridCard";
 import "./GalleryCard.scss";
 
-interface ValkyrUiGalleryCardProps {
+interface GalleryCardProps {
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
 }
 
-const GalleryCard: React.FC<ValkyrUiGalleryCardProps> = (props) => {
+const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   console.log(`props - '${props.gallery.title || props.gallery.id}': `, props);
 
   const id = createGalleryCardID(props.gallery.id);

@@ -1,17 +1,17 @@
 import React from "react";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
-import GridCard, { ValkyrUiCardFooterProps } from "../GridCard";
+import GridCard, { CardFooterProps } from "../GridCard";
 import { CLASSNAME } from "@/constants";
 import "./SceneCard.scss";
 import CardModal from "../CardModal";
 
-interface ValkyrUiSceneCardProps {
+interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
    * current one ends. */
   continuePlaylist?: Maybe<boolean> | undefined;
 
   /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: ValkyrUiCardFooterProps;
+  footer?: CardFooterProps;
 
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
@@ -23,7 +23,7 @@ interface ValkyrUiSceneCardProps {
   scene: SlimSceneDataFragment;
 }
 
-const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
+const SceneCard: React.FC<SceneCardProps> = (props) => {
   console.log(`props - '${props.scene.title || props.scene.id}': `, props);
 
   const id = createSceneCardID(props.scene.id);

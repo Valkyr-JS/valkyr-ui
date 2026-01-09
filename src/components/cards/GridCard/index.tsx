@@ -7,9 +7,9 @@ import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
 import "./GridCard.scss";
 
-interface ValkyrUiGridCardProps {
+interface GridCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: ValkyrUiCardFooterProps;
+  footer?: CardFooterProps;
 
   /** HTML ID used for aria labelling. */
   id: string;
@@ -24,7 +24,7 @@ interface ValkyrUiGridCardProps {
   title: string;
 }
 
-const GridCard: React.FC<ValkyrUiGridCardProps> = (props) => {
+const GridCard: React.FC<GridCardProps> = (props) => {
   const componentClass = CLASSNAME.NAMESPACE + "__grid-card";
   const bodyClass = CLASSNAME.NAMESPACE + "__grid-card-body";
 
@@ -45,7 +45,7 @@ export default GridCard;
 /*                                      Card footer component                                     */
 /* ---------------------------------------------------------------------------------------------- */
 
-export interface ValkyrUiCardFooterProps {
+export interface CardFooterProps {
   /** Handler for opening the modal. */
   openHandler: () => void;
 
@@ -53,7 +53,7 @@ export interface ValkyrUiCardFooterProps {
   setSection: (section: CardModalSection) => void;
 }
 
-const CardFooter: React.FC<ValkyrUiCardFooterProps> = (props) => {
+const CardFooter: React.FC<CardFooterProps> = (props) => {
   const intl = useIntl();
 
   const handleOpenDetailsSection = () => {

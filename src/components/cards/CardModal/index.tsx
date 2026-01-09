@@ -7,7 +7,7 @@ import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
 import "./CardModal.scss";
 
-export interface ValkyrUiCardModalProps {
+export interface CardModalProps {
   /** Handler for closing the modal. */
   closeHandler: () => void;
 
@@ -33,7 +33,7 @@ export interface ValkyrUiCardModalProps {
   titleID: string;
 }
 
-const CardModal: React.FC<ValkyrUiCardModalProps> = (props) => {
+const CardModal: React.FC<CardModalProps> = (props) => {
   const intl = useIntl();
   const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
 
