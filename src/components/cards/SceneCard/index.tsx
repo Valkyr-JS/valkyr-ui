@@ -3,7 +3,7 @@ import { getTitleFromObject, makeSceneUrl } from "@/helpers";
 import GridCard, { ValkyrUiCardFooterProps } from "../GridCard";
 import { CLASSNAME } from "@/constants";
 import "./SceneCard.scss";
-import CardModal, { ValkyrUiCardModalProps } from "../CardModal";
+import CardModal from "../CardModal";
 
 interface ValkyrUiSceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -37,6 +37,7 @@ const SceneCard: React.FC<ValkyrUiSceneCardProps> = (props) => {
 
   return (
     <GridCard
+      footer={props.footer}
       id={id}
       link={sceneLink}
       thumbnail={
