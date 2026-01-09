@@ -1,6 +1,7 @@
 import React from "react";
 import { CLASSNAME } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
+import CardModal from "../CardModal";
 import GridCard, { CardFooterProps } from "../GridCard";
 import "./GalleryCard.scss";
 
@@ -68,6 +69,52 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
         </div>
       </a>
     </div>
+  );
+};
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                  Gallery card modal component                                  */
+/* ---------------------------------------------------------------------------------------------- */
+
+interface GalleryCardModalProps {
+  /** Handler for closing the modal. */
+  closeHandler: () => void;
+
+  /** The Stash gallery data. */
+  gallery: SlimGalleryDataFragment;
+
+  /** The currently displayed modal section. */
+  section: CardModalSection;
+
+  /** Handler that sets the currently displayed modal section. */
+  setSection: (section: CardModalSection) => void;
+
+  /** Whether the modal is currently rendered. */
+  show: boolean;
+}
+
+export const GalleryCardModal: React.FC<GalleryCardModalProps> = (props) => {
+  const id = createGalleryCardID(props.gallery.id);
+  const galleryLink = `/galleries/${props.gallery.id}`;
+  const title = getTitleFromObject(props.gallery);
+
+  return (
+    <CardModal
+      closeHandler={props.closeHandler}
+      link={galleryLink}
+      section={props.section}
+      setSection={props.setSection}
+      show={props.show}
+      thumbnail={
+        <GalleryCardThumbnail
+          id={id}
+          link={galleryLink}
+          src={props.gallery.paths.cover}
+        />
+      }
+      title={title}
+      titleID={id}
+    />
   );
 };
 
