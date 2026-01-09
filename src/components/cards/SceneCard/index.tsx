@@ -3,6 +3,7 @@ import { getTitleFromObject, makeSceneUrl } from "@/helpers";
 import GridCard, { ValkyrUiCardFooterProps } from "../GridCard";
 import { CLASSNAME } from "@/constants";
 import "./SceneCard.scss";
+import CardModal, { ValkyrUiCardModalProps } from "../CardModal";
 
 interface ValkyrUiSceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -81,6 +82,67 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
         </div>
       </a>
     </div>
+  );
+};
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                   Scene card modal component                                   */
+/* ---------------------------------------------------------------------------------------------- */
+
+interface SceneCardModalProps {
+  /** Handler for closing the modal. */
+  closeHandler: () => void;
+
+  /** Stash user setting for whether to continue to the next scene when the
+   * current one ends. */
+  continuePlaylist?: Maybe<boolean> | undefined;
+
+  /** The index of the scene in the current page query. */
+  index?: ISceneCardProps["index"];
+
+  /** The scenes in the current query. */
+  queue?: ISceneCardProps["queue"];
+
+  /** The Stash scene data. */
+  scene: SlimSceneDataFragment;
+
+  /** The currently displayed modal section. */
+  section: CardModalSection;
+
+  /** Handler that sets the currently displayed modal section. */
+  setSection: (section: CardModalSection) => void;
+
+  /** Whether the modal is currently rendered. */
+  show: boolean;
+}
+
+export const SceneCardModal: React.FC<SceneCardModalProps> = (props) => {
+  const id = createSceneCardID(props.scene.id) + "Modal";
+  const title = getTitleFromObject(props.scene);
+  const sceneLink = makeSceneUrl({
+    cont: props.continuePlaylist ?? false,
+    index: props.index,
+    scene: props.scene,
+    queue: props.queue,
+  });
+
+  return (
+    <CardModal
+      closeHandler={props.closeHandler}
+      link={sceneLink}
+      section={props.section}
+      setSection={props.setSection}
+      show={props.show}
+      thumbnail={
+        <SceneCardThumbnail
+          id={id}
+          link={sceneLink}
+          src={props.scene.paths.screenshot ?? ""}
+        />
+      }
+      title={title}
+      titleID={id}
+    />
   );
 };
 

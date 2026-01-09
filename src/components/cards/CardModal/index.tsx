@@ -7,7 +7,7 @@ import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
 import "./CardModal.scss";
 
-interface ValkyrUiCardModalProps {
+export interface ValkyrUiCardModalProps {
   /** Handler for closing the modal. */
   closeHandler: () => void;
 

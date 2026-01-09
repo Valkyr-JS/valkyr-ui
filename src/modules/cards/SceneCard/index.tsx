@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CardGrid from "@/components/cards/CardGrid";
-import SceneCard from "@/components/cards/SceneCard";
+import SceneCard, { SceneCardModal } from "@/components/cards/SceneCard";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<ISceneCardsGrid>(
@@ -13,6 +13,7 @@ PluginApi.patch.instead<ISceneCardsGrid>(
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
       const [modalOpen, setModalOpen] = useState(false);
+      const [modalSceneIndex, setModalSceneIndex] = useState(0);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
 
@@ -39,6 +40,16 @@ PluginApi.patch.instead<ISceneCardsGrid>(
                 />
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
+            />
+            <SceneCardModal
+              closeHandler={() => setModalOpen(false)}
+              continuePlaylist={stashConfig.interface.continuePlaylistDefault}
+              index={modalSceneIndex}
+              queue={props.queue}
+              scene={props.scenes[modalSceneIndex]}
+              section={modalSection}
+              setSection={setModalSection}
+              show={modalOpen}
             />
           </>,
         ];
