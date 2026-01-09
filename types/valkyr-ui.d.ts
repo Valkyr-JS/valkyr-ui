@@ -1,3 +1,5 @@
+type CardModalSection = "details";
+
 interface ExtendedConfigResult extends ConfigResult {
   plugins: {
     "valkyr-ui"?: ValkyrUiConfigMap;

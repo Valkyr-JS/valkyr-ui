@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import CardGrid from "@/components/cards/CardGrid";
-import GalleryCard from "@/components/cards/GalleryCard";
+import GalleryCard, { GalleryCardModal } from "@/components/cards/GalleryCard";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<IGalleryCardGrid>(
@@ -12,17 +12,39 @@ PluginApi.patch.instead<IGalleryCardGrid>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
+      const [modalOpen, setModalOpen] = useState(false);
+      const [modalGalleryIndex, setModalGalleryIndex] = useState(0);
+      const [modalSection, setModalSection] =
+        useState<CardModalSection>("details");
+
       if (
         pluginConfig?.cards__cardGrids__enabled &&
         pluginConfig?.cards__galleryCards__enabled
       )
         return [
-          <CardGrid
-            cards={props.galleries.map((gl, i) => (
-              <GalleryCard key={i} gallery={gl} />
-            ))}
-            zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
-          />,
+          <>
+            <CardGrid
+              cards={props.galleries.map((gl, i) => (
+                <GalleryCard
+                  key={i}
+                  footer={{
+                    openHandler: () => setModalOpen(!modalOpen),
+                    setData: () => setModalGalleryIndex(i),
+                    setSection: setModalSection,
+                  }}
+                  gallery={gl}
+                />
+              ))}
+              zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
+            />
+            <GalleryCardModal
+              closeHandler={() => setModalOpen(false)}
+              gallery={props.galleries[modalGalleryIndex]}
+              section={modalSection}
+              setSection={setModalSection}
+              show={modalOpen}
+            />
+          </>,
         ];
     }
 
