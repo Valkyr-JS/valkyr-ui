@@ -1,10 +1,13 @@
 import React from "react";
 import { CLASSNAME } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
-import GridCard from "../GridCard";
+import GridCard, { CardFooterProps } from "../GridCard";
 import "./GalleryCard.scss";
 
 interface GalleryCardProps {
+  /** Footer props. Leave `undefined` to not render the footer. */
+  footer?: CardFooterProps;
+
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
 }
@@ -18,6 +21,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
 
   return (
     <GridCard
+      footer={props.footer}
       id={id}
       link={galleryLink}
       thumbnail={
