@@ -6,7 +6,7 @@ interface ExtendedConfigResult extends ConfigResult {
   };
 }
 
-type StashCardGridZoom = 0 | 1 | 2 | 3;
+type StashCardGridZoom = -1 | 0 | 1 | 2 | 3;
 
 type SlimStashObject =
   | SlimGalleryDataFragment
@@ -25,6 +25,8 @@ interface ValkyrUiConfigMap {
   cards__cardGrids__enabled?: boolean;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCards__enabled?: boolean;
+  /** The zoom breakpoint at which to display the studio link. */
+  cards__general_data__studio?: StashCardGridZoom;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCards__enabled?: boolean;
 }

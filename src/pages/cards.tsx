@@ -1,7 +1,11 @@
 import React from "react";
-import { Form, Table } from "react-bootstrap";
-import { BooleanSetting } from "@/components/stash/Settings/Inputs";
+import { Form } from "react-bootstrap";
+import {
+  BooleanSetting,
+  SettingGroup,
+} from "@/components/stash/Settings/Inputs";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
+import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting";
 
 interface CardsTabProps {
   configUpdateHandler: (updatedConfig: ValkyrUiConfigMap) => void;
@@ -55,6 +59,22 @@ const CardsTab: React.FC<CardsTabProps> = (props) => {
     />
   );
 
+  const StudioBreakpoint = () => (
+    <NumberSetting
+      heading="Studio"
+      id="valkyr-ui-cards__general_data__studio"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__general_data__studio: v,
+          });
+        }
+      }}
+      value={props.pluginConfig.cards__general_data__studio ?? 0}
+    />
+  );
+
   return (
     <Form.Group>
       <SettingSection id="cards-enable" heading="Enable cards">
@@ -62,27 +82,18 @@ const CardsTab: React.FC<CardsTabProps> = (props) => {
         <SceneCardsEnabled />
         <CardGridsEnabled />
       </SettingSection>
-      <SettingSection
-        id="shared-data"
-        heading="Shared card data"
-        subHeading="For each piece of data, you can set the card zoom at which it appears. This allows you to display only select data when cards are smaller, and more data as they get bigger. The value must be between 0 and 3. Alternatively, set it to -1 to turn it off completely."
-      >
-        <Table striped>
-          <thead>
-            <tr>
-              <th>Data</th>
-              <th>Card zoom</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Studio</th>
-              <td>
-                <input type="number" min={-1} max={3} value={0} />
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+
+      <SettingSection id="shared-data" heading="Shared card data">
+        <SettingGroup
+          collapsible
+          settingProps={{
+            heading: "Shared card data",
+            subHeading:
+              "For each piece of data, you can set the card zoom at which it appears. This allows you to display only select data when cards are smaller, and more data as they get bigger. The value must be between 0 and 3. Alternatively, set it to -1 to turn it off completely.",
+          }}
+        >
+          <StudioBreakpoint />
+        </SettingGroup>
       </SettingSection>
     </Form.Group>
   );
