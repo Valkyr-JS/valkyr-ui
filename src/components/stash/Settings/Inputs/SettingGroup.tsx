@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useState } from "react";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Collapse } from "react-bootstrap";
 import Setting from "./Setting";
-const { Icon } = PluginApi.components;
 
 interface ISetting {
   id?: string;
@@ -33,7 +33,7 @@ const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
         variant="minimal"
         onClick={() => setOpen(!open)}
       >
-        <Icon className="fa-fw" icon={open ? faChevronUp : faChevronDown} />
+        <FontAwesomeIcon fixedWidth icon={open ? faChevronUp : faChevronDown} />
       </Button>
     );
   }
