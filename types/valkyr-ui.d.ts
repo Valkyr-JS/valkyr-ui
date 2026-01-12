@@ -26,7 +26,7 @@ interface ValkyrUiConfigMap {
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCards__enabled?: boolean;
   /** The zoom breakpoint at which to display the studio link. */
-  cards__general_data__studio?: StashCardGridZoom;
+  cards__generalData__studio?: StashCardGridZoom;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCards__enabled?: boolean;
 }
