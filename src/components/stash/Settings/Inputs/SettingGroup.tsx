@@ -34,6 +34,9 @@ const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
         onClick={() => setOpen(!open)}
       >
         <FontAwesomeIcon fixedWidth icon={open ? faChevronUp : faChevronDown} />
+        <span className="sr-only">
+          {open ? "Close" : "Open"} settings group
+        </span>
       </Button>
     );
   }
