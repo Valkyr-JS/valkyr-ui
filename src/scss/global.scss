@@ -10,3 +10,9 @@ $prefix: variables.$prefix;
   --#{$prefix}-card-title-color: var(--#{$prefix}-title-color);
   --#{$prefix}-card-title-font-size: 1.25rem;
 }
+
+// Ensure the toggle button for collapsible settings doesn't wrap to the next
+// line due to long subheading text.
+.setting-section .setting-group.collapsible > .setting {
+  flex-wrap: nowrap;
+}
