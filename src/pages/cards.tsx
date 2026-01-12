@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, Table } from "react-bootstrap";
 import { BooleanSetting } from "@/components/stash/Settings/Inputs";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 
@@ -61,6 +61,28 @@ const CardsTab: React.FC<CardsTabProps> = (props) => {
         <GalleryCardsEnabled />
         <SceneCardsEnabled />
         <CardGridsEnabled />
+      </SettingSection>
+      <SettingSection
+        id="shared-data"
+        heading="Shared card data"
+        subHeading="For each piece of data, you can set the card zoom at which it appears. This allows you to display only select data when cards are smaller, and more data as they get bigger. The value must be between 0 and 3. Alternatively, set it to -1 to turn it off completely."
+      >
+        <Table striped>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Card zoom</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Studio</th>
+              <td>
+                <input type="number" min={-1} max={3} value={0} />
+              </td>
+            </tr>
+          </tbody>
+        </Table>
       </SettingSection>
     </Form.Group>
   );
