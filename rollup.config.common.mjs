@@ -20,6 +20,8 @@ const banner = `window.require = function(name) {
             return window.PluginApi.libraries.FontAwesomeRegular
         case "@fortawesome/free-solid-svg-icons":
             return window.PluginApi.libraries.FontAwesomeSolid
+        case "@fortawesome/react-fontawesome":
+            return window.PluginApi.libraries.ReactFontAwesome
         case "mousetrap":
             return window.PluginApi.libraries.Mousetrap
         case "mousetrap-pause":
