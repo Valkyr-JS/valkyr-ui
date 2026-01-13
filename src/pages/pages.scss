@@ -9,3 +9,30 @@
     max-width: 780px;
   }
 }
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                              Forms                                             */
+/* ---------------------------------------------------------------------------------------------- */
+
+.valkyr-ui {
+  &__form-group {
+    // At small screen sizes, split settings group key and value into two rows
+    // rather than two columns.
+    @media (max-width: 576px) {
+      .setting-section .setting-group .setting > div {
+        width: 100%;
+
+        &:last-child {
+          margin-top: 5px;
+          margin-left: 0;
+        }
+      }
+    }
+
+    // Ensure the toggle button for collapsible settings doesn't wrap to the next
+    // line due to long subheading text.
+    .setting-section .setting-group.collapsible > .setting {
+      flex-wrap: nowrap;
+    }
+  }
+}
