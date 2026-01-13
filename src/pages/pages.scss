@@ -16,6 +16,11 @@
 
 .valkyr-ui {
   &__form-group {
+    // .setting-section .setting {
+    //   flex-direction: column;
+    //   align-items: baseline;
+    //   flex-wrap: wrap;
+    // }
     // At small screen sizes, split settings group key and value into two rows
     // rather than two columns.
     @media (max-width: 576px) {

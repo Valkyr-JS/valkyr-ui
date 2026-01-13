@@ -15,6 +15,7 @@ export const NumberSetting: React.FC<INumberSetting> = ({
   return (
     <Setting {...props}>
       <NumberField
+        id={props.id}
         className="text-input"
         value={value ?? 0}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
