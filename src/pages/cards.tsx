@@ -6,6 +6,7 @@ import {
 } from "@/components/stash/Settings/Inputs";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting";
+import { CLASSNAME } from "@/constants";
 
 interface CardsTabProps {
   configUpdateHandler: (updatedConfig: ValkyrUiConfigMap) => void;
@@ -75,8 +76,10 @@ const CardsTab: React.FC<CardsTabProps> = (props) => {
     />
   );
 
+  const classes = CLASSNAME.NAMESPACE + "__form-group";
+
   return (
-    <Form.Group>
+    <Form.Group className={classes}>
       <SettingSection id="cards-enable" heading="Enable cards">
         <GalleryCardsEnabled />
         <SceneCardsEnabled />
