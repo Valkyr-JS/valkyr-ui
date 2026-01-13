@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import CardsTab from "./cards";
+import CardsTab from "./";
 import { fn } from "storybook/test";
-import "./pages.scss";
+import "../pages.scss";
 
 const meta = {
   title: "Pages/Settings/Cards",

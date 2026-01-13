@@ -6,6 +6,13 @@ interface ExtendedConfigResult extends ConfigResult {
   };
 }
 
+interface SettingsTabProps {
+  /** The function that updates the user's plugin config. */
+  configUpdateHandler: (updatedConfig: ValkyrUiConfigMap) => void;
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+}
+
 type StashCardGridZoom = -1 | 0 | 1 | 2 | 3;
 
 type SlimStashObject =
