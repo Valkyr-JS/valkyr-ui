@@ -3,12 +3,12 @@ import CardGrid from "@/components/cards/CardGrid";
 import SceneCard, { SceneCardModal } from "@/components/cards/SceneCard";
 const { PluginApi } = window;
 
-PluginApi.patch.instead<ISceneCardsGrid>(
-  "SceneCardsGrid",
+PluginApi.patch.instead<ISceneCardGrid>(
+  "SceneCardGrid",
   function (props, _, Original) {
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
-      console.log("ISceneCardsGrid: ", props);
+      console.log("ISceneCardGrid: ", props);
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 

@@ -53,7 +53,7 @@ interface ISceneCardProps {
   fromGroupId?: string;
 }
 
-interface ISceneCardsGrid {
+interface ISceneCardGrid {
   scenes: SlimSceneDataFragment[];
   queue?: SceneQueue;
   selectedIds: Set<string>;
