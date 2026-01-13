@@ -22,6 +22,9 @@ interface GridCardProps {
 
   /** The title text. */
   title: string;
+
+  /** The data components to be displayed on the top line. */
+  topLine?: React.ReactNode[];
 }
 
 const GridCard: React.FC<GridCardProps> = (props) => {
@@ -33,6 +36,7 @@ const GridCard: React.FC<GridCardProps> = (props) => {
       {props.thumbnail}
       <div className={bodyClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
+        {maybeRenderTopLine(props.topLine)}
       </div>
       {props.footer && <CardFooter {...props.footer} />}
     </Card>
@@ -40,6 +44,20 @@ const GridCard: React.FC<GridCardProps> = (props) => {
 };
 
 export default GridCard;
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                     Card topline component                                     */
+/* ---------------------------------------------------------------------------------------------- */
+
+const maybeRenderTopLine = (
+  items?: React.ReactNode[]
+): React.JSX.Element | null => {
+  if (!items?.length) return null;
+
+  const componentClass = CLASSNAME.NAMESPACE + "__grid-card-top-line";
+
+  return <div className={componentClass}>{items}</div>;
+};
 
 /* ---------------------------------------------------------------------------------------------- */
 /*                                      Card footer component                                     */
