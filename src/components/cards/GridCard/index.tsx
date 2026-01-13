@@ -58,6 +58,7 @@ export interface CardFooterProps {
 
 const CardFooter: React.FC<CardFooterProps> = (props) => {
   const intl = useIntl();
+  const componentClass = CLASSNAME.NAMESPACE + "__grid-card-footer";
 
   const handleOpenDetailsSection = () => {
     props.setData();
@@ -66,7 +67,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
   };
 
   return (
-    <footer>
+    <footer className={componentClass}>
       <button
         type="button"
         className="minimal btn"
