@@ -4,15 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Collapse } from "react-bootstrap";
 import Setting from "./Setting";
 
-interface ISetting {
-  id?: string;
-  className?: string;
-  heading?: React.ReactNode;
-  subHeading?: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-  disabled?: boolean;
-}
-
 interface ISettingGroup {
   settingProps?: ISetting;
   topLevel?: JSX.Element;
