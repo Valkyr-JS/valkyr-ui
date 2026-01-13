@@ -4,6 +4,7 @@ import { getTitleFromObject } from "@/helpers";
 import CardModal from "../CardModal";
 import GridCard, { CardFooterProps } from "../GridCard";
 import "./GalleryCard.scss";
+import Studio from "../Studio";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -33,6 +34,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
         />
       }
       title={title}
+      topLine={[<Studio currentBreakpoint={0} studio={props.gallery.studio} />]}
     />
   );
 };
