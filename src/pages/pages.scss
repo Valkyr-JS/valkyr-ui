@@ -16,11 +16,24 @@
 
 .valkyr-ui {
   &__form-group {
-    // .setting-section .setting {
-    //   flex-direction: column;
-    //   align-items: baseline;
-    //   flex-wrap: wrap;
-    // }
+    // Stash uses h3 tags instead of span or label. Replicate h3 form styling
+    // here.
+    .setting-section .setting {
+      label,
+      span {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-bottom: 0;
+      }
+    }
+
+    .setting-section .setting-group .collapsible-section .setting {
+      label,
+      span {
+        font-size: 1rem;
+      }
+    }
+
     // At small screen sizes, split settings group key and value into two rows
     // rather than two columns.
     @media (max-width: 576px) {
