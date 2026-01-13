@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
@@ -56,7 +56,13 @@ const maybeRenderTopLine = (
 
   const componentClass = CLASSNAME.NAMESPACE + "__grid-card-top-line";
 
-  return <div className={componentClass}>{items}</div>;
+  return (
+    <div className={componentClass}>
+      {items.map((it, i) => (
+        <Fragment key={i}>{it}</Fragment>
+      ))}
+    </div>
+  );
 };
 
 /* ---------------------------------------------------------------------------------------------- */

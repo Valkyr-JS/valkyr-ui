@@ -36,4 +36,15 @@ $prefix: variables.$prefix;
     grid-row: title-top / title-bottom;
     overflow-wrap: anywhere;
   }
+
+  &__card-data-studio {
+    a {
+      color: inherit;
+      opacity: var(--#{$prefix}-card-top-line-opacity);
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
 }

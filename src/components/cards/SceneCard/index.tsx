@@ -4,6 +4,7 @@ import GridCard, { CardFooterProps } from "../GridCard";
 import { CLASSNAME } from "@/constants";
 import "./SceneCard.scss";
 import CardModal from "../CardModal";
+import Studio from "../Studio";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -48,6 +49,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
         />
       }
       title={title}
+      topLine={[<Studio currentBreakpoint={0} studio={props.scene.studio} />]}
     />
   );
 };
