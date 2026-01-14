@@ -1,10 +1,10 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import CardModal from ".";
-import { SceneCardThumbnail } from "../SceneCard";
-import gallery4521 from "../../../../mocks/galleries/4521.json";
-import scene2414 from "../../../../mocks/scenes/2414.json";
-import { createGalleryCardID, GalleryCardThumbnail } from "../GalleryCard";
+import { SceneCardThumbnail } from "../../SceneCard";
+import gallery4521 from "../../../../../mocks/galleries/4521.json";
+import scene2414 from "../../../../../mocks/scenes/2414.json";
+import { createGalleryCardID, GalleryCardThumbnail } from "../../GalleryCard";
 import { fn } from "storybook/test";
 
 const meta = {

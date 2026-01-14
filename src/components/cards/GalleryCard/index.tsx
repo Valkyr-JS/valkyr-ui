@@ -1,8 +1,8 @@
 import React from "react";
 import { CLASSNAME } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
-import CardModal from "../CardModal";
-import GridCard, { CardFooterProps } from "../GridCard";
+import CardModal from "../layouts/CardModal";
+import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import "./GalleryCard.scss";
 import Studio from "../Studio";
 

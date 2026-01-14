@@ -1,9 +1,9 @@
 import React from "react";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
-import GridCard, { CardFooterProps } from "../GridCard";
+import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import { CLASSNAME } from "@/constants";
 import "./SceneCard.scss";
-import CardModal from "../CardModal";
+import CardModal from "../layouts/CardModal";
 import Studio from "../Studio";
 
 interface SceneCardProps {
