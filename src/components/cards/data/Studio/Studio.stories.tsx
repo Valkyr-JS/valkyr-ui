@@ -29,17 +29,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const UserDisabled: Story = {
-  args: {
-    userBreakpoint: -1,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const link = canvas.queryByRole("link");
-    await expect(link).toBeNull();
-  },
-};
-
 export const AboveZoomBreakpoint: Story = {
   args: {
     currentBreakpoint: 3,
@@ -70,6 +59,17 @@ export const EqualsZoomBreakpoint: Story = {
     const canvas = within(canvasElement);
     const link = canvas.getByRole("link");
     await expect(link).toBeInTheDocument();
+  },
+};
+
+export const UserDisabled: Story = {
+  args: {
+    userBreakpoint: -1,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.queryByRole("link");
+    await expect(link).toBeNull();
   },
 };
 
