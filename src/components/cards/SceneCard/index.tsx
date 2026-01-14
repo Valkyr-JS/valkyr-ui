@@ -17,11 +17,16 @@ interface SceneCardProps {
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
 
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
   /** The scenes in the current query. */
   queue?: ISceneCardProps["queue"];
 
   /** The Stash scene data. */
   scene: SlimSceneDataFragment;
+
+  zoomBreakpoint?: StashCardGridZoom;
 }
 
 const SceneCard: React.FC<SceneCardProps> = (props) => {
@@ -50,9 +55,11 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       }
       title={title}
       topLine={
-        <>
-          <Studio currentBreakpoint={0} studio={props.scene.studio} />
-        </>
+        <Studio
+          currentBreakpoint={props.pluginConfig.cards__generalData__studio}
+          studio={props.scene.studio}
+          userBreakpoint={props.zoomBreakpoint}
+        />
       }
     />
   );

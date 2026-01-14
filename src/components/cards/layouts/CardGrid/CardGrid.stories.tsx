@@ -27,11 +27,26 @@ type Story = StoryObj<typeof meta>;
 export const ScenesZoom0: Story = {
   args: {
     cards: [
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene10613 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene10613 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
     ],
     zoomIndex: 0,
   },
@@ -43,11 +58,26 @@ export const ScenesZoom0: Story = {
 export const ScenesZoom1: Story = {
   args: {
     cards: [
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene10613 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene10613 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
     ],
     zoomIndex: 1,
   },
@@ -59,11 +89,26 @@ export const ScenesZoom1: Story = {
 export const ScenesZoom2: Story = {
   args: {
     cards: [
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene10613 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene10613 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
     ],
     zoomIndex: 2,
   },
@@ -75,11 +120,26 @@ export const ScenesZoom2: Story = {
 export const ScenesZoom3: Story = {
   args: {
     cards: [
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene10613 as SlimSceneDataFragment} />,
-      <SceneCard scene={scene2414 as SlimSceneDataFragment} />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene10613 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene10613 as SlimSceneDataFragment}
+      />,
+      <SceneCard
+        pluginConfig={{}}
+        scene={scene2414 as SlimSceneDataFragment}
+      />,
     ],
     zoomIndex: 3,
   },

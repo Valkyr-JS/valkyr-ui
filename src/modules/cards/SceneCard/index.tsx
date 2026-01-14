@@ -36,6 +36,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                     setSection: setModalSection,
                   }}
                   index={i}
+                  pluginConfig={pluginConfig}
                   queue={props.queue}
                   scene={sc}
                 />
@@ -73,6 +74,7 @@ PluginApi.patch.instead<ISceneCardProps>(
           <SceneCard
             continuePlaylist={stashConfig.interface.continuePlaylistDefault}
             index={props.index}
+            pluginConfig={pluginConfig}
             queue={props.queue}
             scene={props.scene}
           />,
