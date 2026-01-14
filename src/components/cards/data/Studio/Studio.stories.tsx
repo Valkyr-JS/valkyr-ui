@@ -13,8 +13,6 @@ const meta = {
       id: "1",
       name: "Vixen",
     },
-    context: "card",
-    userBreakpoint: 2,
   },
   argTypes: {
     currentBreakpoint: {
@@ -32,7 +30,9 @@ type Story = StoryObj<typeof meta>;
 
 export const AboveZoomBreakpoint: Story = {
   args: {
+    context: "card",
     currentBreakpoint: 3,
+    userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -43,7 +43,9 @@ export const AboveZoomBreakpoint: Story = {
 
 export const BelowZoomBreakpoint: Story = {
   args: {
+    context: "card",
     currentBreakpoint: 0,
+    userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -54,7 +56,9 @@ export const BelowZoomBreakpoint: Story = {
 
 export const EqualsZoomBreakpoint: Story = {
   args: {
+    context: "card",
     currentBreakpoint: 2,
+    userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -63,7 +67,7 @@ export const EqualsZoomBreakpoint: Story = {
   },
 };
 
-export const OnModal: Story = {
+export const ModalContext: Story = {
   args: {
     context: "modal",
   },
@@ -76,6 +80,7 @@ export const OnModal: Story = {
 
 export const UserDisabled: Story = {
   args: {
+    context: "card",
     userBreakpoint: -1,
   },
   play: async ({ canvasElement }) => {
@@ -86,6 +91,9 @@ export const UserDisabled: Story = {
 };
 
 export const WithoutZoomData: Story = {
+  args: {
+    context: "card",
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const link = canvas.getByRole("link");
