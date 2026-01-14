@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CardGrid from "@/components/cards/CardGrid";
+import CardGrid from "@/components/cards/layouts/CardGrid";
 import SceneCard, { SceneCardModal } from "@/components/cards/SceneCard";
 const { PluginApi } = window;
 

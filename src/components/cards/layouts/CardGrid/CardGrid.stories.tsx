@@ -1,11 +1,11 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import scene2414 from "../../../../mocks/scenes/2414.json";
-import scene10613 from "../../../../mocks/scenes/10613.json";
 import CardGrid from ".";
-import SceneCard from "../SceneCard";
-import GalleryCard from "../GalleryCard";
-import gallery4521 from "../../../../mocks/galleries/4521.json";
+import GalleryCard from "../../GalleryCard";
+import SceneCard from "../../SceneCard";
+import gallery4521 from "../../../../../mocks/galleries/4521.json";
+import scene2414 from "../../../../../mocks/scenes/2414.json";
+import scene10613 from "../../../../../mocks/scenes/10613.json";
 
 const meta = {
   title: "Modules/Cards/CardGrid",
