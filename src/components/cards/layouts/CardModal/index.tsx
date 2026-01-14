@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
+import TopLine from "../TopLine";
 import "./CardModal.scss";
 
 export interface CardModalProps {
@@ -31,6 +32,9 @@ export interface CardModalProps {
 
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
+
+  /** The data components to be displayed on the top line. */
+  topLine?: React.ReactNode;
 }
 
 const CardModal: React.FC<CardModalProps> = (props) => {
@@ -48,6 +52,7 @@ const CardModal: React.FC<CardModalProps> = (props) => {
       <Modal.Header>{props.thumbnail}</Modal.Header>
       <Modal.Body>
         <CardTitle id={props.titleID} link={props.link} text={props.title} />
+        <TopLine>{props.topLine}</TopLine>
       </Modal.Body>
       <Modal.Footer>
         <div>

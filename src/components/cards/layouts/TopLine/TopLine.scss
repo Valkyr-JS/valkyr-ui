@@ -1,0 +1,17 @@
+@use "../../../../scss/variables";
+
+$column-gap: variables.$column-gap;
+$prefix: variables.$prefix;
+
+.valkyr-ui__card-top-line {
+  grid-row: top-line-top / top-line-bottom;
+
+  display: grid;
+  column-gap: $column-gap;
+  margin-bottom: 3px;
+  font-size: var(--#{$prefix}-cards-font-sm);
+
+  &:empty {
+    display: none !important;
+  }
+}

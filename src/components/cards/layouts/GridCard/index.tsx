@@ -1,10 +1,11 @@
-import React, { Fragment, PropsWithChildren } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
+import TopLine from "../TopLine";
 import "./GridCard.scss";
 
 interface GridCardProps {
@@ -44,18 +45,6 @@ const GridCard: React.FC<GridCardProps> = (props) => {
 };
 
 export default GridCard;
-
-/* ---------------------------------------------------------------------------------------------- */
-/*                                     Card topline component                                     */
-/* ---------------------------------------------------------------------------------------------- */
-
-const TopLine: React.FC<PropsWithChildren> = (props) => {
-  if (!props.children) return null;
-
-  const componentClass = CLASSNAME.NAMESPACE + "__grid-card-top-line";
-
-  return <div className={componentClass}>{props.children}</div>;
-};
 
 /* ---------------------------------------------------------------------------------------------- */
 /*                                      Card footer component                                     */
