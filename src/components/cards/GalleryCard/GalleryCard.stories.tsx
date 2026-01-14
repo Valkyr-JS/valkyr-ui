@@ -3,7 +3,7 @@ import GalleryCard from ".";
 import gallery4521 from "../../../../mocks/galleries/4521.json";
 
 const meta = {
-  title: "Modules/Cards/GalleryCard",
+  title: "Components/Cards/Gallery card",
   component: GalleryCard,
   parameters: {
     layout: "centered",

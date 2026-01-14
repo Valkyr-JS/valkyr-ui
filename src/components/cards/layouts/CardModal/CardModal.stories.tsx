@@ -8,7 +8,7 @@ import { createGalleryCardID, GalleryCardThumbnail } from "../../GalleryCard";
 import { fn } from "storybook/test";
 
 const meta = {
-  title: "Modules/Cards/CardModal",
+  title: "Components/Cards/Layouts/Card modal",
   component: CardModal,
   parameters: {
     layout: "centered",

@@ -4,7 +4,7 @@ import scene2414 from "../../../../mocks/scenes/2414.json";
 import scene10613 from "../../../../mocks/scenes/10613.json";
 
 const meta = {
-  title: "Modules/Cards/SceneCard",
+  title: "Components/Cards/Scene card",
   component: SceneCard,
   parameters: {
     layout: "centered",
