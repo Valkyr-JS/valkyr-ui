@@ -4,7 +4,7 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import { CLASSNAME } from "@/constants";
-import CardTitle from "../../Title";
+import CardTitle from "../Title";
 import "./CardModal.scss";
 
 export interface CardModalProps {
