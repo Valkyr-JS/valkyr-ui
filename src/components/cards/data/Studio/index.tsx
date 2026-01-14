@@ -13,17 +13,12 @@ interface StudioProps extends DataComponentProps {
 }
 
 const Studio: React.FC<StudioProps> = (props) => {
-  const zoomBreakpoint =
-    props.currentBreakpoint !== undefined && props.userBreakpoint !== undefined
-      ? {
-          current: props.currentBreakpoint,
-          user: props.userBreakpoint,
-        }
-      : undefined;
-
   const data = getRenderData({
     data: props.studio,
-    zoomBreakpoint,
+    zoomBreakpoint: {
+      current: props.currentBreakpoint,
+      user: props.userBreakpoint,
+    },
   });
 
   if (!data) return null;

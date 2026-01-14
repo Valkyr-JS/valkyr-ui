@@ -5,7 +5,7 @@ interface DataComponentProps {
   currentBreakpoint?: StashCardGridZoom;
 
   /** The user-set breakpoint at which to render the component. */
-  userBreakpoint?: StashCardGridZoom;
+  userBreakpoint: StashCardGridZoom;
 }
 
 interface ExtendedConfigResult extends ConfigResult {

@@ -13,6 +13,7 @@ const meta = {
       id: "1",
       name: "Vixen",
     },
+    userBreakpoint: 2,
   },
   argTypes: {
     currentBreakpoint: {
@@ -28,10 +29,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const UserDisabled: Story = {
+  args: {
+    userBreakpoint: -1,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.queryByRole("link");
+    await expect(link).toBeNull();
+  },
+};
+
 export const AboveZoomBreakpoint: Story = {
   args: {
     currentBreakpoint: 3,
-    userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -43,7 +54,6 @@ export const AboveZoomBreakpoint: Story = {
 export const BelowZoomBreakpoint: Story = {
   args: {
     currentBreakpoint: 0,
-    userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -55,7 +65,6 @@ export const BelowZoomBreakpoint: Story = {
 export const EqualsZoomBreakpoint: Story = {
   args: {
     currentBreakpoint: 2,
-    userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
