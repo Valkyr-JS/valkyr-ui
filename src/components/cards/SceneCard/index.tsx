@@ -49,7 +49,11 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
         />
       }
       title={title}
-      topLine={[<Studio currentBreakpoint={0} studio={props.scene.studio} />]}
+      topLine={
+        <>
+          <Studio currentBreakpoint={0} studio={props.scene.studio} />
+        </>
+      }
     />
   );
 };

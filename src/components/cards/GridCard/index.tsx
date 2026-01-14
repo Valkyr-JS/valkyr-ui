@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
@@ -24,7 +24,7 @@ interface GridCardProps {
   title: string;
 
   /** The data components to be displayed on the top line. */
-  topLine?: React.ReactNode[];
+  topLine?: React.ReactNode;
 }
 
 const GridCard: React.FC<GridCardProps> = (props) => {
@@ -36,7 +36,7 @@ const GridCard: React.FC<GridCardProps> = (props) => {
       {props.thumbnail}
       <div className={bodyClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
-        {maybeRenderTopLine(props.topLine)}
+        <TopLine>{props.topLine}</TopLine>
       </div>
       {props.footer && <CardFooter {...props.footer} />}
     </Card>
@@ -49,20 +49,12 @@ export default GridCard;
 /*                                     Card topline component                                     */
 /* ---------------------------------------------------------------------------------------------- */
 
-const maybeRenderTopLine = (
-  items?: React.ReactNode[]
-): React.JSX.Element | null => {
-  if (!items?.length) return null;
+const TopLine: React.FC<PropsWithChildren> = (props) => {
+  if (!props.children) return null;
 
   const componentClass = CLASSNAME.NAMESPACE + "__grid-card-top-line";
 
-  return (
-    <div className={componentClass}>
-      {items.map((it, i) => (
-        <Fragment key={i}>{it}</Fragment>
-      ))}
-    </div>
-  );
+  return <div className={componentClass}>{props.children}</div>;
 };
 
 /* ---------------------------------------------------------------------------------------------- */

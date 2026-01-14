@@ -34,7 +34,11 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
         />
       }
       title={title}
-      topLine={[<Studio currentBreakpoint={0} studio={props.gallery.studio} />]}
+      topLine={
+        <>
+          <Studio currentBreakpoint={0} studio={props.gallery.studio} />
+        </>
+      }
     />
   );
 };

@@ -24,6 +24,10 @@ $prefix: variables.$prefix;
     column-gap: $column-gap;
     margin-bottom: 3px;
     font-size: var(--#{$prefix}-cards-font-sm);
+
+    &:empty {
+      display: none !important;
+    }
   }
 
   &__grid-card-footer {
