@@ -1,9 +1,16 @@
 import React from "react";
 import { CLASSNAME } from "@/constants";
+import { getRenderData } from "@/helpers";
 
-interface StudioProps {
+interface DataComponentProps {
   /** The current breakpoint in the browser. */
-  currentBreakpoint: StashCardGridZoom;
+  currentBreakpoint?: StashCardGridZoom;
+
+  /** The user-set breakpoint at which to render the component. */
+  userBreakpoint?: StashCardGridZoom;
+}
+
+interface StudioProps extends DataComponentProps {
   /** The studio data. */
   studio:
     | Maybe<{
@@ -14,12 +21,25 @@ interface StudioProps {
 }
 
 const Studio = (props: StudioProps) => {
-  if (!props.studio) return null;
+  const zoomBreakpoint =
+    props.currentBreakpoint !== undefined && props.userBreakpoint !== undefined
+      ? {
+          current: props.currentBreakpoint,
+          user: props.userBreakpoint,
+        }
+      : undefined;
 
-  const link = `/studios/${props.studio.id}`;
+  const data = getRenderData({
+    data: props.studio,
+    zoomBreakpoint,
+  });
+  
+  if (!data) return null;
+
+  const link = `/studios/${data.id}`;
   return (
     <span className={`${CLASSNAME.NAMESPACE}__card-data-studio`}>
-      <a href={link}>{props.studio.name}</a>
+      <a href={link}>{data.name}</a>
     </span>
   );
 };

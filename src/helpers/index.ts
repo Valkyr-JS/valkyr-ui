@@ -1,31 +1,39 @@
+interface IgetRenderData<T> {
+  data: T | undefined;
+  hideZeroValueData?: boolean;
+  zoomBreakpoint?: {
+    current: number;
+    user: number;
+  };
+}
+
 /** A helper function that runs common checks to see if the component can be
  * rendered. Returns either the required data object if it will render, or null
  * if it won't. */
-export const getRenderData = <T>(
-  currentBreakpoint: number,
-  renderBreakpoint: number,
-  data: T | undefined,
-  hideZeroValueData?: boolean
-): T | null => {
+export const getRenderData = <T>(args: IgetRenderData<T>): T | null => {
   // Return null if no data is available
-  if (data === undefined) return null;
+  if (args.data === undefined) return null;
 
-  // Return null if the breakpoint is invalid
+  // Return null if hiding zero-value data is enabled, and the data equals `0`.
+  if (args.hideZeroValueData && args.data === 0) return null;
+
+  // Return the data if no breakpoint data is provided, i.e. not in a zoom
+  // context
+  if (args.zoomBreakpoint === undefined) return args.data;
+
+  // Return null if the user breakpoint is invalid
   if (
-    renderBreakpoint < 0 ||
-    renderBreakpoint > 3 ||
-    !Number.isInteger(renderBreakpoint)
+    args.zoomBreakpoint.user < 0 ||
+    args.zoomBreakpoint.user > 3 ||
+    !Number.isInteger(args.zoomBreakpoint.user)
   )
     return null;
 
-  // Return null if hiding zero-value data is enabled, and the data equals `0`.
-  if (hideZeroValueData && data === 0) return null;
-
-  // Return null if the render breakpoint is greater than the current
+  // Return null if the user breakpoint is greater than the current
   // breakpoint.
-  if (renderBreakpoint > currentBreakpoint) return null;
+  if (args.zoomBreakpoint.user > args.zoomBreakpoint.current) return null;
 
-  return data;
+  return args.data;
 };
 
 export const getTitleFromObject = (object: SlimStashObject): string => {
