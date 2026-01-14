@@ -6,7 +6,6 @@ import { WithCard } from "../../../../../.storybook/decorators";
 const meta = {
   title: "Components/Cards/Data/Studio",
   component: Studio,
-  decorators: [WithCard],
   parameters: {
     layout: "centered",
   },
