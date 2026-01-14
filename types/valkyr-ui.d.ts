@@ -1,5 +1,13 @@
 type CardModalSection = "details";
 
+interface DataComponentProps {
+  /** The current breakpoint in the browser. */
+  currentBreakpoint?: StashCardGridZoom;
+
+  /** The user-set breakpoint at which to render the component. */
+  userBreakpoint?: StashCardGridZoom;
+}
+
 interface ExtendedConfigResult extends ConfigResult {
   plugins: {
     "valkyr-ui"?: ValkyrUiConfigMap;
