@@ -4,7 +4,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import { CLASSNAME } from "@/constants";
 import "./SceneCard.scss";
 import CardModal from "../layouts/CardModal";
-import Studio from "../Studio";
+import Studio from "../data/Studio";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
