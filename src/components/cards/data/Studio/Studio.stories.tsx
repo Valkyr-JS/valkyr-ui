@@ -13,6 +13,7 @@ const meta = {
       id: "1",
       name: "Vixen",
     },
+    context: "card",
     userBreakpoint: 2,
   },
   argTypes: {
@@ -54,6 +55,17 @@ export const BelowZoomBreakpoint: Story = {
 export const EqualsZoomBreakpoint: Story = {
   args: {
     currentBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.getByRole("link");
+    await expect(link).toBeInTheDocument();
+  },
+};
+
+export const OnModal: Story = {
+  args: {
+    context: "modal",
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -1,11 +1,19 @@
-interface IgetRenderData<T> {
-  data: T | undefined;
-  hideZeroValueData?: boolean;
+interface IgetRenderCardData {
+  context: "card";
   zoomBreakpoint: {
     current?: number;
     user: number;
   };
 }
+
+interface IgetRenderModalData {
+  context: "modal";
+}
+
+type IgetRenderData<T> = {
+  data: T | undefined;
+  hideZeroValueData?: boolean;
+} & (IgetRenderCardData | IgetRenderModalData);
 
 /** A helper function that runs common checks to see if the component can be
  * rendered. Returns either the required data object if it will render, or null
@@ -17,6 +25,9 @@ export const getRenderData = <T>(args: IgetRenderData<T>): T | null => {
 
   // Return null if hiding zero-value data is enabled, and the data equals `0`.
   if (args.hideZeroValueData && args.data === 0) return null;
+
+  // Return the data if in a modal context
+  if (args.context === "modal") return args.data;
 
   // Return null if the user has disabled the data, i.e. `zoomBreakpoint.user`
   // equals `-1`.

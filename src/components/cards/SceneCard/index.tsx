@@ -56,6 +56,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       title={title}
       topLine={
         <Studio
+          context="card"
           currentBreakpoint={props.pluginConfig.cards__generalData__studio}
           studio={props.scene.studio}
           userBreakpoint={props.zoomBreakpoint}

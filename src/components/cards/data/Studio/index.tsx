@@ -1,5 +1,5 @@
 import React from "react";
-import { CLASSNAME } from "@/constants";
+import { CLASSNAME, DEFAULT } from "@/constants";
 import { getRenderData } from "@/helpers";
 
 interface StudioProps extends DataComponentProps {
@@ -14,10 +14,11 @@ interface StudioProps extends DataComponentProps {
 
 const Studio: React.FC<StudioProps> = (props) => {
   const data = getRenderData({
+    context: props.context,
     data: props.studio,
     zoomBreakpoint: {
       current: props.currentBreakpoint,
-      user: props.userBreakpoint,
+      user: props.userBreakpoint ?? DEFAULT.ZOOM_BREAKPOINT.STUDIO,
     },
   });
 

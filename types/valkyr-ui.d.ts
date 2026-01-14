@@ -1,11 +1,15 @@
 type CardModalSection = "details";
 
 interface DataComponentProps {
+  /** Whether the component is being rendered in a card component or modal
+   * component. */
+  context: "card" | "modal";
+
   /** The current breakpoint in the browser. */
   currentBreakpoint?: StashCardGridZoom;
 
   /** The user-set breakpoint at which to render the component. */
-  userBreakpoint: StashCardGridZoom;
+  userBreakpoint?: StashCardGridZoom;
 }
 
 interface ExtendedConfigResult extends ConfigResult {
