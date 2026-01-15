@@ -13,6 +13,7 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
+      sort: "requiredFirst",
     },
     a11y: {
       // 'todo' - show a11y violations in the test UI only
