@@ -1,5 +1,4 @@
 import React from "react";
-import { CLASSNAME } from "@/constants";
 import "./Title.scss";
 
 interface CardTitleProps {
@@ -14,7 +13,7 @@ interface CardTitleProps {
 }
 
 const CardTitle: React.FC<CardTitleProps> = (props) => {
-  const componentClass = CLASSNAME.NAMESPACE + "__card-title";
+  const componentClass = "vui-card-title";
 
   return (
     <a href={props.link} className={componentClass} id={props.id}>
