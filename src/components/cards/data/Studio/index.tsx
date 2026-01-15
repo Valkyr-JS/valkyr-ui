@@ -1,5 +1,5 @@
 import React from "react";
-import { CLASSNAME, DEFAULT } from "@/constants";
+import { DEFAULT } from "@/constants";
 import { getRenderData } from "@/helpers";
 
 interface StudioProps extends DataComponentProps {
@@ -24,9 +24,11 @@ const Studio: React.FC<StudioProps> = (props) => {
 
   if (!data) return null;
 
+  const componentClass = "vui-card-data__studio";
   const link = `/studios/${data.id}`;
+
   return (
-    <span className={`${CLASSNAME.NAMESPACE}__card-data-studio`}>
+    <span className={componentClass}>
       <a href={link}>{data.name}</a>
     </span>
   );
