@@ -1,0 +1,29 @@
+@use "../../../../scss/variables";
+
+$prefix: variables.$prefix;
+
+.valkyr-ui {
+  &__grid-card {
+    padding: 0;
+  }
+
+  /* ------------------------------------------ Sections ------------------------------------------ */
+
+  &__grid-card-body {
+    display: grid;
+    grid-template-rows: [body-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-bottom];
+    height: 100%;
+    padding: 0.5rem 1rem 0;
+  }
+
+  &__grid-card-footer {
+    margin-top: auto;
+  }
+
+  /* -------------------------------------------- Data -------------------------------------------- */
+
+  &__card-title {
+    grid-row: title-top / title-bottom;
+    overflow-wrap: anywhere;
+  }
+}

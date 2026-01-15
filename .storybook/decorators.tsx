@@ -3,6 +3,8 @@ import { IntlProvider } from "react-intl";
 import { DecoratorFunction } from "storybook/internal/csf";
 import messages from "./locales/en-GB.json";
 import { ReactRenderer } from "@storybook/react-vite";
+import { Card } from "react-bootstrap";
+import { CLASSNAME } from "../src/constants";
 
 type NestedMessage = { [key: string]: NestedMessage | string };
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/utils/flattenMessages.ts */
@@ -34,3 +36,31 @@ export const WithIntlProvider: DecoratorFunction<ReactRenderer> = (Story) => (
     <Story />
   </IntlProvider>
 );
+
+/** Wraps a story in simple React Bootstrap card component. */
+export const WithCard: DecoratorFunction<ReactRenderer> = (Story) => (
+  <Card>
+    <Story />
+  </Card>
+);
+
+/** Wraps the story in a simulated React Bootstrap modal component, without the
+ * fixed position styling. */
+export const WithStaticCardModal: DecoratorFunction<ReactRenderer> = (
+  Story
+) => {
+  const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
+
+  return (
+    <div
+      className={componentClass + " modal show"}
+      style={{ display: "block", position: "initial" }}
+    >
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <Story />
+        </div>
+      </div>
+    </div>
+  );
+};

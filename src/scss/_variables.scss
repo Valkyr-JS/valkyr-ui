@@ -1,1 +1,4 @@
+@use "./functions";
+
 $prefix: valkyr-ui;
+$column-gap: functions.toRem(10);

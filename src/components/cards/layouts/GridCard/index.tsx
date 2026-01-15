@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
+import TopLine from "../TopLine";
 import "./GridCard.scss";
 
 interface GridCardProps {
@@ -22,6 +23,9 @@ interface GridCardProps {
 
   /** The title text. */
   title: string;
+
+  /** The data components to be displayed on the top line. */
+  topLine?: React.ReactNode;
 }
 
 const GridCard: React.FC<GridCardProps> = (props) => {
@@ -33,6 +37,7 @@ const GridCard: React.FC<GridCardProps> = (props) => {
       {props.thumbnail}
       <div className={bodyClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
+        <TopLine>{props.topLine}</TopLine>
       </div>
       {props.footer && <CardFooter {...props.footer} />}
     </Card>
@@ -50,7 +55,7 @@ export interface CardFooterProps {
   openHandler: () => void;
 
   /** Handler that sets data set for the modal. */
-  setData: () => void;
+  setData?: () => void;
 
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
@@ -58,15 +63,16 @@ export interface CardFooterProps {
 
 const CardFooter: React.FC<CardFooterProps> = (props) => {
   const intl = useIntl();
+  const componentClass = CLASSNAME.NAMESPACE + "__grid-card-footer";
 
   const handleOpenDetailsSection = () => {
-    props.setData();
+    if (props.setData !== undefined) props.setData();
     props.setSection("details");
     props.openHandler();
   };
 
   return (
-    <footer>
+    <footer className={componentClass}>
       <button
         type="button"
         className="minimal btn"

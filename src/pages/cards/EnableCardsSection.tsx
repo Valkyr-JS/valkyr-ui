@@ -1,14 +1,8 @@
 import React from "react";
-import { Form } from "react-bootstrap";
 import { BooleanSetting } from "@/components/stash/Settings/Inputs";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 
-interface CardsTabProps {
-  configUpdateHandler: (updatedConfig: ValkyrUiConfigMap) => void;
-  pluginConfig: ValkyrUiConfigMap;
-}
-
-const CardsTab: React.FC<CardsTabProps> = (props) => {
+const EnableCardsSection: React.FC<SettingsTabProps> = (props) => {
   const GalleryCardsEnabled = () => (
     <BooleanSetting
       checked={props.pluginConfig.cards__galleryCards__enabled ?? false}
@@ -56,14 +50,12 @@ const CardsTab: React.FC<CardsTabProps> = (props) => {
   );
 
   return (
-    <Form.Group>
-      <SettingSection id="cards-enable" heading="Enable cards">
-        <GalleryCardsEnabled />
-        <SceneCardsEnabled />
-        <CardGridsEnabled />
-      </SettingSection>
-    </Form.Group>
+    <SettingSection id="cards-enable" heading="Enable cards">
+      <GalleryCardsEnabled />
+      <SceneCardsEnabled />
+      <CardGridsEnabled />
+    </SettingSection>
   );
 };
 
-export default CardsTab;
+export default EnableCardsSection;

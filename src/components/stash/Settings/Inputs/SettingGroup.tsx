@@ -1,17 +1,8 @@
 import React, { PropsWithChildren, useState } from "react";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Collapse } from "react-bootstrap";
 import Setting from "./Setting";
-const { Icon } = PluginApi.components;
-
-interface ISetting {
-  id?: string;
-  className?: string;
-  heading?: React.ReactNode;
-  subHeading?: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-  disabled?: boolean;
-}
 
 interface ISettingGroup {
   settingProps?: ISetting;
@@ -33,7 +24,10 @@ const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
         variant="minimal"
         onClick={() => setOpen(!open)}
       >
-        <Icon className="fa-fw" icon={open ? faChevronUp : faChevronDown} />
+        <FontAwesomeIcon fixedWidth icon={open ? faChevronUp : faChevronDown} />
+        <span className="sr-only">
+          {open ? "Close" : "Open"} settings group
+        </span>
       </Button>
     );
   }

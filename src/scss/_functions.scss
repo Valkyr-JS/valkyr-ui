@@ -1,0 +1,11 @@
+@use "sass:math";
+
+// Value of 1rem in Stash in pixels
+$stash-rem-value: 14;
+
+@function toRem($px) {
+  @if math.is-unitless($px) {
+    @return math.div($px, $stash-rem-value) * 1rem;
+  }
+  @return math.div($px, ($stash-rem-value * 1px)) * 1rem;
+}

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import CardGrid from "@/components/cards/CardGrid";
-import GalleryCard, { GalleryCardModal } from "@/components/cards/GalleryCard";
+import CardGrid from "@/components/cards/layouts/CardGrid";
+import GalleryCard, {
+  createGalleryCardID,
+  GalleryCardModalContent,
+} from "@/components/cards/GalleryCard";
+import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<IGalleryCardGrid>(
@@ -16,6 +20,9 @@ PluginApi.patch.instead<IGalleryCardGrid>(
       const [modalGalleryIndex, setModalGalleryIndex] = useState(0);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
+
+      const titleID =
+        createGalleryCardID(props.galleries[modalGalleryIndex].id) + "Modal";
 
       if (
         pluginConfig?.cards__cardGrids__enabled &&
@@ -33,17 +40,20 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                     setSection: setModalSection,
                   }}
                   gallery={gl}
+                  pluginConfig={pluginConfig}
                 />
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
             />
-            <GalleryCardModal
-              closeHandler={() => setModalOpen(false)}
-              gallery={props.galleries[modalGalleryIndex]}
-              section={modalSection}
-              setSection={setModalSection}
-              show={modalOpen}
-            />
+            <CardModalWrapper show={modalOpen} titleID={titleID}>
+              <GalleryCardModalContent
+                closeHandler={() => setModalOpen(false)}
+                gallery={props.galleries[modalGalleryIndex]}
+                section={modalSection}
+                setSection={setModalSection}
+                titleID={titleID}
+              />
+            </CardModalWrapper>
           </>,
         ];
     }
@@ -60,8 +70,34 @@ PluginApi.patch.instead<IGalleryCardProps>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
+      const [modalOpen, setModalOpen] = useState(false);
+      const [modalSection, setModalSection] =
+        useState<CardModalSection>("details");
+
+      const titleID = createGalleryCardID(props.gallery.id) + "Modal";
+
       if (pluginConfig?.cards__galleryCards__enabled)
-        return [<GalleryCard {...props} />];
+        return [
+          <>
+            <GalleryCard
+              {...props}
+              footer={{
+                openHandler: () => setModalOpen(!modalOpen),
+                setSection: setModalSection,
+              }}
+              pluginConfig={pluginConfig}
+            />
+            <CardModalWrapper show={modalOpen} titleID={titleID}>
+              <GalleryCardModalContent
+                closeHandler={() => setModalOpen(false)}
+                gallery={props.gallery}
+                section={modalSection}
+                setSection={setModalSection}
+                titleID={titleID}
+              />
+            </CardModalWrapper>
+          </>,
+        ];
     }
 
     return [<Original {...props} />];

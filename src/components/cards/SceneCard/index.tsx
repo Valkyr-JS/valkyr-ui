@@ -1,9 +1,10 @@
 import React from "react";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
-import GridCard, { CardFooterProps } from "../GridCard";
+import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import { CLASSNAME } from "@/constants";
 import "./SceneCard.scss";
-import CardModal from "../CardModal";
+import { CardModalContent } from "../layouts/CardModal";
+import Studio from "../data/Studio";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -16,11 +17,17 @@ interface SceneCardProps {
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
 
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
   /** The scenes in the current query. */
   queue?: ISceneCardProps["queue"];
 
   /** The Stash scene data. */
   scene: SlimSceneDataFragment;
+
+  /** The current zoom breakpoint. */
+  zoomBreakpoint?: StashCardGridZoom;
 }
 
 const SceneCard: React.FC<SceneCardProps> = (props) => {
@@ -42,12 +49,20 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       link={sceneLink}
       thumbnail={
         <SceneCardThumbnail
-          id={id}
+          titleID={id}
           link={sceneLink}
           src={props.scene.paths.screenshot ?? ""}
         />
       }
       title={title}
+      topLine={
+        <Studio
+          context="card"
+          currentBreakpoint={props.zoomBreakpoint}
+          studio={props.scene.studio}
+          userBreakpoint={props.pluginConfig.cards__generalData__studio}
+        />
+      }
     />
   );
 };
@@ -59,14 +74,14 @@ export default SceneCard;
 /* ---------------------------------------------------------------------------------------------- */
 
 interface SceneCardThumbnailProps {
-  /** HTML ID used for aria labelling. */
-  id: string;
-
   /** The link to the object page. */
   link: string;
 
   /** The link to the gallery cover thumbnail. */
   src: string;
+
+  /** HTML ID used for aria labelling on the modal title. */
+  titleID: string;
 }
 
 export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
@@ -77,7 +92,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
 
   return (
     <div className={componentClass}>
-      <a href={props.link} aria-labelledby={props.id}>
+      <a href={props.link} aria-labelledby={props.titleID}>
         <div className={previewClass}>
           <img loading="lazy" alt="" src={props.src} />
         </div>
@@ -90,7 +105,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
 /*                                   Scene card modal component                                   */
 /* ---------------------------------------------------------------------------------------------- */
 
-interface SceneCardModalProps {
+interface SceneCardModalContentProps {
   /** Handler for closing the modal. */
   closeHandler: () => void;
 
@@ -113,12 +128,13 @@ interface SceneCardModalProps {
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
 
-  /** Whether the modal is currently rendered. */
-  show: boolean;
+  /** HTML ID used for aria labelling on the modal title. */
+  titleID: string;
 }
 
-export const SceneCardModal: React.FC<SceneCardModalProps> = (props) => {
-  const id = createSceneCardID(props.scene.id) + "Modal";
+export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
+  props
+) => {
   const title = getTitleFromObject(props.scene);
   const sceneLink = makeSceneUrl({
     cont: props.continuePlaylist ?? false,
@@ -128,21 +144,21 @@ export const SceneCardModal: React.FC<SceneCardModalProps> = (props) => {
   });
 
   return (
-    <CardModal
+    <CardModalContent
       closeHandler={props.closeHandler}
       link={sceneLink}
       section={props.section}
       setSection={props.setSection}
-      show={props.show}
       thumbnail={
         <SceneCardThumbnail
-          id={id}
+          titleID={props.titleID}
           link={sceneLink}
           src={props.scene.paths.screenshot ?? ""}
         />
       }
       title={title}
-      titleID={id}
+      titleID={props.titleID}
+      topLine={<Studio context="modal" studio={props.scene.studio} />}
     />
   );
 };

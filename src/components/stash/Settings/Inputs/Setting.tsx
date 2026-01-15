@@ -4,7 +4,13 @@ import cx from "classnames";
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Settings/Inputs.tsx#L24 */
 const Setting: React.FC<PropsWithChildren<ISetting>> = (props) => {
   function renderHeading() {
-    return <h3 title={props.tooltip}>{props.heading}</h3>;
+    return props.id === undefined ? (
+      <span title={props.tooltip}>{props.heading}</span>
+    ) : (
+      <label title={props.tooltip} htmlFor={props.id}>
+        {props.heading}
+      </label>
+    );
   }
 
   function renderSubHeading() {
@@ -18,7 +24,7 @@ const Setting: React.FC<PropsWithChildren<ISetting>> = (props) => {
   });
 
   return (
-    <div className={classes} id={props.id} onClick={props.onClick}>
+    <div className={classes} onClick={props.onClick}>
       <div>
         {renderHeading()}
         {renderSubHeading()}

@@ -7,6 +7,9 @@ $prefix: variables.$prefix;
 
   --#{$prefix}-title-color: var(--#{$prefix}-body-color);
 
+  --#{$prefix}-cards-font-sm: 12px;
   --#{$prefix}-card-title-color: var(--#{$prefix}-title-color);
   --#{$prefix}-card-title-font-size: 1.25rem;
+  --#{$prefix}-card-top-line-font-size: var(--#{$prefix}-cards-font-sm);
+  --#{$prefix}-card-top-line-opacity: 0.8;
 }
