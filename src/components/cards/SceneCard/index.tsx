@@ -1,10 +1,9 @@
 import React from "react";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
-import GridCard, { CardFooterProps } from "../layouts/GridCard";
-import { CLASSNAME } from "@/constants";
-import "./SceneCard.scss";
-import { CardModalContent } from "../layouts/CardModal";
 import Studio from "../data/Studio";
+import { CardModalContent } from "../layouts/CardModal";
+import GridCard, { CardFooterProps } from "../layouts/GridCard";
+import "./SceneCard.scss";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -77,7 +76,7 @@ interface SceneCardThumbnailProps {
   /** The link to the object page. */
   link: string;
 
-  /** The link to the gallery cover thumbnail. */
+  /** The link to the scene cover thumbnail. */
   src: string;
 
   /** HTML ID used for aria labelling on the modal title. */
@@ -87,11 +86,12 @@ interface SceneCardThumbnailProps {
 export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
   props
 ) => {
-  const componentClass = CLASSNAME.NAMESPACE + "__scene-card-thumbnail";
-  const previewClass = CLASSNAME.NAMESPACE + "__scene-card-thumbnail-preview";
+  const componentClass = "vui-scene-card";
+  const thumbnailClass = componentClass + "__thumbnail";
+  const previewClass = componentClass + "__thumbnail-preview";
 
   return (
-    <div className={componentClass}>
+    <div className={thumbnailClass}>
       <a href={props.link} aria-labelledby={props.titleID}>
         <div className={previewClass}>
           <img loading="lazy" alt="" src={props.src} />
