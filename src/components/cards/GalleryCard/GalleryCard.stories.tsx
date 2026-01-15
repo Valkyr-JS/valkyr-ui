@@ -1,9 +1,11 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 import GalleryCard from ".";
+
+// Mock data
 import gallery4521 from "../../../../mocks/galleries/4521.json";
 import gallery17791 from "../../../../mocks/galleries/17791.json";
-import { fn } from "storybook/test";
 
 const meta = {
   title: "Components/Cards/Gallery card",

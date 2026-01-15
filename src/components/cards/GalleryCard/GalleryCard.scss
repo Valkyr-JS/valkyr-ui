@@ -1,8 +1,9 @@
+@use "sass:map";
 @use "sass:math";
 @use "../../../../src/scss/variables";
 
 $zoomBreakpoints: variables.$card-zoom-breakpoints;
-$zoomCardHeights: (
+$zoomThumbnailHeights: (
   0: 180px,
   1: 240px,
   2: 360px,
@@ -23,8 +24,8 @@ $zoomCardHeights: (
 
 // Generate thumbnail heights for each zoom breakpoint
 @each $zoom, $maxCardWidth in $zoomBreakpoints {
-  $height: map-get(
-    $map: $zoomCardHeights,
+  $height: map.get(
+    $map: $zoomThumbnailHeights,
     $key: $zoom,
   );
 
