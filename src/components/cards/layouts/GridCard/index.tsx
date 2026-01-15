@@ -55,7 +55,7 @@ export interface CardFooterProps {
   openHandler: () => void;
 
   /** Handler that sets data set for the modal. */
-  setData: () => void;
+  setData?: () => void;
 
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
@@ -66,7 +66,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
   const componentClass = CLASSNAME.NAMESPACE + "__grid-card-footer";
 
   const handleOpenDetailsSection = () => {
-    props.setData();
+    if (props.setData !== undefined) props.setData();
     props.setSection("details");
     props.openHandler();
   };

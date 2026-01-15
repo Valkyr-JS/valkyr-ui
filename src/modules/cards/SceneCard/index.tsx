@@ -78,15 +78,39 @@ PluginApi.patch.instead<ISceneCardProps>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
+      const [modalOpen, setModalOpen] = useState(false);
+      const [modalSection, setModalSection] =
+        useState<CardModalSection>("details");
+
+      const titleID = createSceneCardID(props.scene.id) + "Modal";
+
       if (pluginConfig?.cards__sceneCards__enabled)
         return [
-          <SceneCard
-            continuePlaylist={stashConfig.interface.continuePlaylistDefault}
-            index={props.index}
-            pluginConfig={pluginConfig}
-            queue={props.queue}
-            scene={props.scene}
-          />,
+          <>
+            <SceneCard
+              continuePlaylist={stashConfig.interface.continuePlaylistDefault}
+              footer={{
+                openHandler: () => setModalOpen(!modalOpen),
+                setSection: setModalSection,
+              }}
+              index={props.index}
+              pluginConfig={pluginConfig}
+              queue={props.queue}
+              scene={props.scene}
+            />
+            <CardModalWrapper show={modalOpen} titleID={titleID}>
+              <SceneCardModalContent
+                closeHandler={() => setModalOpen(false)}
+                continuePlaylist={stashConfig.interface.continuePlaylistDefault}
+                index={props.index}
+                queue={props.queue}
+                scene={props.scene}
+                section={modalSection}
+                setSection={setModalSection}
+                titleID={titleID}
+              />
+            </CardModalWrapper>
+          </>,
         ];
     }
 
