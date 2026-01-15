@@ -32,3 +32,8 @@ $zoomCardHeights: (
     height: $height;
   }
 }
+
+// Max thumbnail height for card modals
+.valkyr-ui__card-modal .vui-gallery-card__thumbnail-cover img {
+  max-height: 480px;
+}

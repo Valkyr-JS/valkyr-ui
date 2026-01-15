@@ -1,9 +1,9 @@
 import React from "react";
 import { getTitleFromObject } from "@/helpers";
+import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import "./GalleryCard.scss";
-import Studio from "../data/Studio";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
