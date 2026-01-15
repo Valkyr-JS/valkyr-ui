@@ -106,7 +106,6 @@ interface GalleryCardModalContentProps {
 export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   props
 ) => {
-  const id = createGalleryCardID(props.gallery.id);
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
@@ -125,6 +124,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       }
       title={title}
       titleID={props.titleID}
+      topLine={<Studio context="modal" studio={props.gallery.studio} />}
     />
   );
 };
