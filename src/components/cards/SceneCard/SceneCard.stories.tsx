@@ -2,6 +2,8 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
 import SceneCard from ".";
+
+// Mock data
 import scene2414 from "../../../../mocks/scenes/2414.json";
 
 const meta = {
