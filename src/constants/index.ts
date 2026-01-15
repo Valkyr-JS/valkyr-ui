@@ -1,6 +1,18 @@
+/** `DEFAULT.MODULE.GROUP.SETTING` */
 export const DEFAULT = {
-  ZOOM_BREAKPOINT: {
-    STUDIO: 0,
+  CARDS: {
+    CARD_GRID: {
+      ENABLED: true,
+    },
+    DATA: {
+      STUDIO_BREAKPOINT: 0,
+    },
+    GALLERY_CARD: {
+      ENABLED: true,
+    },
+    SCENE_CARD: {
+      ENABLED: true,
+    },
   },
 } as const;
 

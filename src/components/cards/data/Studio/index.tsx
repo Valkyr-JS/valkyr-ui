@@ -18,7 +18,7 @@ const Studio: React.FC<StudioProps> = (props) => {
     data: props.studio,
     zoomBreakpoint: {
       current: props.currentBreakpoint,
-      user: props.userBreakpoint ?? DEFAULT.ZOOM_BREAKPOINT.STUDIO,
+      user: props.userBreakpoint ?? DEFAULT.CARDS.DATA.STUDIO_BREAKPOINT,
     },
   });
 
