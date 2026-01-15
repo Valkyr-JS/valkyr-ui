@@ -70,8 +70,34 @@ PluginApi.patch.instead<IGalleryCardProps>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
+      const [modalOpen, setModalOpen] = useState(false);
+      const [modalSection, setModalSection] =
+        useState<CardModalSection>("details");
+
+      const titleID = createGalleryCardID(props.gallery.id) + "Modal";
+
       if (pluginConfig?.cards__galleryCards__enabled)
-        return [<GalleryCard {...props} pluginConfig={pluginConfig} />];
+        return [
+          <>
+            <GalleryCard
+              {...props}
+              footer={{
+                openHandler: () => setModalOpen(!modalOpen),
+                setSection: setModalSection,
+              }}
+              pluginConfig={pluginConfig}
+            />
+            <CardModalWrapper show={modalOpen} titleID={titleID}>
+              <GalleryCardModalContent
+                closeHandler={() => setModalOpen(false)}
+                gallery={props.gallery}
+                section={modalSection}
+                setSection={setModalSection}
+                titleID={titleID}
+              />
+            </CardModalWrapper>
+          </>,
+        ];
     }
 
     return [<Original {...props} />];
