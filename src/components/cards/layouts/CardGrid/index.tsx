@@ -1,6 +1,5 @@
 import React from "react";
 import cx from "classnames";
-import { CLASSNAME } from "@/constants";
 import "./CardGrid.scss";
 
 interface CardGridProps {
@@ -9,11 +8,11 @@ interface CardGridProps {
 }
 
 const CardGrid: React.FC<CardGridProps> = (props) => {
-  const componentClassname = CLASSNAME.NAMESPACE + "__card-grid";
+  const componentClassname = "vui-card-grid";
   const zoomClassname = componentClassname + "--zoom-" + props.zoomIndex;
 
   const classes = cx(componentClassname, zoomClassname);
-  const cardWrapperClassname = CLASSNAME.NAMESPACE + "__card-wrapper";
+  const cardWrapperClassname = componentClassname + "__card-wrapper";
 
   return (
     <div className={classes}>
