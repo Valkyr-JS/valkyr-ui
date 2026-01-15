@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import CardGrid from "@/components/cards/layouts/CardGrid";
-import SceneCard, { SceneCardModal } from "@/components/cards/SceneCard";
+import SceneCard, {
+  createSceneCardID,
+  SceneCardModalContent,
+} from "@/components/cards/SceneCard";
+import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<ISceneCardGrid>(
@@ -16,6 +20,9 @@ PluginApi.patch.instead<ISceneCardGrid>(
       const [modalSceneIndex, setModalSceneIndex] = useState(0);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
+
+      const titleID =
+        createSceneCardID(props.scenes[modalSceneIndex].id) + "Modal";
 
       if (
         pluginConfig?.cards__cardGrids__enabled &&
@@ -43,16 +50,18 @@ PluginApi.patch.instead<ISceneCardGrid>(
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
             />
-            <SceneCardModal
-              closeHandler={() => setModalOpen(false)}
-              continuePlaylist={stashConfig.interface.continuePlaylistDefault}
-              index={modalSceneIndex}
-              queue={props.queue}
-              scene={props.scenes[modalSceneIndex]}
-              section={modalSection}
-              setSection={setModalSection}
-              show={modalOpen}
-            />
+            <CardModalWrapper show={modalOpen} titleID={titleID}>
+              <SceneCardModalContent
+                closeHandler={() => setModalOpen(false)}
+                continuePlaylist={stashConfig.interface.continuePlaylistDefault}
+                index={modalSceneIndex}
+                queue={props.queue}
+                scene={props.scenes[modalSceneIndex]}
+                section={modalSection}
+                setSection={setModalSection}
+                titleID={titleID}
+              />
+            </CardModalWrapper>
           </>,
         ];
     }

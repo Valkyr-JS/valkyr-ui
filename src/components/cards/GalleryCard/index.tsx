@@ -1,7 +1,7 @@
 import React from "react";
 import { CLASSNAME } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
-import CardModal from "../layouts/CardModal";
+import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import "./GalleryCard.scss";
 import Studio from "../data/Studio";
@@ -28,7 +28,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       link={galleryLink}
       thumbnail={
         <GalleryCardThumbnail
-          id={id}
+          titleID={id}
           link={galleryLink}
           src={props.gallery.paths.cover}
         />
@@ -36,7 +36,11 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       title={title}
       topLine={
         <>
-          <Studio currentBreakpoint={0} studio={props.gallery.studio} />
+          <Studio
+            context="card"
+            currentBreakpoint={0}
+            studio={props.gallery.studio}
+          />
         </>
       }
     />
@@ -50,14 +54,14 @@ export default GalleryCard;
 /* ---------------------------------------------------------------------------------------------- */
 
 interface GalleryCardThumbnailProps {
-  /** HTML ID used for aria labelling. */
-  id: string;
-
   /** The link to the object page. */
   link: string;
 
   /** The link to the gallery cover thumbnail. */
   src: string;
+
+  /** HTML ID used for aria labelling on the modal title. */
+  titleID: string;
 }
 
 export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
@@ -69,7 +73,7 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
 
   return (
     <div className={componentClass}>
-      <a href={props.link} aria-labelledby={props.id}>
+      <a href={props.link} aria-labelledby={props.titleID}>
         <div className={coverClass}>
           <img className={imgClass} loading="lazy" alt="" src={props.src} />
         </div>
@@ -82,7 +86,7 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
 /*                                  Gallery card modal component                                  */
 /* ---------------------------------------------------------------------------------------------- */
 
-interface GalleryCardModalProps {
+interface GalleryCardModalContentProps {
   /** Handler for closing the modal. */
   closeHandler: () => void;
 
@@ -95,31 +99,32 @@ interface GalleryCardModalProps {
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
 
-  /** Whether the modal is currently rendered. */
-  show: boolean;
+  /** HTML ID used for aria labelling on the modal title. */
+  titleID: string;
 }
 
-export const GalleryCardModal: React.FC<GalleryCardModalProps> = (props) => {
+export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
+  props
+) => {
   const id = createGalleryCardID(props.gallery.id);
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
   return (
-    <CardModal
+    <CardModalContent
       closeHandler={props.closeHandler}
       link={galleryLink}
       section={props.section}
       setSection={props.setSection}
-      show={props.show}
       thumbnail={
         <GalleryCardThumbnail
-          id={id}
+          titleID={props.titleID}
           link={galleryLink}
           src={props.gallery.paths.cover}
         />
       }
       title={title}
-      titleID={id}
+      titleID={props.titleID}
     />
   );
 };

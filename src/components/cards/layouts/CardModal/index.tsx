@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
@@ -8,7 +8,7 @@ import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
 
-export interface CardModalProps {
+export interface CardModalContentProps {
   /** Handler for closing the modal. */
   closeHandler: () => void;
 
@@ -20,9 +20,6 @@ export interface CardModalProps {
 
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
-
-  /** Whether the modal is currently rendered. */
-  show: boolean;
 
   /** A component used for displaying the object thumbnail. */
   thumbnail: React.ReactNode;
@@ -37,18 +34,12 @@ export interface CardModalProps {
   topLine?: React.ReactNode;
 }
 
-const CardModal: React.FC<CardModalProps> = (props) => {
+export const CardModalContent: React.FC<CardModalContentProps> = (props) => {
   const intl = useIntl();
-  const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
-
   const handleSetDetailsSection = () => props.setSection("details");
 
   return (
-    <Modal
-      className={componentClass}
-      show={props.show}
-      aria-labelledby={props.titleID}
-    >
+    <>
       <Modal.Header>{props.thumbnail}</Modal.Header>
       <Modal.Body>
         <CardTitle id={props.titleID} link={props.link} text={props.title} />
@@ -75,8 +66,30 @@ const CardModal: React.FC<CardModalProps> = (props) => {
           </button>
         </div>
       </Modal.Footer>
-    </Modal>
+    </>
   );
 };
 
-export default CardModal;
+interface CardModalWrapperProps {
+  /** Whether the modal is currently rendered. */
+  show: boolean;
+
+  /** HTML ID used for aria labelling on the modal title. */
+  titleID: string;
+}
+
+export const CardModalWrapper: React.FC<
+  PropsWithChildren<CardModalWrapperProps>
+> = (props) => {
+  const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
+
+  return (
+    <Modal
+      className={componentClass}
+      show={props.show}
+      aria-labelledby={props.titleID}
+    >
+      {props.children}
+    </Modal>
+  );
+};
