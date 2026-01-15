@@ -53,11 +53,13 @@ export const WithStaticCardModal: DecoratorFunction<ReactRenderer> = (
 
   return (
     <div
-      className={"modal show " + componentClass}
+      className={componentClass + " modal show"}
       style={{ display: "block", position: "initial" }}
     >
       <div className="modal-dialog">
-        <Story />
+        <div className="modal-content">
+          <Story />
+        </div>
       </div>
     </div>
   );
