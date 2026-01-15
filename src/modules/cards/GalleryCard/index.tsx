@@ -40,6 +40,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                     setSection: setModalSection,
                   }}
                   gallery={gl}
+                  pluginConfig={pluginConfig}
                 />
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
@@ -70,7 +71,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
       if (pluginConfig?.cards__galleryCards__enabled)
-        return [<GalleryCard {...props} />];
+        return [<GalleryCard {...props} pluginConfig={pluginConfig} />];
     }
 
     return [<Original {...props} />];

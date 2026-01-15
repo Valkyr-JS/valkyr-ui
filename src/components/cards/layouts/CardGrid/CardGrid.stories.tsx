@@ -150,7 +150,12 @@ export const ScenesZoom3: Story = {
 
 export const GalleriesZoom0: Story = {
   args: {
-    cards: [<GalleryCard gallery={gallery4521 as SlimGalleryDataFragment} />],
+    cards: [
+      <GalleryCard
+        pluginConfig={{}}
+        gallery={gallery4521 as SlimGalleryDataFragment}
+      />,
+    ],
     zoomIndex: 0,
   },
   parameters: {
@@ -160,7 +165,12 @@ export const GalleriesZoom0: Story = {
 
 export const GalleriesZoom1: Story = {
   args: {
-    cards: [<GalleryCard gallery={gallery4521 as SlimGalleryDataFragment} />],
+    cards: [
+      <GalleryCard
+        pluginConfig={{}}
+        gallery={gallery4521 as SlimGalleryDataFragment}
+      />,
+    ],
     zoomIndex: 1,
   },
   parameters: {
@@ -170,7 +180,12 @@ export const GalleriesZoom1: Story = {
 
 export const GalleriesZoom2: Story = {
   args: {
-    cards: [<GalleryCard gallery={gallery4521 as SlimGalleryDataFragment} />],
+    cards: [
+      <GalleryCard
+        pluginConfig={{}}
+        gallery={gallery4521 as SlimGalleryDataFragment}
+      />,
+    ],
     zoomIndex: 2,
   },
   parameters: {
@@ -180,7 +195,12 @@ export const GalleriesZoom2: Story = {
 
 export const GalleriesZoom3: Story = {
   args: {
-    cards: [<GalleryCard gallery={gallery4521 as SlimGalleryDataFragment} />],
+    cards: [
+      <GalleryCard
+        pluginConfig={{}}
+        gallery={gallery4521 as SlimGalleryDataFragment}
+      />,
+    ],
     zoomIndex: 3,
   },
   parameters: {

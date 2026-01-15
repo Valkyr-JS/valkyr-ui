@@ -8,6 +8,9 @@ const meta = {
   parameters: {
     layout: "centered",
   },
+  args: {
+    pluginConfig: {},
+  },
   tags: ["autodocs"],
 } satisfies Meta<typeof GalleryCard>;
 

@@ -12,6 +12,12 @@ interface GalleryCardProps {
 
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
+
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
+  /** The current zoom breakpoint. */
+  zoomBreakpoint?: StashCardGridZoom;
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = (props) => {
@@ -38,8 +44,9 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
         <>
           <Studio
             context="card"
-            currentBreakpoint={0}
+            currentBreakpoint={props.zoomBreakpoint}
             studio={props.gallery.studio}
+            userBreakpoint={props.pluginConfig.cards__generalData__studio}
           />
         </>
       }

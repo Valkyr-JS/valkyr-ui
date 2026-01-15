@@ -26,6 +26,7 @@ interface SceneCardProps {
   /** The Stash scene data. */
   scene: SlimSceneDataFragment;
 
+  /** The current zoom breakpoint. */
   zoomBreakpoint?: StashCardGridZoom;
 }
 
@@ -57,9 +58,9 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       topLine={
         <Studio
           context="card"
-          currentBreakpoint={props.pluginConfig.cards__generalData__studio}
+          currentBreakpoint={props.zoomBreakpoint}
           studio={props.scene.studio}
-          userBreakpoint={props.zoomBreakpoint}
+          userBreakpoint={props.pluginConfig.cards__generalData__studio}
         />
       }
     />
