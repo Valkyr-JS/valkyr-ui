@@ -1,7 +1,3 @@
-export const CLASSNAME = {
-  NAMESPACE: "valkyr-ui",
-} as const;
-
 export const DEFAULT = {
   ZOOM_BREAKPOINT: {
     STUDIO: 0,
