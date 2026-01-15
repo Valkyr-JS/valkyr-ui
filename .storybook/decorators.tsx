@@ -49,7 +49,7 @@ export const WithCard: DecoratorFunction<ReactRenderer> = (Story) => (
 export const WithStaticCardModal: DecoratorFunction<ReactRenderer> = (
   Story
 ) => {
-  const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
+  const componentClass = "vui-card-modal";
 
   return (
     <div
