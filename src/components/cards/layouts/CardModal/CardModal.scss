@@ -8,6 +8,11 @@
       align-items: center;
     }
 
+    .modal-body {
+      display: grid;
+      grid-template-rows: [body-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-bottom];
+    }
+
     .modal-footer {
       justify-content: space-between;
     }
