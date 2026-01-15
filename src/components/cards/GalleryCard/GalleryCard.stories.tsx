@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { expect, fn, within } from "storybook/test";
 import GalleryCard from ".";
 
 // Mock data
@@ -40,16 +40,49 @@ const footerProps = {
   setSection: fn(),
 };
 
+export const FullData: Story = {
+  args: {
+    gallery: gallery17791 as SlimGalleryDataFragment,
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Studio link should render
+    const studioLink = canvas.getByRole("link", {
+      name: args.gallery.studio?.name,
+    });
+    await expect(studioLink).toBeInTheDocument();
+  },
+};
+
 export const LandscapeThumbnail: Story = {
   args: {
     gallery: gallery17791 as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Link to card modal details section should NOT render
+    const detailsModalBtn = canvas.queryByRole("button", {
+      name: "Details",
+    });
+    await expect(detailsModalBtn).toBeNull();
   },
 };
 
 export const LandscapeThumbnailWithFooter: Story = {
   args: {
-    gallery: gallery17791 as SlimGalleryDataFragment,
     footer: footerProps,
+    gallery: gallery17791 as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Link to card modal details section should render
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    await expect(detailsModalBtn).toBeInTheDocument();
   },
 };
 
@@ -57,11 +90,29 @@ export const PortraitThumbnail: Story = {
   args: {
     gallery: gallery4521 as SlimGalleryDataFragment,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Link to card modal details section should NOT render
+    const detailsModalBtn = canvas.queryByRole("button", {
+      name: "Details",
+    });
+    await expect(detailsModalBtn).toBeNull();
+  },
 };
 
 export const PortraitThumbnailWithFooter: Story = {
   args: {
-    gallery: gallery4521 as SlimGalleryDataFragment,
     footer: footerProps,
+    gallery: gallery4521 as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Link to card modal details section should render
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    await expect(detailsModalBtn).toBeInTheDocument();
   },
 };
