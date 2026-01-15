@@ -8,16 +8,16 @@ interface CardGridProps {
 }
 
 const CardGrid: React.FC<CardGridProps> = (props) => {
-  const componentClassname = "vui-card-grid";
-  const zoomClassname = componentClassname + "--zoom-" + props.zoomIndex;
+  const componentClass = "vui-card-grid";
+  const zoomClass = componentClass + "--zoom-" + props.zoomIndex;
+  const cardWrapperClass = componentClass + "__card-wrapper";
 
-  const classes = cx(componentClassname, zoomClassname);
-  const cardWrapperClassname = componentClassname + "__card-wrapper";
+  const classes = cx(componentClass, zoomClass);
 
   return (
     <div className={classes}>
       {props.cards.map((ob, i) => (
-        <div className={cardWrapperClassname} key={i}>
+        <div className={cardWrapperClass} key={i}>
           {ob}
         </div>
       ))}

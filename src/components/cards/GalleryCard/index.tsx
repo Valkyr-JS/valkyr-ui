@@ -1,5 +1,4 @@
 import React from "react";
-import { CLASSNAME } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
@@ -74,15 +73,15 @@ interface GalleryCardThumbnailProps {
 export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
   props
 ) => {
-  const componentClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail";
-  const coverClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail-cover";
-  const imgClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail-img";
+  const componentClass = "vui-gallery-card";
+  const thumbnailClass = componentClass + "__thumbnail";
+  const coverClass = componentClass + "__thumbnail-cover";
 
   return (
-    <div className={componentClass}>
+    <div className={thumbnailClass}>
       <a href={props.link} aria-labelledby={props.titleID}>
         <div className={coverClass}>
-          <img className={imgClass} loading="lazy" alt="" src={props.src} />
+          <img loading="lazy" alt="" src={props.src} />
         </div>
       </a>
     </div>

@@ -1,26 +1,34 @@
-.valkyr-ui {
-  &__gallery-card-thumbnail-cover {
+@use "sass:math";
+@use "../../../../src/scss/variables";
+
+$zoomBreakpoints: variables.$card-zoom-breakpoints;
+$zoomCardHeights: (
+  0: 180px,
+  1: 240px,
+  2: 360px,
+  3: 480px,
+);
+
+.vui-gallery-card {
+  &__thumbnail-cover {
     position: relative;
-  }
-  &__gallery-card-thumbnail-img {
-    height: auto;
-    width: 100%;
-    object-fit: contain;
-  }
 
-  &__card-grid--zoom-0 &__gallery-card-thumbnail-img {
-    height: 180px;
+    img {
+      height: auto;
+      width: 100%;
+      object-fit: contain;
+    }
   }
+}
 
-  &__card-grid--zoom-1 &__gallery-card-thumbnail-img {
-    height: 240px;
-  }
+// Generate thumbnail heights for each zoom breakpoint
+@each $zoom, $maxCardWidth in $zoomBreakpoints {
+  $height: map-get(
+    $map: $zoomCardHeights,
+    $key: $zoom,
+  );
 
-  &__card-grid--zoom-2 &__gallery-card-thumbnail-img {
-    height: 360px;
-  }
-
-  &__card-grid--zoom-3 &__gallery-card-thumbnail-img {
-    height: 480px;
+  .vui-card-grid--zoom-#{$zoom} .vui-gallery-card__thumbnail-cover img {
+    height: $height;
   }
 }
