@@ -25,15 +25,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const longDate = "Date: 12 December 2015";
+
 export const AboveZoomBreakpoint: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
     userBreakpoint: 2,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const date = canvas.getByText(args.date as string);
+    const date = canvas.getByText(longDate);
     await expect(date).toBeInTheDocument();
   },
 };
@@ -44,9 +46,9 @@ export const BelowZoomBreakpoint: Story = {
     currentBreakpoint: 0,
     userBreakpoint: 2,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const date = canvas.queryByText(args.date as string);
+    const date = canvas.queryByText(longDate);
     await expect(date).toBeNull();
   },
 };
@@ -57,9 +59,9 @@ export const EqualsZoomBreakpoint: Story = {
     currentBreakpoint: 2,
     userBreakpoint: 2,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const date = canvas.getByText(args.date as string);
+    const date = canvas.getByText(longDate);
     await expect(date).toBeInTheDocument();
   },
 };
@@ -68,9 +70,9 @@ export const ModalContext: Story = {
   args: {
     context: "modal",
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const date = canvas.getByText(args.date as string);
+    const date = canvas.getByText(longDate);
     await expect(date).toBeInTheDocument();
   },
 };
@@ -80,9 +82,9 @@ export const UserDisabled: Story = {
     context: "card",
     userBreakpoint: -1,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const date = canvas.queryByText(args.date as string);
+    const date = canvas.queryByText(longDate);
     await expect(date).toBeNull();
   },
 };
@@ -92,9 +94,9 @@ export const WithoutZoomData: Story = {
     context: "card",
     userBreakpoint: 0,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const date = canvas.getByText(args.date as string);
+    const date = canvas.getByText(longDate);
     await expect(date).toBeInTheDocument();
   },
 };

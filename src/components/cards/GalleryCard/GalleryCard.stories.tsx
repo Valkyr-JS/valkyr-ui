@@ -54,7 +54,7 @@ export const FullData: Story = {
     await expect(studioLink).toBeInTheDocument();
 
     // Date should render
-    const date = canvas.getByText(args.gallery.date as string);
+    const date = canvas.getByText("Date: 7 October 2025");
     await expect(date).toBeInTheDocument();
   },
 };
