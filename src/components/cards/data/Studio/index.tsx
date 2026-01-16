@@ -1,8 +1,7 @@
 import React from "react";
-import { DEFAULT } from "@/constants";
 import { getRenderData } from "@/helpers";
 
-interface StudioProps extends DataComponentProps {
+interface StudioProps {
   /** The studio data. */
   studio:
     | Maybe<{
@@ -12,15 +11,19 @@ interface StudioProps extends DataComponentProps {
     | undefined;
 }
 
-const Studio: React.FC<StudioProps> = (props) => {
-  const data = getRenderData({
-    context: props.context,
-    data: props.studio,
-    zoomBreakpoint: {
-      current: props.currentBreakpoint,
-      user: props.userBreakpoint ?? DEFAULT.CARDS.DATA.STUDIO_BREAKPOINT,
-    },
-  });
+const Studio: React.FC<
+  DataComponentProps<StudioProps> | DataComponentModalProps<StudioProps>
+> = (props) => {
+  const data =
+    props.context === "modal"
+      ? props.studio
+      : getRenderData({
+          data: props.studio,
+          zoomBreakpoint: {
+            current: props.currentBreakpoint,
+            user: props.userBreakpoint,
+          },
+        });
 
   if (!data) return null;
 
