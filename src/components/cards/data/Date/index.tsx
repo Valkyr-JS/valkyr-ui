@@ -1,9 +1,10 @@
 import React from "react";
 import { getRenderData } from "@/helpers";
+import "./Date.scss";
 
 interface DateProps {
   /** The date data. */
-  date: Maybe<Scalars["String"]["output"]>;
+  date: Maybe<Scalars["String"]["output"]> | undefined;
 }
 
 const Date: React.FC<
