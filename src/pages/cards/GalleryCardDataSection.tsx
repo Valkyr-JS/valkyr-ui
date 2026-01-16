@@ -24,6 +24,25 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const DetailsBreakpoint = () => (
+    <NumberSetting
+      heading="Details"
+      id="valkyr-ui-cards__galleryCard__detailsBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__detailsBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__galleryCard__detailsBreakpoint ??
+        DEFAULT.CARDS.GALLERY_CARD.DETAILS_BREAKPOINT
+      }
+    />
+  );
+
   const StudioBreakpoint = () => (
     <NumberSetting
       heading="Studio"
@@ -48,11 +67,13 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
       <SettingGroup
         collapsible
         settingProps={{
+          heading: "Card zoom data breakpoints",
           subHeading:
             "For each piece of data, you can set the card zoom at which it appears. This allows you to display only select data when cards are smaller, and more data as they get bigger. The value must be between 0 and 3. Alternatively, set it to -1 to turn it off completely.",
         }}
       >
         <DateBreakpoint />
+        <DetailsBreakpoint />
         <StudioBreakpoint />
       </SettingGroup>
     </SettingSection>
