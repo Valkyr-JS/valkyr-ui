@@ -1,13 +1,14 @@
 import React from "react";
 import { getRenderData } from "@/helpers";
 import "./Date.scss";
+import { FormattedDate } from "react-intl";
 
 interface DateProps {
   /** The date data. */
   date: Maybe<Scalars["String"]["output"]> | undefined;
 }
 
-const Date: React.FC<
+const DateComponent: React.FC<
   DataComponentProps<DateProps> | DataComponentModalProps<DateProps>
 > = (props) => {
   const data =
@@ -28,9 +29,9 @@ const Date: React.FC<
   return (
     <span className={componentClass}>
       <span className="sr-only">Date: </span>
-      {data}
+      <FormattedDate value={data} timeZone="utc" />
     </span>
   );
 };
 
-export default Date;
+export default DateComponent;
