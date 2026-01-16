@@ -60,6 +60,35 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
         </>
       }
     >
+      <GalleryCardBody
+        gallery={props.gallery}
+        pluginConfig={props.pluginConfig}
+        zoomBreakpoint={props.zoomBreakpoint}
+      />
+    </GridCard>
+  );
+};
+
+export default GalleryCard;
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                   Gallery card body component                                  */
+/* ---------------------------------------------------------------------------------------------- */
+
+interface GalleryCardBodyProps {
+  /** The Stash gallery data */
+  gallery: SlimGalleryDataFragment;
+
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
+  /** The current zoom breakpoint. */
+  zoomBreakpoint?: StashCardGridZoom;
+}
+
+const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
+  return (
+    <>
       <KeyData>
         <ReleaseData>
           <Date
@@ -86,11 +115,9 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
           DEFAULT.CARDS.GALLERY_CARD.DETAILS_BREAKPOINT
         }
       />
-    </GridCard>
+    </>
   );
 };
-
-export default GalleryCard;
 
 /* ---------------------------------------------------------------------------------------------- */
 /*                                Gallery card thumbnail component                                */
