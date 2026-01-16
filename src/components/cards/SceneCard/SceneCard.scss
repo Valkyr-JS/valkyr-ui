@@ -34,3 +34,22 @@
     }
   }
 }
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                           Card modal                                           */
+/* ---------------------------------------------------------------------------------------------- */
+
+.vui-scene-card-modal {
+  .vui-card-modal {
+    &__body {
+      display: grid;
+      grid-template-rows: [scene-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom scene-card-modal-body-bottom];
+    }
+  }
+
+  .vui-card-data {
+    &__details {
+      grid-row: details-top / details-bottom;
+    }
+  }
+}
