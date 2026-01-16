@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
+import KeyData from "../KeyData";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
@@ -10,6 +11,9 @@ import "./CardModal.scss";
 export interface CardModalContentProps {
   /** Handler for closing the modal. */
   closeHandler: () => void;
+
+  /** The data components to be displayed as key data. */
+  keyData?: React.ReactNode;
 
   /** The link to the object page. */
   link: string;
@@ -43,6 +47,7 @@ export const CardModalContent: React.FC<CardModalContentProps> = (props) => {
       <Modal.Body>
         <CardTitle id={props.titleID} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
+        <KeyData>{props.keyData}</KeyData>
       </Modal.Body>
       <Modal.Footer>
         <div>

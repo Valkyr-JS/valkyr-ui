@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
+import KeyData from "../KeyData";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
@@ -13,6 +14,9 @@ interface GridCardProps {
 
   /** HTML ID used for aria labelling. */
   id: string;
+
+  /** The data components to be displayed as key data. */
+  keyData?: React.ReactNode;
 
   /** The link to the object page. */
   link: string;
@@ -37,6 +41,7 @@ const GridCard: React.FC<GridCardProps> = (props) => {
       <div className={bodyClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
+        <KeyData>{props.keyData}</KeyData>
       </div>
       {props.footer && <CardFooter {...props.footer} />}
     </Card>

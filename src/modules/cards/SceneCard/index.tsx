@@ -59,6 +59,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                 closeHandler={() => setModalOpen(false)}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
                 index={modalSceneIndex}
+                pluginConfig={pluginConfig}
                 queue={props.queue}
                 scene={props.scenes[modalSceneIndex]}
                 section={modalSection}
@@ -110,6 +111,7 @@ PluginApi.patch.instead<ISceneCardProps>(
                 closeHandler={() => setModalOpen(false)}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
                 index={props.index}
+                pluginConfig={pluginConfig}
                 queue={props.queue}
                 scene={props.scene}
                 section={modalSection}

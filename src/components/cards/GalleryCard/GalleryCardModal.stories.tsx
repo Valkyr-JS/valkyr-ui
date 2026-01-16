@@ -13,6 +13,7 @@ const meta = {
   },
   args: {
     closeHandler: fn(),
+    pluginConfig: {},
     section: "details",
     setSection: fn(),
   },
@@ -32,8 +33,12 @@ export const DefaultSettings: Story = {
 
     // Studio link should render
     const studioLink = canvas.getByRole("link", {
-      name: args.gallery.studio?.name,
+      name: "Studio: " + args.gallery.studio?.name,
     });
     await expect(studioLink).toBeInTheDocument();
+
+    // Date should render
+    const date = canvas.getByText("Date: 3 March 2016");
+    await expect(date).toBeInTheDocument();
   },
 };

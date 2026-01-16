@@ -1,18 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
-import Studio from ".";
+import Date from ".";
 
 const meta = {
-  title: "Components/Cards/Data/Studio",
-  component: Studio,
+  title: "Components/Cards/Data/Date",
+  component: Date,
   parameters: {
     layout: "centered",
   },
   args: {
-    studio: {
-      id: "1",
-      name: "Vixen",
-    },
+    date: "2015-12-25",
+    localeDateFormat: false,
   },
   argTypes: {
     currentBreakpoint: {
@@ -23,10 +21,12 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Studio>;
+} satisfies Meta<typeof Date>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+const longDate = "Date: 25 December 2015";
 
 export const AboveZoomBreakpoint: Story = {
   args: {
@@ -36,8 +36,8 @@ export const AboveZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
-    await expect(link).toBeInTheDocument();
+    const date = canvas.getByText(longDate);
+    await expect(date).toBeInTheDocument();
   },
 };
 
@@ -49,8 +49,8 @@ export const BelowZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.queryByRole("link");
-    await expect(link).toBeNull();
+    const date = canvas.queryByText(longDate);
+    await expect(date).toBeNull();
   },
 };
 
@@ -62,8 +62,8 @@ export const EqualsZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
-    await expect(link).toBeInTheDocument();
+    const date = canvas.getByText(longDate);
+    await expect(date).toBeInTheDocument();
   },
 };
 
@@ -73,8 +73,8 @@ export const ModalContext: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
-    await expect(link).toBeInTheDocument();
+    const date = canvas.getByText(longDate);
+    await expect(date).toBeInTheDocument();
   },
 };
 
@@ -85,8 +85,8 @@ export const UserDisabled: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.queryByRole("link");
-    await expect(link).toBeNull();
+    const date = canvas.queryByText(longDate);
+    await expect(date).toBeNull();
   },
 };
 
@@ -97,7 +97,7 @@ export const WithoutZoomData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
-    await expect(link).toBeInTheDocument();
+    const date = canvas.getByText(longDate);
+    await expect(date).toBeInTheDocument();
   },
 };

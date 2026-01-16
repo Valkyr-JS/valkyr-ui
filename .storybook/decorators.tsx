@@ -1,5 +1,5 @@
 import React from "react";
-import { IntlProvider } from "react-intl";
+import { CustomFormats, IntlProvider } from "react-intl";
 import { DecoratorFunction } from "storybook/internal/csf";
 import messages from "./locales/en-GB.json";
 import { ReactRenderer } from "@storybook/react-vite";
@@ -28,10 +28,20 @@ const flattenMessages = (
   }, {});
 };
 
+const intlFormats: CustomFormats = {
+  date: {
+    long: { year: "numeric", month: "long", day: "numeric" },
+  },
+};
+
 /** Wraps a story in react-intl's `IntlProvider` component and provides access
  * to Stash's `en-GB` locale messages. */
 export const WithIntlProvider: DecoratorFunction<ReactRenderer> = (Story) => (
-  <IntlProvider locale="en-GB" messages={flattenMessages(messages)}>
+  <IntlProvider
+    locale="en-GB"
+    messages={flattenMessages(messages)}
+    formats={intlFormats}
+  >
     <Story />
   </IntlProvider>
 );

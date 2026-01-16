@@ -53,6 +53,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
                 gallery={props.galleries[modalGalleryIndex]}
+                pluginConfig={pluginConfig}
                 section={modalSection}
                 setSection={setModalSection}
                 titleID={titleID}
@@ -99,6 +100,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
                 gallery={props.gallery}
+                pluginConfig={pluginConfig}
                 section={modalSection}
                 setSection={setModalSection}
                 titleID={titleID}

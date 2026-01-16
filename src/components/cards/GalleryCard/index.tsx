@@ -1,9 +1,11 @@
 import React from "react";
 import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
+import Date from "../data/Date";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
+import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
 
 interface GalleryCardProps {
@@ -31,6 +33,23 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
     <GridCard
       footer={props.footer}
       id={id}
+      keyData={
+        <ReleaseData>
+          <Date
+            context="card"
+            currentBreakpoint={props.zoomBreakpoint}
+            date={props.gallery.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+            userBreakpoint={
+              props.pluginConfig.cards__galleryCard__studioBreakpoint ??
+              DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
+            }
+          />
+        </ReleaseData>
+      }
       link={galleryLink}
       thumbnail={
         <GalleryCardThumbnail
@@ -103,6 +122,9 @@ interface GalleryCardModalContentProps {
   /** The Stash gallery data. */
   gallery: SlimGalleryDataFragment;
 
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
   /** The currently displayed modal section. */
   section: CardModalSection;
 
@@ -122,6 +144,18 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
+      keyData={
+        <ReleaseData>
+          <Date
+            context="modal"
+            date={props.gallery.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+          />
+        </ReleaseData>
+      }
       link={galleryLink}
       section={props.section}
       setSection={props.setSection}

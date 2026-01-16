@@ -1,9 +1,11 @@
 import React from "react";
 import { DEFAULT } from "@/constants";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
+import Date from "../data/Date";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
+import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
 
 interface SceneCardProps {
@@ -46,6 +48,23 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
     <GridCard
       footer={props.footer}
       id={id}
+      keyData={
+        <ReleaseData>
+          <Date
+            context="card"
+            currentBreakpoint={props.zoomBreakpoint}
+            date={props.scene.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+            userBreakpoint={
+              props.pluginConfig.cards__sceneCard__studioBreakpoint ??
+              DEFAULT.CARDS.SCENE_CARD.DATE_BREAKPOINT
+            }
+          />
+        </ReleaseData>
+      }
       link={sceneLink}
       thumbnail={
         <SceneCardThumbnail
@@ -120,6 +139,9 @@ interface SceneCardModalContentProps {
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
 
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
   /** The scenes in the current query. */
   queue?: ISceneCardProps["queue"];
 
@@ -150,6 +172,18 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
+      keyData={
+        <ReleaseData>
+          <Date
+            context="modal"
+            date={props.scene.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+          />
+        </ReleaseData>
+      }
       link={sceneLink}
       section={props.section}
       setSection={props.setSection}

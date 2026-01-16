@@ -1,0 +1,14 @@
+@use "../../../../scss/variables";
+
+$column-gap: variables.$column-gap;
+$prefix: variables.$prefix;
+
+.vui-card-key-data {
+  grid-row: key-data-top / key-data-bottom;
+
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: $column-gap;
+  margin-top: 3px;
+  font-size: var(--#{$prefix}-cards-font-sm);
+}

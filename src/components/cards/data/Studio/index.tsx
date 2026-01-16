@@ -32,7 +32,10 @@ const Studio: React.FC<
 
   return (
     <span className={componentClass}>
-      <a href={link}>{data.name}</a>
+      <a href={link}>
+        <span className="sr-only">Studio: </span>
+        {data.name}
+      </a>
     </span>
   );
 };

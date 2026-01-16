@@ -5,6 +5,25 @@ import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting"
 import { DEFAULT } from "@/constants";
 
 const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
+  const DateBreakpoint = () => (
+    <NumberSetting
+      heading="Date"
+      id="valkyr-ui-cards__galleryCard__dateBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__dateBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__galleryCard__dateBreakpoint ??
+        DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
+      }
+    />
+  );
+
   const StudioBreakpoint = () => (
     <NumberSetting
       heading="Studio"
@@ -33,6 +52,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
             "For each piece of data, you can set the card zoom at which it appears. This allows you to display only select data when cards are smaller, and more data as they get bigger. The value must be between 0 and 3. Alternatively, set it to -1 to turn it off completely.",
         }}
       >
+        <DateBreakpoint />
         <StudioBreakpoint />
       </SettingGroup>
     </SettingSection>
