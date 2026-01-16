@@ -60,4 +60,6 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__enabled?: boolean;
   /** The zoom breakpoint at which to display the studio link on scene cards. */
   cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
+  /** Format the date according to the user's Stash language setting. */
+  general__localeDateFormat?: boolean;
 }

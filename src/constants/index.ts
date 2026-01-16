@@ -15,6 +15,9 @@ export const DEFAULT = {
       STUDIO_BREAKPOINT: 0,
     },
   },
+  GENERAL: {
+    LOCALE_DATE_FORMAT: false,
+  },
 } as const;
 
 export const PLUGIN = {
