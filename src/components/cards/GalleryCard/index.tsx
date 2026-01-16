@@ -137,6 +137,11 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
+      keyData={
+        <ReleaseData>
+          <Date context="modal" date={props.gallery.date} />
+        </ReleaseData>
+      }
       link={galleryLink}
       section={props.section}
       setSection={props.setSection}

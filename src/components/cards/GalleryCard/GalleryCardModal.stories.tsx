@@ -35,5 +35,9 @@ export const DefaultSettings: Story = {
       name: args.gallery.studio?.name,
     });
     await expect(studioLink).toBeInTheDocument();
+
+    // Date should render
+    const date = canvas.getByText(args.gallery.date as string);
+    await expect(date).toBeInTheDocument();
   },
 };
