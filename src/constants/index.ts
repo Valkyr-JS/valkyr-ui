@@ -5,10 +5,12 @@ export const DEFAULT = {
       ENABLED: true,
     },
     GALLERY_CARD: {
+      DATE_BREAKPOINT: 0,
       ENABLED: true,
       STUDIO_BREAKPOINT: 0,
     },
     SCENE_CARD: {
+      DATE_BREAKPOINT: 0,
       ENABLED: true,
       STUDIO_BREAKPOINT: 0,
     },
