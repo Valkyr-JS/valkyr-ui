@@ -37,6 +37,7 @@ interface SceneCardProps {
 const SceneCard: React.FC<SceneCardProps> = (props) => {
   console.log(`props - '${props.scene.title || props.scene.id}': `, props);
 
+  const componentClass = "vui-scene-card";
   const id = createSceneCardID(props.scene.id);
   const title = getTitleFromObject(props.scene);
   const sceneLink = makeSceneUrl({
@@ -48,6 +49,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
 
   return (
     <GridCard
+      classname={componentClass}
       footer={props.footer}
       id={id}
       link={sceneLink}
@@ -98,11 +100,8 @@ interface SceneCardBodyProps {
 }
 
 const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
-  const componentClass = "vui-scene-card";
-  const bodyClass = componentClass + "__body";
-
   return (
-    <div className={bodyClass}>
+    <>
       <KeyData>
         <ReleaseData>
           <Date
@@ -129,7 +128,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
           DEFAULT.CARDS.SCENE_CARD.DETAILS_BREAKPOINT
         }
       />
-    </div>
+    </>
   );
 };
 
