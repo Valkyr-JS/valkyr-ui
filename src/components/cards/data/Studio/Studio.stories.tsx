@@ -16,10 +16,10 @@ const meta = {
   },
   argTypes: {
     currentBreakpoint: {
-      control: "number",
+      control: { type: "range", min: 0, max: 3 },
     },
     userBreakpoint: {
-      control: "number",
+      control: { type: "range", min: -1, max: 3 },
     },
   },
   tags: ["autodocs"],

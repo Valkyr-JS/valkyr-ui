@@ -8,13 +8,15 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  args: {},
+  args: {
+    date: "2015-12-12",
+  },
   argTypes: {
     currentBreakpoint: {
-      control: "number",
+      control: { type: "range", min: 0, max: 3 },
     },
     userBreakpoint: {
-      control: "number",
+      control: { type: "range", min: -1, max: 3 },
     },
   },
   tags: ["autodocs"],
@@ -22,3 +24,77 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const AboveZoomBreakpoint: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    userBreakpoint: 2,
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.getByText(args.date as string);
+    await expect(date).toBeInTheDocument();
+  },
+};
+
+export const BelowZoomBreakpoint: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 0,
+    userBreakpoint: 2,
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.queryByText(args.date as string);
+    await expect(date).toBeNull();
+  },
+};
+
+export const EqualsZoomBreakpoint: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 2,
+    userBreakpoint: 2,
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.getByText(args.date as string);
+    await expect(date).toBeInTheDocument();
+  },
+};
+
+export const ModalContext: Story = {
+  args: {
+    context: "modal",
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.getByText(args.date as string);
+    await expect(date).toBeInTheDocument();
+  },
+};
+
+export const UserDisabled: Story = {
+  args: {
+    context: "card",
+    userBreakpoint: -1,
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.queryByText(args.date as string);
+    await expect(date).toBeNull();
+  },
+};
+
+export const WithoutZoomData: Story = {
+  args: {
+    context: "card",
+    userBreakpoint: 0,
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.getByText(args.date as string);
+    await expect(date).toBeInTheDocument();
+  },
+};
