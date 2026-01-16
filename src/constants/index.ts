@@ -4,14 +4,13 @@ export const DEFAULT = {
     CARD_GRID: {
       ENABLED: true,
     },
-    DATA: {
-      STUDIO_BREAKPOINT: 0,
-    },
     GALLERY_CARD: {
       ENABLED: true,
+      STUDIO_BREAKPOINT: 0,
     },
     SCENE_CARD: {
       ENABLED: true,
+      STUDIO_BREAKPOINT: 0,
     },
   },
 } as const;

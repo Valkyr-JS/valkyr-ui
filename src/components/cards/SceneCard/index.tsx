@@ -1,4 +1,5 @@
 import React from "react";
+import { DEFAULT } from "@/constants";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
@@ -59,7 +60,10 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           context="card"
           currentBreakpoint={props.zoomBreakpoint}
           studio={props.scene.studio}
-          userBreakpoint={props.pluginConfig.cards__data__studioBreakpoint}
+          userBreakpoint={
+            props.pluginConfig.cards__sceneCard__studioBreakpoint ??
+            DEFAULT.CARDS.SCENE_CARD.STUDIO_BREAKPOINT
+          }
         />
       }
     />

@@ -93,6 +93,7 @@ export const UserDisabled: Story = {
 export const WithoutZoomData: Story = {
   args: {
     context: "card",
+    userBreakpoint: 0,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

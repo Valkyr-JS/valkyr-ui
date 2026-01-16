@@ -1,4 +1,5 @@
 import React from "react";
+import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
@@ -45,7 +46,10 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             context="card"
             currentBreakpoint={props.zoomBreakpoint}
             studio={props.gallery.studio}
-            userBreakpoint={props.pluginConfig.cards__data__studioBreakpoint}
+            userBreakpoint={
+              props.pluginConfig.cards__galleryCard__studioBreakpoint ??
+              DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
+            }
           />
         </>
       }

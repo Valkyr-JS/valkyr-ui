@@ -1,16 +1,22 @@
 type CardModalSection = "details";
 
-interface DataComponentProps {
+type DataComponentProps<T = unknown> = T & {
   /** Whether the component is being rendered in a card component or modal
    * component. */
-  context: "card" | "modal";
+  context: "card";
 
   /** The current breakpoint in the browser. */
   currentBreakpoint?: StashCardGridZoom;
 
   /** The user-set breakpoint at which to render the component. */
-  userBreakpoint?: StashCardGridZoom;
-}
+  userBreakpoint: StashCardGridZoom;
+};
+
+type DataComponentModalProps<T = unknown> = T & {
+  /** Whether the component is being rendered in a card component or modal
+   * component. */
+  context: "modal";
+};
 
 interface ExtendedConfigResult extends ConfigResult {
   plugins: {
@@ -42,10 +48,12 @@ type SlimStashObject =
 interface ValkyrUiConfigMap {
   /** Enables Valkyr UI card grids for all enabled card types. */
   cards__cardGrid__enabled?: boolean;
-  /** The zoom breakpoint at which to display the studio link. */
-  cards__data__studioBreakpoint?: StashCardGridZoom;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
+  /** The zoom breakpoint at which to display the studio link on gallery cards. */
+  cards__galleryCard__studioBreakpoint?: StashCardGridZoom;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
+  /** The zoom breakpoint at which to display the studio link on scene cards. */
+  cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
 }
