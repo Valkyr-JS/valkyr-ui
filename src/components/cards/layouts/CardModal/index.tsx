@@ -12,9 +12,6 @@ export interface CardModalContentProps {
   /** Handler for closing the modal. */
   closeHandler: () => void;
 
-  /** The data components to be displayed as key data. */
-  keyData?: React.ReactNode;
-
   /** The link to the object page. */
   link: string;
 
@@ -37,7 +34,9 @@ export interface CardModalContentProps {
   topLine?: React.ReactNode;
 }
 
-export const CardModalContent: React.FC<CardModalContentProps> = (props) => {
+export const CardModalContent: React.FC<
+  PropsWithChildren<CardModalContentProps>
+> = (props) => {
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
 
@@ -47,7 +46,7 @@ export const CardModalContent: React.FC<CardModalContentProps> = (props) => {
       <Modal.Body>
         <CardTitle id={props.titleID} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
-        <KeyData>{props.keyData}</KeyData>
+        {props.children}
       </Modal.Body>
       <Modal.Footer>
         <div>

@@ -1,9 +1,8 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
-import KeyData from "../KeyData";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
@@ -14,9 +13,6 @@ interface GridCardProps {
 
   /** HTML ID used for aria labelling. */
   id: string;
-
-  /** The data components to be displayed as key data. */
-  keyData?: React.ReactNode;
 
   /** The link to the object page. */
   link: string;
@@ -31,7 +27,7 @@ interface GridCardProps {
   topLine?: React.ReactNode;
 }
 
-const GridCard: React.FC<GridCardProps> = (props) => {
+const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   const componentClass = "vui-grid-card";
   const bodyClass = componentClass + "__body";
 
@@ -41,7 +37,7 @@ const GridCard: React.FC<GridCardProps> = (props) => {
       <div className={bodyClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
-        <KeyData>{props.keyData}</KeyData>
+        {props.children}
       </div>
       {props.footer && <CardFooter {...props.footer} />}
     </Card>

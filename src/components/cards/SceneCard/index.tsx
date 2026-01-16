@@ -5,6 +5,7 @@ import Date from "../data/Date";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
+import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
 
@@ -48,23 +49,6 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
     <GridCard
       footer={props.footer}
       id={id}
-      keyData={
-        <ReleaseData>
-          <Date
-            context="card"
-            currentBreakpoint={props.zoomBreakpoint}
-            date={props.scene.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-            userBreakpoint={
-              props.pluginConfig.cards__sceneCard__studioBreakpoint ??
-              DEFAULT.CARDS.SCENE_CARD.DATE_BREAKPOINT
-            }
-          />
-        </ReleaseData>
-      }
       link={sceneLink}
       thumbnail={
         <SceneCardThumbnail
@@ -85,7 +69,25 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           }
         />
       }
-    />
+    >
+      <KeyData>
+        <ReleaseData>
+          <Date
+            context="card"
+            currentBreakpoint={props.zoomBreakpoint}
+            date={props.scene.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+            userBreakpoint={
+              props.pluginConfig.cards__sceneCard__studioBreakpoint ??
+              DEFAULT.CARDS.SCENE_CARD.DATE_BREAKPOINT
+            }
+          />
+        </ReleaseData>
+      </KeyData>
+    </GridCard>
   );
 };
 
@@ -172,18 +174,6 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
-      keyData={
-        <ReleaseData>
-          <Date
-            context="modal"
-            date={props.scene.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-          />
-        </ReleaseData>
-      }
       link={sceneLink}
       section={props.section}
       setSection={props.setSection}
@@ -197,7 +187,20 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       title={title}
       titleID={props.titleID}
       topLine={<Studio context="modal" studio={props.scene.studio} />}
-    />
+    >
+      <KeyData>
+        <ReleaseData>
+          <Date
+            context="modal"
+            date={props.scene.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+          />
+        </ReleaseData>
+      </KeyData>
+    </CardModalContent>
   );
 };
 
