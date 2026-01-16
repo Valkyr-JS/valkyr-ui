@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import EnableCardsSection from "./EnableCardsSection";
-import SharedCardDataSection from "./SharedCardDataSection";
+import GalleryCardDataSection from "./GalleryCardDataSection";
 
 const CardsTab: React.FC<SettingsTabProps> = (props) => {
   const componentClassname = "vui-form-group";
@@ -9,7 +9,7 @@ const CardsTab: React.FC<SettingsTabProps> = (props) => {
   return (
     <Form.Group className={componentClassname}>
       <EnableCardsSection {...props} />
-      <SharedCardDataSection {...props} />
+      <GalleryCardDataSection {...props} />
     </Form.Group>
   );
 };
