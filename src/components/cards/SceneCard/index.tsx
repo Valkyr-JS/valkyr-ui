@@ -82,6 +82,10 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
 
 export default SceneCard;
 
+/* ---------------------------------------------------------------------------------------------- */
+/*                                    Scene card body component                                   */
+/* ---------------------------------------------------------------------------------------------- */
+
 interface SceneCardBodyProps {
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
@@ -236,6 +240,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           />
         </ReleaseData>
       </KeyData>
+      <Details context="modal" details={props.scene.details} />
     </CardModalContent>
   );
 };

@@ -8,6 +8,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
+import Details from "../data/Details";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -74,6 +75,15 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
           />
         </ReleaseData>
       </KeyData>
+      <Details
+        context="card"
+        currentBreakpoint={props.zoomBreakpoint}
+        details={props.gallery.details}
+        userBreakpoint={
+          props.pluginConfig.cards__galleryCard__detailsBreakpoint ??
+          DEFAULT.CARDS.GALLERY_CARD.DETAILS_BREAKPOINT
+        }
+      />
     </GridCard>
   );
 };
@@ -161,7 +171,6 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       topLine={<Studio context="modal" studio={props.gallery.studio} />}
     >
       <KeyData>
-        {" "}
         <ReleaseData>
           <Date
             context="modal"
@@ -173,6 +182,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           />
         </ReleaseData>
       </KeyData>
+      <Details context="modal" details={props.gallery.details} />
     </CardModalContent>
   );
 };
