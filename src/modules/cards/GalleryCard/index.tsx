@@ -49,7 +49,11 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
             />
-            <CardModalWrapper show={modalOpen} titleID={titleID}>
+            <CardModalWrapper
+              classname="vui-gallery-card-modal"
+              show={modalOpen}
+              titleID={titleID}
+            >
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
                 gallery={props.galleries[modalGalleryIndex]}
@@ -96,7 +100,11 @@ PluginApi.patch.instead<IGalleryCardProps>(
               }}
               pluginConfig={pluginConfig}
             />
-            <CardModalWrapper show={modalOpen} titleID={titleID}>
+            <CardModalWrapper
+              classname="vui-gallery-card-modal"
+              show={modalOpen}
+              titleID={titleID}
+            >
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
                 gallery={props.gallery}
