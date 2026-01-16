@@ -52,13 +52,23 @@ const DateComponent: React.FC<
 
     return (
       <span className={componentClass}>
-        <span className="sr-only">Date: </span>
-        <FormattedDate
-          value={Date.UTC(year, month)}
-          year="numeric"
-          month="numeric"
-          timeZone="utc"
-        />
+        <span className="sr-only">
+          Date:{" "}
+          <FormattedDate
+            value={Date.UTC(year, month)}
+            year="numeric"
+            month="long"
+            timeZone="utc"
+          />
+        </span>
+        <span aria-hidden>
+          <FormattedDate
+            value={Date.UTC(year, month)}
+            year="numeric"
+            month="numeric"
+            timeZone="utc"
+          />
+        </span>
       </span>
     );
   }
@@ -67,8 +77,12 @@ const DateComponent: React.FC<
 
   return (
     <span className={componentClass}>
-      <span className="sr-only">Date: </span>
-      <FormattedDate value={data} timeZone="utc" />
+      <span className="sr-only">
+        Date: <FormattedDate value={data} format="long" timeZone="utc" />
+      </span>
+      <span aria-hidden>
+        <FormattedDate value={data} timeZone="utc" />
+      </span>
     </span>
   );
 };
