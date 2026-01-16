@@ -4,28 +4,28 @@ import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting";
 import { DEFAULT } from "@/constants";
 
-const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
+const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
   const StudioBreakpoint = () => (
     <NumberSetting
       heading="Studio"
-      id="valkyr-ui-cards__galleryCard__studioBreakpoint"
+      id="valkyr-ui-cards__sceneCard__studioBreakpoint"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__galleryCard__studioBreakpoint: v,
+            cards__sceneCard__studioBreakpoint: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__galleryCard__studioBreakpoint ??
-        DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__studioBreakpoint ??
+        DEFAULT.CARDS.SCENE_CARD.STUDIO_BREAKPOINT
       }
     />
   );
 
   return (
-    <SettingSection id="gallery-data" heading="Gallery card data">
+    <SettingSection id="scene-data" heading="Scene card data">
       <SettingGroup
         collapsible
         settingProps={{
@@ -39,4 +39,4 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
   );
 };
 
-export default GalleryCardDataSection;
+export default SceneCardDataSection;
