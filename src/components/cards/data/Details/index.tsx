@@ -3,7 +3,7 @@ import { getRenderData } from "@/helpers";
 
 interface DetailsProps {
   /** The details data. */
-  details?: string;
+  details?: Maybe<string>;
 }
 
 const Details: React.FC<
