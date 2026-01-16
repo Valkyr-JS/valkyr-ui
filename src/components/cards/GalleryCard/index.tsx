@@ -45,7 +45,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             context="card"
             currentBreakpoint={props.zoomBreakpoint}
             studio={props.gallery.studio}
-            userBreakpoint={props.pluginConfig.cards__generalData__studio}
+            userBreakpoint={props.pluginConfig.cards__data__studioBreakpoint}
           />
         </>
       }

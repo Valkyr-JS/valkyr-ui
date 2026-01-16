@@ -25,8 +25,8 @@ PluginApi.patch.instead<ISceneCardGrid>(
         createSceneCardID(props.scenes[modalSceneIndex].id) + "Modal";
 
       if (
-        pluginConfig?.cards__cardGrids__enabled &&
-        pluginConfig?.cards__sceneCards__enabled
+        pluginConfig?.cards__cardGrid__enabled &&
+        pluginConfig?.cards__sceneCard__enabled
       )
         return [
           <>
@@ -84,7 +84,7 @@ PluginApi.patch.instead<ISceneCardProps>(
 
       const titleID = createSceneCardID(props.scene.id) + "Modal";
 
-      if (pluginConfig?.cards__sceneCards__enabled)
+      if (pluginConfig?.cards__sceneCard__enabled)
         return [
           <>
             <SceneCard

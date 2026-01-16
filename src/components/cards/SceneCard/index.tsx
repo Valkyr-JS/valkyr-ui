@@ -59,7 +59,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           context="card"
           currentBreakpoint={props.zoomBreakpoint}
           studio={props.scene.studio}
-          userBreakpoint={props.pluginConfig.cards__generalData__studio}
+          userBreakpoint={props.pluginConfig.cards__data__studioBreakpoint}
         />
       }
     />

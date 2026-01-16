@@ -25,8 +25,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
         createGalleryCardID(props.galleries[modalGalleryIndex].id) + "Modal";
 
       if (
-        pluginConfig?.cards__cardGrids__enabled &&
-        pluginConfig?.cards__galleryCards__enabled
+        pluginConfig?.cards__cardGrid__enabled &&
+        pluginConfig?.cards__galleryCard__enabled
       )
         return [
           <>
@@ -76,7 +76,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
 
       const titleID = createGalleryCardID(props.gallery.id) + "Modal";
 
-      if (pluginConfig?.cards__galleryCards__enabled)
+      if (pluginConfig?.cards__galleryCard__enabled)
         return [
           <>
             <GalleryCard
