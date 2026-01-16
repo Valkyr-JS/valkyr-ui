@@ -30,16 +30,17 @@ interface GridCardProps {
 const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   const componentClass = "vui-grid-card";
   const bodyClass = componentClass + "__body";
+  const contentClass = componentClass + "__content";
 
   return (
     <Card className={componentClass}>
       {props.thumbnail}
-      <div className={bodyClass}>
+      <div className={contentClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
-        {props.children}
+        <div className={bodyClass}>{props.children}</div>
+        {props.footer && <CardFooter {...props.footer} />}
       </div>
-      {props.footer && <CardFooter {...props.footer} />}
     </Card>
   );
 };
