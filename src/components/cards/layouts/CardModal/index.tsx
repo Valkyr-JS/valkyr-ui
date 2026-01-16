@@ -1,14 +1,17 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
-import KeyData from "../KeyData";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
 
 export interface CardModalContentProps {
+  /** Optional classes added alongside the `vui-card-modal` component class. */
+  classname?: string;
+
   /** Handler for closing the modal. */
   closeHandler: () => void;
 
@@ -39,6 +42,8 @@ export const CardModalContent: React.FC<
 > = (props) => {
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
+  const componentClass = "vui-card-modal";
+  const bodyClass = componentClass + "__body";
 
   return (
     <>
@@ -46,7 +51,7 @@ export const CardModalContent: React.FC<
       <Modal.Body>
         <CardTitle id={props.titleID} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
-        {props.children}
+        <div className={bodyClass}>{props.children}</div>
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -74,6 +79,9 @@ export const CardModalContent: React.FC<
 };
 
 interface CardModalWrapperProps {
+  /** Optional classes added alongside the `vui-card-modal` component class. */
+  classname?: string;
+
   /** Whether the modal is currently rendered. */
   show: boolean;
 
@@ -85,10 +93,11 @@ export const CardModalWrapper: React.FC<
   PropsWithChildren<CardModalWrapperProps>
 > = (props) => {
   const componentClass = "vui-card-modal";
+  const componentClassList = cx(componentClass, props.classname);
 
   return (
     <Modal
-      className={componentClass}
+      className={componentClassList}
       show={props.show}
       aria-labelledby={props.titleID}
     >

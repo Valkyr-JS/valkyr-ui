@@ -1,4 +1,8 @@
 .vui-card-modal {
+  &__body {
+    grid-row: body-top / body-bottom;
+  }
+
   .modal-header {
     border-bottom: 0;
     overflow: hidden;
@@ -9,7 +13,7 @@
 
   .modal-body {
     display: grid;
-    grid-template-rows: [body-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-bottom];
+    grid-template-rows: [content-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-top] 1fr [body-bottom content-bottom];
   }
 
   .modal-footer {
