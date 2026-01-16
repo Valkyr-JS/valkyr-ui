@@ -39,6 +39,10 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             context="card"
             currentBreakpoint={props.zoomBreakpoint}
             date={props.gallery.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
             userBreakpoint={
               props.pluginConfig.cards__galleryCard__studioBreakpoint ??
               DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
@@ -118,6 +122,9 @@ interface GalleryCardModalContentProps {
   /** The Stash gallery data. */
   gallery: SlimGalleryDataFragment;
 
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
   /** The currently displayed modal section. */
   section: CardModalSection;
 
@@ -139,7 +146,14 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       closeHandler={props.closeHandler}
       keyData={
         <ReleaseData>
-          <Date context="modal" date={props.gallery.date} />
+          <Date
+            context="modal"
+            date={props.gallery.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+          />
         </ReleaseData>
       }
       link={galleryLink}

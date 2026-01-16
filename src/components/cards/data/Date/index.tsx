@@ -6,6 +6,9 @@ import { FormattedDate } from "react-intl";
 interface DateProps {
   /** The date data. */
   date: Maybe<Scalars["String"]["output"]> | undefined;
+
+  /** Format the date according to the user's Stash language setting. */
+  localeDateFormat: boolean;
 }
 
 const DateComponent: React.FC<
@@ -34,11 +37,15 @@ const DateComponent: React.FC<
     return (
       <span className={componentClass}>
         <span className="sr-only">Date: </span>
-        <FormattedDate
-          value={Date.UTC(year, 0)}
-          year="numeric"
-          timeZone="utc"
-        />
+        {props.localeDateFormat ? (
+          <FormattedDate
+            value={Date.UTC(year, 0)}
+            year="numeric"
+            timeZone="utc"
+          />
+        ) : (
+          data
+        )}
       </span>
     );
   }
@@ -62,12 +69,16 @@ const DateComponent: React.FC<
           />
         </span>
         <span aria-hidden>
-          <FormattedDate
-            value={Date.UTC(year, month)}
-            year="numeric"
-            month="numeric"
-            timeZone="utc"
-          />
+          {props.localeDateFormat ? (
+            <FormattedDate
+              value={Date.UTC(year, month)}
+              year="numeric"
+              month="numeric"
+              timeZone="utc"
+            />
+          ) : (
+            data
+          )}
         </span>
       </span>
     );
@@ -81,7 +92,11 @@ const DateComponent: React.FC<
         Date: <FormattedDate value={data} format="long" timeZone="utc" />
       </span>
       <span aria-hidden>
-        <FormattedDate value={data} timeZone="utc" />
+        {props.localeDateFormat ? (
+          <FormattedDate value={data} timeZone="utc" />
+        ) : (
+          data
+        )}
       </span>
     </span>
   );

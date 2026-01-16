@@ -9,7 +9,8 @@ const meta = {
     layout: "centered",
   },
   args: {
-    date: "2015-12-12",
+    date: "2015-12-25",
+    localeDateFormat: false,
   },
   argTypes: {
     currentBreakpoint: {
@@ -25,7 +26,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const longDate = "Date: 12 December 2015";
+const longDate = "Date: 25 December 2015";
 
 export const AboveZoomBreakpoint: Story = {
   args: {

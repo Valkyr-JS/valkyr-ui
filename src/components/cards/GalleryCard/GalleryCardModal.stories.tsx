@@ -13,6 +13,7 @@ const meta = {
   },
   args: {
     closeHandler: fn(),
+    pluginConfig: {},
     section: "details",
     setSection: fn(),
   },
