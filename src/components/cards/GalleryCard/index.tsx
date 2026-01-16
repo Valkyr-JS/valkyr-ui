@@ -1,10 +1,9 @@
 import React from "react";
-import { CLASSNAME } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
+import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import "./GalleryCard.scss";
-import Studio from "../data/Studio";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -46,7 +45,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             context="card"
             currentBreakpoint={props.zoomBreakpoint}
             studio={props.gallery.studio}
-            userBreakpoint={props.pluginConfig.cards__generalData__studio}
+            userBreakpoint={props.pluginConfig.cards__data__studioBreakpoint}
           />
         </>
       }
@@ -74,15 +73,15 @@ interface GalleryCardThumbnailProps {
 export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
   props
 ) => {
-  const componentClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail";
-  const coverClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail-cover";
-  const imgClass = CLASSNAME.NAMESPACE + "__gallery-card-thumbnail-img";
+  const componentClass = "vui-gallery-card";
+  const thumbnailClass = componentClass + "__thumbnail";
+  const coverClass = componentClass + "__thumbnail-cover";
 
   return (
-    <div className={componentClass}>
+    <div className={thumbnailClass}>
       <a href={props.link} aria-labelledby={props.titleID}>
         <div className={coverClass}>
-          <img className={imgClass} loading="lazy" alt="" src={props.src} />
+          <img loading="lazy" alt="" src={props.src} />
         </div>
       </a>
     </div>

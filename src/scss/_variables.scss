@@ -2,3 +2,10 @@
 
 $prefix: valkyr-ui;
 $column-gap: functions.toRem(10);
+
+$card-zoom-breakpoints: (
+  0: 240px,
+  1: 340px,
+  2: 480px,
+  3: 640px,
+);

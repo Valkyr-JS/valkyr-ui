@@ -5,6 +5,7 @@ import SceneCard, {
   SceneCardModalContent,
 } from "@/components/cards/SceneCard";
 import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
+import { DEFAULT } from "@/constants";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<ISceneCardGrid>(
@@ -25,8 +26,11 @@ PluginApi.patch.instead<ISceneCardGrid>(
         createSceneCardID(props.scenes[modalSceneIndex].id) + "Modal";
 
       if (
-        pluginConfig?.cards__cardGrids__enabled &&
-        pluginConfig?.cards__sceneCards__enabled
+        pluginConfig &&
+        (pluginConfig?.cards__cardGrid__enabled ??
+          DEFAULT.CARDS.CARD_GRID.ENABLED) &&
+        (pluginConfig?.cards__sceneCard__enabled ??
+          DEFAULT.CARDS.SCENE_CARD.ENABLED)
       )
         return [
           <>
@@ -84,7 +88,10 @@ PluginApi.patch.instead<ISceneCardProps>(
 
       const titleID = createSceneCardID(props.scene.id) + "Modal";
 
-      if (pluginConfig?.cards__sceneCards__enabled)
+      if (
+        pluginConfig &&
+        (pluginConfig?.cards__sceneCard__enabled ?? DEFAULT.CARDS.SCENE_CARD)
+      )
         return [
           <>
             <SceneCard

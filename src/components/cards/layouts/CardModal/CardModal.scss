@@ -1,24 +1,18 @@
-.valkyr-ui {
-  &__card-modal {
-    .modal-header {
-      border-bottom: 0;
-      overflow: hidden;
-      flex-direction: column;
-      padding: 0;
-      align-items: center;
-    }
-
-    .modal-body {
-      display: grid;
-      grid-template-rows: [body-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-bottom];
-    }
-
-    .modal-footer {
-      justify-content: space-between;
-    }
+.vui-card-modal {
+  .modal-header {
+    border-bottom: 0;
+    overflow: hidden;
+    flex-direction: column;
+    padding: 0;
+    align-items: center;
   }
 
-  &__card-modal &__gallery-card-thumbnail-img {
-    max-height: 360px;
+  .modal-body {
+    display: grid;
+    grid-template-rows: [body-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-bottom];
+  }
+
+  .modal-footer {
+    justify-content: space-between;
   }
 }

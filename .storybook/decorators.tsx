@@ -4,7 +4,6 @@ import { DecoratorFunction } from "storybook/internal/csf";
 import messages from "./locales/en-GB.json";
 import { ReactRenderer } from "@storybook/react-vite";
 import { Card } from "react-bootstrap";
-import { CLASSNAME } from "../src/constants";
 
 type NestedMessage = { [key: string]: NestedMessage | string };
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/utils/flattenMessages.ts */
@@ -49,7 +48,7 @@ export const WithCard: DecoratorFunction<ReactRenderer> = (Story) => (
 export const WithStaticCardModal: DecoratorFunction<ReactRenderer> = (
   Story
 ) => {
-  const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
+  const componentClass = "vui-card-modal";
 
   return (
     <div

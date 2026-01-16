@@ -1,18 +1,22 @@
 import React from "react";
 import { BooleanSetting } from "@/components/stash/Settings/Inputs";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
+import { DEFAULT } from "@/constants";
 
 const EnableCardsSection: React.FC<SettingsTabProps> = (props) => {
   const GalleryCardsEnabled = () => (
     <BooleanSetting
-      checked={props.pluginConfig.cards__galleryCards__enabled ?? false}
+      checked={
+        props.pluginConfig.cards__galleryCard__enabled ??
+        DEFAULT.CARDS.GALLERY_CARD.ENABLED
+      }
       heading="Enable gallery cards"
-      id="valkyr-ui-cards__galleryCards__enabled"
+      id="valkyr-ui-cards__galleryCard__enabled"
       onChange={() =>
         props.configUpdateHandler({
           ...props.pluginConfig,
-          cards__galleryCards__enabled:
-            !props.pluginConfig.cards__galleryCards__enabled,
+          cards__galleryCard__enabled:
+            !props.pluginConfig.cards__galleryCard__enabled,
         })
       }
     />
@@ -20,14 +24,17 @@ const EnableCardsSection: React.FC<SettingsTabProps> = (props) => {
 
   const SceneCardsEnabled = () => (
     <BooleanSetting
-      checked={props.pluginConfig.cards__sceneCards__enabled ?? false}
+      checked={
+        props.pluginConfig.cards__sceneCard__enabled ??
+        DEFAULT.CARDS.SCENE_CARD.ENABLED
+      }
       heading="Enable scene cards"
-      id="valkyr-ui-cards__sceneCards__enabled"
+      id="valkyr-ui-cards__sceneCard__enabled"
       onChange={() =>
         props.configUpdateHandler({
           ...props.pluginConfig,
-          cards__sceneCards__enabled:
-            !props.pluginConfig.cards__sceneCards__enabled,
+          cards__sceneCard__enabled:
+            !props.pluginConfig.cards__sceneCard__enabled,
         })
       }
     />
@@ -35,14 +42,17 @@ const EnableCardsSection: React.FC<SettingsTabProps> = (props) => {
 
   const CardGridsEnabled = () => (
     <BooleanSetting
-      checked={props.pluginConfig.cards__cardGrids__enabled ?? false}
+      checked={
+        props.pluginConfig.cards__cardGrid__enabled ??
+        DEFAULT.CARDS.CARD_GRID.ENABLED
+      }
       heading="Enable card grids"
-      id="valkyr-ui-cards__cardGrids__enabled"
+      id="valkyr-ui-cards__cardGrid__enabled"
       onChange={() =>
         props.configUpdateHandler({
           ...props.pluginConfig,
-          cards__cardGrids__enabled:
-            !props.pluginConfig.cards__cardGrids__enabled,
+          cards__cardGrid__enabled:
+            !props.pluginConfig.cards__cardGrid__enabled,
         })
       }
       subHeading="Enables a smoother card grid component for enabled Valkyr UI card types. Closely resembles the native Stash card grids."

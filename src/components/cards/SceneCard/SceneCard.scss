@@ -1,9 +1,9 @@
-.valkyr-ui {
-  &__scene-card-thumbnail {
+.vui-scene-card {
+  &__thumbnail {
     position: relative;
   }
 
-  &__scene-card-thumbnail-preview {
+  &__thumbnail-preview {
     display: flex;
     justify-content: center;
     position: relative;

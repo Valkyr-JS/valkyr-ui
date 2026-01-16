@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
-import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
@@ -29,8 +28,8 @@ interface GridCardProps {
 }
 
 const GridCard: React.FC<GridCardProps> = (props) => {
-  const componentClass = CLASSNAME.NAMESPACE + "__grid-card";
-  const bodyClass = CLASSNAME.NAMESPACE + "__grid-card-body";
+  const componentClass = "vui-grid-card";
+  const bodyClass = componentClass + "__body";
 
   return (
     <Card className={componentClass}>
@@ -63,7 +62,9 @@ export interface CardFooterProps {
 
 const CardFooter: React.FC<CardFooterProps> = (props) => {
   const intl = useIntl();
-  const componentClass = CLASSNAME.NAMESPACE + "__grid-card-footer";
+
+  const componentClass = "vui-grid-card";
+  const footerClass = componentClass + "__footer";
 
   const handleOpenDetailsSection = () => {
     if (props.setData !== undefined) props.setData();
@@ -72,7 +73,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
   };
 
   return (
-    <footer className={componentClass}>
+    <footer className={footerClass}>
       <button
         type="button"
         className="minimal btn"

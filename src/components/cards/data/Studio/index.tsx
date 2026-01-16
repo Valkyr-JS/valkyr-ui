@@ -1,5 +1,5 @@
 import React from "react";
-import { CLASSNAME, DEFAULT } from "@/constants";
+import { DEFAULT } from "@/constants";
 import { getRenderData } from "@/helpers";
 
 interface StudioProps extends DataComponentProps {
@@ -18,15 +18,17 @@ const Studio: React.FC<StudioProps> = (props) => {
     data: props.studio,
     zoomBreakpoint: {
       current: props.currentBreakpoint,
-      user: props.userBreakpoint ?? DEFAULT.ZOOM_BREAKPOINT.STUDIO,
+      user: props.userBreakpoint ?? DEFAULT.CARDS.DATA.STUDIO_BREAKPOINT,
     },
   });
 
   if (!data) return null;
 
+  const componentClass = "vui-card-data__studio";
   const link = `/studios/${data.id}`;
+
   return (
-    <span className={`${CLASSNAME.NAMESPACE}__card-data-studio`}>
+    <span className={componentClass}>
       <a href={link}>{data.name}</a>
     </span>
   );

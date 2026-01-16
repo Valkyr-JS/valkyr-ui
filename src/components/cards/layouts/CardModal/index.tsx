@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
-import { CLASSNAME } from "@/constants";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
@@ -81,7 +80,7 @@ interface CardModalWrapperProps {
 export const CardModalWrapper: React.FC<
   PropsWithChildren<CardModalWrapperProps>
 > = (props) => {
-  const componentClass = CLASSNAME.NAMESPACE + "__card-modal";
+  const componentClass = "vui-card-modal";
 
   return (
     <Modal

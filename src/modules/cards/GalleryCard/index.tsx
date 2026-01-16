@@ -5,6 +5,7 @@ import GalleryCard, {
   GalleryCardModalContent,
 } from "@/components/cards/GalleryCard";
 import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
+import { DEFAULT } from "@/constants";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<IGalleryCardGrid>(
@@ -25,8 +26,11 @@ PluginApi.patch.instead<IGalleryCardGrid>(
         createGalleryCardID(props.galleries[modalGalleryIndex].id) + "Modal";
 
       if (
-        pluginConfig?.cards__cardGrids__enabled &&
-        pluginConfig?.cards__galleryCards__enabled
+        pluginConfig &&
+        (pluginConfig?.cards__cardGrid__enabled ??
+          DEFAULT.CARDS.CARD_GRID.ENABLED) &&
+        (pluginConfig?.cards__galleryCard__enabled ??
+          DEFAULT.CARDS.GALLERY_CARD.ENABLED)
       )
         return [
           <>
@@ -76,7 +80,11 @@ PluginApi.patch.instead<IGalleryCardProps>(
 
       const titleID = createGalleryCardID(props.gallery.id) + "Modal";
 
-      if (pluginConfig?.cards__galleryCards__enabled)
+      if (
+        pluginConfig &&
+        (pluginConfig?.cards__galleryCard__enabled ??
+          DEFAULT.CARDS.GALLERY_CARD.ENABLED)
+      )
         return [
           <>
             <GalleryCard

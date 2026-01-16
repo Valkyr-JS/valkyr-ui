@@ -41,11 +41,11 @@ type SlimStashObject =
  * when they are changed. By default they are `undefined`. */
 interface ValkyrUiConfigMap {
   /** Enables Valkyr UI card grids for all enabled card types. */
-  cards__cardGrids__enabled?: boolean;
-  /** Enables Valkyr UI gallery cards. */
-  cards__galleryCards__enabled?: boolean;
+  cards__cardGrid__enabled?: boolean;
   /** The zoom breakpoint at which to display the studio link. */
-  cards__generalData__studio?: StashCardGridZoom;
+  cards__data__studioBreakpoint?: StashCardGridZoom;
+  /** Enables Valkyr UI gallery cards. */
+  cards__galleryCard__enabled?: boolean;
   /** Enables Valkyr UI scene cards. */
-  cards__sceneCards__enabled?: boolean;
+  cards__sceneCard__enabled?: boolean;
 }

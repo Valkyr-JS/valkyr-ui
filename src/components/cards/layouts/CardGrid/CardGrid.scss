@@ -1,23 +1,17 @@
 @use "sass:math";
+@use "../../../../../src/scss/variables";
 
 $cardSpacer: 5px;
-$zoomBreakpoints: (
-  0: 240px,
-  1: 340px,
-  2: 480px,
-  3: 640px,
-);
+$zoomBreakpoints: variables.$card-zoom-breakpoints;
 
 $maxScreenWidth: 2160px;
 
-.valkyr-ui {
-  &__card-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-left: $cardSpacer * -1;
-    margin-right: $cardSpacer * -1;
-  }
+.vui-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: $cardSpacer * -1;
+  margin-right: $cardSpacer * -1;
 
   &__card-wrapper {
     position: relative;
@@ -41,7 +35,7 @@ $maxScreenWidth: 2160px;
       math.div($maxScreenWidth, $maxCardWidthWidthPadding)
     );
     @for $i from 1 through $breakpointsIn4k {
-      &__card-grid--zoom-#{$zoom} &__card-wrapper {
+      &--zoom-#{$zoom} &__card-wrapper {
         @media (min-width: #{$i * $maxCardWidthWidthPadding}) {
           flex: 0 0 math.div(100%, $i + 1);
           max-width: math.div(100%, $i + 1);

@@ -3,7 +3,7 @@
 $column-gap: variables.$column-gap;
 $prefix: variables.$prefix;
 
-.valkyr-ui__card-top-line {
+.vui-card-top-line {
   grid-row: top-line-top / top-line-bottom;
 
   display: grid;
