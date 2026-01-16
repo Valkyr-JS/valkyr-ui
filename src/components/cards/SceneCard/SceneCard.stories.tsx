@@ -48,7 +48,7 @@ export const FullData: Story = {
 
     // Studio link should render
     const studioLink = canvas.getByRole("link", {
-      name: args.scene.studio?.name,
+      name: "Studio: " + args.scene.studio?.name,
     });
     await expect(studioLink).toBeInTheDocument();
 
