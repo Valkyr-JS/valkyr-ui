@@ -4,6 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, useLocation } from "react-router-dom";
 import { PLUGIN, ROUTE } from "@/constants";
 import { useConfigurePlugin } from "@/hooks";
+import GereralTab from "./general";
 import CardsTab from "./cards";
 import "./pages.scss";
 const { PluginApi } = window;
@@ -15,10 +16,10 @@ interface TabData {
   title: string;
 }
 
-const validTabs = ["about", "cards"] as const;
+const validTabs = ["general", "cards"] as const;
 type TabKey = (typeof validTabs)[number];
 
-const defaultTab: TabKey = "about";
+const defaultTab: TabKey = "general";
 
 function isTabKey(tab: string | null): tab is TabKey {
   return validTabs.includes(tab as TabKey);
@@ -52,9 +53,14 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
 
   const tabs: TabData[] = [
     {
-      key: "about",
-      component: <h1>About Valkyr UI</h1>,
-      title: "About",
+      key: "general",
+      component: (
+        <GereralTab
+          configUpdateHandler={handlePluginConfigUpdate}
+          pluginConfig={pluginConfig}
+        />
+      ),
+      title: "General",
     },
     {
       key: "cards",
