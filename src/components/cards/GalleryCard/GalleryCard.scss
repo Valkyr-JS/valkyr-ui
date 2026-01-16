@@ -20,6 +20,19 @@ $zoomThumbnailHeights: (
       object-fit: contain;
     }
   }
+
+  .vui-grid-card {
+    &__body {
+      display: grid;
+      grid-template-rows: [gallery-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom gallery-body-bottom];
+    }
+  }
+
+  .vui-card-data {
+    &__details {
+      grid-row: details-top / details-bottom;
+    }
+  }
 }
 
 // Generate thumbnail heights for each zoom breakpoint

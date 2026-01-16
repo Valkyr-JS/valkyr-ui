@@ -118,7 +118,14 @@ const GalleryCards = [
   gallery17791,
   gallery19022,
 ].map((g) => (
-  <GalleryCard pluginConfig={{}} gallery={g as SlimGalleryDataFragment} />
+  <GalleryCard
+    footer={{
+      openHandler: fn(),
+      setSection: fn(),
+    }}
+    pluginConfig={{}}
+    gallery={g as SlimGalleryDataFragment}
+  />
 ));
 
 export const GalleriesZoom0: Story = {

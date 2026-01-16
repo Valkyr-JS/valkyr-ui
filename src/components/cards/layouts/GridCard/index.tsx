@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import cx from "classnames";
 import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import CardTitle from "../Title";
@@ -8,6 +9,9 @@ import TopLine from "../TopLine";
 import "./GridCard.scss";
 
 interface GridCardProps {
+  /** Optional classes added alongside the `vui-grid-card` component class. */
+  classname?: string;
+
   /** Footer props. Leave `undefined` to not render the footer. */
   footer?: CardFooterProps;
 
@@ -31,9 +35,10 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   const componentClass = "vui-grid-card";
   const bodyClass = componentClass + "__body";
   const contentClass = componentClass + "__content";
+  const componentClassList = cx(componentClass, props.classname);
 
   return (
-    <Card className={componentClass}>
+    <Card className={componentClassList}>
       {props.thumbnail}
       <div className={contentClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
