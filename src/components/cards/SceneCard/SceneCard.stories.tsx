@@ -51,6 +51,10 @@ export const FullData: Story = {
       name: args.scene.studio?.name,
     });
     await expect(studioLink).toBeInTheDocument();
+
+    // Date should render
+    const date = canvas.getByText(args.scene.date as string);
+    await expect(date).toBeInTheDocument();
   },
 };
 
