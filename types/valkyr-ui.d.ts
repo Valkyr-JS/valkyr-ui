@@ -50,12 +50,16 @@ interface ValkyrUiConfigMap {
   cards__cardGrid__enabled?: boolean;
   /** The zoom breakpoint at which to display the date on gallery cards. */
   cards__galleryCard__dateBreakpoint?: StashCardGridZoom;
+  /** The zoom breakpoint at which to display the details on gallery cards. */
+  cards__galleryCard__detailsBreakpoint?: StashCardGridZoom;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
   /** The zoom breakpoint at which to display the studio link on gallery cards. */
   cards__galleryCard__studioBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the date on scene cards. */
   cards__sceneCard__dateBreakpoint?: StashCardGridZoom;
+  /** The zoom breakpoint at which to display the details on scene cards. */
+  cards__sceneCard__detailsBreakpoint?: StashCardGridZoom;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
   /** The zoom breakpoint at which to display the studio link on scene cards. */

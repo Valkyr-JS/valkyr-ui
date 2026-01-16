@@ -6,11 +6,13 @@ export const DEFAULT = {
     },
     GALLERY_CARD: {
       DATE_BREAKPOINT: 0,
+      DETAILS_BREAKPOINT: 0,
       ENABLED: true,
       STUDIO_BREAKPOINT: 0,
     },
     SCENE_CARD: {
       DATE_BREAKPOINT: 0,
+      DETAILS_BREAKPOINT: 0,
       ENABLED: true,
       STUDIO_BREAKPOINT: 0,
     },
