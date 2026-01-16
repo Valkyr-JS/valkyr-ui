@@ -25,7 +25,12 @@ const Date: React.FC<
 
   const componentClass = "vui-card-data__date";
 
-  return <span className={componentClass}>{data}</span>;
+  return (
+    <span className={componentClass}>
+      <span className="sr-only">Date: </span>
+      {data}
+    </span>
+  );
 };
 
 export default Date;
