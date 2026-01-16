@@ -165,6 +165,11 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
+      keyData={
+        <ReleaseData>
+          <Date context="modal" date={props.scene.date} />
+        </ReleaseData>
+      }
       link={sceneLink}
       section={props.section}
       setSection={props.setSection}
