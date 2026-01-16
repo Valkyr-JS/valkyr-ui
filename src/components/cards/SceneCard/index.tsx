@@ -8,6 +8,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
+import Details from "../data/Details";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -70,6 +71,34 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
         />
       }
     >
+      <SceneCardBody
+        pluginConfig={props.pluginConfig}
+        scene={props.scene}
+        zoomBreakpoint={props.zoomBreakpoint}
+      />
+    </GridCard>
+  );
+};
+
+export default SceneCard;
+
+interface SceneCardBodyProps {
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
+  /** The Stash scene data. */
+  scene: SlimSceneDataFragment;
+
+  /** The current zoom breakpoint. */
+  zoomBreakpoint?: StashCardGridZoom;
+}
+
+const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
+  const componentClass = "vui-scene-card";
+  const bodyClass = componentClass + "__body";
+
+  return (
+    <div className={bodyClass}>
       <KeyData>
         <ReleaseData>
           <Date
@@ -87,11 +116,18 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           />
         </ReleaseData>
       </KeyData>
-    </GridCard>
+      <Details
+        context="card"
+        currentBreakpoint={props.zoomBreakpoint}
+        details={props.scene.details}
+        userBreakpoint={
+          props.pluginConfig.cards__sceneCard__detailsBreakpoint ??
+          DEFAULT.CARDS.SCENE_CARD.DETAILS_BREAKPOINT
+        }
+      />
+    </div>
   );
 };
-
-export default SceneCard;
 
 /* ---------------------------------------------------------------------------------------------- */
 /*                                 Scene card thumbnail component                                 */
