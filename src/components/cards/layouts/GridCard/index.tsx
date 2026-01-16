@@ -80,7 +80,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
   };
 
   return (
-    <footer className={footerClass}>
+    <div className={footerClass}>
       <button
         type="button"
         className="minimal btn"
@@ -89,6 +89,6 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
       >
         <FontAwesomeIcon icon={faCircleInfo} />
       </button>
-    </footer>
+    </div>
   );
 };
