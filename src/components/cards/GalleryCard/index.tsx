@@ -32,6 +32,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   console.log(`props - '${props.gallery.title || props.gallery.id}': `, props);
 
   const componentClass = "vui-gallery-card";
+  const userDataClass = componentClass + "__user-data";
   const id = createGalleryCardID(props.gallery.id);
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
@@ -61,7 +62,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
               DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
             }
           />
-          <div>
+          <div className={userDataClass}>
             <RatingIcon
               context="card"
               currentBreakpoint={props.zoomBreakpoint}

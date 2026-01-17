@@ -2,12 +2,14 @@ import React from "react";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getRenderData } from "@/helpers";
+import "./RatingIcon.scss";
 
 interface RatingProps {
   /** The object's user rating out of 100 */
   rating100: Maybe<Scalars["Int"]["output"]> | undefined;
 
-  ratingSystem: RatingSystemOptions;
+  /** The user's Stash rating system configuration. */
+  ratingSystem?: RatingSystemOptions;
 }
 
 const RatingIcon: React.FC<
@@ -29,11 +31,11 @@ const RatingIcon: React.FC<
 
   const componentClass = "vui-card-data__rating-icon";
 
-  const ratingType = props.ratingSystem.type;
+  const ratingType = props.ratingSystem?.type ?? "stars";
   let ratingNum = 0;
   if (ratingType === "decimal") ratingNum = data / 10;
   else {
-    switch (props.ratingSystem.starPrecision) {
+    switch (props.ratingSystem?.starPrecision) {
       case "half":
         ratingNum = Math.round(data / 10) / 2; // Math.round(74 / 10 = 7.4) / 2 = 3.5
         break;
