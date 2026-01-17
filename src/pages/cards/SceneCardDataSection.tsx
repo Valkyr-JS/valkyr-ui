@@ -43,6 +43,26 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const DetailsMaxLines = () => (
+    <NumberSetting
+      heading="Details max lines"
+      id="valkyr-ui-cards__sceneCard__detailsMaxLines"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__detailsMaxLines: v,
+          });
+        }
+      }}
+      subHeading="The maximum number of lines to display for details on scene cards. Details in scene card modals are displayed in full."
+      value={
+        props.pluginConfig.cards__sceneCard__detailsMaxLines ??
+        DEFAULT.CARDS.SCENE_CARD.DETAILS_MAX_LINES
+      }
+    />
+  );
+
   const StudioBreakpoint = () => (
     <NumberSetting
       heading="Studio"
@@ -75,6 +95,9 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DateBreakpoint />
         <DetailsBreakpoint />
         <StudioBreakpoint />
+      </SettingGroup>
+      <SettingGroup collapsible settingProps={{ heading: "Other" }}>
+        <DetailsMaxLines />
       </SettingGroup>
     </SettingSection>
   );
