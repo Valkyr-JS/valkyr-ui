@@ -86,8 +86,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
               rating100={props.scene.rating100}
               ratingSystem={props.ratingSystem}
               userBreakpoint={
-                props.pluginConfig.cards__sceneCard__ratingIcon ??
-                DEFAULT.CARDS.SCENE_CARD.RATING_ICON
+                props.pluginConfig.cards__sceneCard__ratingIconBreakpoint ??
+                DEFAULT.CARDS.SCENE_CARD.RATING_ICON_BREAKPOINT
               }
             />
           </div>

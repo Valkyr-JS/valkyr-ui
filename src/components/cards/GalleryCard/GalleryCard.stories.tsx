@@ -22,7 +22,7 @@ const meta = {
   },
   args: {
     pluginConfig: {
-      cards__galleryCard__ratingIcon: 0,
+      cards__galleryCard__ratingIconBreakpoint: 0,
     },
     zoomBreakpoint: 1,
   },

@@ -21,7 +21,7 @@ const meta = {
   },
   args: {
     pluginConfig: {
-      cards__sceneCard__ratingIcon: 0,
+      cards__sceneCard__ratingIconBreakpoint: 0,
     },
     zoomBreakpoint: 1,
   },

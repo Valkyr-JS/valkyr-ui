@@ -71,8 +71,8 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
               rating100={props.gallery.rating100}
               ratingSystem={props.ratingSystem}
               userBreakpoint={
-                props.pluginConfig.cards__galleryCard__ratingIcon ??
-                DEFAULT.CARDS.GALLERY_CARD.RATING_ICON
+                props.pluginConfig.cards__galleryCard__ratingIconBreakpoint ??
+                DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_BREAKPOINT
               }
             />
           </div>
