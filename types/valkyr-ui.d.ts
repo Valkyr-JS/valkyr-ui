@@ -54,6 +54,9 @@ type SlimStashObject =
 interface ValkyrUiConfigMap {
   /** Enables Valkyr UI card grids for all enabled card types. */
   cards__cardGrid__enabled?: boolean;
+  /** Whether to hide zero-value data on card components. */
+  cards__data__hideZeroValue?: boolean;
+
   /** The zoom breakpoint at which to display the date on gallery cards. */
   cards__galleryCard__dateBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the details on gallery cards. */
@@ -62,8 +65,11 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__detailsMaxLines?: number;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
+  /** The user's rating displayed as an icon. */
+  cards__galleryCard__ratingIcon?: boolean;
   /** The zoom breakpoint at which to display the studio link on gallery cards. */
   cards__galleryCard__studioBreakpoint?: StashCardGridZoom;
+
   /** The zoom breakpoint at which to display the date on scene cards. */
   cards__sceneCard__dateBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the details on scene cards. */
@@ -72,8 +78,11 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__detailsMaxLines?: number;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
+  /** The user's rating displayed as an icon. */
+  cards__sceneCard__ratingIcon?: boolean;
   /** The zoom breakpoint at which to display the studio link on scene cards. */
   cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
+
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;
 }
