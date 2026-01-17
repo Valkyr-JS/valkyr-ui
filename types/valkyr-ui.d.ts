@@ -65,7 +65,7 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__detailsMaxLines?: number;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
-  /** The user's rating displayed as an icon. */
+  /** The zoom breakpoint at which to display the rating icon on gallery cards. */
   cards__galleryCard__ratingIcon?: boolean;
   /** The zoom breakpoint at which to display the studio link on gallery cards. */
   cards__galleryCard__studioBreakpoint?: StashCardGridZoom;
@@ -78,7 +78,7 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__detailsMaxLines?: number;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
-  /** The user's rating displayed as an icon. */
+  /** The zoom breakpoint at which to display the rating icon on scene cards. */
   cards__sceneCard__ratingIcon?: boolean;
   /** The zoom breakpoint at which to display the studio link on scene cards. */
   cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
