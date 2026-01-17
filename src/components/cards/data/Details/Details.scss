@@ -1,0 +1,9 @@
+.vui-card-data__details {
+  div {
+    // Limit number of lines
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: pre-line;
+  }
+}

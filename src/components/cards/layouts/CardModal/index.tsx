@@ -1,19 +1,19 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
-import KeyData from "../KeyData";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
 
 export interface CardModalContentProps {
+  /** Optional classes added alongside the `vui-card-modal` component class. */
+  classname?: string;
+
   /** Handler for closing the modal. */
   closeHandler: () => void;
-
-  /** The data components to be displayed as key data. */
-  keyData?: React.ReactNode;
 
   /** The link to the object page. */
   link: string;
@@ -37,9 +37,13 @@ export interface CardModalContentProps {
   topLine?: React.ReactNode;
 }
 
-export const CardModalContent: React.FC<CardModalContentProps> = (props) => {
+export const CardModalContent: React.FC<
+  PropsWithChildren<CardModalContentProps>
+> = (props) => {
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
+  const componentClass = "vui-card-modal";
+  const bodyClass = componentClass + "__body";
 
   return (
     <>
@@ -47,7 +51,7 @@ export const CardModalContent: React.FC<CardModalContentProps> = (props) => {
       <Modal.Body>
         <CardTitle id={props.titleID} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
-        <KeyData>{props.keyData}</KeyData>
+        <div className={bodyClass}>{props.children}</div>
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -75,6 +79,9 @@ export const CardModalContent: React.FC<CardModalContentProps> = (props) => {
 };
 
 interface CardModalWrapperProps {
+  /** Optional classes added alongside the `vui-card-modal` component class. */
+  classname?: string;
+
   /** Whether the modal is currently rendered. */
   show: boolean;
 
@@ -86,10 +93,11 @@ export const CardModalWrapper: React.FC<
   PropsWithChildren<CardModalWrapperProps>
 > = (props) => {
   const componentClass = "vui-card-modal";
+  const componentClassList = cx(componentClass, props.classname);
 
   return (
     <Modal
-      className={componentClass}
+      className={componentClassList}
       show={props.show}
       aria-labelledby={props.titleID}
     >

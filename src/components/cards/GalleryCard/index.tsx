@@ -2,9 +2,11 @@ import React from "react";
 import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
+import Details from "../data/Details";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
+import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
 
@@ -25,31 +27,16 @@ interface GalleryCardProps {
 const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   console.log(`props - '${props.gallery.title || props.gallery.id}': `, props);
 
+  const componentClass = "vui-gallery-card";
   const id = createGalleryCardID(props.gallery.id);
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
   return (
     <GridCard
+      classname={componentClass}
       footer={props.footer}
       id={id}
-      keyData={
-        <ReleaseData>
-          <Date
-            context="card"
-            currentBreakpoint={props.zoomBreakpoint}
-            date={props.gallery.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-            userBreakpoint={
-              props.pluginConfig.cards__galleryCard__studioBreakpoint ??
-              DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
-            }
-          />
-        </ReleaseData>
-      }
       link={galleryLink}
       thumbnail={
         <GalleryCardThumbnail
@@ -72,11 +59,69 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
           />
         </>
       }
-    />
+    >
+      <GalleryCardBody
+        gallery={props.gallery}
+        pluginConfig={props.pluginConfig}
+        zoomBreakpoint={props.zoomBreakpoint}
+      />
+    </GridCard>
   );
 };
 
 export default GalleryCard;
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                   Gallery card body component                                  */
+/* ---------------------------------------------------------------------------------------------- */
+
+interface GalleryCardBodyProps {
+  /** The Stash gallery data */
+  gallery: SlimGalleryDataFragment;
+
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
+  /** The current zoom breakpoint. */
+  zoomBreakpoint?: StashCardGridZoom;
+}
+
+const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
+  return (
+    <>
+      <KeyData>
+        <ReleaseData>
+          <Date
+            context="card"
+            currentBreakpoint={props.zoomBreakpoint}
+            date={props.gallery.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+            userBreakpoint={
+              props.pluginConfig.cards__galleryCard__studioBreakpoint ??
+              DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
+            }
+          />
+        </ReleaseData>
+      </KeyData>
+      <Details
+        context="card"
+        currentBreakpoint={props.zoomBreakpoint}
+        details={props.gallery.details}
+        maxLines={
+          props.pluginConfig.cards__galleryCard__detailsMaxLines ??
+          DEFAULT.CARDS.GALLERY_CARD.DETAILS_MAX_LINES
+        }
+        userBreakpoint={
+          props.pluginConfig.cards__galleryCard__detailsBreakpoint ??
+          DEFAULT.CARDS.GALLERY_CARD.DETAILS_BREAKPOINT
+        }
+      />
+    </>
+  );
+};
 
 /* ---------------------------------------------------------------------------------------------- */
 /*                                Gallery card thumbnail component                                */
@@ -144,18 +189,6 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
-      keyData={
-        <ReleaseData>
-          <Date
-            context="modal"
-            date={props.gallery.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-          />
-        </ReleaseData>
-      }
       link={galleryLink}
       section={props.section}
       setSection={props.setSection}
@@ -169,7 +202,21 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       title={title}
       titleID={props.titleID}
       topLine={<Studio context="modal" studio={props.gallery.studio} />}
-    />
+    >
+      <KeyData>
+        <ReleaseData>
+          <Date
+            context="modal"
+            date={props.gallery.date}
+            localeDateFormat={
+              props.pluginConfig.general__localeDateFormat ??
+              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+            }
+          />
+        </ReleaseData>
+      </KeyData>
+      <Details context="modal" details={props.gallery.details} />
+    </CardModalContent>
   );
 };
 

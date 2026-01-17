@@ -52,24 +52,3 @@ export const WithCard: DecoratorFunction<ReactRenderer> = (Story) => (
     <Story />
   </Card>
 );
-
-/** Wraps the story in a simulated React Bootstrap modal component, without the
- * fixed position styling. */
-export const WithStaticCardModal: DecoratorFunction<ReactRenderer> = (
-  Story
-) => {
-  const componentClass = "vui-card-modal";
-
-  return (
-    <div
-      className={componentClass + " modal show"}
-      style={{ display: "block", position: "initial" }}
-    >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <Story />
-        </div>
-      </div>
-    </div>
-  );
-};

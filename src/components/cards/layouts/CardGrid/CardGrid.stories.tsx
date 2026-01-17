@@ -1,5 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 import CardGrid from ".";
 import GalleryCard from "../../GalleryCard";
 import SceneCard from "../../SceneCard";
@@ -61,7 +62,14 @@ const SceneCards = [
   scene10613,
   scene10804,
 ].map((s) => (
-  <SceneCard pluginConfig={{}} scene={s as SlimSceneDataFragment} />
+  <SceneCard
+    footer={{
+      openHandler: fn(),
+      setSection: fn(),
+    }}
+    pluginConfig={{}}
+    scene={s as SlimSceneDataFragment}
+  />
 ));
 
 export const ScenesZoom0: Story = {
@@ -110,7 +118,14 @@ const GalleryCards = [
   gallery17791,
   gallery19022,
 ].map((g) => (
-  <GalleryCard pluginConfig={{}} gallery={g as SlimGalleryDataFragment} />
+  <GalleryCard
+    footer={{
+      openHandler: fn(),
+      setSection: fn(),
+    }}
+    pluginConfig={{}}
+    gallery={g as SlimGalleryDataFragment}
+  />
 ));
 
 export const GalleriesZoom0: Story = {

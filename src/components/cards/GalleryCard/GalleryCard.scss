@@ -20,6 +20,19 @@ $zoomThumbnailHeights: (
       object-fit: contain;
     }
   }
+
+  .vui-grid-card {
+    &__body {
+      display: grid;
+      grid-template-rows: [gallery-card-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom gallery-card-body-bottom];
+    }
+  }
+
+  .vui-card-data {
+    &__details {
+      grid-row: details-top / details-bottom;
+    }
+  }
 }
 
 // Generate thumbnail heights for each zoom breakpoint
@@ -37,4 +50,23 @@ $zoomThumbnailHeights: (
 // Max thumbnail height for card modals
 .vui-card-modal .vui-gallery-card__thumbnail-cover img {
   max-height: 480px;
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                           Card modal                                           */
+/* ---------------------------------------------------------------------------------------------- */
+
+.vui-gallery-card-modal {
+  .vui-card-modal {
+    &__body {
+      display: grid;
+      grid-template-rows: [gallery-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom gallery-card-modal-body-bottom];
+    }
+  }
+
+  .vui-card-data {
+    &__details {
+      grid-row: details-top / details-bottom;
+    }
+  }
 }

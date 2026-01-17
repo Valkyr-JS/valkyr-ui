@@ -1,13 +1,26 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
 import { GalleryCardModalContent } from ".";
 import gallery4521 from "../../../../mocks/galleries/4521.json";
-import { WithStaticCardModal } from "../../../../.storybook/decorators";
 
 const meta = {
   title: "Components/Cards/Gallery card modal content",
   component: GalleryCardModalContent,
-  decorators: [WithStaticCardModal],
+  decorators: [
+    (Story) => (
+      <div
+        className={"vui-card-modal vui-gallery-card-modal modal show"}
+        style={{ display: "block", position: "initial" }}
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <Story />
+          </div>
+        </div>
+      </div>
+    ),
+  ],
   parameters: {
     layout: "centered",
   },

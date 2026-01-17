@@ -5,15 +5,20 @@ $prefix: variables.$prefix;
 .vui-grid-card {
   padding: 0;
 
-  &__body {
+  &__content {
     display: grid;
-    grid-template-rows: [body-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-bottom];
+    grid-template-rows: [content-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-top] 1fr [body-bottom footer-top] auto [footer-bottom content-bottom];
     height: 100%;
-    padding: 0.5rem 1rem 0;
+    padding: 0.5rem 1rem;
+  }
+
+  &__body {
+    grid-row: body-top / body-bottom;
   }
 
   &__footer {
-    margin-top: auto;
+    grid-row: footer-top / footer-bottom;
+    margin-top: 0.5rem;
   }
 
   &__title {

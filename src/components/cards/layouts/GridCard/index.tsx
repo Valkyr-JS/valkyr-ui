@@ -1,22 +1,22 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import cx from "classnames";
 import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
-import KeyData from "../KeyData";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
 
 interface GridCardProps {
+  /** Optional classes added alongside the `vui-grid-card` component class. */
+  classname?: string;
+
   /** Footer props. Leave `undefined` to not render the footer. */
   footer?: CardFooterProps;
 
   /** HTML ID used for aria labelling. */
   id: string;
-
-  /** The data components to be displayed as key data. */
-  keyData?: React.ReactNode;
 
   /** The link to the object page. */
   link: string;
@@ -31,19 +31,21 @@ interface GridCardProps {
   topLine?: React.ReactNode;
 }
 
-const GridCard: React.FC<GridCardProps> = (props) => {
+const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   const componentClass = "vui-grid-card";
   const bodyClass = componentClass + "__body";
+  const contentClass = componentClass + "__content";
+  const componentClassList = cx(componentClass, props.classname);
 
   return (
-    <Card className={componentClass}>
+    <Card className={componentClassList}>
       {props.thumbnail}
-      <div className={bodyClass}>
+      <div className={contentClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
-        <KeyData>{props.keyData}</KeyData>
+        <div className={bodyClass}>{props.children}</div>
+        {props.footer && <CardFooter {...props.footer} />}
       </div>
-      {props.footer && <CardFooter {...props.footer} />}
     </Card>
   );
 };
@@ -78,7 +80,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
   };
 
   return (
-    <footer className={footerClass}>
+    <div className={footerClass}>
       <button
         type="button"
         className="minimal btn"
@@ -87,6 +89,6 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
       >
         <FontAwesomeIcon icon={faCircleInfo} />
       </button>
-    </footer>
+    </div>
   );
 };

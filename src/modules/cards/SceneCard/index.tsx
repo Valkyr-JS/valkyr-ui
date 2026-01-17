@@ -54,7 +54,11 @@ PluginApi.patch.instead<ISceneCardGrid>(
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
             />
-            <CardModalWrapper show={modalOpen} titleID={titleID}>
+            <CardModalWrapper
+              classname="vui-scene-card-modal"
+              show={modalOpen}
+              titleID={titleID}
+            >
               <SceneCardModalContent
                 closeHandler={() => setModalOpen(false)}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
@@ -106,7 +110,11 @@ PluginApi.patch.instead<ISceneCardProps>(
               queue={props.queue}
               scene={props.scene}
             />
-            <CardModalWrapper show={modalOpen} titleID={titleID}>
+            <CardModalWrapper
+              classname="vui-scene-card-modal"
+              show={modalOpen}
+              titleID={titleID}
+            >
               <SceneCardModalContent
                 closeHandler={() => setModalOpen(false)}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
