@@ -49,7 +49,7 @@ $zoomThumbnailHeights: (
     grid-template-columns: [top-line-start studio-start] 1fr [studio-end user-data-start] max-content [user-data-end top-line-end];
     column-gap: $column-gap;
     margin-bottom: 3px;
-    font-size: var(--#{$prefix}-cards-font-sm);
+    font-size: var(--#{$prefix}-card-font-sm);
   }
 }
 

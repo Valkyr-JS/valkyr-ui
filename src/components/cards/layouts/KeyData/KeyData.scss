@@ -10,5 +10,5 @@ $prefix: variables.$prefix;
   flex-wrap: wrap;
   column-gap: $column-gap;
   margin-top: 3px;
-  font-size: var(--#{$prefix}-cards-font-sm);
+  font-size: var(--#{$prefix}-card-font-sm);
 }
