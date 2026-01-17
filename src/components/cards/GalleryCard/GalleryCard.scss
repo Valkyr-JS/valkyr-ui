@@ -2,6 +2,8 @@
 @use "sass:math";
 @use "../../../../src/scss/variables";
 
+$column-gap: variables.$column-gap;
+$prefix: variables.$prefix;
 $zoomBreakpoints: variables.$card-zoom-breakpoints;
 $zoomThumbnailHeights: (
   0: 180px,
@@ -21,6 +23,14 @@ $zoomThumbnailHeights: (
     }
   }
 
+  &__user-data {
+    grid-column: user-data-start / user-data-end;
+
+    display: flex;
+    column-gap: $column-gap;
+    opacity: var(--#{$prefix}-cards-top-line-opacity);
+  }
+
   .vui-grid-card {
     &__body {
       display: grid;
@@ -32,6 +42,14 @@ $zoomThumbnailHeights: (
     &__details {
       grid-row: details-top / details-bottom;
     }
+  }
+
+  .vui-card-top-line {
+    display: grid;
+    grid-template-columns: [top-line-start studio-start] 1fr [studio-end user-data-start] max-content [user-data-end top-line-end];
+    column-gap: $column-gap;
+    margin-bottom: 3px;
+    font-size: var(--#{$prefix}-cards-font-sm);
   }
 }
 

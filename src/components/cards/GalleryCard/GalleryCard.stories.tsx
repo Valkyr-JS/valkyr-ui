@@ -21,7 +21,9 @@ const meta = {
     layout: "centered",
   },
   args: {
-    pluginConfig: {},
+    pluginConfig: {
+      cards__galleryCard__ratingIcon: 0,
+    },
     zoomBreakpoint: 1,
   },
   argTypes: {
