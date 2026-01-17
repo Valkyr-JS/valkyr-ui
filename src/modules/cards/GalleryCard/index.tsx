@@ -45,6 +45,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   }}
                   gallery={gl}
                   pluginConfig={pluginConfig}
+                  ratingSystem={stashConfig.ui.ratingSystemOptions}
                 />
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
@@ -68,7 +69,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
     }
 
     return [<Original {...props} />];
-  }
+  },
 );
 
 PluginApi.patch.instead<IGalleryCardProps>(
@@ -119,5 +120,5 @@ PluginApi.patch.instead<IGalleryCardProps>(
     }
 
     return [<Original {...props} />];
-  }
+  },
 );

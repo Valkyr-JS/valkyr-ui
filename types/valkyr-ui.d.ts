@@ -28,6 +28,9 @@ interface ExtendedConfigResult extends ConfigResult {
   plugins: {
     "valkyr-ui"?: ValkyrUiConfigMap;
   };
+  ui: {
+    ratingSystemOptions?: RatingSystemOptions
+  }
 }
 
 interface SettingsTabProps {
