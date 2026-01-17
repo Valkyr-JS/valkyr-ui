@@ -49,6 +49,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   index={i}
                   pluginConfig={pluginConfig}
                   queue={props.queue}
+                  ratingSystem={stashConfig.ui.ratingSystemOptions}
                   scene={sc}
                 />
               ))}
@@ -76,7 +77,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
     }
 
     return [<Original {...props} />];
-  }
+  },
 );
 
 PluginApi.patch.instead<ISceneCardProps>(
@@ -132,5 +133,5 @@ PluginApi.patch.instead<ISceneCardProps>(
     }
 
     return [<Original {...props} />];
-  }
+  },
 );

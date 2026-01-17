@@ -1,3 +1,8 @@
+@use "../../../../src/scss/variables";
+
+$column-gap: variables.$column-gap;
+$prefix: variables.$prefix;
+
 .vui-scene-card {
   &__thumbnail {
     position: relative;
@@ -21,6 +26,14 @@
     }
   }
 
+  &__user-data {
+    grid-column: user-data-start / user-data-end;
+
+    display: flex;
+    column-gap: $column-gap;
+    opacity: var(--#{$prefix}-card-top-line-opacity);
+  }
+
   .vui-grid-card {
     &__body {
       display: grid;
@@ -32,6 +45,14 @@
     &__details {
       grid-row: details-top / details-bottom;
     }
+  }
+
+  .vui-card-top-line {
+    display: grid;
+    grid-template-columns: [top-line-start studio-start] 1fr [studio-end user-data-start] max-content [user-data-end top-line-end];
+    column-gap: $column-gap;
+    margin-bottom: 3px;
+    font-size: var(--#{$prefix}-card-font-sm);
   }
 }
 

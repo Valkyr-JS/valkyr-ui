@@ -2,6 +2,7 @@ import React from "react";
 import { DEFAULT } from "@/constants";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
 import Date from "../data/Date";
+import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
@@ -27,6 +28,9 @@ interface SceneCardProps {
   /** The scenes in the current query. */
   queue?: ISceneCardProps["queue"];
 
+  /** The user's Stash rating system configuration */
+  ratingSystem?: RatingSystemOptions;
+
   /** The Stash scene data. */
   scene: SlimSceneDataFragment;
 
@@ -38,6 +42,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   console.log(`props - '${props.scene.title || props.scene.id}': `, props);
 
   const componentClass = "vui-scene-card";
+  const userDataClass = componentClass + "__user-data";
+
   const id = createSceneCardID(props.scene.id);
   const title = getTitleFromObject(props.scene);
   const sceneLink = makeSceneUrl({
@@ -62,15 +68,30 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       }
       title={title}
       topLine={
-        <Studio
-          context="card"
-          currentBreakpoint={props.zoomBreakpoint}
-          studio={props.scene.studio}
-          userBreakpoint={
-            props.pluginConfig.cards__sceneCard__studioBreakpoint ??
-            DEFAULT.CARDS.SCENE_CARD.STUDIO_BREAKPOINT
-          }
-        />
+        <>
+          <Studio
+            context="card"
+            currentBreakpoint={props.zoomBreakpoint}
+            studio={props.scene.studio}
+            userBreakpoint={
+              props.pluginConfig.cards__sceneCard__studioBreakpoint ??
+              DEFAULT.CARDS.SCENE_CARD.STUDIO_BREAKPOINT
+            }
+          />
+          <div className={userDataClass}>
+            <RatingIcon
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              hideZeroValueData={props.pluginConfig.cards__data__hideZeroValue}
+              rating100={props.scene.rating100}
+              ratingSystem={props.ratingSystem}
+              userBreakpoint={
+                props.pluginConfig.cards__sceneCard__ratingIcon ??
+                DEFAULT.CARDS.SCENE_CARD.RATING_ICON
+              }
+            />
+          </div>
+        </>
       }
     >
       <SceneCardBody
@@ -152,7 +173,7 @@ interface SceneCardThumbnailProps {
 }
 
 export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
-  props
+  props,
 ) => {
   const componentClass = "vui-scene-card";
   const thumbnailClass = componentClass + "__thumbnail";
@@ -204,7 +225,7 @@ interface SceneCardModalContentProps {
 }
 
 export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
-  props
+  props,
 ) => {
   const title = getTitleFromObject(props.scene);
   const sceneLink = makeSceneUrl({

@@ -3,13 +3,13 @@ import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
+import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
-import RatingIcon from "../data/RatingIcon";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -33,6 +33,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
 
   const componentClass = "vui-gallery-card";
   const userDataClass = componentClass + "__user-data";
+
   const id = createGalleryCardID(props.gallery.id);
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
