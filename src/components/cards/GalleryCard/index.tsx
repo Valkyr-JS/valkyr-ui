@@ -189,6 +189,9 @@ interface GalleryCardModalContentProps {
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
 
+  /** The user's Stash rating system configuration */
+  ratingSystem?: RatingSystemOptions;
+
   /** The currently displayed modal section. */
   section: CardModalSection;
 
@@ -202,6 +205,9 @@ interface GalleryCardModalContentProps {
 export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   props,
 ) => {
+  const componentClass = "vui-gallery-card";
+  const userDataClass = componentClass + "__user-data";
+
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
@@ -220,7 +226,18 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       }
       title={title}
       titleID={props.titleID}
-      topLine={<Studio context="modal" studio={props.gallery.studio} />}
+      topLine={
+        <>
+          <Studio context="modal" studio={props.gallery.studio} />
+          <div className={userDataClass}>
+            <RatingIcon
+              context="modal"
+              rating100={props.gallery.rating100}
+              ratingSystem={props.ratingSystem}
+            />
+          </div>
+        </>
+      }
     >
       <KeyData>
         <ReleaseData>

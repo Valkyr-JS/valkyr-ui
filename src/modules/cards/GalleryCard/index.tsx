@@ -59,6 +59,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                 closeHandler={() => setModalOpen(false)}
                 gallery={props.galleries[modalGalleryIndex]}
                 pluginConfig={pluginConfig}
+                ratingSystem={stashConfig.ui.ratingSystemOptions}
                 section={modalSection}
                 setSection={setModalSection}
                 titleID={titleID}
@@ -100,6 +101,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
                 setSection: setModalSection,
               }}
               pluginConfig={pluginConfig}
+              ratingSystem={stashConfig.ui.ratingSystemOptions}
             />
             <CardModalWrapper
               classname="vui-gallery-card-modal"
@@ -110,6 +112,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
                 closeHandler={() => setModalOpen(false)}
                 gallery={props.gallery}
                 pluginConfig={pluginConfig}
+                ratingSystem={stashConfig.ui.ratingSystemOptions}
                 section={modalSection}
                 setSection={setModalSection}
                 titleID={titleID}
