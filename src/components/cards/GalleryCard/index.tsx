@@ -110,6 +110,10 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
         context="card"
         currentBreakpoint={props.zoomBreakpoint}
         details={props.gallery.details}
+        maxLines={
+          props.pluginConfig.cards__galleryCard__detailsMaxLines ??
+          DEFAULT.CARDS.GALLERY_CARD.DETAILS_MAX_LINES
+        }
         userBreakpoint={
           props.pluginConfig.cards__galleryCard__detailsBreakpoint ??
           DEFAULT.CARDS.GALLERY_CARD.DETAILS_BREAKPOINT

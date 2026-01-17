@@ -123,6 +123,10 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
         context="card"
         currentBreakpoint={props.zoomBreakpoint}
         details={props.scene.details}
+        maxLines={
+          props.pluginConfig.cards__sceneCard__detailsMaxLines ??
+          DEFAULT.CARDS.SCENE_CARD.DETAILS_MAX_LINES
+        }
         userBreakpoint={
           props.pluginConfig.cards__sceneCard__detailsBreakpoint ??
           DEFAULT.CARDS.SCENE_CARD.DETAILS_BREAKPOINT

@@ -1,13 +1,19 @@
 import React from "react";
 import { getRenderData } from "@/helpers";
+import "./Details.scss";
 
 interface DetailsProps {
   /** The details data. */
   details?: Maybe<string>;
 }
 
+interface DetailsCardProps extends DetailsProps {
+  /** The maximum number of lines to display for details on gallery cards. */
+  maxLines: number;
+}
+
 const Details: React.FC<
-  DataComponentProps<DetailsProps> | DataComponentModalProps<DetailsProps>
+  DataComponentProps<DetailsCardProps> | DataComponentModalProps<DetailsProps>
 > = (props) => {
   const data =
     props.context === "modal"
@@ -24,7 +30,20 @@ const Details: React.FC<
 
   const componentClass = "vui-card-data__details";
 
-  return <div className={componentClass}>{data}</div>;
+  // Modal details can be rendered in full
+  if (props.context === "modal")
+    return <div className={componentClass}>{data}</div>;
+
+  // Card details should be limited to the user's defined maxiumum
+  const maxLengthStyles: React.CSSProperties = {
+    WebkitLineClamp: props.maxLines,
+  };
+
+  return (
+    <div className={componentClass}>
+      <div style={maxLengthStyles}>{data}</div>
+    </div>
+  );
 };
 
 export default Details;

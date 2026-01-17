@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 import Details from ".";
 
-const detailsText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at tincidunt diam. Etiam quis odio egestas, vehicula urna a, facilisis metus. Pellentesque sit amet est vitae nisi vestibulum finibus sed et sem. Etiam vel porttitor massa, quis dictum libero. Aliquam erat volutpat. Ut in vehicula ante, ut fermentum purus. Integer non varius velit. Maecenas in arcu leo. Phasellus accumsan volutpat condimentum. Nulla facilisi. Nulla varius orci ante. Cras aliquam volutpat urna sed convallis. Ut a condimentum quam."
+const detailsText =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at tincidunt diam. Etiam quis odio egestas, vehicula urna a, facilisis metus. Pellentesque sit amet est vitae nisi vestibulum finibus sed et sem. Etiam vel porttitor massa, quis dictum libero. Aliquam erat volutpat. Ut in vehicula ante, ut fermentum purus. Integer non varius velit. Maecenas in arcu leo. Phasellus accumsan volutpat condimentum. Nulla facilisi. Nulla varius orci ante. Cras aliquam volutpat urna sed convallis. Ut a condimentum quam.";
 
 const meta = {
   title: "Components/Cards/Data/Details",
@@ -31,6 +32,7 @@ export const AboveZoomBreakpoint: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
+    maxLines: 3,
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
@@ -44,6 +46,7 @@ export const BelowZoomBreakpoint: Story = {
   args: {
     context: "card",
     currentBreakpoint: 0,
+    maxLines: 3,
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
@@ -57,6 +60,7 @@ export const EqualsZoomBreakpoint: Story = {
   args: {
     context: "card",
     currentBreakpoint: 2,
+    maxLines: 3,
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
@@ -80,6 +84,7 @@ export const ModalContext: Story = {
 export const UserDisabled: Story = {
   args: {
     context: "card",
+    maxLines: 3,
     userBreakpoint: -1,
   },
   play: async ({ canvasElement }) => {
@@ -92,6 +97,7 @@ export const UserDisabled: Story = {
 export const WithoutZoomData: Story = {
   args: {
     context: "card",
+    maxLines: 3,
     userBreakpoint: 0,
   },
   play: async ({ canvasElement }) => {
