@@ -8,6 +8,9 @@ type DataComponentProps<T = unknown> = T & {
   /** The current breakpoint in the browser. */
   currentBreakpoint?: StashCardGridZoom;
 
+  /** Whether the user has set 0-value data to not be rendered. */
+  hideZeroValueData?: boolean;
+
   /** The user-set breakpoint at which to render the component. */
   userBreakpoint: StashCardGridZoom;
 };
@@ -16,6 +19,9 @@ type DataComponentModalProps<T = unknown> = T & {
   /** Whether the component is being rendered in a card component or modal
    * component. */
   context: "modal";
+
+  /** Whether the user has set 0-value data to not be rendered. */
+  hideZeroValueData?: boolean;
 };
 
 interface ExtendedConfigResult extends ConfigResult {
