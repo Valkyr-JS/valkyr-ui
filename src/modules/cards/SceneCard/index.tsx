@@ -66,6 +66,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                 index={modalSceneIndex}
                 pluginConfig={pluginConfig}
                 queue={props.queue}
+                ratingSystem={stashConfig.ui.ratingSystemOptions}
                 scene={props.scenes[modalSceneIndex]}
                 section={modalSection}
                 setSection={setModalSection}
@@ -108,6 +109,7 @@ PluginApi.patch.instead<ISceneCardProps>(
               }}
               index={props.index}
               pluginConfig={pluginConfig}
+              ratingSystem={stashConfig.ui.ratingSystemOptions}
               queue={props.queue}
               scene={props.scene}
             />
@@ -122,6 +124,7 @@ PluginApi.patch.instead<ISceneCardProps>(
                 index={props.index}
                 pluginConfig={pluginConfig}
                 queue={props.queue}
+                ratingSystem={stashConfig.ui.ratingSystemOptions}
                 scene={props.scene}
                 section={modalSection}
                 setSection={setModalSection}

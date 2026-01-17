@@ -211,6 +211,9 @@ interface SceneCardModalContentProps {
   /** The scenes in the current query. */
   queue?: ISceneCardProps["queue"];
 
+  /** The user's Stash rating system configuration */
+  ratingSystem?: RatingSystemOptions;
+
   /** The Stash scene data. */
   scene: SlimSceneDataFragment;
 
@@ -227,6 +230,9 @@ interface SceneCardModalContentProps {
 export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   props,
 ) => {
+  const componentClass = "vui-scene-card";
+  const userDataClass = componentClass + "__user-data";
+
   const title = getTitleFromObject(props.scene);
   const sceneLink = makeSceneUrl({
     cont: props.continuePlaylist ?? false,
@@ -250,7 +256,18 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       }
       title={title}
       titleID={props.titleID}
-      topLine={<Studio context="modal" studio={props.scene.studio} />}
+      topLine={
+        <>
+          <Studio context="modal" studio={props.scene.studio} />
+          <div className={userDataClass}>
+            <RatingIcon
+              context="modal"
+              rating100={props.scene.rating100}
+              ratingSystem={props.ratingSystem}
+            />
+          </div>
+        </>
+      }
     >
       <KeyData>
         <ReleaseData>
