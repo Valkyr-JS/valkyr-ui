@@ -9,6 +9,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
+import RatingIcon from "../data/RatingIcon";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -19,6 +20,9 @@ interface GalleryCardProps {
 
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
+
+  /** The user's Stash rating system configuration */
+  ratingSystem?: RatingSystemOptions;
 
   /** The current zoom breakpoint. */
   zoomBreakpoint?: StashCardGridZoom;
@@ -57,6 +61,19 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
               DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
             }
           />
+          <div>
+            <RatingIcon
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              hideZeroValueData={props.pluginConfig.cards__data__hideZeroValue}
+              rating100={props.gallery.rating100}
+              ratingSystem={props.ratingSystem}
+              userBreakpoint={
+                props.pluginConfig.cards__galleryCard__ratingIcon ??
+                DEFAULT.CARDS.GALLERY_CARD.RATING_ICON
+              }
+            />
+          </div>
         </>
       }
     >
@@ -139,7 +156,7 @@ interface GalleryCardThumbnailProps {
 }
 
 export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
-  props
+  props,
 ) => {
   const componentClass = "vui-gallery-card";
   const thumbnailClass = componentClass + "__thumbnail";
@@ -181,7 +198,7 @@ interface GalleryCardModalContentProps {
 }
 
 export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
-  props
+  props,
 ) => {
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
