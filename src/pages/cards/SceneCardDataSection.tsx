@@ -63,6 +63,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const RatingBreakpoint = () => (
+    <NumberSetting
+      heading="Rating icon"
+      id="valkyr-ui-cards__sceneCard__ratingIconBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__ratingIconBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__ratingIconBreakpoint ??
+        DEFAULT.CARDS.SCENE_CARD.RATING_ICON_BREAKPOINT
+      }
+    />
+  );
+
   const StudioBreakpoint = () => (
     <NumberSetting
       heading="Studio"
@@ -94,6 +113,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
       >
         <DateBreakpoint />
         <DetailsBreakpoint />
+        <RatingBreakpoint />
         <StudioBreakpoint />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>
