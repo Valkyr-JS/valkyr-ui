@@ -28,7 +28,7 @@ $zoomThumbnailHeights: (
 
     display: flex;
     column-gap: $column-gap;
-    opacity: var(--#{$prefix}-cards-top-line-opacity);
+    opacity: var(--#{$prefix}-card-top-line-opacity);
   }
 
   .vui-grid-card {
