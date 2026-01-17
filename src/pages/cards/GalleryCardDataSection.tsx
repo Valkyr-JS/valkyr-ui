@@ -48,7 +48,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
       heading="Details max lines"
       id="valkyr-ui-cards__galleryCard__detailsMaxLines"
       onChange={(v) => {
-        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+        if (v > 0) {
           props.configUpdateHandler({
             ...props.pluginConfig,
             cards__galleryCard__detailsMaxLines: v,
