@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import { DEFAULT } from "@/constants";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
@@ -64,14 +64,19 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       ? (props.scene.paths.preview ?? undefined)
       : undefined;
 
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <GridCard
       classname={componentClass}
       footer={props.footer}
       id={id}
       link={sceneLink}
+      onMouseOut={() => setIsHovered(false)}
+      onMouseOver={() => setIsHovered(true)}
       thumbnail={
         <SceneCardThumbnail
+          cardIsHovered={isHovered}
           context="card"
           isPortrait={isPortrait}
           link={sceneLink}
@@ -184,6 +189,9 @@ interface SceneCardThumbnailProps {
    * component. */
   context: "card" | "modal";
 
+  /** Whether a part of the card is currently being hovered over. */
+  cardIsHovered?: boolean;
+
   /** Whether the scene is portrait-oriented or not. */
   isPortrait: boolean;
 
@@ -234,17 +242,11 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
   const videoEl = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > 0)
-          // Catch is necessary due to DOMException if user hovers before clicking on page
-          videoEl.current?.play()?.catch(() => {});
-        else videoEl.current?.pause();
-      });
-    });
-
-    if (videoEl.current) observer.observe(videoEl.current);
-  });
+    if (props.cardIsHovered) {
+      // Catch is necessary due to DOMException if user hovers before clicking on page
+      videoEl.current?.play().catch(() => {});
+    } else videoEl.current?.pause();
+  }, [props.cardIsHovered]);
 
   return (
     <div className={classList}>
