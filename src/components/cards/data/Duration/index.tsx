@@ -1,0 +1,51 @@
+import React from "react";
+import TextUtils from "@/components/stash/utils/text";
+import { getRenderData } from "@/helpers";
+
+interface DurationProps {
+  /** The scene duration data. */
+  duration: Scalars["Float"]["output"];
+}
+
+const Duration: React.FC<
+  DataComponentProps<DurationProps> | DataComponentModalProps<DurationProps>
+> = (props) => {
+  const data =
+    props.context === "modal"
+      ? props.duration
+      : getRenderData({
+          data: props.duration,
+          zoomBreakpoint: {
+            current: props.currentBreakpoint,
+            user: props.userBreakpoint,
+          },
+        });
+
+  if (!data) return null;
+
+  const timestamp = TextUtils.secondsToTimestamp(props.duration);
+
+  // Screen-reader text
+  const timeStampBreakdown = timestamp.split(":");
+  if (timeStampBreakdown.length == 2) timeStampBreakdown.unshift("0");
+  const timestampNumeric = timeStampBreakdown.map((s) => +s);
+  let srText = "Duration: ";
+  if (timestampNumeric[0] !== 0)
+    srText += `${timestampNumeric[0]} hour${timestampNumeric[0] === 1 ? "" : "s"} `;
+  if (timestampNumeric[1] !== 0)
+    srText += `${timestampNumeric[1]} minute${timestampNumeric[1] === 1 ? "" : "s"} `;
+  if (timestampNumeric[2] !== 0)
+    srText += `${timestampNumeric[2]} second${timestampNumeric[2] === 1 ? "" : "s"} `;
+  srText = srText.trim();
+
+  const componentClass = "vui-card-data__duration";
+
+  return (
+    <span className={componentClass}>
+      <span className="sr-only">{srText}</span>
+      <span aria-hidden>{timestamp}</span>
+    </span>
+  );
+};
+
+export default Duration;
