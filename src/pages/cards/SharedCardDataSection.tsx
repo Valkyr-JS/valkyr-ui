@@ -50,10 +50,34 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
+  const PadTimestamps = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.cards__shared__timestampPadding ??
+        DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Timestamp padding"
+        id="valkyr-ui-cards__shared__timestampPadding"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__shared__timestampPadding: newState,
+          });
+        }}
+        subHeading="Adds padding to timestamps to make all units double-figures and include hours. For example, a timestamp of '6:38' will appear as '00:06:38'."
+      />
+    );
+  };
+
   return (
     <SettingSection id="cards-shared" heading="Shared card settings">
       <FooterCountsEnabled />
       <HideZeroValueData />
+      <PadTimestamps />
     </SettingSection>
   );
 };
