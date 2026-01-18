@@ -29,8 +29,8 @@ interface ExtendedConfigResult extends ConfigResult {
     "valkyr-ui"?: ValkyrUiConfigMap;
   };
   ui: {
-    ratingSystemOptions?: RatingSystemOptions
-  }
+    ratingSystemOptions?: RatingSystemOptions;
+  };
 }
 
 interface SettingsTabProps {
@@ -68,6 +68,9 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__detailsMaxLines?: number;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
+  /** The zoom breakpoint at which to display the rating banner on gallery
+   * cards. */
+  cards__galleryCard__ratingBannerBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the rating icon on gallery cards. */
   cards__galleryCard__ratingIconBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the studio link on gallery cards. */
@@ -81,6 +84,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__detailsMaxLines?: number;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
+  /** The zoom breakpoint at which to display the rating banner on scene cards. */
+  cards__sceneCard__ratingBannerBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the rating icon on scene cards. */
   cards__sceneCard__ratingIconBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the studio link on scene cards. */
