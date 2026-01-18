@@ -51,6 +51,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   queue={props.queue}
                   ratingSystem={stashConfig.ui.ratingSystemOptions}
                   scene={sc}
+                  zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
                 />
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}

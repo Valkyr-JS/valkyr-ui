@@ -46,6 +46,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   gallery={gl}
                   pluginConfig={pluginConfig}
                   ratingSystem={stashConfig.ui.ratingSystemOptions}
+                  zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
                 />
               ))}
               zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
