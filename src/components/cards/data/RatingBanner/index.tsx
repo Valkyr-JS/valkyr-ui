@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import { convertRating100, getRenderData } from "@/helpers";
 import { FormattedMessage } from "react-intl";
+import "./RatingBanner.scss";
 
 interface RatingBannerProps {
   /** The object's user rating out of 100 */
