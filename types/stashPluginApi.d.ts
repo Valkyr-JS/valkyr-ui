@@ -754,7 +754,7 @@ declare namespace PluginApi {
     "TagCard.Overlays": React.FC<any>;
     "TagCard.Popovers": React.FC<any>;
     "TagCard.Title": React.FC<any>;
-    TagLink: React.FC<any>;
+    TagLink: React.FC<ITagLinkProps>;
     TagList: React.FC<any>;
     TagSelect: React.FC<any>;
     TruncatedText: React.FC<any>;
@@ -1085,7 +1085,7 @@ declare namespace PluginApi {
     function before(target: PatchableComponentNames, fn: Function): void;
     function instead<T>(
       target: PatchableComponentNames,
-      fn: (props: T, _: unknown, Original: React.JSX) => React.JSX.Element[]
+      fn: (props: T, _: unknown, Original: React.JSX) => React.JSX.Element[],
     ): void;
     function after(target: PatchableComponentNames, fn: Function): void;
   }

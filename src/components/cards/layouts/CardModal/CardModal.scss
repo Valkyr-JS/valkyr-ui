@@ -22,5 +22,12 @@
 
   .modal-footer {
     justify-content: space-between;
+
+    // Add spacing between icon and count, if there is one
+    button {
+      span {
+        margin-left: 3px;
+      }
+    }
   }
 }

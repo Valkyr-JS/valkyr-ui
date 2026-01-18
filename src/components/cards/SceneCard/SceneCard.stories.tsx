@@ -6,6 +6,10 @@ import SceneCard from ".";
 // Mock data
 import scene2414 from "../../../../mocks/scenes/2414.json";
 
+const pluginConfig = {
+  cards__sceneCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
+};
+
 const meta = {
   title: "Components/Cards/Scene card",
   component: SceneCard,
@@ -20,9 +24,7 @@ const meta = {
     layout: "centered",
   },
   args: {
-    pluginConfig: {
-      cards__sceneCard__ratingIconBreakpoint: 0,
-    },
+    pluginConfig,
     zoomBreakpoint: 1,
   },
   argTypes: {
@@ -38,6 +40,8 @@ type Story = StoryObj<typeof meta>;
 
 const footerProps = {
   openHandler: fn(),
+  pluginConfig,
+  sections: [["details"], ["tags", 5]] as CardModalSectionData[],
   setSection: fn(),
 };
 

@@ -43,6 +43,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   }
                   footer={{
                     openHandler: () => setModalOpen(!modalOpen),
+                    pluginConfig,
                     setData: () => setModalSceneIndex(i),
                     setSection: setModalSection,
                   }}
@@ -106,6 +107,7 @@ PluginApi.patch.instead<ISceneCardProps>(
               continuePlaylist={stashConfig.interface.continuePlaylistDefault}
               footer={{
                 openHandler: () => setModalOpen(!modalOpen),
+                pluginConfig,
                 setSection: setModalSection,
               }}
               index={props.index}

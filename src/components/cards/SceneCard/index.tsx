@@ -7,7 +7,7 @@ import Details from "../data/Details";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
-import { CardModalContent } from "../layouts/CardModal";
+import { CardModalContent, CardModalTagsSection } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
@@ -19,7 +19,7 @@ interface SceneCardProps {
   continuePlaylist?: Maybe<boolean> | undefined;
 
   /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: CardFooterProps;
+  footer?: Omit<CardFooterProps, "sections">;
 
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
@@ -66,14 +66,22 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
+  const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.tags.length)
+    footerSections.push(["tags", props.scene.tags.length]);
+  const footerProps = props.footer
+    ? { ...props.footer, sections: footerSections }
+    : undefined;
+
   return (
     <GridCard
       classname={componentClass}
-      footer={props.footer}
+      footer={footerProps}
       id={id}
       link={sceneLink}
       onMouseOut={() => setIsHovered(false)}
       onMouseOver={() => setIsHovered(true)}
+      pluginConfig={props.pluginConfig}
       thumbnail={
         <SceneCardThumbnail
           cardIsHovered={isHovered}
@@ -105,7 +113,9 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
             <RatingIcon
               context="card"
               currentBreakpoint={props.zoomBreakpoint}
-              hideZeroValueData={props.pluginConfig.cards__data__hideZeroValue}
+              hideZeroValueData={
+                props.pluginConfig.cards__shared__hideZeroValue
+              }
               rating100={props.scene.rating100}
               ratingSystem={props.ratingSystem}
               userBreakpoint={
@@ -340,11 +350,16 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     (props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
       DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_BREAKPOINT) > -1;
 
+  const sections: CardModalSectionData[] = [["details"]];
+  if (props.scene.tags.length) sections.push(["tags", props.scene.tags.length]);
+
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
       link={sceneLink}
+      pluginConfig={props.pluginConfig}
       section={props.section}
+      sections={sections}
       setSection={props.setSection}
       thumbnail={
         <SceneCardThumbnail
@@ -376,19 +391,25 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
         </>
       }
     >
-      <KeyData>
-        <ReleaseData>
-          <Date
-            context="modal"
-            date={props.scene.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-          />
-        </ReleaseData>
-      </KeyData>
-      <Details context="modal" details={props.scene.details} />
+      {props.section === "tags" ? (
+        <CardModalTagsSection tags={props.scene.tags} />
+      ) : (
+        <>
+          <KeyData>
+            <ReleaseData>
+              <Date
+                context="modal"
+                date={props.scene.date}
+                localeDateFormat={
+                  props.pluginConfig.general__localeDateFormat ??
+                  DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+                }
+              />
+            </ReleaseData>
+          </KeyData>
+          <Details context="modal" details={props.scene.details} />
+        </>
+      )}
     </CardModalContent>
   );
 };

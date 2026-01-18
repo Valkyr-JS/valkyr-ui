@@ -4,9 +4,6 @@ export const DEFAULT = {
     CARD_GRID: {
       ENABLED: true,
     },
-    DATA: {
-      HIDE_ZERO_VALUE: false,
-    },
     GALLERY_CARD: {
       DATE_BREAKPOINT: 0,
       DETAILS_BREAKPOINT: 0,
@@ -25,6 +22,10 @@ export const DEFAULT = {
       RATING_BANNER_BREAKPOINT: 0,
       RATING_ICON_BREAKPOINT: -1,
       STUDIO_BREAKPOINT: 0,
+    },
+    SHARED: {
+      ENABLE_FOOTER_BUTTON_COUNTS: true,
+      HIDE_ZERO_VALUE: false,
     },
   },
   GENERAL: {

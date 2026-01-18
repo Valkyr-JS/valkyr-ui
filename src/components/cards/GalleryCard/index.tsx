@@ -6,7 +6,7 @@ import Details from "../data/Details";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
-import { CardModalContent } from "../layouts/CardModal";
+import { CardModalContent, CardModalTagsSection } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
@@ -14,7 +14,7 @@ import "./GalleryCard.scss";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: CardFooterProps;
+  footer?: Omit<CardFooterProps, "sections">;
 
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
@@ -39,12 +39,20 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
+  const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.tags.length)
+    footerSections.push(["tags", props.gallery.tags.length]);
+  const footerProps = props.footer
+    ? { ...props.footer, sections: footerSections }
+    : undefined;
+
   return (
     <GridCard
       classname={componentClass}
-      footer={props.footer}
+      footer={footerProps}
       id={id}
       link={galleryLink}
+      pluginConfig={props.pluginConfig}
       thumbnail={
         <GalleryCardThumbnail
           context="card"
@@ -73,7 +81,9 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             <RatingIcon
               context="card"
               currentBreakpoint={props.zoomBreakpoint}
-              hideZeroValueData={props.pluginConfig.cards__data__hideZeroValue}
+              hideZeroValueData={
+                props.pluginConfig.cards__shared__hideZeroValue
+              }
               rating100={props.gallery.rating100}
               ratingSystem={props.ratingSystem}
               userBreakpoint={
@@ -243,6 +253,10 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
+  const sections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.tags.length)
+    sections.push(["tags", props.gallery.tags.length]);
+
   // Only render one of the two rating options
   const willRenderRatingBanner =
     (props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
@@ -252,7 +266,9 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
     <CardModalContent
       closeHandler={props.closeHandler}
       link={galleryLink}
+      pluginConfig={props.pluginConfig}
       section={props.section}
+      sections={sections}
       setSection={props.setSection}
       thumbnail={
         <GalleryCardThumbnail
@@ -282,19 +298,25 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
         </>
       }
     >
-      <KeyData>
-        <ReleaseData>
-          <Date
-            context="modal"
-            date={props.gallery.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-          />
-        </ReleaseData>
-      </KeyData>
-      <Details context="modal" details={props.gallery.details} />
+      {props.section === "tags" ? (
+        <CardModalTagsSection tags={props.gallery.tags} />
+      ) : (
+        <>
+          <KeyData>
+            <ReleaseData>
+              <Date
+                context="modal"
+                date={props.gallery.date}
+                localeDateFormat={
+                  props.pluginConfig.general__localeDateFormat ??
+                  DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+                }
+              />
+            </ReleaseData>
+          </KeyData>
+          <Details context="modal" details={props.gallery.details} />
+        </>
+      )}
     </CardModalContent>
   );
 };

@@ -30,6 +30,12 @@ interface IGalleryCardProps {
   onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
 }
 
+interface INamedObject {
+  id: string;
+  name?: string;
+  sort_name?: string | null;
+}
+
 interface IPlaySceneOptions {
   sceneIndex?: number;
   newPage?: number;
@@ -70,6 +76,25 @@ interface ISetting {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   disabled?: boolean;
 }
+
+interface ITagLinkProps {
+  tag: INamedObject;
+  linkType?:
+    | "scene"
+    | "gallery"
+    | "image"
+    | "details"
+    | "performer"
+    | "group"
+    | "studio"
+    | "scene_marker";
+  className?: string;
+  hoverPlacement?: Placement;
+  showHierarchyIcon?: boolean;
+  hierarchyTooltipID?: string;
+}
+
+type Placement = "top" | "bottom" | "left" | "right";
 
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/utils/rating.ts#L6 */
 type RatingStarPrecision = "full" | "half" | "quarter" | "tenth";

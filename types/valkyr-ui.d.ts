@@ -1,4 +1,5 @@
-type CardModalSection = "details";
+type CardModalSection = "details" | "tags";
+type CardModalSectionData = [CardModalSection] | [CardModalSection, number];
 
 type DataComponentProps<T = unknown> = T & {
   /** Whether the component is being rendered in a card component or modal
@@ -58,7 +59,9 @@ interface ValkyrUiConfigMap {
   /** Enables Valkyr UI card grids for all enabled card types. */
   cards__cardGrid__enabled?: boolean;
   /** Whether to hide zero-value data on card components. */
-  cards__data__hideZeroValue?: boolean;
+  cards__shared__hideZeroValue?: boolean;
+  /** Enables counts for associated object modal sections. */
+  card__shared__enableCounts?: boolean;
 
   /** The zoom breakpoint at which to display the date on gallery cards. */
   cards__galleryCard__dateBreakpoint?: StashCardGridZoom;

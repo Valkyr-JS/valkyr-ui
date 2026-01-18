@@ -40,6 +40,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   key={i}
                   footer={{
                     openHandler: () => setModalOpen(!modalOpen),
+                    pluginConfig,
                     setData: () => setModalGalleryIndex(i),
                     setSection: setModalSection,
                   }}
@@ -99,6 +100,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
               {...props}
               footer={{
                 openHandler: () => setModalOpen(!modalOpen),
+                pluginConfig,
                 setSection: setModalSection,
               }}
               pluginConfig={pluginConfig}

@@ -1,12 +1,13 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faTag } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
+import { DEFAULT } from "@/constants";
 
 interface GridCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
@@ -26,6 +27,9 @@ interface GridCardProps {
 
   /** Event to fire when the card is being hovered over. */
   onMouseOver?: React.MouseEventHandler<HTMLDivElement>;
+
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
 
   /** A component used for displaying the object thumbnail. */
   thumbnail: React.ReactNode;
@@ -70,6 +74,12 @@ export interface CardFooterProps {
   /** Handler for opening the modal. */
   openHandler: () => void;
 
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
+  /** The sections available to the modal */
+  sections: CardModalSectionData[];
+
   /** Handler that sets data set for the modal. */
   setData?: () => void;
 
@@ -89,16 +99,40 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
     props.openHandler();
   };
 
+  const handleOpenTagsSection = () => {
+    if (props.setData !== undefined) props.setData();
+    props.setSection("tags");
+    props.openHandler();
+  };
+
   return (
     <div className={footerClass}>
-      <button
-        type="button"
-        className="minimal btn"
-        onClick={handleOpenDetailsSection}
-        title={intl.formatMessage({ id: "details" })}
-      >
-        <FontAwesomeIcon icon={faCircleInfo} />
-      </button>
+      {props.sections.find((s) => s[0] === "details") && (
+        <button
+          type="button"
+          className="minimal btn"
+          onClick={handleOpenDetailsSection}
+          title={intl.formatMessage({ id: "details" })}
+        >
+          <FontAwesomeIcon icon={faCircleInfo} />
+        </button>
+      )}
+      {props.sections.find((s) => s[0] === "tags") && (
+        <button
+          type="button"
+          className="minimal btn"
+          onClick={handleOpenTagsSection}
+          title={intl.formatMessage({ id: "tags" })}
+        >
+          <FontAwesomeIcon icon={faTag} />
+          {(props.pluginConfig.card__shared__enableCounts ??
+          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+            <span aria-hidden>
+              {props.sections.find((s) => s[0] === "tags")?.[1]}
+            </span>
+          ) : null}
+        </button>
+      )}
     </div>
   );
 };
