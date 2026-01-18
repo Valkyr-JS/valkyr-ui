@@ -14,7 +14,7 @@ import "./GalleryCard.scss";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: CardFooterProps;
+  footer?: Omit<CardFooterProps, "sections">;
 
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
@@ -39,8 +39,9 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
-  const footerSections: CardModalSection[] = ["details"];
-  if (props.gallery.tags.length) footerSections.push("tags");
+  const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.tags.length)
+    footerSections.push(["tags", props.gallery.tags.length]);
   const footerProps = props.footer
     ? { ...props.footer, sections: footerSections }
     : undefined;
@@ -249,8 +250,9 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
-  const sections: CardModalSection[] = ["details"];
-  if (props.gallery.tags.length) sections.push("tags");
+  const sections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.tags.length)
+    sections.push(["tags", props.gallery.tags.length]);
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
@@ -261,6 +263,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
     <CardModalContent
       closeHandler={props.closeHandler}
       link={galleryLink}
+      pluginConfig={props.pluginConfig}
       section={props.section}
       sections={sections}
       setSection={props.setSection}

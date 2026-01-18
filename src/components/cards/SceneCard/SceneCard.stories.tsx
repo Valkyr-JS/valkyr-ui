@@ -38,6 +38,7 @@ type Story = StoryObj<typeof meta>;
 
 const footerProps = {
   openHandler: fn(),
+  sections: [["details"], ["tags", 5]] as CardModalSectionData[],
   setSection: fn(),
 };
 

@@ -7,6 +7,7 @@ import { useIntl } from "react-intl";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
+import { DEFAULT } from "@/constants";
 
 export interface CardModalContentProps {
   /** Optional classes added alongside the `vui-card-modal` component class. */
@@ -18,11 +19,14 @@ export interface CardModalContentProps {
   /** The link to the object page. */
   link: string;
 
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
   /** The currently displayed modal section. */
   section: CardModalSection;
 
   /** The sections available to the modal */
-  sections: CardModalSection[];
+  sections: CardModalSectionData[];
 
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
@@ -59,7 +63,7 @@ export const CardModalContent: React.FC<
       </Modal.Body>
       <Modal.Footer>
         <div>
-          {props.sections.includes("details") && (
+          {props.sections.find((s) => s[0] === "details") && (
             <button
               type="button"
               className="minimal btn"
@@ -69,7 +73,7 @@ export const CardModalContent: React.FC<
               <FontAwesomeIcon icon={faCircleInfo} />
             </button>
           )}
-          {props.sections.includes("tags") && (
+          {props.sections.find((s) => s[0] === "tags") && (
             <button
               type="button"
               className="minimal btn"
@@ -77,6 +81,12 @@ export const CardModalContent: React.FC<
               title={intl.formatMessage({ id: "tags" })}
             >
               <FontAwesomeIcon icon={faTag} />
+              {(props.pluginConfig.card__footer__enableCounts ??
+              DEFAULT.CARDS.FOOTER.ENABLE_COUNTS) ? (
+                <span aria-hidden>
+                  {props.sections.find((s) => s[0] === "tags")?.[1]}
+                </span>
+              ) : null}
             </button>
           )}
         </div>

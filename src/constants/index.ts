@@ -7,6 +7,9 @@ export const DEFAULT = {
     DATA: {
       HIDE_ZERO_VALUE: false,
     },
+    FOOTER: {
+      ENABLE_COUNTS: true,
+    },
     GALLERY_CARD: {
       DATE_BREAKPOINT: 0,
       DETAILS_BREAKPOINT: 0,

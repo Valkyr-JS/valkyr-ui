@@ -19,7 +19,7 @@ interface SceneCardProps {
   continuePlaylist?: Maybe<boolean> | undefined;
 
   /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: CardFooterProps;
+  footer?: Omit<CardFooterProps, "sections">;
 
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
@@ -66,8 +66,9 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const footerSections: CardModalSection[] = ["details"];
-  if (props.scene.tags.length) footerSections.push("tags");
+  const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.tags.length)
+    footerSections.push(["tags", props.scene.tags.length]);
   const footerProps = props.footer
     ? { ...props.footer, sections: footerSections }
     : undefined;
@@ -346,13 +347,14 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     (props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
       DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_BREAKPOINT) > -1;
 
-  const sections: CardModalSection[] = ["details"];
-  if (props.scene.tags.length) sections.push("tags");
+  const sections: CardModalSectionData[] = [["details"]];
+  if (props.scene.tags.length) sections.push(["tags", props.scene.tags.length]);
 
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
       link={sceneLink}
+      pluginConfig={props.pluginConfig}
       section={props.section}
       sections={sections}
       setSection={props.setSection}
