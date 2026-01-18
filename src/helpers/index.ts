@@ -73,3 +73,30 @@ interface ImakeSceneUrl {
   scene: SlimSceneDataFragment;
   index?: number;
 }
+
+/** Convert a Stash object `rating100` value to a Stash interface rating. */
+export const convertRating100 = (
+  value: number,
+  options: RatingSystemOptions = { type: "stars", starPrecision: "full" },
+): number => {
+  let ratingNum = 0;
+  if (options.type === "decimal") ratingNum = value / 10;
+  else {
+    switch (options.starPrecision) {
+      case "half":
+        ratingNum = Math.round(value / 10) / 2; // Math.round(74 / 10 = 7.4) / 2 = 3.5
+        break;
+      case "quarter":
+        ratingNum = Math.round(value / 5) / 4; // Math.round(74 / 5 = 14.8) / 4 = 3.75
+        break;
+      case "tenth":
+        ratingNum = Math.round(value / 2) / 10; // Math.round(74 / 2 = 37) / 10 = 3.7
+        break;
+      case "full":
+      default:
+        ratingNum = Math.round(value / 20); // Math.round(74 / 20 = 3.7) = 4
+    }
+  }
+
+  return ratingNum;
+};

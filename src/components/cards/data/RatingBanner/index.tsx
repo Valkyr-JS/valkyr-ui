@@ -1,10 +1,9 @@
 import React from "react";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import cx from "classnames";
 import { convertRating100, getRenderData } from "@/helpers";
-import "./RatingIcon.scss";
+import { FormattedMessage } from "react-intl";
 
-interface RatingIconProps {
+interface RatingBannerProps {
   /** The object's user rating out of 100 */
   rating100: Maybe<Scalars["Int"]["output"]> | undefined;
 
@@ -12,8 +11,9 @@ interface RatingIconProps {
   ratingSystem?: RatingSystemOptions;
 }
 
-const RatingIcon: React.FC<
-  DataComponentProps<RatingIconProps> | DataComponentModalProps<RatingIconProps>
+const RatingBanner: React.FC<
+  | DataComponentProps<RatingBannerProps>
+  | DataComponentModalProps<RatingBannerProps>
 > = (props) => {
   const data =
     props.context === "modal"
@@ -29,23 +29,20 @@ const RatingIcon: React.FC<
 
   if (data === null) return null;
 
-  const componentClass = "vui-card-data__rating-icon";
-
   const ratingNum = convertRating100(data, props.ratingSystem);
-  const ratingType = props.ratingSystem?.type ?? "stars";
 
-  const srText =
-    ratingType === "decimal"
-      ? `Rated ${ratingNum} out of 10`
-      : `Rated ${ratingNum} out of 5 stars`;
+  const componentClass = "vui-card-data__rating-banner";
+  const classList = cx(
+    "rating-banner",
+    `rating-100-${Math.trunc(data / 5)}`,
+    componentClass,
+  );
 
   return (
-    <span className={componentClass}>
-      <FontAwesomeIcon icon={faStar} />
-      <span className="sr-only">{srText}</span>
-      <span aria-hidden>{ratingNum}</span>
-    </span>
+    <div className={classList} aria-hidden>
+      <FormattedMessage id="rating" />: {ratingNum}
+    </div>
   );
 };
 
-export default RatingIcon;
+export default RatingBanner;
