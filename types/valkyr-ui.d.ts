@@ -59,7 +59,7 @@ interface ValkyrUiConfigMap {
   /** Enables Valkyr UI card grids for all enabled card types. */
   cards__cardGrid__enabled?: boolean;
   /** Whether to hide zero-value data on card components. */
-  cards__data__hideZeroValue?: boolean;
+  cards__shared__hideZeroValue?: boolean;
   /** Enables counts for associated object modal sections. */
   card__shared__enableCounts?: boolean;
 

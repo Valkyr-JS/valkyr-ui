@@ -3,6 +3,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { convertRating100, getRenderData } from "@/helpers";
 import "./RatingIcon.scss";
+import { DEFAULT } from "@/constants";
 
 interface RatingIconProps {
   /** The object's user rating out of 100 */
@@ -20,7 +21,8 @@ const RatingIcon: React.FC<
       ? (props.rating100 ?? 0)
       : getRenderData({
           data: props.rating100,
-          hideZeroValueData: props.hideZeroValueData,
+          hideZeroValueData:
+            props.hideZeroValueData ?? DEFAULT.CARDS.SHARED.HIDE_ZERO_VALUE,
           zoomBreakpoint: {
             current: props.currentBreakpoint,
             user: props.userBreakpoint,

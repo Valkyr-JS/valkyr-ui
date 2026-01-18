@@ -113,7 +113,9 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
             <RatingIcon
               context="card"
               currentBreakpoint={props.zoomBreakpoint}
-              hideZeroValueData={props.pluginConfig.cards__data__hideZeroValue}
+              hideZeroValueData={
+                props.pluginConfig.cards__shared__hideZeroValue
+              }
               rating100={props.scene.rating100}
               ratingSystem={props.ratingSystem}
               userBreakpoint={
