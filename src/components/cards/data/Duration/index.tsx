@@ -1,10 +1,14 @@
 import React from "react";
 import TextUtils from "@/components/stash/utils/text";
-import { getRenderData } from "@/helpers";
+import { getRenderData, padTimestamps } from "@/helpers";
 
 interface DurationProps {
   /** The scene duration data. */
   duration: Scalars["Float"]["output"];
+
+  /** Adds padding to timestamps to make all units double-figures and include
+   * hours. */
+  timestampPadding: boolean;
 }
 
 const Duration: React.FC<
@@ -24,6 +28,9 @@ const Duration: React.FC<
   if (!data) return null;
 
   const timestamp = TextUtils.secondsToTimestamp(props.duration);
+  const timestampValue = props.timestampPadding
+    ? padTimestamps(timestamp)
+    : timestamp;
 
   // Screen-reader text
   const timeStampBreakdown = timestamp.split(":");
@@ -43,7 +50,7 @@ const Duration: React.FC<
   return (
     <span className={componentClass}>
       <span className="sr-only">{srText}</span>
-      <span aria-hidden>{timestamp}</span>
+      <span aria-hidden>{timestampValue}</span>
     </span>
   );
 };

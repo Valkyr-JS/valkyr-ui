@@ -183,6 +183,10 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
               context="card"
               currentBreakpoint={props.zoomBreakpoint}
               duration={primaryFile.duration}
+              timestampPadding={
+                props.pluginConfig.cards__shared__timestampPadding ??
+                DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+              }
               userBreakpoint={
                 props.pluginConfig.cards__sceneCard__durationBreakpoint ??
                 DEFAULT.CARDS.SCENE_CARD.DURATION_BREAKPOINT
@@ -426,7 +430,14 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
             </ReleaseData>
             <FileData>
               {primaryFile && (
-                <Duration context="modal" duration={primaryFile.duration} />
+                <Duration
+                  context="modal"
+                  duration={primaryFile.duration}
+                  timestampPadding={
+                    props.pluginConfig.cards__shared__timestampPadding ??
+                    DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                  }
+                />
               )}
             </FileData>
           </KeyData>

@@ -10,6 +10,7 @@ const meta = {
   },
   args: {
     duration: 1702.07,
+    timestampPadding: false,
   },
   argTypes: {
     currentBreakpoint: {
@@ -96,5 +97,33 @@ export const WithoutZoomData: Story = {
     const canvas = within(canvasElement);
     const duration = canvas.getByText("Duration: 28 minutes 22 seconds");
     await expect(duration).toBeInTheDocument();
+  },
+};
+
+export const WithTimestampPadding: Story = {
+  args: {
+    context: "card",
+    timestampPadding: true,
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const duration = canvas.getByText("00:28:22");
+    await expect(duration).toBeInTheDocument();
+  },
+};
+
+export const WithoutTimestampPadding: Story = {
+  args: {
+    context: "card",
+    timestampPadding: false,
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const duration = canvas.getByText("28:22");
+    const longDuration = canvas.queryByText("00:28:22");
+    await expect(duration).toBeInTheDocument();
+    await expect(longDuration).toBeNull();
   },
 };
