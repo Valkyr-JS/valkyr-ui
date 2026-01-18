@@ -66,10 +66,16 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
+  const footerSections: CardModalSection[] = ["details"];
+  if (props.scene.tags.length) footerSections.push("tags");
+  const footerProps = props.footer
+    ? { ...props.footer, sections: footerSections }
+    : undefined;
+
   return (
     <GridCard
       classname={componentClass}
-      footer={props.footer}
+      footer={footerProps}
       id={id}
       link={sceneLink}
       onMouseOut={() => setIsHovered(false)}

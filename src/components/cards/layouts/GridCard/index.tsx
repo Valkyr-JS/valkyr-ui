@@ -70,6 +70,9 @@ export interface CardFooterProps {
   /** Handler for opening the modal. */
   openHandler: () => void;
 
+  /** The sections available to the modal */
+  sections: CardModalSection[];
+
   /** Handler that sets data set for the modal. */
   setData?: () => void;
 
@@ -97,22 +100,26 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
 
   return (
     <div className={footerClass}>
-      <button
-        type="button"
-        className="minimal btn"
-        onClick={handleOpenDetailsSection}
-        title={intl.formatMessage({ id: "details" })}
-      >
-        <FontAwesomeIcon icon={faCircleInfo} />
-      </button>
-      <button
-        type="button"
-        className="minimal btn"
-        onClick={handleOpenTagsSection}
-        title={intl.formatMessage({ id: "tags" })}
-      >
-        <FontAwesomeIcon icon={faTag} />
-      </button>
+      {props.sections.includes("details") && (
+        <button
+          type="button"
+          className="minimal btn"
+          onClick={handleOpenDetailsSection}
+          title={intl.formatMessage({ id: "details" })}
+        >
+          <FontAwesomeIcon icon={faCircleInfo} />
+        </button>
+      )}
+      {props.sections.includes("tags") && (
+        <button
+          type="button"
+          className="minimal btn"
+          onClick={handleOpenTagsSection}
+          title={intl.formatMessage({ id: "tags" })}
+        >
+          <FontAwesomeIcon icon={faTag} />
+        </button>
+      )}
     </div>
   );
 };

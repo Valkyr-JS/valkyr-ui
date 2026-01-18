@@ -39,10 +39,16 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
+  const footerSections: CardModalSection[] = ["details"];
+  if (props.gallery.tags.length) footerSections.push("tags");
+  const footerProps = props.footer
+    ? { ...props.footer, sections: footerSections }
+    : undefined;
+
   return (
     <GridCard
       classname={componentClass}
-      footer={props.footer}
+      footer={footerProps}
       id={id}
       link={galleryLink}
       thumbnail={
