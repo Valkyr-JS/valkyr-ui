@@ -27,7 +27,9 @@ const RatingBanner: React.FC<
           },
         });
 
-  if (data === null) return null;
+  // Only ever return if there is non-zero data, irrelevant of the user's
+  // settings. `Rating: 0` is just bad.
+  if (!data) return null;
 
   const ratingNum = convertRating100(data, props.ratingSystem);
 
