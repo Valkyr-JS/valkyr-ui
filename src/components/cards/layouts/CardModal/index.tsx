@@ -98,6 +98,7 @@ export const CardModalWrapper: React.FC<
   return (
     <Modal
       className={componentClassList}
+      scrollable
       show={props.show}
       aria-labelledby={props.titleID}
     >
