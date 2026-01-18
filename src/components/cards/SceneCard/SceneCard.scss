@@ -43,12 +43,32 @@ $prefix: variables.$prefix;
 
     aspect-ratio: 16 / 9;
 
-    img {
+    img,
+    video {
       height: 100%;
       object-fit: cover;
       object-position: top;
       width: 100%;
     }
+
+    video {
+      position: absolute;
+      z-index: -1;
+      transition: z-index 0s;
+      transition-delay: 0.2s;
+    }
+
+    &--portrait {
+      img,
+      video {
+        object-fit: contain;
+      }
+    }
+  }
+
+  // Unhide preview
+  &:hover &__thumbnail-preview video {
+    z-index: auto;
   }
 
   &__user-data {

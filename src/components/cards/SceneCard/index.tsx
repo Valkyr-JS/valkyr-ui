@@ -43,7 +43,7 @@ interface SceneCardProps {
 const SceneCard: React.FC<SceneCardProps> = (props) => {
   console.log(`props - '${props.scene.title || props.scene.id}': `, props);
 
-  const componentClass = "scene-card vui-scene-card";
+  const componentClass = "vui-scene-card";
   const userDataClass = componentClass + "__user-data";
 
   const id = createSceneCardID(props.scene.id);
@@ -217,10 +217,12 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
 ) => {
   const componentClass = "vui-scene-card";
   const thumbnailClass = componentClass + "__thumbnail";
-  const classList = cx(thumbnailClass, "scene-card-preview", {
-    portrait: props.isPortrait,
-  });
+  const classList = thumbnailClass;
   const previewClass = componentClass + "__thumbnail-preview";
+  const previewPortraitClass = previewClass + "--portrait";
+  const previewClassList = cx(previewClass, {
+    [previewPortraitClass]: props.isPortrait,
+  });
 
   const preview =
     props.context === "card" &&
@@ -247,14 +249,13 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
   return (
     <div className={classList}>
       <a href={props.link} aria-labelledby={props.titleID}>
-        <div className={previewClass}>
+        <div className={previewClassList}>
           <img loading="lazy" alt="" src={props.src} />
           {preview && (
             <video
               disableRemotePlayback
               playsInline
               muted
-              className="scene-card-preview-video"
               loop
               preload="none"
               ref={videoEl}
