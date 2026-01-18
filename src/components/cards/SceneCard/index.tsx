@@ -273,6 +273,11 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     queue: props.queue,
   });
 
+  // Only render one of the two rating options
+  const willRenderRatingBanner =
+    (props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
+      DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_BREAKPOINT) > -1;
+
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
@@ -284,7 +289,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           context="modal"
           link={sceneLink}
           pluginConfig={props.pluginConfig}
-          rating100={props.scene.rating100}
+          rating100={willRenderRatingBanner ? props.scene.rating100 : null}
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
           titleID={props.titleID}
@@ -296,11 +301,13 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
         <>
           <Studio context="modal" studio={props.scene.studio} />
           <div className={userDataClass}>
-            <RatingIcon
-              context="modal"
-              rating100={props.scene.rating100}
-              ratingSystem={props.ratingSystem}
-            />
+            {willRenderRatingBanner ? null : (
+              <RatingIcon
+                context="modal"
+                rating100={props.scene.rating100}
+                ratingSystem={props.ratingSystem}
+              />
+            )}
           </div>
         </>
       }

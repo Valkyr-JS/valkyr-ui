@@ -243,6 +243,11 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
+  // Only render one of the two rating options
+  const willRenderRatingBanner =
+    (props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
+      DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT) > -1;
+
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
@@ -254,7 +259,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           context="modal"
           link={galleryLink}
           pluginConfig={props.pluginConfig}
-          rating100={props.gallery.rating100}
+          rating100={willRenderRatingBanner ? props.gallery.rating100 : 0}
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
           titleID={props.titleID}
@@ -266,11 +271,13 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
         <>
           <Studio context="modal" studio={props.gallery.studio} />
           <div className={userDataClass}>
-            <RatingIcon
-              context="modal"
-              rating100={props.gallery.rating100}
-              ratingSystem={props.ratingSystem}
-            />
+            {willRenderRatingBanner ? null : (
+              <RatingIcon
+                context="modal"
+                rating100={props.gallery.rating100}
+                ratingSystem={props.ratingSystem}
+              />
+            )}
           </div>
         </>
       }
