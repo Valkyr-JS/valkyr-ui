@@ -18,7 +18,16 @@ $prefix: variables.$prefix;
 
   &__footer {
     grid-row: footer-top / footer-bottom;
+
+    display: flex;
     margin-top: 0.5rem;
+
+    // Add spacing between icon and count, if there is one
+    button {
+      span {
+        margin-left: 3px;
+      }
+    }
   }
 
   &__title {
