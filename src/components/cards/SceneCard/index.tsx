@@ -424,6 +424,11 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 }
               />
             </ReleaseData>
+            <FileData>
+              {primaryFile && (
+                <Duration context="modal" duration={primaryFile.duration} />
+              )}
+            </FileData>
           </KeyData>
           <Details context="modal" details={props.scene.details} />
         </>
