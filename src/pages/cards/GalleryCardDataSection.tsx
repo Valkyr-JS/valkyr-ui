@@ -63,7 +63,26 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
-  const RatingBreakpoint = () => (
+  const RatingBannerBreakpoint = () => (
+    <NumberSetting
+      heading="Rating banner"
+      id="valkyr-ui-cards__galleryCard__ratingBannerBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__ratingBannerBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
+        DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT
+      }
+    />
+  );
+
+  const RatingIconBreakpoint = () => (
     <NumberSetting
       heading="Rating icon"
       id="valkyr-ui-cards__galleryCard__ratingIconBreakpoint"
@@ -113,7 +132,8 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
       >
         <DateBreakpoint />
         <DetailsBreakpoint />
-        <RatingBreakpoint />
+        <RatingBannerBreakpoint />
+        <RatingIconBreakpoint />
         <StudioBreakpoint />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>

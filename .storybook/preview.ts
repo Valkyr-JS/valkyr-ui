@@ -4,6 +4,7 @@ import { WithIntlProvider } from "./decorators";
 // Stash app CSS bundle - v0.30.1
 import "./index-DkM4iYzr.css";
 import "../src/scss/global.scss";
+import "./overrides.css";
 
 const preview: Preview = {
   decorators: [WithIntlProvider],
