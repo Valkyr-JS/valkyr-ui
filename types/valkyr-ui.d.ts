@@ -86,7 +86,7 @@ interface ValkyrUiConfigMap {
   /** The maximum number of lines to display for details on scene cards. */
   cards__sceneCard__detailsMaxLines?: number;
   /** The zoom breakpoint at which to display the duration on scene cards. */
-  cards__sceneCard__duration?: StashCardGridZoom;
+  cards__sceneCard__durationBreakpoint?: StashCardGridZoom;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
   /** Enables scene card previews. */
