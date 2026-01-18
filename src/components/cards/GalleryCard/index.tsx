@@ -10,6 +10,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
+import RatingBanner from "../data/RatingBanner";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -46,9 +47,14 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       link={galleryLink}
       thumbnail={
         <GalleryCardThumbnail
-          titleID={id}
+          context="card"
           link={galleryLink}
+          pluginConfig={props.pluginConfig}
+          rating100={props.gallery.rating100}
+          ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
+          titleID={id}
+          zoomBreakpoint={props.zoomBreakpoint}
         />
       }
       title={title}
@@ -147,14 +153,30 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
 /* ---------------------------------------------------------------------------------------------- */
 
 interface GalleryCardThumbnailProps {
+  /** Whether the component is being rendered in a card component or modal
+   * component. */
+  context: "card" | "modal";
+
   /** The link to the object page. */
   link: string;
+
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
+  /** The object's user rating out of 100 */
+  rating100: Maybe<Scalars["Int"]["output"]> | undefined;
+
+  /** The user's Stash rating system configuration. */
+  ratingSystem?: RatingSystemOptions;
 
   /** The link to the gallery cover thumbnail. */
   src: string;
 
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
+
+  /** The current zoom breakpoint. */
+  zoomBreakpoint?: StashCardGridZoom;
 }
 
 export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
@@ -170,6 +192,16 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
         <div className={coverClass}>
           <img loading="lazy" alt="" src={props.src} />
         </div>
+        <RatingBanner
+          context={props.context}
+          currentBreakpoint={props.zoomBreakpoint}
+          rating100={props.rating100}
+          ratingSystem={props.ratingSystem}
+          userBreakpoint={
+            props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
+            DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT
+          }
+        />
       </a>
     </div>
   );
@@ -219,9 +251,13 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       setSection={props.setSection}
       thumbnail={
         <GalleryCardThumbnail
-          titleID={props.titleID}
+          context="modal"
           link={galleryLink}
+          pluginConfig={props.pluginConfig}
+          rating100={props.gallery.rating100}
+          ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
+          titleID={props.titleID}
         />
       }
       title={title}

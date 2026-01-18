@@ -3,6 +3,10 @@
     grid-row: body-top / body-bottom;
   }
 
+  .modal-content {
+    overflow: hidden;
+  }
+
   .modal-header {
     border-bottom: 0;
     overflow: hidden;
