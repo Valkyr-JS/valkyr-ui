@@ -94,6 +94,10 @@ export const CardModalContent: React.FC<
   );
 };
 
+/* ---------------------------------------------------------------------------------------------- */
+/*                                             Wrapper                                            */
+/* ---------------------------------------------------------------------------------------------- */
+
 interface CardModalWrapperProps {
   /** Optional classes added alongside the `vui-card-modal` component class. */
   classname?: string;
@@ -120,5 +124,32 @@ export const CardModalWrapper: React.FC<
     >
       {props.children}
     </Modal>
+  );
+};
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                          Tags section                                          */
+/* ---------------------------------------------------------------------------------------------- */
+
+interface CardModalTagsSectionProps {
+  tags: { id: Tag["id"]; name: Tag["name"] }[];
+}
+
+export const CardModalTagsSection: React.FC<CardModalTagsSectionProps> = (
+  props,
+) => {
+  // Simple tag fallback for when plugin API isn't available, e.g. storybook
+  const TagLink = window.PluginApi?.components
+    ? window.PluginApi?.components.TagLink
+    : (props: { tag: { id: string; name: string } }) => (
+        <span className="tag-item">{props.tag.name}</span>
+      );
+
+  return (
+    <div>
+      {props.tags.map((t) => {
+        return <TagLink tag={t} />;
+      })}
+    </div>
   );
 };
