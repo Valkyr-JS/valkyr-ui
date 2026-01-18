@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import cx from "classnames";
 import { DEFAULT } from "@/constants";
-import { getTitleFromObject, makeSceneUrl } from "@/helpers";
+import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
 import RatingBanner from "../data/RatingBanner";
@@ -54,17 +55,33 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
     queue: props.queue,
   });
 
+  const primaryFile =
+    props.scene.files.length > 0 ? props.scene.files[0] : undefined;
+  const isPortrait = getFileIsPortrait(primaryFile);
+  const preview =
+    (props.pluginConfig.cards__sceneCard__previewsEnabled ??
+    DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
+      ? (props.scene.paths.preview ?? undefined)
+      : undefined;
+
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <GridCard
       classname={componentClass}
       footer={props.footer}
       id={id}
       link={sceneLink}
+      onMouseOut={() => setIsHovered(false)}
+      onMouseOver={() => setIsHovered(true)}
       thumbnail={
         <SceneCardThumbnail
+          cardIsHovered={isHovered}
           context="card"
+          isPortrait={isPortrait}
           link={sceneLink}
           pluginConfig={props.pluginConfig}
+          preview={preview}
           rating100={props.scene.rating100}
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
@@ -172,11 +189,20 @@ interface SceneCardThumbnailProps {
    * component. */
   context: "card" | "modal";
 
+  /** Whether a part of the card is currently being hovered over. */
+  cardIsHovered?: boolean;
+
+  /** Whether the scene is portrait-oriented or not. */
+  isPortrait: boolean;
+
   /** The link to the object page. */
   link: string;
 
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
+
+  /** The path to the preview file. Disabled if `undefined`. */
+  preview: string | undefined;
 
   /** The object's user rating out of 100 */
   rating100: Maybe<Scalars["Int"]["output"]> | undefined;
@@ -199,13 +225,45 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
 ) => {
   const componentClass = "vui-scene-card";
   const thumbnailClass = componentClass + "__thumbnail";
+  const classList = thumbnailClass;
   const previewClass = componentClass + "__thumbnail-preview";
+  const previewPortraitClass = previewClass + "--portrait";
+  const previewClassList = cx(previewClass, {
+    [previewPortraitClass]: props.isPortrait,
+  });
+
+  const preview =
+    props.context === "card" &&
+    (props.pluginConfig.cards__sceneCard__previewsEnabled ??
+      DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
+      ? (props.preview ?? undefined)
+      : undefined;
+
+  const videoEl = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (props.cardIsHovered) {
+      // Catch is necessary due to DOMException if user hovers before clicking on page
+      videoEl.current?.play().catch(() => {});
+    } else videoEl.current?.pause();
+  }, [props.cardIsHovered]);
 
   return (
-    <div className={thumbnailClass}>
+    <div className={classList}>
       <a href={props.link} aria-labelledby={props.titleID}>
-        <div className={previewClass}>
+        <div className={previewClassList}>
           <img loading="lazy" alt="" src={props.src} />
+          {preview && (
+            <video
+              disableRemotePlayback
+              playsInline
+              muted
+              loop
+              preload="none"
+              ref={videoEl}
+              src={preview}
+            />
+          )}
         </div>
         <RatingBanner
           context={props.context}
@@ -273,6 +331,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     queue: props.queue,
   });
 
+  const primaryFile =
+    props.scene.files.length > 0 ? props.scene.files[0] : undefined;
+  const isPortrait = getFileIsPortrait(primaryFile);
+
   // Only render one of the two rating options
   const willRenderRatingBanner =
     (props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
@@ -287,8 +349,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       thumbnail={
         <SceneCardThumbnail
           context="modal"
+          isPortrait={isPortrait}
           link={sceneLink}
           pluginConfig={props.pluginConfig}
+          preview={props.scene.paths.preview ?? undefined}
           rating100={willRenderRatingBanner ? props.scene.rating100 : null}
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}

@@ -100,3 +100,10 @@ export const convertRating100 = (
 
   return ratingNum;
 };
+
+/** Returns whether a video file is portrait-orientated. */
+export function getFileIsPortrait(file: VideoFileData | undefined): boolean {
+  const width = file?.width ? file.width : 0;
+  const height = file?.height ? file.height : 0;
+  return height > width;
+}

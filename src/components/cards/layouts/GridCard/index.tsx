@@ -21,6 +21,12 @@ interface GridCardProps {
   /** The link to the object page. */
   link: string;
 
+  /** Event to fire when the card is no longer being hovered over. */
+  onMouseOut?: React.MouseEventHandler<HTMLDivElement>;
+
+  /** Event to fire when the card is being hovered over. */
+  onMouseOver?: React.MouseEventHandler<HTMLDivElement>;
+
   /** A component used for displaying the object thumbnail. */
   thumbnail: React.ReactNode;
 
@@ -38,7 +44,11 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   const componentClassList = cx(componentClass, props.classname);
 
   return (
-    <Card className={componentClassList}>
+    <Card
+      className={componentClassList}
+      onMouseOut={props.onMouseOut}
+      onMouseOver={props.onMouseOver}
+    >
       {props.thumbnail}
       <div className={contentClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />

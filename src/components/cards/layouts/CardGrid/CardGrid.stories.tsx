@@ -23,7 +23,7 @@ import scene263 from "../../../../../mocks/scenes/263.json";
 import scene1792 from "../../../../../mocks/scenes/1792.json";
 import scene2414 from "../../../../../mocks/scenes/2414.json";
 import scene5076 from "../../../../../mocks/scenes/5076.json";
-import scene6343 from "../../../../../mocks/scenes/6343.json";
+import scene6296 from "../../../../../mocks/scenes/6296.json";
 import scene7530 from "../../../../../mocks/scenes/7530.json";
 import scene7929 from "../../../../../mocks/scenes/7929.json";
 import scene7946 from "../../../../../mocks/scenes/7946.json";
@@ -54,7 +54,7 @@ const SceneCards = [
   scene1792,
   scene2414,
   scene5076,
-  scene6343,
+  scene6296,
   scene7530,
   scene7929,
   scene7946,

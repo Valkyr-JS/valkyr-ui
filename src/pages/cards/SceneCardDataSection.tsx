@@ -1,5 +1,8 @@
-import React from "react";
-import { SettingGroup } from "@/components/stash/Settings/Inputs";
+import React, { useState } from "react";
+import {
+  BooleanSetting,
+  SettingGroup,
+} from "@/components/stash/Settings/Inputs";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting";
 import { DEFAULT } from "@/constants";
@@ -62,6 +65,29 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
       }
     />
   );
+
+  const PreviewsEnabled = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.cards__sceneCard__previewsEnabled ??
+        DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Enable scene previews"
+        id="valkyr-ui-cards__sceneCard__previewsEnabled"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__previewsEnabled: newState,
+          });
+        }}
+        subHeading="Enable Stash-generated scene previews on hover."
+      />
+    );
+  };
 
   const RatingBannerBreakpoint = () => (
     <NumberSetting
@@ -138,6 +164,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>
         <DetailsMaxLines />
+        <PreviewsEnabled />
       </SettingGroup>
     </SettingSection>
   );
