@@ -119,7 +119,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
               DEFAULT.GENERAL.LOCALE_DATE_FORMAT
             }
             userBreakpoint={
-              props.pluginConfig.cards__galleryCard__studioBreakpoint ??
+              props.pluginConfig.cards__galleryCard__dateBreakpoint ??
               DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
             }
           />

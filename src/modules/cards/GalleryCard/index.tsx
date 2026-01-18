@@ -49,7 +49,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
                 />
               ))}
-              zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
+              zoomIndex={props.zoomIndex as StashCardGridZoom}
             />
             <CardModalWrapper
               classname="vui-gallery-card-modal"

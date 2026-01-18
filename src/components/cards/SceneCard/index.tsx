@@ -134,7 +134,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
               DEFAULT.GENERAL.LOCALE_DATE_FORMAT
             }
             userBreakpoint={
-              props.pluginConfig.cards__sceneCard__studioBreakpoint ??
+              props.pluginConfig.cards__sceneCard__dateBreakpoint ??
               DEFAULT.CARDS.SCENE_CARD.DATE_BREAKPOINT
             }
           />
