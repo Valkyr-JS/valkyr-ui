@@ -58,6 +58,11 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const primaryFile =
     props.scene.files.length > 0 ? props.scene.files[0] : undefined;
   const isPortrait = getFileIsPortrait(primaryFile);
+  const preview =
+    (props.pluginConfig.cards__sceneCard__previewsEnabled ??
+    DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
+      ? (props.scene.paths.preview ?? undefined)
+      : undefined;
 
   return (
     <GridCard
@@ -71,7 +76,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           isPortrait={isPortrait}
           link={sceneLink}
           pluginConfig={props.pluginConfig}
-          preview={props.scene.paths.preview ?? undefined}
+          preview={preview}
           rating100={props.scene.rating100}
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
@@ -216,6 +221,12 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
     portrait: props.isPortrait,
   });
   const previewClass = componentClass + "__thumbnail-preview";
+  
+  const preview =
+    (props.pluginConfig.cards__sceneCard__previewsEnabled ??
+    DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
+      ? (props.preview ?? undefined)
+      : undefined;
 
   const videoEl = useRef<HTMLVideoElement>(null);
 
@@ -237,7 +248,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
       <a href={props.link} aria-labelledby={props.titleID}>
         <div className={previewClass}>
           <img loading="lazy" alt="" src={props.src} />
-          {props.preview && (
+          {preview && (
             <video
               disableRemotePlayback
               playsInline
@@ -246,7 +257,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
               loop
               preload="none"
               ref={videoEl}
-              src={props.preview}
+              src={preview}
             />
           )}
         </div>
