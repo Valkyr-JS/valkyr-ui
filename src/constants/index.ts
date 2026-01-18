@@ -4,11 +4,15 @@ export const DEFAULT = {
     CARD_GRID: {
       ENABLED: true,
     },
+    DATA: {
+      HIDE_ZERO_VALUE: false,
+    },
     GALLERY_CARD: {
       DATE_BREAKPOINT: 0,
       DETAILS_BREAKPOINT: 0,
       DETAILS_MAX_LINES: 3,
       ENABLED: true,
+      RATING_ICON_BREAKPOINT: -1,
       STUDIO_BREAKPOINT: 0,
     },
     SCENE_CARD: {
@@ -16,6 +20,7 @@ export const DEFAULT = {
       DETAILS_BREAKPOINT: 0,
       DETAILS_MAX_LINES: 3,
       ENABLED: true,
+      RATING_ICON_BREAKPOINT: -1,
       STUDIO_BREAKPOINT: 0,
     },
   },

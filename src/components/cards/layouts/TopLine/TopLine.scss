@@ -9,7 +9,7 @@ $prefix: variables.$prefix;
   display: grid;
   column-gap: $column-gap;
   margin-bottom: 3px;
-  font-size: var(--#{$prefix}-cards-font-sm);
+  font-size: var(--#{$prefix}-card-font-sm);
 
   &:empty {
     display: none !important;

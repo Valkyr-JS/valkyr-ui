@@ -1,3 +1,33 @@
+@use "../../../../src/scss/variables";
+
+$column-gap: variables.$column-gap;
+$prefix: variables.$prefix;
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                             Shared                                             */
+/* ---------------------------------------------------------------------------------------------- */
+
+.vui-scene-card,
+.vui-scene-card-modal {
+  .vui-card-top-line {
+    display: grid;
+    grid-template-columns: [top-line-start studio-start] 1fr [studio-end user-data-start] max-content [user-data-end top-line-end];
+    column-gap: $column-gap;
+    margin-bottom: 3px;
+    font-size: var(--#{$prefix}-card-font-sm);
+  }
+
+  .vui-card-data {
+    &__details {
+      grid-row: details-top / details-bottom;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                              Card                                              */
+/* ---------------------------------------------------------------------------------------------- */
+
 .vui-scene-card {
   &__thumbnail {
     position: relative;
@@ -21,16 +51,18 @@
     }
   }
 
+  &__user-data {
+    grid-column: user-data-start / user-data-end;
+
+    display: flex;
+    column-gap: $column-gap;
+    opacity: var(--#{$prefix}-card-top-line-opacity);
+  }
+
   .vui-grid-card {
     &__body {
       display: grid;
       grid-template-rows: [scene-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom scene-body-bottom];
-    }
-  }
-
-  .vui-card-data {
-    &__details {
-      grid-row: details-top / details-bottom;
     }
   }
 }
@@ -44,12 +76,6 @@
     &__body {
       display: grid;
       grid-template-rows: [scene-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom scene-card-modal-body-bottom];
-    }
-  }
-
-  .vui-card-data {
-    &__details {
-      grid-row: details-top / details-bottom;
     }
   }
 }

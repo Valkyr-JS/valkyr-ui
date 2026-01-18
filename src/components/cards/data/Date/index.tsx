@@ -1,7 +1,7 @@
 import React from "react";
+import { FormattedDate } from "react-intl";
 import { getRenderData } from "@/helpers";
 import "./Date.scss";
-import { FormattedDate } from "react-intl";
 
 interface DateProps {
   /** The date data. */

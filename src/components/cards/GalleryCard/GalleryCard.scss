@@ -2,6 +2,8 @@
 @use "sass:math";
 @use "../../../../src/scss/variables";
 
+$column-gap: variables.$column-gap;
+$prefix: variables.$prefix;
 $zoomBreakpoints: variables.$card-zoom-breakpoints;
 $zoomThumbnailHeights: (
   0: 180px,
@@ -9,6 +11,27 @@ $zoomThumbnailHeights: (
   2: 360px,
   3: 480px,
 );
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                             Shared                                             */
+/* ---------------------------------------------------------------------------------------------- */
+
+.vui-gallery-card,
+.vui-gallery-card-modal {
+  .vui-card-top-line {
+    display: grid;
+    grid-template-columns: [top-line-start studio-start] 1fr [studio-end user-data-start] max-content [user-data-end top-line-end];
+    column-gap: $column-gap;
+    margin-bottom: 3px;
+    font-size: var(--#{$prefix}-card-font-sm);
+  }
+
+  .vui-card-data {
+    &__details {
+      grid-row: details-top / details-bottom;
+    }
+  }
+}
 
 .vui-gallery-card {
   &__thumbnail-cover {
@@ -21,16 +44,18 @@ $zoomThumbnailHeights: (
     }
   }
 
+  &__user-data {
+    grid-column: user-data-start / user-data-end;
+
+    display: flex;
+    column-gap: $column-gap;
+    opacity: var(--#{$prefix}-card-top-line-opacity);
+  }
+
   .vui-grid-card {
     &__body {
       display: grid;
       grid-template-rows: [gallery-card-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom gallery-card-body-bottom];
-    }
-  }
-
-  .vui-card-data {
-    &__details {
-      grid-row: details-top / details-bottom;
     }
   }
 }
@@ -61,12 +86,6 @@ $zoomThumbnailHeights: (
     &__body {
       display: grid;
       grid-template-rows: [gallery-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom gallery-card-modal-body-bottom];
-    }
-  }
-
-  .vui-card-data {
-    &__details {
-      grid-row: details-top / details-bottom;
     }
   }
 }

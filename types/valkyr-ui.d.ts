@@ -8,6 +8,9 @@ type DataComponentProps<T = unknown> = T & {
   /** The current breakpoint in the browser. */
   currentBreakpoint?: StashCardGridZoom;
 
+  /** Whether the user has set 0-value data to not be rendered. */
+  hideZeroValueData?: boolean;
+
   /** The user-set breakpoint at which to render the component. */
   userBreakpoint: StashCardGridZoom;
 };
@@ -16,12 +19,18 @@ type DataComponentModalProps<T = unknown> = T & {
   /** Whether the component is being rendered in a card component or modal
    * component. */
   context: "modal";
+
+  /** Whether the user has set 0-value data to not be rendered. */
+  hideZeroValueData?: boolean;
 };
 
 interface ExtendedConfigResult extends ConfigResult {
   plugins: {
     "valkyr-ui"?: ValkyrUiConfigMap;
   };
+  ui: {
+    ratingSystemOptions?: RatingSystemOptions
+  }
 }
 
 interface SettingsTabProps {
@@ -48,6 +57,9 @@ type SlimStashObject =
 interface ValkyrUiConfigMap {
   /** Enables Valkyr UI card grids for all enabled card types. */
   cards__cardGrid__enabled?: boolean;
+  /** Whether to hide zero-value data on card components. */
+  cards__data__hideZeroValue?: boolean;
+
   /** The zoom breakpoint at which to display the date on gallery cards. */
   cards__galleryCard__dateBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the details on gallery cards. */
@@ -56,8 +68,11 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__detailsMaxLines?: number;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
+  /** The zoom breakpoint at which to display the rating icon on gallery cards. */
+  cards__galleryCard__ratingIconBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the studio link on gallery cards. */
   cards__galleryCard__studioBreakpoint?: StashCardGridZoom;
+
   /** The zoom breakpoint at which to display the date on scene cards. */
   cards__sceneCard__dateBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the details on scene cards. */
@@ -66,8 +81,11 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__detailsMaxLines?: number;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
+  /** The zoom breakpoint at which to display the rating icon on scene cards. */
+  cards__sceneCard__ratingIconBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the studio link on scene cards. */
   cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
+
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;
 }

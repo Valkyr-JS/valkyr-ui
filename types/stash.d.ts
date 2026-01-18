@@ -71,6 +71,18 @@ interface ISetting {
   disabled?: boolean;
 }
 
+/** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/utils/rating.ts#L6 */
+type RatingStarPrecision = "full" | "half" | "quarter" | "tenth";
+
+/** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/utils/rating.ts#L47 */
+interface RatingSystemOptions {
+  type: RatingSystemType;
+  starPrecision?: RatingStarPrecision;
+}
+
+/** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/utils/rating.ts#L1 */
+type RatingSystemType = "stars" | "decimal";
+
 interface SlimGalleryDataFragment {
   chapters: Array<{
     id: GalleryChapter["id"];

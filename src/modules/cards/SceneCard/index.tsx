@@ -49,10 +49,12 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   index={i}
                   pluginConfig={pluginConfig}
                   queue={props.queue}
+                  ratingSystem={stashConfig.ui.ratingSystemOptions}
                   scene={sc}
+                  zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
                 />
               ))}
-              zoomIndex={props.zoomIndex as 0 | 1 | 2 | 3}
+              zoomIndex={props.zoomIndex as StashCardGridZoom}
             />
             <CardModalWrapper
               classname="vui-scene-card-modal"
@@ -65,6 +67,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                 index={modalSceneIndex}
                 pluginConfig={pluginConfig}
                 queue={props.queue}
+                ratingSystem={stashConfig.ui.ratingSystemOptions}
                 scene={props.scenes[modalSceneIndex]}
                 section={modalSection}
                 setSection={setModalSection}
@@ -76,7 +79,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
     }
 
     return [<Original {...props} />];
-  }
+  },
 );
 
 PluginApi.patch.instead<ISceneCardProps>(
@@ -107,6 +110,7 @@ PluginApi.patch.instead<ISceneCardProps>(
               }}
               index={props.index}
               pluginConfig={pluginConfig}
+              ratingSystem={stashConfig.ui.ratingSystemOptions}
               queue={props.queue}
               scene={props.scene}
             />
@@ -121,6 +125,7 @@ PluginApi.patch.instead<ISceneCardProps>(
                 index={props.index}
                 pluginConfig={pluginConfig}
                 queue={props.queue}
+                ratingSystem={stashConfig.ui.ratingSystemOptions}
                 scene={props.scene}
                 section={modalSection}
                 setSection={setModalSection}
@@ -132,5 +137,5 @@ PluginApi.patch.instead<ISceneCardProps>(
     }
 
     return [<Original {...props} />];
-  }
+  },
 );

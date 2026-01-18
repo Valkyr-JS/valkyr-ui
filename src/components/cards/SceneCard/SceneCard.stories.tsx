@@ -20,7 +20,9 @@ const meta = {
     layout: "centered",
   },
   args: {
-    pluginConfig: {},
+    pluginConfig: {
+      cards__sceneCard__ratingIconBreakpoint: 0,
+    },
     zoomBreakpoint: 1,
   },
   argTypes: {

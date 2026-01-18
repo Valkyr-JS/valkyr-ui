@@ -3,6 +3,7 @@ import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
+import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
@@ -20,6 +21,9 @@ interface GalleryCardProps {
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
 
+  /** The user's Stash rating system configuration */
+  ratingSystem?: RatingSystemOptions;
+
   /** The current zoom breakpoint. */
   zoomBreakpoint?: StashCardGridZoom;
 }
@@ -28,6 +32,8 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   console.log(`props - '${props.gallery.title || props.gallery.id}': `, props);
 
   const componentClass = "vui-gallery-card";
+  const userDataClass = componentClass + "__user-data";
+
   const id = createGalleryCardID(props.gallery.id);
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
@@ -57,6 +63,19 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
               DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
             }
           />
+          <div className={userDataClass}>
+            <RatingIcon
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              hideZeroValueData={props.pluginConfig.cards__data__hideZeroValue}
+              rating100={props.gallery.rating100}
+              ratingSystem={props.ratingSystem}
+              userBreakpoint={
+                props.pluginConfig.cards__galleryCard__ratingIconBreakpoint ??
+                DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_BREAKPOINT
+              }
+            />
+          </div>
         </>
       }
     >
@@ -100,7 +119,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
               DEFAULT.GENERAL.LOCALE_DATE_FORMAT
             }
             userBreakpoint={
-              props.pluginConfig.cards__galleryCard__studioBreakpoint ??
+              props.pluginConfig.cards__galleryCard__dateBreakpoint ??
               DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
             }
           />
@@ -139,7 +158,7 @@ interface GalleryCardThumbnailProps {
 }
 
 export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
-  props
+  props,
 ) => {
   const componentClass = "vui-gallery-card";
   const thumbnailClass = componentClass + "__thumbnail";
@@ -170,6 +189,9 @@ interface GalleryCardModalContentProps {
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
 
+  /** The user's Stash rating system configuration */
+  ratingSystem?: RatingSystemOptions;
+
   /** The currently displayed modal section. */
   section: CardModalSection;
 
@@ -181,8 +203,11 @@ interface GalleryCardModalContentProps {
 }
 
 export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
-  props
+  props,
 ) => {
+  const componentClass = "vui-gallery-card";
+  const userDataClass = componentClass + "__user-data";
+
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
@@ -201,7 +226,18 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       }
       title={title}
       titleID={props.titleID}
-      topLine={<Studio context="modal" studio={props.gallery.studio} />}
+      topLine={
+        <>
+          <Studio context="modal" studio={props.gallery.studio} />
+          <div className={userDataClass}>
+            <RatingIcon
+              context="modal"
+              rating100={props.gallery.rating100}
+              ratingSystem={props.ratingSystem}
+            />
+          </div>
+        </>
+      }
     >
       <KeyData>
         <ReleaseData>
