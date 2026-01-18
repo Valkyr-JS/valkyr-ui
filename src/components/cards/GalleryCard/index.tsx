@@ -3,6 +3,7 @@ import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
+import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
@@ -10,7 +11,6 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
-import RatingBanner from "../data/RatingBanner";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */

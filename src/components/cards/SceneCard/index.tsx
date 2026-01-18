@@ -2,6 +2,8 @@ import React from "react";
 import { DEFAULT } from "@/constants";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
 import Date from "../data/Date";
+import Details from "../data/Details";
+import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
 import { CardModalContent } from "../layouts/CardModal";
@@ -9,7 +11,6 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
-import Details from "../data/Details";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -61,9 +62,14 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       link={sceneLink}
       thumbnail={
         <SceneCardThumbnail
-          titleID={id}
+          context="card"
           link={sceneLink}
-          src={props.scene.paths.screenshot ?? ""}
+          pluginConfig={props.pluginConfig}
+          rating100={props.scene.rating100}
+          ratingSystem={props.ratingSystem}
+          src={props.scene.paths.screenshot as string}
+          titleID={id}
+          zoomBreakpoint={props.zoomBreakpoint}
         />
       }
       title={title}
@@ -162,14 +168,30 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
 /* ---------------------------------------------------------------------------------------------- */
 
 interface SceneCardThumbnailProps {
+  /** Whether the component is being rendered in a card component or modal
+   * component. */
+  context: "card" | "modal";
+
   /** The link to the object page. */
   link: string;
+
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
+
+  /** The object's user rating out of 100 */
+  rating100: Maybe<Scalars["Int"]["output"]> | undefined;
+
+  /** The user's Stash rating system configuration. */
+  ratingSystem?: RatingSystemOptions;
 
   /** The link to the scene cover thumbnail. */
   src: string;
 
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
+
+  /** The current zoom breakpoint. */
+  zoomBreakpoint?: StashCardGridZoom;
 }
 
 export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
@@ -185,6 +207,16 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
         <div className={previewClass}>
           <img loading="lazy" alt="" src={props.src} />
         </div>
+        <RatingBanner
+          context={props.context}
+          currentBreakpoint={props.zoomBreakpoint}
+          rating100={props.rating100}
+          ratingSystem={props.ratingSystem}
+          userBreakpoint={
+            props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
+            DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT
+          }
+        />
       </a>
     </div>
   );
@@ -249,9 +281,13 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       setSection={props.setSection}
       thumbnail={
         <SceneCardThumbnail
-          titleID={props.titleID}
+          context="modal"
           link={sceneLink}
-          src={props.scene.paths.screenshot ?? ""}
+          pluginConfig={props.pluginConfig}
+          rating100={props.scene.rating100}
+          ratingSystem={props.ratingSystem}
+          src={props.scene.paths.screenshot as string}
+          titleID={props.titleID}
         />
       }
       title={title}
