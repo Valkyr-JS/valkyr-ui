@@ -340,11 +340,15 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     (props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
       DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_BREAKPOINT) > -1;
 
+  const sections: CardModalSection[] = ["details"];
+  if (props.scene.tags.length) sections.push("tags");
+
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
       link={sceneLink}
       section={props.section}
+      sections={sections}
       setSection={props.setSection}
       thumbnail={
         <SceneCardThumbnail
@@ -376,19 +380,25 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
         </>
       }
     >
-      <KeyData>
-        <ReleaseData>
-          <Date
-            context="modal"
-            date={props.scene.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-          />
-        </ReleaseData>
-      </KeyData>
-      <Details context="modal" details={props.scene.details} />
+      {props.section === "tags" ? (
+        <div>Tags data</div>
+      ) : (
+        <>
+          <KeyData>
+            <ReleaseData>
+              <Date
+                context="modal"
+                date={props.scene.date}
+                localeDateFormat={
+                  props.pluginConfig.general__localeDateFormat ??
+                  DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+                }
+              />
+            </ReleaseData>
+          </KeyData>
+          <Details context="modal" details={props.scene.details} />
+        </>
+      )}
     </CardModalContent>
   );
 };

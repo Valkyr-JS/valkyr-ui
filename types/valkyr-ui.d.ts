@@ -1,4 +1,4 @@
-type CardModalSection = "details";
+type CardModalSection = "details" | "tags";
 
 type DataComponentProps<T = unknown> = T & {
   /** Whether the component is being rendered in a card component or modal

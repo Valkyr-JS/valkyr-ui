@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faTag } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
@@ -20,6 +20,9 @@ export interface CardModalContentProps {
 
   /** The currently displayed modal section. */
   section: CardModalSection;
+
+  /** The sections available to the modal */
+  sections: CardModalSection[];
 
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
@@ -42,6 +45,7 @@ export const CardModalContent: React.FC<
 > = (props) => {
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
+  const handleSetTagsSection = () => props.setSection("tags");
   const componentClass = "vui-card-modal";
   const bodyClass = componentClass + "__body";
 
@@ -55,14 +59,26 @@ export const CardModalContent: React.FC<
       </Modal.Body>
       <Modal.Footer>
         <div>
-          <button
-            type="button"
-            className="minimal btn"
-            onClick={handleSetDetailsSection}
-            title={intl.formatMessage({ id: "details" })}
-          >
-            <FontAwesomeIcon icon={faCircleInfo} />
-          </button>
+          {props.sections.includes("details") && (
+            <button
+              type="button"
+              className="minimal btn"
+              onClick={handleSetDetailsSection}
+              title={intl.formatMessage({ id: "details" })}
+            >
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </button>
+          )}
+          {props.sections.includes("tags") && (
+            <button
+              type="button"
+              className="minimal btn"
+              onClick={handleSetTagsSection}
+              title={intl.formatMessage({ id: "tags" })}
+            >
+              <FontAwesomeIcon icon={faTag} />
+            </button>
+          )}
         </div>
         <div>
           <button

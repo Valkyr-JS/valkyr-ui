@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faTag } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Card } from "react-bootstrap";
 import { useIntl } from "react-intl";
@@ -89,6 +89,12 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
     props.openHandler();
   };
 
+  const handleOpenTagsSection = () => {
+    if (props.setData !== undefined) props.setData();
+    props.setSection("tags");
+    props.openHandler();
+  };
+
   return (
     <div className={footerClass}>
       <button
@@ -98,6 +104,14 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
         title={intl.formatMessage({ id: "details" })}
       >
         <FontAwesomeIcon icon={faCircleInfo} />
+      </button>
+      <button
+        type="button"
+        className="minimal btn"
+        onClick={handleOpenTagsSection}
+        title={intl.formatMessage({ id: "tags" })}
+      >
+        <FontAwesomeIcon icon={faTag} />
       </button>
     </div>
   );

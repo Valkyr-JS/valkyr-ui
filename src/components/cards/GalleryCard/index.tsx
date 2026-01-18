@@ -243,6 +243,9 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
+  const sections: CardModalSection[] = ["details"];
+  if (props.gallery.tags.length) sections.push("tags");
+
   // Only render one of the two rating options
   const willRenderRatingBanner =
     (props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
@@ -253,6 +256,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       closeHandler={props.closeHandler}
       link={galleryLink}
       section={props.section}
+      sections={sections}
       setSection={props.setSection}
       thumbnail={
         <GalleryCardThumbnail
