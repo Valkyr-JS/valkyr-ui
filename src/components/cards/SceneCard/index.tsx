@@ -221,10 +221,11 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
     portrait: props.isPortrait,
   });
   const previewClass = componentClass + "__thumbnail-preview";
-  
+
   const preview =
+    props.context === "card" &&
     (props.pluginConfig.cards__sceneCard__previewsEnabled ??
-    DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
+      DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
       ? (props.preview ?? undefined)
       : undefined;
 
