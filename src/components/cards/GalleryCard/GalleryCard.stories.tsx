@@ -7,6 +7,10 @@ import GalleryCard from ".";
 import gallery4521 from "../../../../mocks/galleries/4521.json";
 import gallery17791 from "../../../../mocks/galleries/17791.json";
 
+const pluginConfig = {
+  cards__galleryCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
+};
+
 const meta = {
   title: "Components/Cards/Gallery card",
   component: GalleryCard,
@@ -21,9 +25,7 @@ const meta = {
     layout: "centered",
   },
   args: {
-    pluginConfig: {
-      cards__galleryCard__ratingIconBreakpoint: 0,
-    },
+    pluginConfig,
     zoomBreakpoint: 1,
   },
   argTypes: {
@@ -39,6 +41,7 @@ type Story = StoryObj<typeof meta>;
 
 const footerProps = {
   openHandler: fn(),
+  pluginConfig,
   sections: [["details"], ["tags", 5]] as CardModalSectionData[],
   setSection: fn(),
 };

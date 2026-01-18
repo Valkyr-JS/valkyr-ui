@@ -65,6 +65,7 @@ const SceneCards = [
   <SceneCard
     footer={{
       openHandler: fn(),
+      pluginConfig: {},
       setSection: fn(),
     }}
     pluginConfig={{}}
@@ -121,6 +122,7 @@ const GalleryCards = [
   <GalleryCard
     footer={{
       openHandler: fn(),
+      pluginConfig: {},
       setSection: fn(),
     }}
     pluginConfig={{}}

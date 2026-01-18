@@ -7,6 +7,7 @@ import { useIntl } from "react-intl";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
+import { DEFAULT } from "@/constants";
 
 interface GridCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
@@ -26,6 +27,9 @@ interface GridCardProps {
 
   /** Event to fire when the card is being hovered over. */
   onMouseOver?: React.MouseEventHandler<HTMLDivElement>;
+
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
 
   /** A component used for displaying the object thumbnail. */
   thumbnail: React.ReactNode;
@@ -69,6 +73,9 @@ export default GridCard;
 export interface CardFooterProps {
   /** Handler for opening the modal. */
   openHandler: () => void;
+
+  /** The user's plugin configuration for Valkyr UI. */
+  pluginConfig: ValkyrUiConfigMap;
 
   /** The sections available to the modal */
   sections: CardModalSectionData[];
@@ -118,9 +125,12 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
           title={intl.formatMessage({ id: "tags" })}
         >
           <FontAwesomeIcon icon={faTag} />
-          <span aria-hidden>
-            {props.sections.find((s) => s[0] === "tags")?.[1]}
-          </span>
+          {(props.pluginConfig.card__shared__enableCounts ??
+          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+            <span aria-hidden>
+              {props.sections.find((s) => s[0] === "tags")?.[1]}
+            </span>
+          ) : null}
         </button>
       )}
     </div>

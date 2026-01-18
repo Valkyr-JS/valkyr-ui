@@ -81,6 +81,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       link={sceneLink}
       onMouseOut={() => setIsHovered(false)}
       onMouseOver={() => setIsHovered(true)}
+      pluginConfig={props.pluginConfig}
       thumbnail={
         <SceneCardThumbnail
           cardIsHovered={isHovered}

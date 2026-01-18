@@ -52,6 +52,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       footer={footerProps}
       id={id}
       link={galleryLink}
+      pluginConfig={props.pluginConfig}
       thumbnail={
         <GalleryCardThumbnail
           context="card"
