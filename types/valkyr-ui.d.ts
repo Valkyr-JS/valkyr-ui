@@ -58,10 +58,12 @@ type SlimStashObject =
 interface ValkyrUiConfigMap {
   /** Enables Valkyr UI card grids for all enabled card types. */
   cards__cardGrid__enabled?: boolean;
-  /** Whether to hide zero-value data on card components. */
-  cards__shared__hideZeroValue?: boolean;
   /** Enables counts for associated object modal sections. */
   card__shared__enableCounts?: boolean;
+  /** Whether to hide zero-value data on card components. */
+  cards__shared__hideZeroValue?: boolean;
+  /** Adds padding to timestamps to make all units double-figures and include hours. */
+  cards__shared__timestampPadding?: boolean;
 
   /** The zoom breakpoint at which to display the date on gallery cards. */
   cards__galleryCard__dateBreakpoint?: StashCardGridZoom;
