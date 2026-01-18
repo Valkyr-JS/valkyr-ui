@@ -55,3 +55,11 @@ export const DefaultSettings: Story = {
     await expect(date).toBeInTheDocument();
   },
 };
+
+export const TagSection: Story = {
+  args: {
+    gallery: gallery4521 as SlimGalleryDataFragment,
+    section: "tags",
+    titleID: "scene2414Modal",
+  },
+};

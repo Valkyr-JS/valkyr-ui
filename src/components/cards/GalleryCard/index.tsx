@@ -6,7 +6,7 @@ import Details from "../data/Details";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
-import { CardModalContent } from "../layouts/CardModal";
+import { CardModalContent, CardModalTagsSection } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
@@ -286,19 +286,25 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
         </>
       }
     >
-      <KeyData>
-        <ReleaseData>
-          <Date
-            context="modal"
-            date={props.gallery.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-          />
-        </ReleaseData>
-      </KeyData>
-      <Details context="modal" details={props.gallery.details} />
+      {props.section === "tags" ? (
+        <CardModalTagsSection tags={props.gallery.tags} />
+      ) : (
+        <>
+          <KeyData>
+            <ReleaseData>
+              <Date
+                context="modal"
+                date={props.gallery.date}
+                localeDateFormat={
+                  props.pluginConfig.general__localeDateFormat ??
+                  DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+                }
+              />
+            </ReleaseData>
+          </KeyData>
+          <Details context="modal" details={props.gallery.details} />
+        </>
+      )}
     </CardModalContent>
   );
 };
