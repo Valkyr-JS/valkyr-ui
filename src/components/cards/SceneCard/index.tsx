@@ -213,7 +213,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
           rating100={props.rating100}
           ratingSystem={props.ratingSystem}
           userBreakpoint={
-            props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
+            props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
             DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT
           }
         />
