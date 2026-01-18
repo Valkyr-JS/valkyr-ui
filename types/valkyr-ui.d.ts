@@ -84,8 +84,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__detailsMaxLines?: number;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
-  /** Enables scene card preview. */
-  cards__sceneCard__previewEnabled?: boolean;
+  /** Enables scene card previews. */
+  cards__sceneCard__previewsEnabled?: boolean;
   /** The zoom breakpoint at which to display the rating banner on scene cards. */
   cards__sceneCard__ratingBannerBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the rating icon on scene cards. */
