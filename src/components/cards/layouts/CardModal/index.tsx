@@ -4,10 +4,10 @@ import { faCircleInfo, faTag } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
+import { DEFAULT } from "@/constants";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
-import { DEFAULT } from "@/constants";
 
 export interface CardModalContentProps {
   /** Optional classes added alongside the `vui-card-modal` component class. */
@@ -81,8 +81,8 @@ export const CardModalContent: React.FC<
               title={intl.formatMessage({ id: "tags" })}
             >
               <FontAwesomeIcon icon={faTag} />
-              {(props.pluginConfig.card__footer__enableCounts ??
-              DEFAULT.CARDS.FOOTER.ENABLE_COUNTS) ? (
+              {(props.pluginConfig.card__shared__enableCounts ??
+              DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
                 <span aria-hidden>
                   {props.sections.find((s) => s[0] === "tags")?.[1]}
                 </span>

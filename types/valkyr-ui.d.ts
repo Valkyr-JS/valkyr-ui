@@ -61,7 +61,7 @@ interface ValkyrUiConfigMap {
   /** Whether to hide zero-value data on card components. */
   cards__data__hideZeroValue?: boolean;
   /** Enables counts for associated object modal sections. */
-  card__footer__enableCounts?: boolean;
+  card__shared__enableCounts?: boolean;
 
   /** The zoom breakpoint at which to display the date on gallery cards. */
   cards__galleryCard__dateBreakpoint?: StashCardGridZoom;
