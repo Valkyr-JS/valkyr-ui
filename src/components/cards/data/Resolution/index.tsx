@@ -26,6 +26,7 @@ const Resolution: React.FC<
         });
 
   if (!data) return null;
+  const resolutionValue = TextUtils.resolution(data[0], data[1]);
 
   if (props.asIcon) {
     const longEdge =
@@ -57,13 +58,12 @@ const Resolution: React.FC<
     return (
       <span className={iconClass}>
         <span className="sr-only">Resolution: </span>
-        <span>{resolutionIconValue}</span>
+        <span title={resolutionValue}>{resolutionIconValue}</span>
       </span>
     );
   }
 
   const componentClass = "vui-card-data__resolution";
-  const resolutionValue = TextUtils.resolution(data[0], data[1]);
 
   return (
     <span className={componentClass}>
