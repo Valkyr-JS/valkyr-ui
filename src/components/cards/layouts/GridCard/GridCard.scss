@@ -4,6 +4,7 @@ $prefix: variables.$prefix;
 
 .vui-grid-card {
   padding: 0;
+  background-color: var(--#{$prefix}-card-bg-color);
 
   &__content {
     display: grid;

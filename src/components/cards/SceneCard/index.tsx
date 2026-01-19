@@ -4,16 +4,17 @@ import { DEFAULT } from "@/constants";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
+import Duration from "../data/Duration";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
+import Resolution from "../data/Resolution";
 import Studio from "../data/Studio";
 import { CardModalContent, CardModalTagsSection } from "../layouts/CardModal";
+import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
-import FileData from "../layouts/FileData";
-import Duration from "../data/Duration";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -179,19 +180,34 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
         </ReleaseData>
         <FileData>
           {primaryFile && (
-            <Duration
-              context="card"
-              currentBreakpoint={props.zoomBreakpoint}
-              duration={primaryFile.duration}
-              timestampPadding={
-                props.pluginConfig.cards__shared__timestampPadding ??
-                DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
-              }
-              userBreakpoint={
-                props.pluginConfig.cards__sceneCard__durationBreakpoint ??
-                DEFAULT.CARDS.SCENE_CARD.DURATION_BREAKPOINT
-              }
-            />
+            <>
+              <Duration
+                context="card"
+                currentBreakpoint={props.zoomBreakpoint}
+                duration={primaryFile.duration}
+                timestampPadding={
+                  props.pluginConfig.cards__shared__timestampPadding ??
+                  DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                }
+                userBreakpoint={
+                  props.pluginConfig.cards__sceneCard__durationBreakpoint ??
+                  DEFAULT.CARDS.SCENE_CARD.DURATION_BREAKPOINT
+                }
+              />
+              <Resolution
+                asIcon={
+                  props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+                }
+                context="card"
+                currentBreakpoint={props.zoomBreakpoint}
+                resolution={[primaryFile.width, primaryFile.height]}
+                userBreakpoint={
+                  props.pluginConfig.cards__sceneCard__resolutionBreakpoint ??
+                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_BREAKPOINT
+                }
+              />
+            </>
           )}
         </FileData>
       </KeyData>
@@ -430,14 +446,24 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
             </ReleaseData>
             <FileData>
               {primaryFile && (
-                <Duration
-                  context="modal"
-                  duration={primaryFile.duration}
-                  timestampPadding={
-                    props.pluginConfig.cards__shared__timestampPadding ??
-                    DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
-                  }
-                />
+                <>
+                  <Duration
+                    context="modal"
+                    duration={primaryFile.duration}
+                    timestampPadding={
+                      props.pluginConfig.cards__shared__timestampPadding ??
+                      DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                    }
+                  />
+                  <Resolution
+                    asIcon={
+                      props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+                      DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+                    }
+                    context="modal"
+                    resolution={[primaryFile.width, primaryFile.height]}
+                  />
+                </>
               )}
             </FileData>
           </KeyData>

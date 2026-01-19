@@ -9,6 +9,6 @@ $prefix: variables.$prefix;
   display: flex;
   flex-wrap: wrap;
   column-gap: $column-gap;
-  margin-top: 3px;
+  margin-bottom: 5px;
   font-size: var(--#{$prefix}-card-font-sm);
 }

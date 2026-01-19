@@ -59,10 +59,11 @@ interface ValkyrUiConfigMap {
   /** Enables Valkyr UI card grids for all enabled card types. */
   cards__cardGrid__enabled?: boolean;
   /** Enables counts for associated object modal sections. */
-  card__shared__enableCounts?: boolean;
+  cards__shared__enableCounts?: boolean;
   /** Whether to hide zero-value data on card components. */
   cards__shared__hideZeroValue?: boolean;
-  /** Adds padding to timestamps to make all units double-figures and include hours. */
+  /** Adds padding to timestamps to make all units double-figures and include
+   * hours. */
   cards__shared__timestampPadding?: boolean;
 
   /** The zoom breakpoint at which to display the date on gallery cards. */
@@ -97,6 +98,10 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__ratingBannerBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the rating icon on scene cards. */
   cards__sceneCard__ratingIconBreakpoint?: StashCardGridZoom;
+  /** Displays the resolution as an icon instead of text. */
+  cards__sceneCard__resolutionAsIcon?: boolean;
+  /** The zoom breakpoint at which to display the resolution on scene cards. */
+  cards__sceneCard__resolutionBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the studio link on scene cards. */
   cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
 

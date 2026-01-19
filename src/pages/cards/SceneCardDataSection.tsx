@@ -146,6 +146,48 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const ResolutionAsIcon = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+        DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Resolution as icon"
+        id="valkyr-ui-cards__sceneCard__resolutionAsIcon"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__resolutionAsIcon: newState,
+          });
+        }}
+        subHeading="Displays the resolution as a shorthand icon rather than as text. E.g. '1080p' will be displayed as 'HD'."
+      />
+    );
+  };
+
+  const ResolutionBreakpoint = () => (
+    <NumberSetting
+      heading="Resolution"
+      id="valkyr-ui-cards__sceneCard__resolutionBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__resolutionBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__resolutionBreakpoint ??
+        DEFAULT.CARDS.SCENE_CARD.RESOLUTION_BREAKPOINT
+      }
+    />
+  );
+
   const StudioBreakpoint = () => (
     <NumberSetting
       heading="Studio"
@@ -180,11 +222,13 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DurationBreakpoint />
         <RatingBannerBreakpoint />
         <RatingIconBreakpoint />
+        <ResolutionBreakpoint />
         <StudioBreakpoint />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>
         <DetailsMaxLines />
         <PreviewsEnabled />
+        <ResolutionAsIcon />
       </SettingGroup>
     </SettingSection>
   );
