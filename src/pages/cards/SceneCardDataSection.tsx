@@ -146,6 +146,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const ResolutionBreakpoint = () => (
+    <NumberSetting
+      heading="Resolution"
+      id="valkyr-ui-cards__sceneCard__resolutionBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__resolutionBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__resolutionBreakpoint ??
+        DEFAULT.CARDS.SCENE_CARD.RESOLUTION_BREAKPOINT
+      }
+    />
+  );
+
   const StudioBreakpoint = () => (
     <NumberSetting
       heading="Studio"
@@ -180,6 +199,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DurationBreakpoint />
         <RatingBannerBreakpoint />
         <RatingIconBreakpoint />
+        <ResolutionBreakpoint />
         <StudioBreakpoint />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>
