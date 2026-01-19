@@ -74,6 +74,9 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__detailsMaxLines?: number;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
+  /** The zoom breakpoint at which to display the organized icon on gallery
+   * cards. */
+  cards__galleryCard__organizedBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the rating banner on gallery
    * cards. */
   cards__galleryCard__ratingBannerBreakpoint?: StashCardGridZoom;
@@ -94,6 +97,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__enabled?: boolean;
   /** The zoom breakpoint at which to display the o count on scene cards. */
   cards__sceneCard__oCountBreakpoint?: StashCardGridZoom;
+  /** The zoom breakpoint at which to display the organized icon on scene cards. */
+  cards__sceneCard__organizedBreakpoint?: StashCardGridZoom;
   /** Enables scene card previews. */
   cards__sceneCard__previewsEnabled?: boolean;
   /** The zoom breakpoint at which to display the rating banner on scene cards. */
