@@ -146,6 +146,29 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const ResolutionAsIcon = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+        DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Resolution as icon"
+        id="valkyr-ui-cards__sceneCard__resolutionAsIcon"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__resolutionAsIcon: newState,
+          });
+        }}
+        subHeading="Displays the resolution as a shorthand icon rather than as text. E.g. '1080p' will be displayed as 'HD'."
+      />
+    );
+  };
+
   const ResolutionBreakpoint = () => (
     <NumberSetting
       heading="Resolution"
@@ -205,6 +228,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>
         <DetailsMaxLines />
         <PreviewsEnabled />
+        <ResolutionAsIcon />
       </SettingGroup>
     </SettingSection>
   );
