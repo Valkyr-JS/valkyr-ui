@@ -195,6 +195,10 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 }
               />
               <Resolution
+                asIcon={
+                  props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+                }
                 context="card"
                 currentBreakpoint={props.zoomBreakpoint}
                 resolution={[primaryFile.width, primaryFile.height]}
@@ -452,6 +456,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                     }
                   />
                   <Resolution
+                    asIcon={
+                      props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+                      DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+                    }
                     context="modal"
                     resolution={[primaryFile.width, primaryFile.height]}
                   />
