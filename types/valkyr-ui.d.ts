@@ -98,6 +98,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__ratingBannerBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the rating icon on scene cards. */
   cards__sceneCard__ratingIconBreakpoint?: StashCardGridZoom;
+  /** Displays the resolution as an icon instead of text. */
+  cards__sceneCard__resolutionAsIcon?: boolean;
   /** The zoom breakpoint at which to display the resolution on scene cards. */
   cards__sceneCard__resolutionBreakpoint?: StashCardGridZoom;
   /** The zoom breakpoint at which to display the studio link on scene cards. */
