@@ -17,6 +17,7 @@ export const DEFAULT = {
       DATE_BREAKPOINT: 0,
       DETAILS_BREAKPOINT: 0,
       DETAILS_MAX_LINES: 3,
+      DURATION_BREAKPOINT: 0,
       ENABLED: true,
       PREVIEWS_ENABLED: true,
       RATING_BANNER_BREAKPOINT: 0,
@@ -26,6 +27,7 @@ export const DEFAULT = {
     SHARED: {
       ENABLE_FOOTER_BUTTON_COUNTS: true,
       HIDE_ZERO_VALUE: false,
+      TIMESTAMP_PADDING: false,
     },
   },
   GENERAL: {

@@ -107,3 +107,18 @@ export function getFileIsPortrait(file: VideoFileData | undefined): boolean {
   const height = file?.height ? file.height : 0;
   return height > width;
 }
+
+/** Adds padding to timestamps to make all units double-figures and include
+ * hours. */
+export const padTimestamps = (timestamp: string): string => {
+  const reverseTimes = timestamp.split(":").reverse();
+  if (reverseTimes.length === 1) reverseTimes.push("00", "00");
+  if (reverseTimes.length === 2) reverseTimes.push("00");
+
+  timestamp = reverseTimes
+    .map((v) => (v.length < 2 ? "0" + v : v))
+    .reverse()
+    .join(":");
+
+  return timestamp;
+};

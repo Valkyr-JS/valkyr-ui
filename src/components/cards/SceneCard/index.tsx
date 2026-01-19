@@ -12,6 +12,8 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
+import FileData from "../layouts/FileData";
+import Duration from "../data/Duration";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -154,6 +156,9 @@ interface SceneCardBodyProps {
 }
 
 const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
+  const primaryFile =
+    props.scene.files.length > 0 ? props.scene.files[0] : undefined;
+
   return (
     <>
       <KeyData>
@@ -172,6 +177,23 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
             }
           />
         </ReleaseData>
+        <FileData>
+          {primaryFile && (
+            <Duration
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              duration={primaryFile.duration}
+              timestampPadding={
+                props.pluginConfig.cards__shared__timestampPadding ??
+                DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+              }
+              userBreakpoint={
+                props.pluginConfig.cards__sceneCard__durationBreakpoint ??
+                DEFAULT.CARDS.SCENE_CARD.DURATION_BREAKPOINT
+              }
+            />
+          )}
+        </FileData>
       </KeyData>
       <Details
         context="card"
@@ -406,6 +428,18 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 }
               />
             </ReleaseData>
+            <FileData>
+              {primaryFile && (
+                <Duration
+                  context="modal"
+                  duration={primaryFile.duration}
+                  timestampPadding={
+                    props.pluginConfig.cards__shared__timestampPadding ??
+                    DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                  }
+                />
+              )}
+            </FileData>
           </KeyData>
           <Details context="modal" details={props.scene.details} />
         </>

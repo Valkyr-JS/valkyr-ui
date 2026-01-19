@@ -1,0 +1,10 @@
+@use "../../../../scss/variables";
+
+$column-gap: variables.$column-gap;
+$prefix: variables.$prefix;
+
+.vui-card-file-data {
+  display: flex;
+  align-items: center;
+  column-gap: $column-gap;
+}
