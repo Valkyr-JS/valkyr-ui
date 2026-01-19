@@ -1,6 +1,7 @@
 import React from "react";
 import { getRenderData } from "@/helpers";
 import SweatDrops from "@/components/stash/Shared/SweatDrops";
+import { DEFAULT } from "@/constants";
 import "./OCount.scss";
 
 interface OCountProps {
@@ -16,7 +17,8 @@ const OCount: React.FC<
       ? props.count
       : getRenderData({
           data: props.count,
-          hideZeroValueData: props.hideZeroValueData,
+          hideZeroValueData:
+            props.hideZeroValueData ?? DEFAULT.CARDS.SHARED.HIDE_ZERO_VALUE,
           zoomBreakpoint: {
             current: props.currentBreakpoint,
             user: props.userBreakpoint,
