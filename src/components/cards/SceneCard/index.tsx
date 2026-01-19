@@ -15,6 +15,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
+import OCount from "../data/OCount";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -113,6 +114,18 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
             }
           />
           <div className={userDataClass}>
+            <OCount
+              context="card"
+              count={props.scene.o_counter}
+              currentBreakpoint={props.zoomBreakpoint}
+              hideZeroValueData={
+                props.pluginConfig.cards__shared__hideZeroValue
+              }
+              userBreakpoint={
+                props.pluginConfig.cards__sceneCard__oCountBreakpoint ??
+                DEFAULT.CARDS.SCENE_CARD.O_COUNT_BREAKPOINT
+              }
+            />
             <RatingIcon
               context="card"
               currentBreakpoint={props.zoomBreakpoint}
@@ -418,6 +431,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
         <>
           <Studio context="modal" studio={props.scene.studio} />
           <div className={userDataClass}>
+            <OCount context="modal" count={props.scene.o_counter} />
             {willRenderRatingBanner ? null : (
               <RatingIcon
                 context="modal"

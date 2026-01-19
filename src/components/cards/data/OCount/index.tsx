@@ -5,7 +5,7 @@ import "./OCount.scss";
 
 interface OCountProps {
   /** The o count. */
-  count: number;
+  count: Maybe<number> | undefined;
 }
 
 const OCount: React.FC<
