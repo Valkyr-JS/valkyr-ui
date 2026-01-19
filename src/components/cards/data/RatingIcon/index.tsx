@@ -1,9 +1,9 @@
 import React from "react";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { DEFAULT } from "@/constants";
 import { convertRating100, getRenderData } from "@/helpers";
 import "./RatingIcon.scss";
-import { DEFAULT } from "@/constants";
 
 interface RatingIconProps {
   /** The object's user rating out of 100 */

@@ -92,6 +92,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__durationBreakpoint?: StashCardGridZoom;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
+  /** The zoom breakpoint at which to display the o count on scene cards. */
+  cards__sceneCard__oCountBreakpoint?: StashCardGridZoom;
   /** Enables scene card previews. */
   cards__sceneCard__previewsEnabled?: boolean;
   /** The zoom breakpoint at which to display the rating banner on scene cards. */
