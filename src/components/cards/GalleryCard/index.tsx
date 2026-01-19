@@ -3,6 +3,7 @@ import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
+import Organized from "../data/Organized";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
@@ -89,6 +90,15 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
               userBreakpoint={
                 props.pluginConfig.cards__galleryCard__ratingIconBreakpoint ??
                 DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_BREAKPOINT
+              }
+            />
+            <Organized
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              organized={props.gallery.organized}
+              userBreakpoint={
+                props.pluginConfig.cards__galleryCard__organizedBreakpoint ??
+                DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_BREAKPOINT
               }
             />
           </div>
@@ -294,6 +304,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
                 ratingSystem={props.ratingSystem}
               />
             )}
+            <Organized context="modal" organized={props.gallery.organized} />
           </div>
         </>
       }

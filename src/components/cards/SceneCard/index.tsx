@@ -5,6 +5,8 @@ import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
 import Duration from "../data/Duration";
+import OCount from "../data/OCount";
+import Organized from "../data/Organized";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Resolution from "../data/Resolution";
@@ -15,7 +17,6 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
-import OCount from "../data/OCount";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -137,6 +138,15 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
               userBreakpoint={
                 props.pluginConfig.cards__sceneCard__ratingIconBreakpoint ??
                 DEFAULT.CARDS.SCENE_CARD.RATING_ICON_BREAKPOINT
+              }
+            />
+            <Organized
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              organized={props.scene.organized}
+              userBreakpoint={
+                props.pluginConfig.cards__sceneCard__organizedBreakpoint ??
+                DEFAULT.CARDS.SCENE_CARD.ORGANIZED_BREAKPOINT
               }
             />
           </div>
@@ -439,6 +449,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 ratingSystem={props.ratingSystem}
               />
             )}
+            <Organized context="modal" organized={props.scene.organized} />
           </div>
         </>
       }

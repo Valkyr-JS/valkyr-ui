@@ -104,6 +104,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const OrganizedBreakpoint = () => (
+    <NumberSetting
+      heading="Organized icon"
+      id="valkyr-ui-cards__sceneCard__organizedBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__organizedBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__organizedBreakpoint ??
+        DEFAULT.CARDS.SCENE_CARD.ORGANIZED_BREAKPOINT
+      }
+    />
+  );
+
   const PreviewsEnabled = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.cards__sceneCard__previewsEnabled ??
@@ -240,6 +259,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DetailsBreakpoint />
         <DurationBreakpoint />
         <OCountBreakpoint />
+        <OrganizedBreakpoint />
         <RatingBannerBreakpoint />
         <RatingIconBreakpoint />
         <ResolutionBreakpoint />

@@ -63,6 +63,25 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const OrganizedBreakpoint = () => (
+    <NumberSetting
+      heading="Organized icon"
+      id="valkyr-ui-cards__galleryCard__organizedBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__organizedBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__galleryCard__organizedBreakpoint ??
+        DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_BREAKPOINT
+      }
+    />
+  );
+
   const RatingBannerBreakpoint = () => (
     <NumberSetting
       heading="Rating banner"
@@ -132,6 +151,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
       >
         <DateBreakpoint />
         <DetailsBreakpoint />
+        <OrganizedBreakpoint />
         <RatingBannerBreakpoint />
         <RatingIconBreakpoint />
         <StudioBreakpoint />
