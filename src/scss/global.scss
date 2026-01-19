@@ -7,7 +7,10 @@ $prefix: variables.$prefix;
 
   --#{$prefix}-title-color: var(--#{$prefix}-body-color);
 
+  --#{$prefix}-card-bg-color: #30404d;
   --#{$prefix}-card-font-sm: 12px;
+  --#{$prefix}-card-resolution-icon-bg-color: var(--#{$prefix}-body-color);
+  --#{$prefix}-card-resolution-icon-color: var(--#{$prefix}-card-bg-color);
   --#{$prefix}-card-title-color: var(--#{$prefix}-title-color);
   --#{$prefix}-card-title-font-size: 1.25rem;
   --#{$prefix}-card-top-line-font-size: var(--#{$prefix}-cards-font-sm);

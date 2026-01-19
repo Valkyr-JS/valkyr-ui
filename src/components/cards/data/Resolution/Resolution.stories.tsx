@@ -9,6 +9,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    asIcon: false,
     resolution: [1920, 1080],
   },
   argTypes: {
@@ -95,6 +96,20 @@ export const WithoutZoomData: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const resolution = canvas.getByText("1080p");
+    await expect(resolution).toBeInTheDocument();
+  },
+};
+
+export const AsIcon: Story = {
+  args: {
+    asIcon: true,
+    context: "card",
+    currentBreakpoint: 3,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const resolution = canvas.getByText("HD");
     await expect(resolution).toBeInTheDocument();
   },
 };
