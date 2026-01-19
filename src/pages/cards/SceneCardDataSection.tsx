@@ -85,6 +85,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const OCountBreakpoint = () => (
+    <NumberSetting
+      heading="O count"
+      id="valkyr-ui-cards__sceneCard__oCountBreakpoint"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__oCountBreakpoint: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__oCountBreakpoint ??
+        DEFAULT.CARDS.SCENE_CARD.O_COUNT_BREAKPOINT
+      }
+    />
+  );
+
   const PreviewsEnabled = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.cards__sceneCard__previewsEnabled ??
@@ -220,6 +239,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DateBreakpoint />
         <DetailsBreakpoint />
         <DurationBreakpoint />
+        <OCountBreakpoint />
         <RatingBannerBreakpoint />
         <RatingIconBreakpoint />
         <ResolutionBreakpoint />
