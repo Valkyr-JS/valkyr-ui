@@ -36,7 +36,7 @@ export const AboveZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
+    const link = canvas.getByRole("link", { name: "Studio: Vixen" });
     await expect(link).toBeInTheDocument();
   },
 };
@@ -49,7 +49,7 @@ export const BelowZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.queryByRole("link");
+    const link = canvas.queryByRole("link", { name: "Studio: Vixen" });
     await expect(link).toBeNull();
   },
 };
@@ -62,7 +62,7 @@ export const EqualsZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
+    const link = canvas.getByRole("link", { name: "Studio: Vixen" });
     await expect(link).toBeInTheDocument();
   },
 };
@@ -73,7 +73,7 @@ export const ModalContext: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
+    const link = canvas.getByRole("link", { name: "Studio: Vixen" });
     await expect(link).toBeInTheDocument();
   },
 };
@@ -85,7 +85,7 @@ export const UserDisabled: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.queryByRole("link");
+    const link = canvas.queryByRole("link", { name: "Studio: Vixen" });
     await expect(link).toBeNull();
   },
 };
@@ -97,7 +97,21 @@ export const WithoutZoomData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
+    const link = canvas.getByRole("link", { name: "Studio: Vixen" });
     await expect(link).toBeInTheDocument();
+  },
+};
+
+export const NoData: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    studio: null,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = canvas.queryByRole("link", { name: "Studio:" });
+    await expect(link).toBeNull();
   },
 };
