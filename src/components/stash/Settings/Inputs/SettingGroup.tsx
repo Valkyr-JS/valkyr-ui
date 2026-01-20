@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useState } from "react";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import cx from "classnames";
 import { Button, Collapse } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import Setting from "./Setting";
@@ -54,8 +55,12 @@ const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
     setOpen(!open);
   }
 
+  const classList = cx("setting-group", {
+    collapsible: props.collapsible,
+  });
+
   return (
-    <div className={`setting-group ${props.collapsible ? "collapsible" : ""}`}>
+    <div className={classList}>
       <Setting {...props.settingProps} onClick={onDivClick}>
         {props.topLevel}
         {renderCollapseButton()}
