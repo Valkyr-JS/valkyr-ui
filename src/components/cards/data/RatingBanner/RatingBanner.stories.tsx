@@ -86,20 +86,3 @@ export const StarTenth: Story = {
     userBreakpoint: 2,
   },
 };
-
-export const AlwaysHideZero: Story = {
-  args: {
-    context: "card",
-    hideZeroValueData: true,
-    rating100: 0,
-    ratingSystem: {
-      type: "decimal",
-    },
-    userBreakpoint: 2,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const rating = canvas.queryByText("Rating: 0");
-    await expect(rating).toBeNull();
-  },
-};

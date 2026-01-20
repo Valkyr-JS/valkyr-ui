@@ -24,8 +24,6 @@ const RatingBanner: React.FC<
       ? (props.rating100 ?? 0)
       : getRenderData({
           data: props.rating100,
-          hideZeroValueData:
-            props.hideZeroValueData ?? DEFAULT.CARDS.SHARED.HIDE_ZERO_VALUE,
           zoomBreakpoint: {
             current: props.currentBreakpoint,
             user: props.userBreakpoint,

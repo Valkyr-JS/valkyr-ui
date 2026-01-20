@@ -99,30 +99,15 @@ export const WithoutZoomData: Story = {
   },
 };
 
-export const HideZeroValue: Story = {
+export const ZeroValue: Story = {
   args: {
     context: "card",
     count: 0,
-    hideZeroValueData: true,
     userBreakpoint: 0,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const count = canvas.queryByText("O Count: 0");
     await expect(count).toBeNull();
-  },
-};
-
-export const ShowZeroValue: Story = {
-  args: {
-    context: "card",
-    count: 0,
-    hideZeroValueData: false,
-    userBreakpoint: 0,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const count = canvas.getByText("O Count: 0");
-    await expect(count).toBeInTheDocument();
   },
 };

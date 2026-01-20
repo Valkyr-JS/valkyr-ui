@@ -9,9 +9,6 @@ type DataComponentProps<T = unknown> = T & {
   /** The current breakpoint in the browser. */
   currentBreakpoint?: StashCardGridZoom;
 
-  /** Whether the user has set 0-value data to not be rendered. */
-  hideZeroValueData?: boolean;
-
   /** The user-set breakpoint at which to render the component. */
   userBreakpoint: StashCardGridZoom;
 };
@@ -20,9 +17,6 @@ type DataComponentModalProps<T = unknown> = T & {
   /** Whether the component is being rendered in a card component or modal
    * component. */
   context: "modal";
-
-  /** Whether the user has set 0-value data to not be rendered. */
-  hideZeroValueData?: boolean;
 };
 
 interface ExtendedConfigResult extends ConfigResult {
@@ -60,8 +54,6 @@ interface ValkyrUiConfigMap {
   cards__cardGrid__enabled?: boolean;
   /** Enables counts for associated object modal sections. */
   cards__shared__enableCounts?: boolean;
-  /** Whether to hide zero-value data on card components. */
-  cards__shared__hideZeroValue?: boolean;
   /** Adds padding to timestamps to make all units double-figures and include
    * hours. */
   cards__shared__timestampPadding?: boolean;

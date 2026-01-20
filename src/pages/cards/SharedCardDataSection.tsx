@@ -27,29 +27,6 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
-  const HideZeroValueData = () => {
-    const [checked, setChecked] = useState(
-      props.pluginConfig.cards__shared__hideZeroValue ??
-        DEFAULT.CARDS.SHARED.HIDE_ZERO_VALUE,
-    );
-    return (
-      <BooleanSetting
-        checked={checked}
-        heading="Hide zero-value data"
-        id="valkyr-ui-cards__shared__hideZeroValue"
-        onChange={() => {
-          const newState = !checked;
-          setChecked(newState);
-          props.configUpdateHandler({
-            ...props.pluginConfig,
-            cards__shared__hideZeroValue: newState,
-          });
-        }}
-        subHeading="Hides numerical data where the value is zero."
-      />
-    );
-  };
-
   const PadTimestamps = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.cards__shared__timestampPadding ??
@@ -76,7 +53,6 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
   return (
     <SettingSection id="cards-shared" heading="Shared card settings">
       <FooterCountsEnabled />
-      <HideZeroValueData />
       <PadTimestamps />
     </SettingSection>
   );

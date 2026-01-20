@@ -191,40 +191,6 @@ export const ModalContext: Story = {
   },
 };
 
-export const HideZeroData: Story = {
-  args: {
-    context: "card",
-    hideZeroValueData: true,
-    rating100: 0,
-    ratingSystem: {
-      type: "decimal",
-    },
-    userBreakpoint: 2,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const rating = canvas.queryByText("Unrated");
-    await expect(rating).toBeNull();
-  },
-};
-
-export const ShowZeroData: Story = {
-  args: {
-    context: "card",
-    hideZeroValueData: false,
-    rating100: 0,
-    ratingSystem: {
-      type: "decimal",
-    },
-    userBreakpoint: 2,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const rating = canvas.getByText("Unrated");
-    await expect(rating).toBeInTheDocument();
-  },
-};
-
 export const UserDisabled: Story = {
   args: {
     context: "card",

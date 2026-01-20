@@ -1,6 +1,5 @@
 interface IgetRenderData<T> {
   data: T | undefined;
-  hideZeroValueData?: boolean;
   zoomBreakpoint: {
     current?: number;
     user: number;
@@ -14,9 +13,6 @@ export const getRenderData = <T>(args: IgetRenderData<T>): T | null => {
   console.log(args);
   // Return null if no data is available
   if (args.data === undefined) return null;
-
-  // Return null if hiding zero-value data is enabled, and the data equals `0`.
-  if (args.hideZeroValueData && args.data === 0) return null;
 
   // Return null if the user has disabled the data, i.e. `zoomBreakpoint.user`
   // equals `-1`.
