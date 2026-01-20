@@ -76,7 +76,7 @@ export const ModalContext: Story = {
   },
 };
 
-export const NoData: Story = {
+export const ZeroData: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
