@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 import RatingBanner from ".";
 
 const meta = {
@@ -36,6 +37,11 @@ export const Decimal: Story = {
     },
     userBreakpoint: 2,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const rating = canvas.getByText("Rating: 7.4 out of 10");
+    await expect(rating).toBeInTheDocument();
+  },
 };
 
 export const StarFull: Story = {
@@ -47,6 +53,11 @@ export const StarFull: Story = {
       starPrecision: "full",
     },
     userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const rating = canvas.getByText("Rating: 4 stars");
+    await expect(rating).toBeInTheDocument();
   },
 };
 
@@ -60,6 +71,11 @@ export const StarHalf: Story = {
     },
     userBreakpoint: 2,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const rating = canvas.getByText("Rating: 3.5 stars");
+    await expect(rating).toBeInTheDocument();
+  },
 };
 
 export const StarQuarter: Story = {
@@ -72,6 +88,11 @@ export const StarQuarter: Story = {
     },
     userBreakpoint: 2,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const rating = canvas.getByText("Rating: 3.75 stars");
+    await expect(rating).toBeInTheDocument();
+  },
 };
 
 export const StarTenth: Story = {
@@ -83,5 +104,27 @@ export const StarTenth: Story = {
       starPrecision: "tenth",
     },
     userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const rating = canvas.getByText("Rating: 3.7 stars");
+    await expect(rating).toBeInTheDocument();
+  },
+};
+
+export const NoData: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    rating100: null,
+    ratingSystem: {
+      type: "decimal",
+    },
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const rating = canvas.queryByText("Rating: 0 out of 10");
+    await expect(rating).toBeNull();
   },
 };

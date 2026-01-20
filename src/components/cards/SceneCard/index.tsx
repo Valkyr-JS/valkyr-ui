@@ -119,9 +119,6 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
               context="card"
               count={props.scene.o_counter}
               currentBreakpoint={props.zoomBreakpoint}
-              hideZeroValueData={
-                props.pluginConfig.cards__shared__hideZeroValue
-              }
               userBreakpoint={
                 props.pluginConfig.cards__sceneCard__oCountBreakpoint ??
                 DEFAULT.CARDS.SCENE_CARD.O_COUNT_BREAKPOINT
@@ -130,9 +127,6 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
             <RatingIcon
               context="card"
               currentBreakpoint={props.zoomBreakpoint}
-              hideZeroValueData={
-                props.pluginConfig.cards__shared__hideZeroValue
-              }
               rating100={props.scene.rating100}
               ratingSystem={props.ratingSystem}
               userBreakpoint={

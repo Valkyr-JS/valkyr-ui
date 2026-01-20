@@ -99,11 +99,10 @@ export const WithoutZoomData: Story = {
   },
 };
 
-export const HideZeroValue: Story = {
+export const ZeroValue: Story = {
   args: {
     context: "card",
     count: 0,
-    hideZeroValueData: true,
     userBreakpoint: 0,
   },
   play: async ({ canvasElement }) => {

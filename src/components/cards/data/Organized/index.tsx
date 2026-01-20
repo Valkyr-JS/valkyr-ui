@@ -2,7 +2,6 @@ import React from "react";
 import { faBox } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useIntl } from "react-intl";
-import { DEFAULT } from "@/constants";
 import { getRenderData } from "@/helpers";
 
 interface OrganizedProps {
@@ -19,8 +18,6 @@ const Organized: React.FC<
       ? props.organized
       : getRenderData({
           data: props.organized,
-          hideZeroValueData:
-            props.hideZeroValueData ?? DEFAULT.CARDS.SHARED.HIDE_ZERO_VALUE,
           zoomBreakpoint: {
             current: props.currentBreakpoint,
             user: props.userBreakpoint,

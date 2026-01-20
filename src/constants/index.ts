@@ -31,7 +31,6 @@ export const DEFAULT = {
     },
     SHARED: {
       ENABLE_FOOTER_BUTTON_COUNTS: true,
-      HIDE_ZERO_VALUE: false,
       TIMESTAMP_PADDING: false,
     },
   },

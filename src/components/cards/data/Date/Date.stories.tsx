@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
-import Date from ".";
+import DateComponent from ".";
 
 const meta = {
   title: "Components/Cards/Data/Date",
-  component: Date,
+  component: DateComponent,
   parameters: {
     layout: "centered",
   },
@@ -21,7 +21,7 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Date>;
+} satisfies Meta<typeof DateComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -78,6 +78,20 @@ export const ModalContext: Story = {
   },
 };
 
+export const NoData: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    date: null,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.queryByText("Date");
+    await expect(date).toBeNull();
+  },
+};
+
 export const UserDisabled: Story = {
   args: {
     context: "card",
@@ -98,6 +112,32 @@ export const WithoutZoomData: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const date = canvas.getByText(longDate);
+    await expect(date).toBeInTheDocument();
+  },
+};
+
+export const LocaleFormat: Story = {
+  args: {
+    context: "card",
+    localeDateFormat: true,
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.getByText("25/12/2015");
+    await expect(date).toBeInTheDocument();
+  },
+};
+
+export const NoLocaleFormat: Story = {
+  args: {
+    context: "card",
+    localeDateFormat: false,
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.getByText("2015-12-25");
     await expect(date).toBeInTheDocument();
   },
 };

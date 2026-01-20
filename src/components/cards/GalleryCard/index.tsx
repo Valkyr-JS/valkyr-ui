@@ -82,9 +82,6 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             <RatingIcon
               context="card"
               currentBreakpoint={props.zoomBreakpoint}
-              hideZeroValueData={
-                props.pluginConfig.cards__shared__hideZeroValue
-              }
               rating100={props.gallery.rating100}
               ratingSystem={props.ratingSystem}
               userBreakpoint={

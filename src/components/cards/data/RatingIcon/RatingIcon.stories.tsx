@@ -40,7 +40,7 @@ export const Decimal: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 7.4 out of 10");
+    const rating = canvas.getByText("Rating: 7.4 out of 10");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -57,7 +57,7 @@ export const StarFull: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 4 out of 5 stars");
+    const rating = canvas.getByText("Rating: 4 stars");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -74,7 +74,7 @@ export const StarHalf: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 3.5 out of 5 stars");
+    const rating = canvas.getByText("Rating: 3.5 stars");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -91,7 +91,7 @@ export const StarQuarter: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 3.75 out of 5 stars");
+    const rating = canvas.getByText("Rating: 3.75 stars");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -108,7 +108,7 @@ export const StarTenth: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 3.7 out of 5 stars");
+    const rating = canvas.getByText("Rating: 3.7 stars");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -124,7 +124,7 @@ export const AboveZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 7.4 out of 10");
+    const rating = canvas.getByText("Rating: 7.4 out of 10");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -140,7 +140,7 @@ export const BelowZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.queryByText("Rated 7.4 out of 10");
+    const rating = canvas.queryByText("Rating: 7.4 out of 10");
     await expect(rating).toBeNull();
   },
 };
@@ -156,7 +156,7 @@ export const EqualsZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 7.4 out of 10");
+    const rating = canvas.getByText("Rating: 7.4 out of 10");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -172,7 +172,7 @@ export const CardContext: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 7.4 out of 10");
+    const rating = canvas.getByText("Rating: 7.4 out of 10");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -186,41 +186,7 @@ export const ModalContext: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 7.4 out of 10");
-    await expect(rating).toBeInTheDocument();
-  },
-};
-
-export const HideZeroData: Story = {
-  args: {
-    context: "card",
-    hideZeroValueData: true,
-    rating100: 0,
-    ratingSystem: {
-      type: "decimal",
-    },
-    userBreakpoint: 2,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const rating = canvas.queryByText("Rated 0 out of 10");
-    await expect(rating).toBeNull();
-  },
-};
-
-export const ShowZeroData: Story = {
-  args: {
-    context: "card",
-    hideZeroValueData: false,
-    rating100: 0,
-    ratingSystem: {
-      type: "decimal",
-    },
-    userBreakpoint: 2,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 0 out of 10");
+    const rating = canvas.getByText("Rating: 7.4 out of 10");
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -235,7 +201,7 @@ export const UserDisabled: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.queryByText("Rated 7.4 out of 10");
+    const rating = canvas.queryByText("Rating: 7.4 out of 10");
     await expect(rating).toBeNull();
   },
 };
@@ -250,7 +216,24 @@ export const WithoutZoomData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 7.4 out of 10");
+    const rating = canvas.getByText("Rating: 7.4 out of 10");
     await expect(rating).toBeInTheDocument();
+  },
+};
+
+export const NoData: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    rating100: null,
+    ratingSystem: {
+      type: "decimal",
+    },
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const rating = canvas.queryByText("Rating: 0 out of 10");
+    await expect(rating).toBeNull();
   },
 };
