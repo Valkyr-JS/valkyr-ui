@@ -1,6 +1,7 @@
 import React from "react";
 import { faBox } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useIntl } from "react-intl";
 import { DEFAULT } from "@/constants";
 import { getRenderData } from "@/helpers";
 
@@ -11,6 +12,8 @@ interface OrganizedProps {
 const Organized: React.FC<
   DataComponentProps<OrganizedProps> | DataComponentModalProps<OrganizedProps>
 > = (props) => {
+  const intl = useIntl();
+
   const data =
     props.context === "modal"
       ? props.organized
@@ -31,7 +34,7 @@ const Organized: React.FC<
   return (
     <span className={componentClass}>
       <FontAwesomeIcon icon={faBox} />
-      <span className="sr-only">Organized</span>
+      <span className="sr-only">{intl.formatMessage({ id: "organized" })}</span>
     </span>
   );
 };

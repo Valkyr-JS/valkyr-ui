@@ -33,7 +33,7 @@ export const AboveZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const icon = canvas.getByText("Organized");
+    const icon = canvas.getByText("Organised");
     await expect(icon).toBeInTheDocument();
   },
 };
@@ -46,7 +46,7 @@ export const BelowZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const icon = canvas.queryByText("Organized");
+    const icon = canvas.queryByText("Organised");
     await expect(icon).toBeNull();
   },
 };
@@ -59,7 +59,7 @@ export const EqualsZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const icon = canvas.getByText("Organized");
+    const icon = canvas.getByText("Organised");
     await expect(icon).toBeInTheDocument();
   },
 };
@@ -72,7 +72,7 @@ export const CardContext: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const icon = canvas.getByText("Organized");
+    const icon = canvas.getByText("Organised");
     await expect(icon).toBeInTheDocument();
   },
 };
@@ -83,7 +83,7 @@ export const ModalContext: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const icon = canvas.getByText("Organized");
+    const icon = canvas.getByText("Organised");
     await expect(icon).toBeInTheDocument();
   },
 };
@@ -95,7 +95,7 @@ export const UserDisabled: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const icon = canvas.queryByText("Organized");
+    const icon = canvas.queryByText("Organised");
     await expect(icon).toBeNull();
   },
 };
@@ -107,7 +107,7 @@ export const WithoutZoomData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const icon = canvas.getByText("Organized");
+    const icon = canvas.getByText("Organised");
     await expect(icon).toBeInTheDocument();
   },
 };
@@ -121,7 +121,7 @@ export const Unorganized: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const icon = canvas.queryByText("Organized");
+    const icon = canvas.queryByText("Organised");
     await expect(icon).toBeNull();
   },
 };
