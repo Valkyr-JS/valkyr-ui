@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import TextUtils from "@/components/stash/utils/text";
 import { getRenderData, padTimestamps } from "@/helpers";
 
@@ -14,6 +15,8 @@ interface DurationProps {
 const Duration: React.FC<
   DataComponentProps<DurationProps> | DataComponentModalProps<DurationProps>
 > = (props) => {
+  const intl = useIntl();
+
   const data =
     props.context === "modal"
       ? props.duration
@@ -36,7 +39,7 @@ const Duration: React.FC<
   const timeStampBreakdown = timestamp.split(":");
   if (timeStampBreakdown.length == 2) timeStampBreakdown.unshift("0");
   const timestampNumeric = timeStampBreakdown.map((s) => +s);
-  let srText = "Duration: ";
+  let srText = intl.formatMessage({ id: "duration" }) + ": ";
   if (timestampNumeric[0] !== 0)
     srText += `${timestampNumeric[0]} hour${timestampNumeric[0] === 1 ? "" : "s"} `;
   if (timestampNumeric[1] !== 0)
