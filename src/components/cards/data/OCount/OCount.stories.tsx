@@ -112,3 +112,17 @@ export const HideZeroValue: Story = {
     await expect(count).toBeNull();
   },
 };
+
+export const ShowZeroValue: Story = {
+  args: {
+    context: "card",
+    count: 0,
+    hideZeroValueData: false,
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const count = canvas.getByText("O Count: 0");
+    await expect(count).toBeInTheDocument();
+  },
+};
