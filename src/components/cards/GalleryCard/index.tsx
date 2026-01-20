@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
@@ -62,6 +63,10 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
           rating100={props.gallery.rating100}
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
+          thumbnailBackground={
+            props.pluginConfig.cards__galleryCard__thumbnailBackgroundEnabled ??
+            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_ENABLED
+          }
           titleID={id}
           zoomBreakpoint={props.zoomBreakpoint}
         />
@@ -189,6 +194,9 @@ interface GalleryCardThumbnailProps {
   /** The link to the gallery cover thumbnail. */
   src: string;
 
+  /** Adds a blurred version of the thumbnail to the background. */
+  thumbnailBackground?: boolean;
+
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
 
@@ -202,11 +210,21 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
   const componentClass = "vui-gallery-card";
   const thumbnailClass = componentClass + "__thumbnail";
   const coverClass = componentClass + "__thumbnail-cover";
+  const coverBackgroundClass = coverClass + "--blurred-bg";
+  const coverClassList = cx(coverClass, {
+    [coverBackgroundClass]: props.thumbnailBackground,
+  });
+
+  const coverStyles: React.CSSProperties = {
+    backgroundImage: props.thumbnailBackground
+      ? `url(${props.src})`
+      : undefined,
+  };
 
   return (
     <div className={thumbnailClass}>
       <a href={props.link} aria-labelledby={props.titleID}>
-        <div className={coverClass}>
+        <div className={coverClassList} style={coverStyles}>
           <img loading="lazy" alt="" src={props.src} />
         </div>
         <RatingBanner
@@ -285,6 +303,10 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           rating100={willRenderRatingBanner ? props.gallery.rating100 : 0}
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
+          thumbnailBackground={
+            props.pluginConfig.cards__galleryCard__thumbnailBackgroundEnabled ??
+            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_ENABLED
+          }
           titleID={props.titleID}
         />
       }

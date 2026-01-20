@@ -9,6 +9,7 @@ import gallery17791 from "../../../../mocks/galleries/17791.json";
 
 const pluginConfig = {
   cards__galleryCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
+  cards__galleryCard__thumbnailBackgroundEnabled: false,
 };
 
 const meta = {
@@ -124,5 +125,15 @@ export const PortraitThumbnailWithFooter: Story = {
       name: "Details",
     });
     await expect(detailsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const PortraitThumbnailWithThumbnailBackground: Story = {
+  args: {
+    gallery: gallery4521 as SlimGalleryDataFragment,
+    pluginConfig: {
+      ...pluginConfig,
+      cards__galleryCard__thumbnailBackgroundEnabled: true,
+    },
   },
 };
