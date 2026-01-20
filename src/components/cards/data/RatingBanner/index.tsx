@@ -1,6 +1,5 @@
 import React from "react";
 import cx from "classnames";
-import { DEFAULT } from "@/constants";
 import { convertRating100, getRenderData } from "@/helpers";
 import { useIntl } from "react-intl";
 import "./RatingBanner.scss";
@@ -35,6 +34,12 @@ const RatingBanner: React.FC<
   if (!data) return null;
 
   const ratingNum = convertRating100(data, props.ratingSystem);
+  const ratingType = props.ratingSystem?.type ?? "stars";
+
+  const srText =
+    ratingType === "decimal"
+      ? `${intl.formatMessage({ id: "rating" })}: ${ratingNum} out of 10`
+      : `${intl.formatMessage({ id: "rating" })}: ${ratingNum} stars`;
 
   const componentClass = "vui-card-data__rating-banner";
   const classList = cx(
@@ -44,8 +49,11 @@ const RatingBanner: React.FC<
   );
 
   return (
-    <div className={classList} aria-hidden>
-      {intl.formatMessage({ id: "rating" })}: {ratingNum}
+    <div className={classList}>
+      <span className="sr-only">{srText}</span>
+      <span aria-hidden>
+        {intl.formatMessage({ id: "rating" })}: {ratingNum}
+      </span>
     </div>
   );
 };
