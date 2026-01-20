@@ -1,3 +1,7 @@
+@use "../../../../../src/scss/variables";
+
+$prefix: variables.$prefix;
+
 .vui-card-modal {
   &__body {
     grid-row: body-top / body-bottom;
@@ -33,7 +37,7 @@
 
   @media (min-width: 992px) {
     .modal-dialog {
-      max-width: 640px;
+      max-width: var(--#{$prefix}-card-modal-max-width);
     }
   }
 }
