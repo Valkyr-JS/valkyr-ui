@@ -115,3 +115,29 @@ export const WithoutZoomData: Story = {
     await expect(date).toBeInTheDocument();
   },
 };
+
+export const LocaleFormat: Story = {
+  args: {
+    context: "card",
+    localeDateFormat: true,
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.getByText("25/12/2015");
+    await expect(date).toBeInTheDocument();
+  },
+};
+
+export const NoLocaleFormat: Story = {
+  args: {
+    context: "card",
+    localeDateFormat: false,
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.getByText("2015-12-25");
+    await expect(date).toBeInTheDocument();
+  },
+};
