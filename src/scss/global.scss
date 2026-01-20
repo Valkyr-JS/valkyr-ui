@@ -15,4 +15,6 @@ $prefix: variables.$prefix;
   --#{$prefix}-card-title-font-size: 1.25rem;
   --#{$prefix}-card-top-line-font-size: var(--#{$prefix}-cards-font-sm);
   --#{$prefix}-card-top-line-opacity: 0.8;
+
+  --#{$prefix}-card-modal-max-width: 640px;
 }
