@@ -21,6 +21,8 @@ $prefix: variables.$prefix;
     grid-row: footer-top / footer-bottom;
 
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 0.5rem;
 
     // Add spacing between icon and count, if there is one
