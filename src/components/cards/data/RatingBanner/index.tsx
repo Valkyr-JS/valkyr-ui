@@ -1,9 +1,9 @@
 import React from "react";
 import cx from "classnames";
-import { convertRating100, getRenderData } from "@/helpers";
-import { FormattedMessage } from "react-intl";
-import "./RatingBanner.scss";
 import { DEFAULT } from "@/constants";
+import { convertRating100, getRenderData } from "@/helpers";
+import { useIntl } from "react-intl";
+import "./RatingBanner.scss";
 
 interface RatingBannerProps {
   /** The object's user rating out of 100 */
@@ -17,6 +17,8 @@ const RatingBanner: React.FC<
   | DataComponentProps<RatingBannerProps>
   | DataComponentModalProps<RatingBannerProps>
 > = (props) => {
+  const intl = useIntl();
+
   const data =
     props.context === "modal"
       ? (props.rating100 ?? 0)
@@ -45,7 +47,7 @@ const RatingBanner: React.FC<
 
   return (
     <div className={classList} aria-hidden>
-      <FormattedMessage id="rating" />: {ratingNum}
+      {intl.formatMessage({ id: "rating" })}: {ratingNum}
     </div>
   );
 };
