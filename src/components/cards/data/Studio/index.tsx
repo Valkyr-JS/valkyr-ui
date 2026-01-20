@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 
 interface StudioProps {
@@ -14,6 +15,8 @@ interface StudioProps {
 const Studio: React.FC<
   DataComponentProps<StudioProps> | DataComponentModalProps<StudioProps>
 > = (props) => {
+  const intl = useIntl();
+
   const data =
     props.context === "modal"
       ? props.studio
@@ -33,7 +36,9 @@ const Studio: React.FC<
   return (
     <span className={componentClass}>
       <a href={link}>
-        <span className="sr-only">Studio: </span>
+        <span className="sr-only">
+          {intl.formatMessage({ id: "studio" })}:{" "}
+        </span>
         {data.name}
       </a>
     </span>
