@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
-import Date from ".";
+import DateComponent from ".";
 
 const meta = {
   title: "Components/Cards/Data/Date",
-  component: Date,
+  component: DateComponent,
   parameters: {
     layout: "centered",
   },
@@ -21,7 +21,7 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Date>;
+} satisfies Meta<typeof DateComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -75,6 +75,20 @@ export const ModalContext: Story = {
     const canvas = within(canvasElement);
     const date = canvas.getByText(longDate);
     await expect(date).toBeInTheDocument();
+  },
+};
+
+export const NoData: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    date: null,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const date = canvas.queryByText("Date");
+    await expect(date).toBeNull();
   },
 };
 
