@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import TextUtils from "@/components/stash/utils/text";
 import { getRenderData } from "@/helpers";
 import "./Resolution.scss";
@@ -14,6 +15,8 @@ interface ResolutionProps {
 const Resolution: React.FC<
   DataComponentProps<ResolutionProps> | DataComponentModalProps<ResolutionProps>
 > = (props) => {
+  const intl = useIntl();
+
   const data =
     props.context === "modal"
       ? props.resolution
@@ -57,7 +60,9 @@ const Resolution: React.FC<
 
     return (
       <span className={iconClass}>
-        <span className="sr-only">Resolution: </span>
+        <span className="sr-only">
+          {intl.formatMessage({ id: "resolution" })}:{" "}
+        </span>
         <span title={resolutionValue}>{resolutionIconValue}</span>
       </span>
     );
@@ -67,7 +72,9 @@ const Resolution: React.FC<
 
   return (
     <span className={componentClass}>
-      <span className="sr-only">Resolution: </span>
+      <span className="sr-only">
+        {intl.formatMessage({ id: "resolution" })}:{" "}
+      </span>
       <span>{resolutionValue}</span>
     </span>
   );

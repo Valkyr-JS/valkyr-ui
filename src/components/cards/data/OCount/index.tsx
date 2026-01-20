@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 import SweatDrops from "@/components/stash/Shared/SweatDrops";
 import { DEFAULT } from "@/constants";
@@ -12,6 +13,8 @@ interface OCountProps {
 const OCount: React.FC<
   DataComponentProps<OCountProps> | DataComponentModalProps<OCountProps>
 > = (props) => {
+  const intl = useIntl();
+
   const data =
     props.context === "modal"
       ? props.count
@@ -32,7 +35,9 @@ const OCount: React.FC<
   return (
     <span className={componentClass}>
       <SweatDrops />
-      <span className="sr-only">O count: {data}</span>
+      <span className="sr-only">
+        {intl.formatMessage({ id: "o_count" })}: {data}
+      </span>
       <span aria-hidden>{data}</span>
     </span>
   );

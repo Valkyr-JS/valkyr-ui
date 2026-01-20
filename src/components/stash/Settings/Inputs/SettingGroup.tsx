@@ -1,7 +1,9 @@
 import React, { PropsWithChildren, useState } from "react";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import cx from "classnames";
 import { Button, Collapse } from "react-bootstrap";
+import { useIntl } from "react-intl";
 import Setting from "./Setting";
 
 interface ISettingGroup {
@@ -13,6 +15,8 @@ interface ISettingGroup {
 
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Settings/Inputs.tsx#L96 */
 const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
+  const intl = useIntl();
+
   const [open, setOpen] = useState(!props.collapsedDefault);
 
   function renderCollapseButton() {
@@ -26,7 +30,7 @@ const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
       >
         <FontAwesomeIcon fixedWidth icon={open ? faChevronUp : faChevronDown} />
         <span className="sr-only">
-          {open ? "Close" : "Open"} settings group
+          {open ? intl.formatMessage({ id: "close" }) : "Open"}
         </span>
       </Button>
     );
@@ -51,8 +55,12 @@ const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
     setOpen(!open);
   }
 
+  const classList = cx("setting-group", {
+    collapsible: props.collapsible,
+  });
+
   return (
-    <div className={`setting-group ${props.collapsible ? "collapsible" : ""}`}>
+    <div className={classList}>
       <Setting {...props.settingProps} onClick={onDivClick}>
         {props.topLevel}
         {renderCollapseButton()}

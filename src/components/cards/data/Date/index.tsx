@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedDate } from "react-intl";
+import { FormattedDate, useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 import "./Date.scss";
 
@@ -14,6 +14,8 @@ interface DateProps {
 const DateComponent: React.FC<
   DataComponentProps<DateProps> | DataComponentModalProps<DateProps>
 > = (props) => {
+  const intl = useIntl();
+
   const data =
     props.context === "modal"
       ? props.date
@@ -28,6 +30,7 @@ const DateComponent: React.FC<
   if (!data) return null;
 
   const componentClass = "vui-card-data__date";
+  const dateText = intl.formatMessage({ id: "date" });
 
   /* ------------------------------------- Only year available ------------------------------------ */
 
@@ -36,7 +39,7 @@ const DateComponent: React.FC<
     const year = parseInt(yearMatch[1], 10);
     return (
       <span className={componentClass}>
-        <span className="sr-only">Date: </span>
+        <span className="sr-only">{dateText}: </span>
         {props.localeDateFormat ? (
           <FormattedDate
             value={Date.UTC(year, 0)}
@@ -60,7 +63,7 @@ const DateComponent: React.FC<
     return (
       <span className={componentClass}>
         <span className="sr-only">
-          Date:{" "}
+          {dateText}:{" "}
           <FormattedDate
             value={Date.UTC(year, month)}
             year="numeric"
@@ -89,7 +92,7 @@ const DateComponent: React.FC<
   return (
     <span className={componentClass}>
       <span className="sr-only">
-        Date: <FormattedDate value={data} format="long" timeZone="utc" />
+        {dateText}: <FormattedDate value={data} format="long" timeZone="utc" />
       </span>
       <span aria-hidden>
         {props.localeDateFormat ? (

@@ -33,7 +33,7 @@ export const AboveZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const count = canvas.getByText("O count: 3");
+    const count = canvas.getByText("O Count: 3");
     await expect(count).toBeInTheDocument();
   },
 };
@@ -46,7 +46,7 @@ export const BelowZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const count = canvas.queryByText("O count: 3");
+    const count = canvas.queryByText("O Count: 3");
     await expect(count).toBeNull();
   },
 };
@@ -59,7 +59,7 @@ export const EqualsZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const count = canvas.getByText("O count: 3");
+    const count = canvas.getByText("O Count: 3");
     await expect(count).toBeInTheDocument();
   },
 };
@@ -70,7 +70,7 @@ export const ModalContext: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const count = canvas.getByText("O count: 3");
+    const count = canvas.getByText("O Count: 3");
     await expect(count).toBeInTheDocument();
   },
 };
@@ -82,7 +82,7 @@ export const UserDisabled: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const count = canvas.queryByText("O count: 3");
+    const count = canvas.queryByText("O Count: 3");
     await expect(count).toBeNull();
   },
 };
@@ -94,7 +94,7 @@ export const WithoutZoomData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const count = canvas.getByText("O count: 3");
+    const count = canvas.getByText("O Count: 3");
     await expect(count).toBeInTheDocument();
   },
 };
@@ -108,7 +108,7 @@ export const HideZeroValue: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const count = canvas.queryByText("O count: 0");
+    const count = canvas.queryByText("O Count: 0");
     await expect(count).toBeNull();
   },
 };
