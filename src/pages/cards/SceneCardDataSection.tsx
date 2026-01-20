@@ -8,6 +8,29 @@ import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting"
 import { DEFAULT } from "@/constants";
 
 const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
+  const BlurredThumbnailBackgroundEnabled = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.cards__sceneCard__thumbnailBackgroundEnabled ??
+        DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_ENABLED,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Enable thumbnail background images"
+        id="valkyr-ui-cards__sceneCard__thumbnailBackgroundEnabled"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__thumbnailBackgroundEnabled: newState,
+          });
+        }}
+        subHeading="Adds a blurred copy of the scene thumbnail to the background, filling any blank space."
+      />
+    );
+  };
+
   const DateBreakpoint = () => (
     <NumberSetting
       heading="Date"
@@ -267,6 +290,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>
         <DetailsMaxLines />
+        <BlurredThumbnailBackgroundEnabled />
         <PreviewsEnabled />
         <ResolutionAsIcon />
       </SettingGroup>

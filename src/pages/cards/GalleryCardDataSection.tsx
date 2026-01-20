@@ -1,5 +1,8 @@
-import React from "react";
-import { SettingGroup } from "@/components/stash/Settings/Inputs";
+import React, { useState } from "react";
+import {
+  BooleanSetting,
+  SettingGroup,
+} from "@/components/stash/Settings/Inputs";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting";
 import { DEFAULT } from "@/constants";
@@ -139,6 +142,29 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const BlurredThumbnailBackgroundEnabled = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.cards__galleryCard__thumbnailBackgroundEnabled ??
+        DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_ENABLED,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Enable thumbnail background images"
+        id="valkyr-ui-cards__galleryCard__thumbnailBackgroundEnabled"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__thumbnailBackgroundEnabled: newState,
+          });
+        }}
+        subHeading="Adds a blurred copy of the gallery thumbnail to the background, filling any blank space."
+      />
+    );
+  };
+
   return (
     <SettingSection id="gallery-data" heading="Gallery card data">
       <SettingGroup
@@ -158,6 +184,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>
         <DetailsMaxLines />
+        <BlurredThumbnailBackgroundEnabled />
       </SettingGroup>
     </SettingSection>
   );
