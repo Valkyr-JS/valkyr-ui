@@ -98,6 +98,10 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           rating100={props.scene.rating100}
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
+          thumbnailBackground={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundEnabled ??
+            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_ENABLED
+          }
           titleID={id}
           zoomBreakpoint={props.zoomBreakpoint}
         />
@@ -278,6 +282,9 @@ interface SceneCardThumbnailProps {
   /** The link to the scene cover thumbnail. */
   src: string;
 
+  /** Adds a blurred version of the thumbnail to the background. */
+  thumbnailBackground?: boolean;
+
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
 
@@ -290,10 +297,12 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
 ) => {
   const componentClass = "vui-scene-card";
   const thumbnailClass = componentClass + "__thumbnail";
-  const classList = thumbnailClass;
+
   const previewClass = componentClass + "__thumbnail-preview";
+  const previewBackgroundClass = previewClass + "--blurred-bg";
   const previewPortraitClass = previewClass + "--portrait";
   const previewClassList = cx(previewClass, {
+    [previewBackgroundClass]: props.thumbnailBackground,
     [previewPortraitClass]: props.isPortrait,
   });
 
@@ -303,6 +312,12 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
       DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
       ? (props.preview ?? undefined)
       : undefined;
+
+  const previewStyles: React.CSSProperties = {
+    backgroundImage: props.thumbnailBackground
+      ? `url(${props.src})`
+      : undefined,
+  };
 
   const videoEl = useRef<HTMLVideoElement>(null);
 
@@ -314,9 +329,9 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
   }, [props.cardIsHovered]);
 
   return (
-    <div className={classList}>
+    <div className={thumbnailClass}>
       <a href={props.link} aria-labelledby={props.titleID}>
-        <div className={previewClassList}>
+        <div className={previewClassList} style={previewStyles}>
           <img loading="lazy" alt="" src={props.src} />
           {preview && (
             <video
@@ -426,6 +441,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           rating100={willRenderRatingBanner ? props.scene.rating100 : null}
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
+          thumbnailBackground={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundEnabled ??
+            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_ENABLED
+          }
           titleID={props.titleID}
         />
       }
