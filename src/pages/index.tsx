@@ -7,6 +7,7 @@ import { useConfigurePlugin } from "@/hooks";
 import GereralTab from "./general";
 import CardsTab from "./cards";
 import "./pages.scss";
+import StylingTab from "./styling";
 const { PluginApi } = window;
 const { LoadingIndicator } = PluginApi.components;
 
@@ -16,7 +17,7 @@ interface TabData {
   title: string;
 }
 
-const validTabs = ["general", "cards"] as const;
+const validTabs = ["general", "cards", "styling"] as const;
 type TabKey = (typeof validTabs)[number];
 
 const defaultTab: TabKey = "general";
@@ -35,7 +36,7 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
 
   const [updatePluginConfig] = useConfigurePlugin();
   const [pluginConfig, setPluginConfig] = useState(
-    stashConfig.plugins[PLUGIN.ID] ?? {}
+    stashConfig.plugins[PLUGIN.ID] ?? {},
   );
 
   const handlePluginConfigUpdate = async (updatedConfig: ValkyrUiConfigMap) => {
@@ -71,6 +72,16 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
         />
       ),
       title: "Cards",
+    },
+    {
+      key: "styling",
+      component: (
+        <StylingTab
+          configUpdateHandler={handlePluginConfigUpdate}
+          pluginConfig={pluginConfig}
+        />
+      ),
+      title: "Styling",
     },
   ] as const;
 
