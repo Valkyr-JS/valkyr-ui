@@ -203,7 +203,7 @@ export const HideZeroData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.queryByText("Rated 0 out of 10");
+    const rating = canvas.queryByText("Unrated");
     await expect(rating).toBeNull();
   },
 };
@@ -220,7 +220,7 @@ export const ShowZeroData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rated 0 out of 10");
+    const rating = canvas.getByText("Unrated");
     await expect(rating).toBeInTheDocument();
   },
 };

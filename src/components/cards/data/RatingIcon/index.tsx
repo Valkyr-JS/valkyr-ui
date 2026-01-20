@@ -37,9 +37,11 @@ const RatingIcon: React.FC<
   const ratingType = props.ratingSystem?.type ?? "stars";
 
   const srText =
-    ratingType === "decimal"
-      ? `Rated ${ratingNum} out of 10`
-      : `Rated ${ratingNum} out of 5 stars`;
+    ratingNum === 0
+      ? "Unrated"
+      : ratingType === "decimal"
+        ? `Rated ${ratingNum} out of 10`
+        : `Rated ${ratingNum} out of 5 stars`;
 
   return (
     <span className={componentClass}>
