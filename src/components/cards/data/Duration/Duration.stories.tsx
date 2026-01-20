@@ -76,6 +76,20 @@ export const ModalContext: Story = {
   },
 };
 
+export const NoData: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    duration: 0,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const duration = canvas.queryByText("Duration: 0");
+    await expect(duration).toBeNull();
+  },
+};
+
 export const UserDisabled: Story = {
   args: {
     context: "card",
