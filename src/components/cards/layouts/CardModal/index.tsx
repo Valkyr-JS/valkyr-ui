@@ -127,10 +127,10 @@ export const CardModalWrapper: React.FC<
 
   return (
     <Modal
+      aria-labelledby={props.titleID}
       className={componentClassList}
       scrollable
       show={props.show}
-      aria-labelledby={props.titleID}
     >
       {props.children}
     </Modal>

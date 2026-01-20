@@ -30,4 +30,10 @@
       }
     }
   }
+
+  @media (min-width: 992px) {
+    .modal-dialog {
+      max-width: 640px;
+    }
+  }
 }
