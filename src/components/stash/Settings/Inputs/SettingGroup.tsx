@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useState } from "react";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Collapse } from "react-bootstrap";
+import { useIntl } from "react-intl";
 import Setting from "./Setting";
 
 interface ISettingGroup {
@@ -13,6 +14,8 @@ interface ISettingGroup {
 
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/components/Settings/Inputs.tsx#L96 */
 const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
+  const intl = useIntl();
+
   const [open, setOpen] = useState(!props.collapsedDefault);
 
   function renderCollapseButton() {
@@ -26,7 +29,7 @@ const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
       >
         <FontAwesomeIcon fixedWidth icon={open ? faChevronUp : faChevronDown} />
         <span className="sr-only">
-          {open ? "Close" : "Open"} settings group
+          {open ? intl.formatMessage({ id: "close" }) : "Open"}
         </span>
       </Button>
     );
