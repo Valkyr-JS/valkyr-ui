@@ -3,6 +3,7 @@ import Setting from "./Setting";
 import { Form } from "react-bootstrap";
 
 interface StringSettingProps extends ISetting {
+  onBlur?: () => void;
   onChange: (v: string) => void;
   placeholder?: string;
   value: string | undefined;
@@ -18,6 +19,7 @@ export const StringSetting: React.FC<StringSettingProps> = (props) => {
       <Form.Control
         className="text-input"
         id={props.id}
+        onBlur={props.onBlur}
         onChange={handleChange}
         placeholder={props.placeholder}
         type="text"
