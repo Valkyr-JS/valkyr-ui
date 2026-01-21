@@ -5,6 +5,7 @@ import SceneCard from ".";
 
 // Mock data
 import scene2414 from "../../../../mocks/scenes/2414.json";
+import scene6439 from "../../../../mocks/scenes/6439.json";
 
 const pluginConfig = {
   cards__sceneCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
@@ -92,5 +93,56 @@ export const LandscapeThumbnailWithFooter: Story = {
       name: "Details",
     });
     await expect(detailsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const PortraitThumbnail: Story = {
+  args: {
+    scene: scene6439 as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Link to card modal details section should NOT render
+    const detailsModalBtn = canvas.queryByRole("button", {
+      name: "Details",
+    });
+    await expect(detailsModalBtn).toBeNull();
+  },
+};
+
+export const PortraitThumbnailWithFooter: Story = {
+  args: {
+    footer: footerProps,
+    scene: scene6439 as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Link to card modal details section should render
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    await expect(detailsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
+  args: {
+    scene: scene6439 as SlimSceneDataFragment,
+    pluginConfig: {
+      ...pluginConfig,
+      cards__sceneCard__thumbnailBackgroundImage: true,
+    },
+  },
+};
+
+export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
+  args: {
+    scene: scene6439 as SlimSceneDataFragment,
+    pluginConfig: {
+      ...pluginConfig,
+      cards__sceneCard__thumbnailBackgroundStyle: "black",
+    },
   },
 };

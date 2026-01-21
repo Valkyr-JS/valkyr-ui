@@ -16,7 +16,7 @@ interface TabData {
   title: string;
 }
 
-const validTabs = ["general", "cards"] as const;
+const validTabs = ["general", "cards", "styling"] as const;
 type TabKey = (typeof validTabs)[number];
 
 const defaultTab: TabKey = "general";
@@ -35,7 +35,7 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
 
   const [updatePluginConfig] = useConfigurePlugin();
   const [pluginConfig, setPluginConfig] = useState(
-    stashConfig.plugins[PLUGIN.ID] ?? {}
+    stashConfig.plugins[PLUGIN.ID] ?? {},
   );
 
   const handlePluginConfigUpdate = async (updatedConfig: ValkyrUiConfigMap) => {

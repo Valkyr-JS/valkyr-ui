@@ -15,6 +15,15 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 .vui-form-group {
+  a {
+    // Slightly lighten color for contrast against background
+    color: #4cb1f0;
+
+    // Add underline to pass accessibility differentiation from surrounding
+    // text. Cannot darken due to contrast.
+    text-decoration: underline;
+  }
+
   // Stash uses h3 tags instead of span or label. Replicate h3 form styling
   // here.
   .setting-section .setting {

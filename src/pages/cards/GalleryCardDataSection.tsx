@@ -1,7 +1,11 @@
-import React from "react";
-import { SettingGroup } from "@/components/stash/Settings/Inputs";
-import { SettingSection } from "@/components/stash/Settings/SettingSection";
+import React, { useState } from "react";
+import {
+  BooleanSetting,
+  SettingGroup,
+} from "@/components/stash/Settings/Inputs";
 import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting";
+import { StringSetting } from "@/components/stash/Settings/Inputs/StringSetting";
+import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { DEFAULT } from "@/constants";
 
 const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
@@ -139,6 +143,66 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const BlurredThumbnailBackgroundEnabled = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
+        DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Enable thumbnail background images"
+        id="valkyr-ui-cards__galleryCard__thumbnailBackgroundImage"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__thumbnailBackgroundImage: newState,
+          });
+        }}
+        subHeading="Adds a blurred copy of the gallery thumbnail to the background, filling any blank space."
+      />
+    );
+  };
+
+  const ThumbnailBackgroundStyle = () => {
+    const initialValue =
+      props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle ??
+      DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_STYLE;
+    const [value, setValue] = useState(
+      initialValue === null ? "" : initialValue,
+    );
+    return (
+      <StringSetting
+        heading="Thumbnail background style"
+        id="valkyr-ui-cards__galleryCard__thumbnailBackgroundStyle"
+        onBlur={() => {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__thumbnailBackgroundStyle: value.length
+              ? value
+              : null,
+          });
+        }}
+        onChange={(v) => setValue(v)}
+        subHeading={
+          <>
+            Adds a{" "}
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background"
+              target="_blank"
+            >
+              <code>background</code> CSS property
+            </a>{" "}
+            to gallery thumbnails with the given value.
+          </>
+        }
+        value={value}
+      />
+    );
+  };
+
   return (
     <SettingSection id="gallery-data" heading="Gallery card data">
       <SettingGroup
@@ -155,6 +219,10 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <RatingBannerBreakpoint />
         <RatingIconBreakpoint />
         <StudioBreakpoint />
+      </SettingGroup>
+      <SettingGroup collapsible settingProps={{ heading: "Thumbnails" }}>
+        <BlurredThumbnailBackgroundEnabled />
+        <ThumbnailBackgroundStyle />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Other" }}>
         <DetailsMaxLines />

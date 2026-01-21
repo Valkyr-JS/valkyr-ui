@@ -63,3 +63,21 @@ export const TagSection: Story = {
     titleID: "scene2414Modal",
   },
 };
+
+export const WithThumbnailBackground: Story = {
+  args: {
+    gallery: gallery4521 as SlimGalleryDataFragment,
+    pluginConfig: { cards__galleryCard__thumbnailBackgroundImage: true },
+    titleID: "gallery4521Modal",
+  },
+};
+
+export const WithThumbnailBackgroundStyle: Story = {
+  args: {
+    gallery: gallery4521 as SlimGalleryDataFragment,
+    pluginConfig: {
+      cards__galleryCard__thumbnailBackgroundStyle: "black",
+    },
+    titleID: "gallery4521Modal",
+  },
+};
