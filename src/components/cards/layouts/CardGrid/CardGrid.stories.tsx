@@ -64,15 +64,7 @@ const SceneCards = [
   scene10613,
   scene10804,
 ].map((s) => (
-  <SceneCard
-    footer={{
-      openHandler: fn(),
-      pluginConfig: {},
-      setSection: fn(),
-    }}
-    pluginConfig={{}}
-    scene={s as SlimSceneDataFragment}
-  />
+  <SceneCard pluginConfig={{}} scene={s as SlimSceneDataFragment} />
 ));
 
 export const ScenesZoom0: Story = {
@@ -121,15 +113,7 @@ const GalleryCards = [
   gallery17791,
   gallery19022,
 ].map((g) => (
-  <GalleryCard
-    footer={{
-      openHandler: fn(),
-      pluginConfig: {},
-      setSection: fn(),
-    }}
-    pluginConfig={{}}
-    gallery={g as SlimGalleryDataFragment}
-  />
+  <GalleryCard pluginConfig={{}} gallery={g as SlimGalleryDataFragment} />
 ));
 
 export const GalleriesZoom0: Story = {
