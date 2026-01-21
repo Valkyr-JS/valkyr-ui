@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import cx from "classnames";
 import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
@@ -15,9 +15,6 @@ import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
 
 interface GalleryCardProps {
-  /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: Omit<CardFooterProps, "sections">;
-
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
 
@@ -32,21 +29,35 @@ interface GalleryCardProps {
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = (props) => {
-  console.log(`props - '${props.gallery.title || props.gallery.id}': `, props);
-
-  const componentClass = "vui-gallery-card";
-  const userDataClass = componentClass + "__user-data";
-
   const id = createGalleryCardID(props.gallery.id);
-  const galleryLink = `/galleries/${props.gallery.id}`;
-  const title = getTitleFromObject(props.gallery);
+
+  /* -------------------------------------------- Modal ------------------------------------------- */
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalSection, setModalSection] = useState<CardModalSection>("details");
+
+  const modalTitleID = id + "Modal";
+
+  /* ------------------------------------------- Footer ------------------------------------------- */
 
   const footerSections: CardModalSectionData[] = [["details"]];
   if (props.gallery.tags.length)
     footerSections.push(["tags", props.gallery.tags.length]);
-  const footerProps = props.footer
-    ? { ...props.footer, sections: footerSections }
-    : undefined;
+
+  const footerProps: CardFooterProps = {
+    openHandler: () => setModalOpen(!modalOpen),
+    pluginConfig: props.pluginConfig,
+    sections: footerSections,
+    setSection: setModalSection,
+  };
+
+  /* --------------------------------------------- --- -------------------------------------------- */
+
+  const componentClass = "vui-gallery-card";
+  const userDataClass = componentClass + "__user-data";
+
+  const galleryLink = `/galleries/${props.gallery.id}`;
+  const title = getTitleFromObject(props.gallery);
 
   return (
     <GridCard

@@ -38,12 +38,6 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               cards={props.galleries.map((gl, i) => (
                 <GalleryCard
                   key={i}
-                  footer={{
-                    openHandler: () => setModalOpen(!modalOpen),
-                    pluginConfig,
-                    setData: () => setModalGalleryIndex(i),
-                    setSection: setModalSection,
-                  }}
                   gallery={gl}
                   pluginConfig={pluginConfig}
                   ratingSystem={stashConfig.ui.ratingSystemOptions}
@@ -98,11 +92,6 @@ PluginApi.patch.instead<IGalleryCardProps>(
           <>
             <GalleryCard
               {...props}
-              footer={{
-                openHandler: () => setModalOpen(!modalOpen),
-                pluginConfig,
-                setSection: setModalSection,
-              }}
               pluginConfig={pluginConfig}
               ratingSystem={stashConfig.ui.ratingSystemOptions}
             />
