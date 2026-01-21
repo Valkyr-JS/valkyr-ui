@@ -108,10 +108,6 @@ interface ValkyrUiConfigMap {
   /** Adds a blurred version of the scene thumbnail to the background. */
   cards__sceneCard__thumbnailBackgroundEnabled?: boolean;
 
-  css__bodyColor?: string;
-  css__titleColor?: string;
-  css__cardBgColor?: string;
-
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;
 }

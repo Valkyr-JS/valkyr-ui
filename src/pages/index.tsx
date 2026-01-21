@@ -7,7 +7,6 @@ import { useConfigurePlugin } from "@/hooks";
 import GereralTab from "./general";
 import CardsTab from "./cards";
 import "./pages.scss";
-import StylingTab from "./styling";
 const { PluginApi } = window;
 const { LoadingIndicator } = PluginApi.components;
 
@@ -72,16 +71,6 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
         />
       ),
       title: "Cards",
-    },
-    {
-      key: "styling",
-      component: (
-        <StylingTab
-          configUpdateHandler={handlePluginConfigUpdate}
-          pluginConfig={pluginConfig}
-        />
-      ),
-      title: "Styling",
     },
   ] as const;
 
