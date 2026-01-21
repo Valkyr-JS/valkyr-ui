@@ -41,12 +41,6 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   continuePlaylist={
                     stashConfig.interface.continuePlaylistDefault
                   }
-                  footer={{
-                    openHandler: () => setModalOpen(!modalOpen),
-                    pluginConfig,
-                    setData: () => setModalSceneIndex(i),
-                    setSection: setModalSection,
-                  }}
                   index={i}
                   pluginConfig={pluginConfig}
                   queue={props.queue}
@@ -105,11 +99,6 @@ PluginApi.patch.instead<ISceneCardProps>(
           <>
             <SceneCard
               continuePlaylist={stashConfig.interface.continuePlaylistDefault}
-              footer={{
-                openHandler: () => setModalOpen(!modalOpen),
-                pluginConfig,
-                setSection: setModalSection,
-              }}
               index={props.index}
               pluginConfig={pluginConfig}
               ratingSystem={stashConfig.ui.ratingSystemOptions}

@@ -23,9 +23,6 @@ interface SceneCardProps {
    * current one ends. */
   continuePlaylist?: Maybe<boolean> | undefined;
 
-  /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: Omit<CardFooterProps, "sections">;
-
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
 
@@ -46,7 +43,25 @@ interface SceneCardProps {
 }
 
 const SceneCard: React.FC<SceneCardProps> = (props) => {
-  console.log(`props - '${props.scene.title || props.scene.id}': `, props);
+  /* -------------------------------------------- Modal ------------------------------------------- */
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalSection, setModalSection] = useState<CardModalSection>("details");
+
+  /* ------------------------------------------- Footer ------------------------------------------- */
+
+  const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.tags.length)
+    footerSections.push(["tags", props.scene.tags.length]);
+
+  const footerProps: CardFooterProps = {
+    openHandler: () => setModalOpen(!modalOpen),
+    pluginConfig: props.pluginConfig,
+    sections: footerSections,
+    setSection: setModalSection,
+  };
+
+  /* --------------------------------------------- --- -------------------------------------------- */
 
   const componentClass = "vui-scene-card";
   const userDataClass = componentClass + "__user-data";
@@ -70,13 +85,6 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       : undefined;
 
   const [isHovered, setIsHovered] = useState(false);
-
-  const footerSections: CardModalSectionData[] = [["details"]];
-  if (props.scene.tags.length)
-    footerSections.push(["tags", props.scene.tags.length]);
-  const footerProps = props.footer
-    ? { ...props.footer, sections: footerSections }
-    : undefined;
 
   return (
     <GridCard

@@ -62,6 +62,12 @@ export const FullData: Story = {
     // Date should render
     const date = canvas.getByText("Date: 20 September 2020");
     await expect(date).toBeInTheDocument();
+
+    // Link to card modal details section should render
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    await expect(detailsModalBtn).toBeInTheDocument();
   },
 };
 
@@ -69,65 +75,15 @@ export const LandscapeThumbnail: Story = {
   args: {
     scene: scene2414 as SlimSceneDataFragment,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should NOT render
-    const detailsModalBtn = canvas.queryByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeNull();
-  },
-};
-
-export const LandscapeThumbnailWithFooter: Story = {
-  args: {
-    footer: footerProps,
-    scene: scene2414 as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should render
-    const detailsModalBtn = canvas.getByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeInTheDocument();
-  },
 };
 
 export const PortraitThumbnail: Story = {
   args: {
     scene: scene6439 as SlimSceneDataFragment,
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should NOT render
-    const detailsModalBtn = canvas.queryByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeNull();
-  },
 };
 
-export const PortraitThumbnailWithFooter: Story = {
-  args: {
-    footer: footerProps,
-    scene: scene6439 as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should render
-    const detailsModalBtn = canvas.getByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeInTheDocument();
-  },
-};
-
-export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
+export const WithThumbnailBackgroundImage: Story = {
   args: {
     scene: scene6439 as SlimSceneDataFragment,
     pluginConfig: {
@@ -137,7 +93,7 @@ export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
   },
 };
 
-export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
+export const WithThumbnailBackgroundStyle: Story = {
   args: {
     scene: scene6439 as SlimSceneDataFragment,
     pluginConfig: {
