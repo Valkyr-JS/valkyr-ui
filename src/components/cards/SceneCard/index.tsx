@@ -99,8 +99,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
           thumbnailBackground={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundEnabled ??
-            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_ENABLED
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
+            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE
           }
           titleID={id}
           zoomBreakpoint={props.zoomBreakpoint}
@@ -442,8 +442,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
           thumbnailBackground={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundEnabled ??
-            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_ENABLED
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
+            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE
           }
           titleID={props.titleID}
         />

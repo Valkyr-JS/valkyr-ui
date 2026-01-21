@@ -144,20 +144,20 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
 
   const BlurredThumbnailBackgroundEnabled = () => {
     const [checked, setChecked] = useState(
-      props.pluginConfig.cards__galleryCard__thumbnailBackgroundEnabled ??
-        DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_ENABLED,
+      props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
+        DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE,
     );
     return (
       <BooleanSetting
         checked={checked}
         heading="Enable thumbnail background images"
-        id="valkyr-ui-cards__galleryCard__thumbnailBackgroundEnabled"
+        id="valkyr-ui-cards__galleryCard__thumbnailBackgroundImage"
         onChange={() => {
           const newState = !checked;
           setChecked(newState);
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__galleryCard__thumbnailBackgroundEnabled: newState,
+            cards__galleryCard__thumbnailBackgroundImage: newState,
           });
         }}
         subHeading="Adds a blurred copy of the gallery thumbnail to the background, filling any blank space."

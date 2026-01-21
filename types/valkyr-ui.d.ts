@@ -77,7 +77,7 @@ interface ValkyrUiConfigMap {
   /** The zoom breakpoint at which to display the studio link on gallery cards. */
   cards__galleryCard__studioBreakpoint?: StashCardGridZoom;
   /** Adds a blurred version of the gallery thumbnail to the background. */
-  cards__galleryCard__thumbnailBackgroundEnabled?: boolean;
+  cards__galleryCard__thumbnailBackgroundImage?: boolean;
 
   /** The zoom breakpoint at which to display the date on scene cards. */
   cards__sceneCard__dateBreakpoint?: StashCardGridZoom;
@@ -106,7 +106,7 @@ interface ValkyrUiConfigMap {
   /** The zoom breakpoint at which to display the studio link on scene cards. */
   cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
   /** Adds a blurred version of the scene thumbnail to the background. */
-  cards__sceneCard__thumbnailBackgroundEnabled?: boolean;
+  cards__sceneCard__thumbnailBackgroundImage?: boolean;
 
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;

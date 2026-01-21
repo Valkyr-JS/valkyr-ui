@@ -67,7 +67,7 @@ export const TagSection: Story = {
 export const WithThumbnailBackground: Story = {
   args: {
     gallery: gallery4521 as SlimGalleryDataFragment,
-    pluginConfig: { cards__galleryCard__thumbnailBackgroundEnabled: true },
+    pluginConfig: { cards__galleryCard__thumbnailBackgroundImage: true },
     titleID: "gallery4521Modal",
   },
 };

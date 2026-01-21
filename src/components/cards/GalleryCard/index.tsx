@@ -64,8 +64,8 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
           thumbnailBackground={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundEnabled ??
-            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_ENABLED
+            props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
+            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE
           }
           titleID={id}
           zoomBreakpoint={props.zoomBreakpoint}
@@ -304,8 +304,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
           thumbnailBackground={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundEnabled ??
-            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_ENABLED
+            props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
+            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE
           }
           titleID={props.titleID}
         />

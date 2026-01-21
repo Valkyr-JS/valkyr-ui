@@ -9,7 +9,7 @@ import gallery17791 from "../../../../mocks/galleries/17791.json";
 
 const pluginConfig = {
   cards__galleryCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
-  cards__galleryCard__thumbnailBackgroundEnabled: false,
+  cards__galleryCard__thumbnailBackgroundImage: false,
 };
 
 const meta = {
@@ -133,7 +133,7 @@ export const PortraitThumbnailWithThumbnailBackground: Story = {
     gallery: gallery4521 as SlimGalleryDataFragment,
     pluginConfig: {
       ...pluginConfig,
-      cards__galleryCard__thumbnailBackgroundEnabled: true,
+      cards__galleryCard__thumbnailBackgroundImage: true,
     },
   },
 };
