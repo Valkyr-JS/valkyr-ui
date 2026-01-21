@@ -137,3 +137,13 @@ export const PortraitThumbnailWithThumbnailBackground: Story = {
     },
   },
 };
+
+export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
+  args: {
+    gallery: gallery4521 as SlimGalleryDataFragment,
+    pluginConfig: {
+      ...pluginConfig,
+      cards__galleryCard__thumbnailBackgroundStyle: "black",
+    },
+  },
+};

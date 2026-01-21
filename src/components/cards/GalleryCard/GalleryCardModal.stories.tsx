@@ -71,3 +71,13 @@ export const WithThumbnailBackground: Story = {
     titleID: "gallery4521Modal",
   },
 };
+
+export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
+  args: {
+    gallery: gallery4521 as SlimGalleryDataFragment,
+    pluginConfig: {
+      cards__galleryCard__thumbnailBackgroundStyle: "black",
+    },
+    titleID: "gallery4521Modal",
+  },
+};

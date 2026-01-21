@@ -78,7 +78,7 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__studioBreakpoint?: StashCardGridZoom;
   /** Adds a blurred version of the gallery thumbnail to the background. */
   cards__galleryCard__thumbnailBackgroundImage?: boolean;
-  /** Adds a user-defined CSS to the thumbnail background. */
+  /** Adds user-defined CSS to the thumbnail background. */
   cards__galleryCard__thumbnailBackgroundStyle?: string | null;
 
   /** The zoom breakpoint at which to display the date on scene cards. */
@@ -109,7 +109,7 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
   /** Adds a blurred version of the scene thumbnail to the background. */
   cards__sceneCard__thumbnailBackgroundImage?: boolean;
-  /** Adds a user-defined CSS to the thumbnail background. */
+  /** Adds user-defined CSS to the thumbnail background. */
   cards__sceneCard__thumbnailBackgroundStyle?: string | null;
 
   /** Format the date according to the user's Stash language setting. */

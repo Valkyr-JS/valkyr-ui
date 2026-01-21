@@ -67,6 +67,10 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
             DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE
           }
+          thumbnailBackgroundStyle={
+            props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle ??
+            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_STYLE
+          }
           titleID={id}
           zoomBreakpoint={props.zoomBreakpoint}
         />
@@ -195,7 +199,10 @@ interface GalleryCardThumbnailProps {
   src: string;
 
   /** Adds a blurred version of the thumbnail to the background. */
-  thumbnailBackground?: boolean;
+  thumbnailBackground: boolean;
+
+  /** Adds user-defined CSS to the thumbnail background. */
+  thumbnailBackgroundStyle: string | null;
 
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
@@ -216,6 +223,9 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
   });
 
   const coverStyles: React.CSSProperties = {
+    background: props.thumbnailBackgroundStyle
+      ? props.thumbnailBackgroundStyle
+      : undefined,
     backgroundImage: props.thumbnailBackground
       ? `url(${props.src})`
       : undefined,
@@ -306,6 +316,10 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           thumbnailBackground={
             props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
             DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE
+          }
+          thumbnailBackgroundStyle={
+            props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle ??
+            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_STYLE
           }
           titleID={props.titleID}
         />
