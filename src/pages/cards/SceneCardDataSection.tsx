@@ -279,7 +279,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     return (
       <StringSetting
         heading="Thumbnail background style"
-        id="valkyr-ui-cards__sceneCard__thumbnailBackgroundImage"
+        id="valkyr-ui-cards__sceneCard__thumbnailBackgroundStyle"
         onBlur={() => {
           props.configUpdateHandler({
             ...props.pluginConfig,

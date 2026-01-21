@@ -176,7 +176,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     return (
       <StringSetting
         heading="Thumbnail background style"
-        id="valkyr-ui-cards__galleryCard__thumbnailBackgroundImage"
+        id="valkyr-ui-cards__galleryCard__thumbnailBackgroundStyle"
         onBlur={() => {
           props.configUpdateHandler({
             ...props.pluginConfig,
