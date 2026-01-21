@@ -102,6 +102,10 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
             props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
             DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE
           }
+          thumbnailBackgroundStyle={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle ??
+            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_STYLE
+          }
           titleID={id}
           zoomBreakpoint={props.zoomBreakpoint}
         />
@@ -283,7 +287,10 @@ interface SceneCardThumbnailProps {
   src: string;
 
   /** Adds a blurred version of the thumbnail to the background. */
-  thumbnailBackground?: boolean;
+  thumbnailBackground: boolean;
+
+  /** Adds user-defined CSS to the thumbnail background. */
+  thumbnailBackgroundStyle: string | null;
 
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
@@ -314,6 +321,9 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
       : undefined;
 
   const previewStyles: React.CSSProperties = {
+    background: props.thumbnailBackgroundStyle
+      ? props.thumbnailBackgroundStyle
+      : undefined,
     backgroundImage: props.thumbnailBackground
       ? `url(${props.src})`
       : undefined,
@@ -444,6 +454,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           thumbnailBackground={
             props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
             DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE
+          }
+          thumbnailBackgroundStyle={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle ??
+            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_STYLE
           }
           titleID={props.titleID}
         />

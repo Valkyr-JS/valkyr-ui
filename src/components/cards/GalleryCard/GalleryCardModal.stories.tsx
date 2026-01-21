@@ -72,7 +72,7 @@ export const WithThumbnailBackground: Story = {
   },
 };
 
-export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
+export const WithThumbnailBackgroundStyle: Story = {
   args: {
     gallery: gallery4521 as SlimGalleryDataFragment,
     pluginConfig: {

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
 import { SceneCardModalContent } from ".";
 import scene2414 from "../../../../mocks/scenes/2414.json";
+import scene6439 from "../../../../mocks/scenes/6439.json";
 
 const meta = {
   title: "Components/Cards/Scene card modal content",
@@ -61,5 +62,32 @@ export const TagSection: Story = {
     scene: scene2414 as SlimSceneDataFragment,
     section: "tags",
     titleID: "scene2414Modal",
+  },
+};
+
+export const PortraitThumbnail: Story = {
+  args: {
+    scene: scene6439 as SlimSceneDataFragment,
+    titleID: "scene6439Modal",
+  },
+};
+
+export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundImage: true,
+    },
+    scene: scene6439 as SlimSceneDataFragment,
+    titleID: "scene6439Modal",
+  },
+};
+
+export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundStyle: "black",
+    },
+    scene: scene6439 as SlimSceneDataFragment,
+    titleID: "scene6439Modal",
   },
 };
