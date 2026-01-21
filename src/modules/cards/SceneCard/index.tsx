@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import CardGrid from "@/components/cards/layouts/CardGrid";
-import SceneCard, {
-  createSceneCardID,
-  SceneCardModalContent,
-} from "@/components/cards/SceneCard";
-import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
+import SceneCard from "@/components/cards/SceneCard";
 import { DEFAULT } from "@/constants";
 const { PluginApi } = window;
 
@@ -17,14 +13,6 @@ PluginApi.patch.instead<ISceneCardGrid>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
-      const [modalOpen, setModalOpen] = useState(false);
-      const [modalSceneIndex, setModalSceneIndex] = useState(0);
-      const [modalSection, setModalSection] =
-        useState<CardModalSection>("details");
-
-      const titleID =
-        createSceneCardID(props.scenes[modalSceneIndex].id) + "Modal";
-
       if (
         pluginConfig &&
         (pluginConfig?.cards__cardGrid__enabled ??
@@ -33,43 +21,21 @@ PluginApi.patch.instead<ISceneCardGrid>(
           DEFAULT.CARDS.SCENE_CARD.ENABLED)
       )
         return [
-          <>
-            <CardGrid
-              cards={props.scenes.map((sc, i) => (
-                <SceneCard
-                  key={i}
-                  continuePlaylist={
-                    stashConfig.interface.continuePlaylistDefault
-                  }
-                  index={i}
-                  pluginConfig={pluginConfig}
-                  queue={props.queue}
-                  ratingSystem={stashConfig.ui.ratingSystemOptions}
-                  scene={sc}
-                  zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
-                />
-              ))}
-              zoomIndex={props.zoomIndex as StashCardGridZoom}
-            />
-            <CardModalWrapper
-              classname="vui-scene-card-modal"
-              show={modalOpen}
-              titleID={titleID}
-            >
-              <SceneCardModalContent
-                closeHandler={() => setModalOpen(false)}
+          <CardGrid
+            cards={props.scenes.map((sc, i) => (
+              <SceneCard
+                key={i}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
-                index={modalSceneIndex}
+                index={i}
                 pluginConfig={pluginConfig}
                 queue={props.queue}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
-                scene={props.scenes[modalSceneIndex]}
-                section={modalSection}
-                setSection={setModalSection}
-                titleID={titleID}
+                scene={sc}
+                zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
               />
-            </CardModalWrapper>
-          </>,
+            ))}
+            zoomIndex={props.zoomIndex as StashCardGridZoom}
+          />,
         ];
     }
 
@@ -85,45 +51,19 @@ PluginApi.patch.instead<ISceneCardProps>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
-      const [modalOpen, setModalOpen] = useState(false);
-      const [modalSection, setModalSection] =
-        useState<CardModalSection>("details");
-
-      const titleID = createSceneCardID(props.scene.id) + "Modal";
-
       if (
         pluginConfig &&
         (pluginConfig?.cards__sceneCard__enabled ?? DEFAULT.CARDS.SCENE_CARD)
       )
         return [
-          <>
-            <SceneCard
-              continuePlaylist={stashConfig.interface.continuePlaylistDefault}
-              index={props.index}
-              pluginConfig={pluginConfig}
-              ratingSystem={stashConfig.ui.ratingSystemOptions}
-              queue={props.queue}
-              scene={props.scene}
-            />
-            <CardModalWrapper
-              classname="vui-scene-card-modal"
-              show={modalOpen}
-              titleID={titleID}
-            >
-              <SceneCardModalContent
-                closeHandler={() => setModalOpen(false)}
-                continuePlaylist={stashConfig.interface.continuePlaylistDefault}
-                index={props.index}
-                pluginConfig={pluginConfig}
-                queue={props.queue}
-                ratingSystem={stashConfig.ui.ratingSystemOptions}
-                scene={props.scene}
-                section={modalSection}
-                setSection={setModalSection}
-                titleID={titleID}
-              />
-            </CardModalWrapper>
-          </>,
+          <SceneCard
+            continuePlaylist={stashConfig.interface.continuePlaylistDefault}
+            index={props.index}
+            pluginConfig={pluginConfig}
+            ratingSystem={stashConfig.ui.ratingSystemOptions}
+            queue={props.queue}
+            scene={props.scene}
+          />,
         ];
     }
 

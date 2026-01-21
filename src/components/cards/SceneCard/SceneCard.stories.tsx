@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, within } from "storybook/test";
+import { expect, within } from "storybook/test";
 import SceneCard from ".";
 
 // Mock data
@@ -38,13 +38,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-const footerProps = {
-  openHandler: fn(),
-  pluginConfig,
-  sections: [["details"], ["tags", 5]] as CardModalSectionData[],
-  setSection: fn(),
-};
 
 export const FullData: Story = {
   args: {
