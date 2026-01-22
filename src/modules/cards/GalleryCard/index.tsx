@@ -9,7 +9,6 @@ PluginApi.patch.instead<IGalleryCardGrid>(
   function (props, _, Original) {
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
-      console.log("IGalleryCardGrid: ", props);
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
