@@ -21,6 +21,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
+const { PluginApi } = window;
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -51,10 +52,21 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
 
   /* -------------------------------------------- Modal ------------------------------------------- */
 
+  const modalTitleID = id + "Modal";
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSection, setModalSection] = useState<CardModalSection>("details");
+  const [loadSceneData, { called, loading, data }] =
+    PluginApi.GQL.useFindSceneLazyQuery({
+      variables: { id: props.scene.id },
+    });
 
-  const modalTitleID = id + "Modal";
+  /** Handler for opening the scene card modal. */
+  const handleOpenModal = () => {
+    // If full scene data has not yet been fetched, do so before opening the
+    // modal.
+    if (called && !loading) return setModalOpen(true);
+    loadSceneData().then(() => setModalOpen(true));
+  };
 
   /* ------------------------------------------- Footer ------------------------------------------- */
 
@@ -63,7 +75,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
     footerSections.push(["tags", props.scene.tags.length]);
 
   const footerProps: CardFooterProps = {
-    openHandler: () => setModalOpen(!modalOpen),
+    openHandler: handleOpenModal,
     pluginConfig: props.pluginConfig,
     sections: footerSections,
     setSection: setModalSection,
@@ -177,24 +189,26 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           zoomBreakpoint={props.zoomBreakpoint}
         />
       </GridCard>
-      <CardModalWrapper
-        classname="vui-scene-card-modal"
-        show={modalOpen}
-        titleID={modalTitleID}
-      >
-        <SceneCardModalContent
-          closeHandler={() => setModalOpen(false)}
-          continuePlaylist={props.continuePlaylist}
-          index={props.index}
-          pluginConfig={props.pluginConfig}
-          queue={props.queue}
-          ratingSystem={props.ratingSystem}
-          scene={props.scene}
-          section={modalSection}
-          setSection={setModalSection}
+      {data && (
+        <CardModalWrapper
+          classname="vui-scene-card-modal"
+          show={modalOpen}
           titleID={modalTitleID}
-        />
-      </CardModalWrapper>
+        >
+          <SceneCardModalContent
+            closeHandler={() => setModalOpen(false)}
+            continuePlaylist={props.continuePlaylist}
+            index={props.index}
+            pluginConfig={props.pluginConfig}
+            queue={props.queue}
+            ratingSystem={props.ratingSystem}
+            scene={data.findScene}
+            section={modalSection}
+            setSection={setModalSection}
+            titleID={modalTitleID}
+          />
+        </CardModalWrapper>
+      )}
     </>
   );
 };
@@ -430,7 +444,7 @@ interface SceneCardModalContentProps {
   ratingSystem?: RatingSystemOptions;
 
   /** The Stash scene data. */
-  scene: SlimSceneDataFragment;
+  scene: Scene;
 
   /** The currently displayed modal section. */
   section: CardModalSection;
