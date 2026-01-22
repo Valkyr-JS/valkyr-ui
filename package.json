@@ -9,9 +9,7 @@
     "build:yaml": "node generateYaml.mjs",
     "dev": "rollup --config ./rollup.config.dev.mjs && node generateYaml.mjs",
     "start": "npm run watch",
-    "watch": "rollup --config ./rollup.config.dev.mjs --watch",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "watch": "rollup --config ./rollup.config.dev.mjs --watch"
   },
   "repository": {
     "type": "git",
