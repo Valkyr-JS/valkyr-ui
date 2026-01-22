@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import CardGrid from "@/components/cards/layouts/CardGrid";
-import GalleryCard, {
-  createGalleryCardID,
-  GalleryCardModalContent,
-} from "@/components/cards/GalleryCard";
-import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
+import GalleryCard from "@/components/cards/GalleryCard";
 import { DEFAULT } from "@/constants";
 const { PluginApi } = window;
 
@@ -13,17 +9,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
   function (props, _, Original) {
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
-      console.log("IGalleryCardGrid: ", props);
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
-
-      const [modalOpen, setModalOpen] = useState(false);
-      const [modalGalleryIndex, setModalGalleryIndex] = useState(0);
-      const [modalSection, setModalSection] =
-        useState<CardModalSection>("details");
-
-      const titleID =
-        createGalleryCardID(props.galleries[modalGalleryIndex].id) + "Modal";
 
       if (
         pluginConfig &&
@@ -33,41 +20,18 @@ PluginApi.patch.instead<IGalleryCardGrid>(
           DEFAULT.CARDS.GALLERY_CARD.ENABLED)
       )
         return [
-          <>
-            <CardGrid
-              cards={props.galleries.map((gl, i) => (
-                <GalleryCard
-                  key={i}
-                  footer={{
-                    openHandler: () => setModalOpen(!modalOpen),
-                    pluginConfig,
-                    setData: () => setModalGalleryIndex(i),
-                    setSection: setModalSection,
-                  }}
-                  gallery={gl}
-                  pluginConfig={pluginConfig}
-                  ratingSystem={stashConfig.ui.ratingSystemOptions}
-                  zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
-                />
-              ))}
-              zoomIndex={props.zoomIndex as StashCardGridZoom}
-            />
-            <CardModalWrapper
-              classname="vui-gallery-card-modal"
-              show={modalOpen}
-              titleID={titleID}
-            >
-              <GalleryCardModalContent
-                closeHandler={() => setModalOpen(false)}
-                gallery={props.galleries[modalGalleryIndex]}
+          <CardGrid
+            cards={props.galleries.map((gl, i) => (
+              <GalleryCard
+                key={i}
+                gallery={gl}
                 pluginConfig={pluginConfig}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
-                section={modalSection}
-                setSection={setModalSection}
-                titleID={titleID}
+                zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
               />
-            </CardModalWrapper>
-          </>,
+            ))}
+            zoomIndex={props.zoomIndex as StashCardGridZoom}
+          />,
         ];
     }
 
@@ -83,45 +47,17 @@ PluginApi.patch.instead<IGalleryCardProps>(
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
-      const [modalOpen, setModalOpen] = useState(false);
-      const [modalSection, setModalSection] =
-        useState<CardModalSection>("details");
-
-      const titleID = createGalleryCardID(props.gallery.id) + "Modal";
-
       if (
         pluginConfig &&
         (pluginConfig?.cards__galleryCard__enabled ??
           DEFAULT.CARDS.GALLERY_CARD.ENABLED)
       )
         return [
-          <>
-            <GalleryCard
-              {...props}
-              footer={{
-                openHandler: () => setModalOpen(!modalOpen),
-                pluginConfig,
-                setSection: setModalSection,
-              }}
-              pluginConfig={pluginConfig}
-              ratingSystem={stashConfig.ui.ratingSystemOptions}
-            />
-            <CardModalWrapper
-              classname="vui-gallery-card-modal"
-              show={modalOpen}
-              titleID={titleID}
-            >
-              <GalleryCardModalContent
-                closeHandler={() => setModalOpen(false)}
-                gallery={props.gallery}
-                pluginConfig={pluginConfig}
-                ratingSystem={stashConfig.ui.ratingSystemOptions}
-                section={modalSection}
-                setSection={setModalSection}
-                titleID={titleID}
-              />
-            </CardModalWrapper>
-          </>,
+          <GalleryCard
+            gallery={props.gallery}
+            pluginConfig={pluginConfig}
+            ratingSystem={stashConfig.ui.ratingSystemOptions}
+          />,
         ];
     }
 

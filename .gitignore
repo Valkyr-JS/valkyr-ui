@@ -1,9 +1,3 @@
 dist
 node_modules
 .env*
-
-*storybook.log
-storybook-static
-
-# May contain personal data
-mocks

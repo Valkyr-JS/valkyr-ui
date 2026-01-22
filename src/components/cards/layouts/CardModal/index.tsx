@@ -8,6 +8,7 @@ import { DEFAULT } from "@/constants";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
+const { PluginApi } = window;
 
 export interface CardModalContentProps {
   /** Optional classes added alongside the `vui-card-modal` component class. */
@@ -148,12 +149,7 @@ interface CardModalTagsSectionProps {
 export const CardModalTagsSection: React.FC<CardModalTagsSectionProps> = (
   props,
 ) => {
-  // Simple tag fallback for when plugin API isn't available, e.g. storybook
-  const TagLink = window.PluginApi?.components
-    ? window.PluginApi?.components.TagLink
-    : (props: { tag: { id: string; name: string } }) => (
-        <span className="tag-item">{props.tag.name}</span>
-      );
+  const { TagLink } = PluginApi.components;
 
   return (
     <div>

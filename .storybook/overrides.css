@@ -1,5 +1,0 @@
-/* Set rating banner backgrounds to black just to pass accessibility, as colours
-are pulled from Stash and don't meet WCAG. */
-.rating-banner {
-  background: black !important;
-}

@@ -11,20 +11,22 @@ import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Resolution from "../data/Resolution";
 import Studio from "../data/Studio";
-import { CardModalContent, CardModalTagsSection } from "../layouts/CardModal";
+import {
+  CardModalContent,
+  CardModalTagsSection,
+  CardModalWrapper,
+} from "../layouts/CardModal";
 import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
+const { PluginApi } = window;
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
    * current one ends. */
   continuePlaylist?: Maybe<boolean> | undefined;
-
-  /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: Omit<CardFooterProps, "sections">;
 
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
@@ -46,12 +48,44 @@ interface SceneCardProps {
 }
 
 const SceneCard: React.FC<SceneCardProps> = (props) => {
-  console.log(`props - '${props.scene.title || props.scene.id}': `, props);
+  const id = createSceneCardID(props.scene.id);
+
+  /* -------------------------------------------- Modal ------------------------------------------- */
+
+  const modalTitleID = id + "Modal";
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalSection, setModalSection] = useState<CardModalSection>("details");
+  const [loadSceneData, { called, loading, data }] =
+    PluginApi.GQL.useFindSceneLazyQuery({
+      variables: { id: props.scene.id },
+    });
+
+  /** Handler for opening the scene card modal. */
+  const handleOpenModal = () => {
+    // If full scene data has not yet been fetched, do so before opening the
+    // modal.
+    if (called && !loading) return setModalOpen(true);
+    loadSceneData().then(() => setModalOpen(true));
+  };
+
+  /* ------------------------------------------- Footer ------------------------------------------- */
+
+  const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.tags.length)
+    footerSections.push(["tags", props.scene.tags.length]);
+
+  const footerProps: CardFooterProps = {
+    openHandler: handleOpenModal,
+    pluginConfig: props.pluginConfig,
+    sections: footerSections,
+    setSection: setModalSection,
+  };
+
+  /* --------------------------------------------- --- -------------------------------------------- */
 
   const componentClass = "vui-scene-card";
   const userDataClass = componentClass + "__user-data";
 
-  const id = createSceneCardID(props.scene.id);
   const title = getTitleFromObject(props.scene);
   const sceneLink = makeSceneUrl({
     cont: props.continuePlaylist ?? false,
@@ -71,96 +105,111 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const footerSections: CardModalSectionData[] = [["details"]];
-  if (props.scene.tags.length)
-    footerSections.push(["tags", props.scene.tags.length]);
-  const footerProps = props.footer
-    ? { ...props.footer, sections: footerSections }
-    : undefined;
-
   return (
-    <GridCard
-      classname={componentClass}
-      footer={footerProps}
-      id={id}
-      link={sceneLink}
-      onMouseOut={() => setIsHovered(false)}
-      onMouseOver={() => setIsHovered(true)}
-      pluginConfig={props.pluginConfig}
-      thumbnail={
-        <SceneCardThumbnail
-          cardIsHovered={isHovered}
-          context="card"
-          isPortrait={isPortrait}
-          link={sceneLink}
+    <>
+      <GridCard
+        classname={componentClass}
+        footer={footerProps}
+        id={id}
+        link={sceneLink}
+        onMouseOut={() => setIsHovered(false)}
+        onMouseOver={() => setIsHovered(true)}
+        pluginConfig={props.pluginConfig}
+        thumbnail={
+          <SceneCardThumbnail
+            cardIsHovered={isHovered}
+            context="card"
+            isPortrait={isPortrait}
+            link={sceneLink}
+            pluginConfig={props.pluginConfig}
+            preview={preview}
+            rating100={props.scene.rating100}
+            ratingSystem={props.ratingSystem}
+            src={props.scene.paths.screenshot as string}
+            thumbnailBackground={
+              props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
+              DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE
+            }
+            thumbnailBackgroundStyle={
+              props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle ??
+              DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_STYLE
+            }
+            titleID={id}
+            zoomBreakpoint={props.zoomBreakpoint}
+          />
+        }
+        title={title}
+        topLine={
+          <>
+            <Studio
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              studio={props.scene.studio}
+              userBreakpoint={
+                props.pluginConfig.cards__sceneCard__studioBreakpoint ??
+                DEFAULT.CARDS.SCENE_CARD.STUDIO_BREAKPOINT
+              }
+            />
+            <div className={userDataClass}>
+              <OCount
+                context="card"
+                count={props.scene.o_counter}
+                currentBreakpoint={props.zoomBreakpoint}
+                userBreakpoint={
+                  props.pluginConfig.cards__sceneCard__oCountBreakpoint ??
+                  DEFAULT.CARDS.SCENE_CARD.O_COUNT_BREAKPOINT
+                }
+              />
+              <RatingIcon
+                context="card"
+                currentBreakpoint={props.zoomBreakpoint}
+                rating100={props.scene.rating100}
+                ratingSystem={props.ratingSystem}
+                userBreakpoint={
+                  props.pluginConfig.cards__sceneCard__ratingIconBreakpoint ??
+                  DEFAULT.CARDS.SCENE_CARD.RATING_ICON_BREAKPOINT
+                }
+              />
+              <Organized
+                context="card"
+                currentBreakpoint={props.zoomBreakpoint}
+                organized={props.scene.organized}
+                userBreakpoint={
+                  props.pluginConfig.cards__sceneCard__organizedBreakpoint ??
+                  DEFAULT.CARDS.SCENE_CARD.ORGANIZED_BREAKPOINT
+                }
+              />
+            </div>
+          </>
+        }
+      >
+        <SceneCardBody
           pluginConfig={props.pluginConfig}
-          preview={preview}
-          rating100={props.scene.rating100}
-          ratingSystem={props.ratingSystem}
-          src={props.scene.paths.screenshot as string}
-          thumbnailBackground={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
-            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE
-          }
-          thumbnailBackgroundStyle={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle ??
-            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_STYLE
-          }
-          titleID={id}
+          scene={props.scene}
           zoomBreakpoint={props.zoomBreakpoint}
         />
-      }
-      title={title}
-      topLine={
-        <>
-          <Studio
-            context="card"
-            currentBreakpoint={props.zoomBreakpoint}
-            studio={props.scene.studio}
-            userBreakpoint={
-              props.pluginConfig.cards__sceneCard__studioBreakpoint ??
-              DEFAULT.CARDS.SCENE_CARD.STUDIO_BREAKPOINT
-            }
+      </GridCard>
+      {data && (
+        <CardModalWrapper
+          classname="vui-scene-card-modal"
+          show={modalOpen}
+          titleID={modalTitleID}
+        >
+          <SceneCardModalContent
+            closeHandler={() => setModalOpen(false)}
+            continuePlaylist={props.continuePlaylist}
+            index={props.index}
+            pluginConfig={props.pluginConfig}
+            queue={props.queue}
+            ratingSystem={props.ratingSystem}
+            scene={data.findScene}
+            section={modalSection}
+            setSection={setModalSection}
+            titleID={modalTitleID}
           />
-          <div className={userDataClass}>
-            <OCount
-              context="card"
-              count={props.scene.o_counter}
-              currentBreakpoint={props.zoomBreakpoint}
-              userBreakpoint={
-                props.pluginConfig.cards__sceneCard__oCountBreakpoint ??
-                DEFAULT.CARDS.SCENE_CARD.O_COUNT_BREAKPOINT
-              }
-            />
-            <RatingIcon
-              context="card"
-              currentBreakpoint={props.zoomBreakpoint}
-              rating100={props.scene.rating100}
-              ratingSystem={props.ratingSystem}
-              userBreakpoint={
-                props.pluginConfig.cards__sceneCard__ratingIconBreakpoint ??
-                DEFAULT.CARDS.SCENE_CARD.RATING_ICON_BREAKPOINT
-              }
-            />
-            <Organized
-              context="card"
-              currentBreakpoint={props.zoomBreakpoint}
-              organized={props.scene.organized}
-              userBreakpoint={
-                props.pluginConfig.cards__sceneCard__organizedBreakpoint ??
-                DEFAULT.CARDS.SCENE_CARD.ORGANIZED_BREAKPOINT
-              }
-            />
-          </div>
-        </>
-      }
-    >
-      <SceneCardBody
-        pluginConfig={props.pluginConfig}
-        scene={props.scene}
-        zoomBreakpoint={props.zoomBreakpoint}
-      />
-    </GridCard>
+        </CardModalWrapper>
+      )}
+    </>
   );
 };
 
@@ -395,7 +444,7 @@ interface SceneCardModalContentProps {
   ratingSystem?: RatingSystemOptions;
 
   /** The Stash scene data. */
-  scene: SlimSceneDataFragment;
+  scene: Scene;
 
   /** The currently displayed modal section. */
   section: CardModalSection;
