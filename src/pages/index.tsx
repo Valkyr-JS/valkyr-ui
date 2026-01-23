@@ -45,6 +45,7 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
         input: updatedConfig,
       },
     });
+    console.log(updated);
     setPluginConfig(updated.data.configurePlugin);
   };
 
