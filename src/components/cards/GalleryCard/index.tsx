@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import cx from "classnames";
 import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
@@ -8,17 +8,16 @@ import Organized from "../data/Organized";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
-import {
-  CardModalContent,
-  CardModalTagsSection,
-  CardModalWrapper,
-} from "../layouts/CardModal";
+import { CardModalContent, CardModalTagsSection } from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
 
 interface GalleryCardProps {
+  /** Footer props. Leave `undefined` to not render the footer. */
+  footer?: Omit<CardFooterProps, "sections">;
+
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
 
@@ -33,122 +32,91 @@ interface GalleryCardProps {
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = (props) => {
-  const id = createGalleryCardID(props.gallery.id);
-
-  /* -------------------------------------------- Modal ------------------------------------------- */
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalSection, setModalSection] = useState<CardModalSection>("details");
-
-  const modalTitleID = id + "Modal";
-
-  /* ------------------------------------------- Footer ------------------------------------------- */
-
-  const footerSections: CardModalSectionData[] = [["details"]];
-  if (props.gallery.tags.length)
-    footerSections.push(["tags", props.gallery.tags.length]);
-
-  const footerProps: CardFooterProps = {
-    openHandler: () => setModalOpen(!modalOpen),
-    pluginConfig: props.pluginConfig,
-    sections: footerSections,
-    setSection: setModalSection,
-  };
-
-  /* --------------------------------------------- --- -------------------------------------------- */
+  console.log(`props - '${props.gallery.title || props.gallery.id}': `, props);
 
   const componentClass = "vui-gallery-card";
   const userDataClass = componentClass + "__user-data";
 
+  const id = createGalleryCardID(props.gallery.id);
   const galleryLink = `/galleries/${props.gallery.id}`;
   const title = getTitleFromObject(props.gallery);
 
+  const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.tags.length)
+    footerSections.push(["tags", props.gallery.tags.length]);
+  const footerProps = props.footer
+    ? { ...props.footer, sections: footerSections }
+    : undefined;
+
   return (
-    <>
-      <GridCard
-        classname={componentClass}
-        footer={footerProps}
-        id={id}
-        link={galleryLink}
-        pluginConfig={props.pluginConfig}
-        thumbnail={
-          <GalleryCardThumbnail
-            context="card"
-            link={galleryLink}
-            pluginConfig={props.pluginConfig}
-            rating100={props.gallery.rating100}
-            ratingSystem={props.ratingSystem}
-            src={props.gallery.paths.cover}
-            thumbnailBackground={
-              props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
-              DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE
-            }
-            thumbnailBackgroundStyle={
-              props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle ??
-              DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_STYLE
-            }
-            titleID={id}
-            zoomBreakpoint={props.zoomBreakpoint}
-          />
-        }
-        title={title}
-        topLine={
-          <>
-            <Studio
-              context="card"
-              currentBreakpoint={props.zoomBreakpoint}
-              studio={props.gallery.studio}
-              userBreakpoint={
-                props.pluginConfig.cards__galleryCard__studioBreakpoint ??
-                DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
-              }
-            />
-            <div className={userDataClass}>
-              <RatingIcon
-                context="card"
-                currentBreakpoint={props.zoomBreakpoint}
-                rating100={props.gallery.rating100}
-                ratingSystem={props.ratingSystem}
-                userBreakpoint={
-                  props.pluginConfig.cards__galleryCard__ratingIconBreakpoint ??
-                  DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_BREAKPOINT
-                }
-              />
-              <Organized
-                context="card"
-                currentBreakpoint={props.zoomBreakpoint}
-                organized={props.gallery.organized}
-                userBreakpoint={
-                  props.pluginConfig.cards__galleryCard__organizedBreakpoint ??
-                  DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_BREAKPOINT
-                }
-              />
-            </div>
-          </>
-        }
-      >
-        <GalleryCardBody
-          gallery={props.gallery}
+    <GridCard
+      classname={componentClass}
+      footer={footerProps}
+      id={id}
+      link={galleryLink}
+      pluginConfig={props.pluginConfig}
+      thumbnail={
+        <GalleryCardThumbnail
+          context="card"
+          link={galleryLink}
           pluginConfig={props.pluginConfig}
+          rating100={props.gallery.rating100}
+          ratingSystem={props.ratingSystem}
+          src={props.gallery.paths.cover}
+          thumbnailBackground={
+            props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
+            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE
+          }
+          thumbnailBackgroundStyle={
+            props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle ??
+            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_STYLE
+          }
+          titleID={id}
           zoomBreakpoint={props.zoomBreakpoint}
         />
-      </GridCard>
-      <CardModalWrapper
-        classname="vui-gallery-card-modal"
-        show={modalOpen}
-        titleID={modalTitleID}
-      >
-        <GalleryCardModalContent
-          closeHandler={() => setModalOpen(false)}
-          gallery={props.gallery}
-          pluginConfig={props.pluginConfig}
-          ratingSystem={props.ratingSystem}
-          section={modalSection}
-          setSection={setModalSection}
-          titleID={modalTitleID}
-        />
-      </CardModalWrapper>
-    </>
+      }
+      title={title}
+      topLine={
+        <>
+          <Studio
+            context="card"
+            currentBreakpoint={props.zoomBreakpoint}
+            studio={props.gallery.studio}
+            userBreakpoint={
+              props.pluginConfig.cards__galleryCard__studioBreakpoint ??
+              DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
+            }
+          />
+          <div className={userDataClass}>
+            <RatingIcon
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              rating100={props.gallery.rating100}
+              ratingSystem={props.ratingSystem}
+              userBreakpoint={
+                props.pluginConfig.cards__galleryCard__ratingIconBreakpoint ??
+                DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_BREAKPOINT
+              }
+            />
+            <Organized
+              context="card"
+              currentBreakpoint={props.zoomBreakpoint}
+              organized={props.gallery.organized}
+              userBreakpoint={
+                props.pluginConfig.cards__galleryCard__organizedBreakpoint ??
+                DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_BREAKPOINT
+              }
+            />
+          </div>
+        </>
+      }
+    >
+      <GalleryCardBody
+        gallery={props.gallery}
+        pluginConfig={props.pluginConfig}
+        zoomBreakpoint={props.zoomBreakpoint}
+      />
+    </GridCard>
   );
 };
 
