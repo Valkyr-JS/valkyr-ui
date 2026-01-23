@@ -5,7 +5,10 @@ import SceneCard, {
   createSceneCardID,
   SceneCardModalContent,
 } from "@/components/cards/SceneCard";
-import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
+import {
+  CardModalNavigation,
+  CardModalWrapper,
+} from "@/components/cards/layouts/CardModal";
 import { DEFAULT } from "@/constants";
 const { PluginApi } = window;
 
@@ -33,29 +36,66 @@ PluginApi.patch.instead<ISceneCardGrid>(
       const titleID =
         createSceneCardID(props.scenes[modalSceneIndex].id) + "Modal";
 
+      /** Checks if full scene data is missing, and updates it */
+      const updateFullData = async (index: number) => {
+        if (fullData[index] === null) {
+          // If not, fetch it
+          const galleryID = props.scenes[index].id;
+          await loadSceneData({ variables: { id: galleryID } }).then(
+            ({ data }) => {
+              if (data) {
+                // Add the fetched data to the state
+                const updatedData = fullData.map((d, i) =>
+                  i === index ? data.findScene : d,
+                );
+                setFullData(updatedData);
+              }
+            },
+          );
+        }
+      };
+
       /** Handle the click event to open the modal. */
       const handleOpenModal = async (index: number) => {
         // Set the modal index for reference
         setModalSceneIndex(index);
 
-        // Check if the data has been fetched
-        if (fullData[index] === null) {
-          // If not, fetch it
-          const sceneID = props.scenes[index].id;
-          loadSceneData({ variables: { id: sceneID } }).then(({ data }) => {
-            if (data) {
-              // Add the fetched data to the state
-              const updatedData = fullData.map((d, i) =>
-                i === index ? data.findScene : d,
-              );
-              setFullData(updatedData);
+        // Ensure data is available
+        await updateFullData(index);
 
-              // Open the modal
-              setModalOpen(true);
-            }
-          });
-        } else setModalOpen(true);
+        // Open the modal
+        setModalOpen(true);
       };
+
+      const navigationProps: CardModalNavigation | undefined =
+        props.scenes.length > 1
+          ? {
+              next: {
+                disabled: modalSceneIndex === props.scenes.length - 1,
+                onClick: async () => {
+                  const nextIndex = modalSceneIndex + 1;
+
+                  // Ensure data is available
+                  await updateFullData(nextIndex);
+
+                  // Open the modal
+                  setModalSceneIndex(nextIndex);
+                },
+              },
+              prev: {
+                disabled: modalSceneIndex === 0,
+                onClick: async () => {
+                  const prevIndex = modalSceneIndex - 1;
+
+                  // Ensure data is available
+                  await updateFullData(prevIndex);
+
+                  // Open the modal
+                  setModalSceneIndex(prevIndex);
+                },
+              },
+            }
+          : undefined;
 
       if (
         pluginConfig &&
@@ -97,6 +137,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                 closeHandler={() => setModalOpen(false)}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
                 index={modalSceneIndex}
+                navigation={navigationProps}
                 pluginConfig={pluginConfig}
                 queue={props.queue}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
