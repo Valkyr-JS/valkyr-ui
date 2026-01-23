@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { LazyQueryResultTuple, OperationVariables } from "@apollo/client";
 import CardGrid from "@/components/cards/layouts/CardGrid";
 import GalleryCard, {
   createGalleryCardID,
@@ -6,7 +7,6 @@ import GalleryCard, {
 } from "@/components/cards/GalleryCard";
 import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
 import { DEFAULT } from "@/constants";
-import { LazyQueryResultTuple, OperationVariables } from "@apollo/client";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<IGalleryCardGrid>(
