@@ -32,8 +32,6 @@ interface GalleryCardProps {
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = (props) => {
-  console.log(`props - '${props.gallery.title || props.gallery.id}': `, props);
-
   const componentClass = "vui-gallery-card";
   const userDataClass = componentClass + "__user-data";
 
@@ -261,7 +259,7 @@ interface GalleryCardModalContentProps {
   closeHandler: () => void;
 
   /** The Stash gallery data. */
-  gallery: SlimGalleryDataFragment;
+  gallery: Gallery;
 
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;

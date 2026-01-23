@@ -6,6 +6,7 @@ import GalleryCard, {
 } from "@/components/cards/GalleryCard";
 import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
 import { DEFAULT } from "@/constants";
+import { LazyQueryResultTuple, OperationVariables } from "@apollo/client";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<IGalleryCardGrid>(
@@ -13,7 +14,6 @@ PluginApi.patch.instead<IGalleryCardGrid>(
   function (props, _, Original) {
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
-      console.log("IGalleryCardGrid: ", props);
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
@@ -21,9 +21,41 @@ PluginApi.patch.instead<IGalleryCardGrid>(
       const [modalGalleryIndex, setModalGalleryIndex] = useState(0);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
+      const [fullData, setFullData] = useState<(Gallery | null)[]>(
+        props.galleries.map(() => null),
+      );
+
+      const [loadGalleryData]: LazyQueryResultTuple<
+        { findGallery: Gallery },
+        OperationVariables
+      > = PluginApi.GQL.useFindGalleryLazyQuery();
 
       const titleID =
         createGalleryCardID(props.galleries[modalGalleryIndex].id) + "Modal";
+
+      /** Handle the click event to open the modal. */
+      const handleOpenModal = async (index: number) => {
+        // Set the modal index for reference
+        setModalGalleryIndex(index);
+
+        // Check if the data has been fetched
+        if (fullData[index] === null) {
+          // If not, fetch it
+          const galleryID = props.galleries[index].id;
+          loadGalleryData({ variables: { id: galleryID } }).then(({ data }) => {
+            if (data) {
+              // Add the fetched data to the state
+              const updatedData = fullData.map((d, i) =>
+                i === index ? data.findGallery : d,
+              );
+              setFullData(updatedData);
+
+              // Open the modal
+              setModalOpen(true);
+            }
+          });
+        } else setModalOpen(true);
+      };
 
       if (
         pluginConfig &&
@@ -39,9 +71,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                 <GalleryCard
                   key={i}
                   footer={{
-                    openHandler: () => setModalOpen(!modalOpen),
+                    openHandler: () => handleOpenModal(i),
                     pluginConfig,
-                    setData: () => setModalGalleryIndex(i),
                     setSection: setModalSection,
                   }}
                   gallery={gl}
@@ -59,7 +90,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
             >
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
-                gallery={props.galleries[modalGalleryIndex]}
+                gallery={fullData[modalGalleryIndex] as Gallery}
                 pluginConfig={pluginConfig}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
                 section={modalSection}
