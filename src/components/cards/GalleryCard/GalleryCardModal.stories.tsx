@@ -2,6 +2,7 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
 import { GalleryCardModalContent } from ".";
+import landscapeThumbnail from "../../../../mocks/galleries/landscapeThumbnail.json";
 import portraitThumbnail from "../../../../mocks/galleries/portraitThumbnail.json";
 
 const meta = {
@@ -38,7 +39,7 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultSettings: Story = {
   args: {
-    gallery: portraitThumbnail as unknown as Gallery,
+    gallery: landscapeThumbnail as unknown as Gallery,
     titleID: "gallery4521Modal",
   },
   play: async ({ args, canvasElement }) => {
@@ -51,7 +52,7 @@ export const DefaultSettings: Story = {
     await expect(studioLink).toBeInTheDocument();
 
     // Date should render
-    const date = canvas.getByText("Date: 3 March 2016");
+    const date = canvas.getByText("Date: 5 March 2021");
     await expect(date).toBeInTheDocument();
   },
 };

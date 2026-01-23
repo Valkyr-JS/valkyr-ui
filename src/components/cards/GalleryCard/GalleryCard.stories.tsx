@@ -50,7 +50,7 @@ const footerProps = {
 
 export const FullData: Story = {
   args: {
-    gallery: portraitThumbnail as unknown as SlimGalleryDataFragment,
+    gallery: landscapeThumbnail as unknown as SlimGalleryDataFragment,
   },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
@@ -62,7 +62,7 @@ export const FullData: Story = {
     await expect(studioLink).toBeInTheDocument();
 
     // Date should render
-    const date = canvas.getByText("Date: 7 October 2025");
+    const date = canvas.getByText("Date: 5 March 2021");
     await expect(date).toBeInTheDocument();
   },
 };
