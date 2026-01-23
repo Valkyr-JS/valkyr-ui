@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
+import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import Details from ".";
 
 const detailsText =
@@ -15,18 +16,40 @@ const meta = {
     details: detailsText,
   },
   argTypes: {
-    currentBreakpoint: {
-      control: { type: "range", min: 0, max: 3 },
-    },
-    userBreakpoint: {
-      control: { type: "range", min: -1, max: 3 },
-    },
+    ...dataComponentArgTypes,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof Details>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const MaxLines3: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    maxLines: 3,
+    userBreakpoint: 2,
+  },
+};
+
+export const MaxLines1: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    maxLines: 1,
+    userBreakpoint: 2,
+  },
+};
+
+export const MaxLines0: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    maxLines: 0,
+    userBreakpoint: 2,
+  },
+};
 
 export const AboveZoomBreakpoint: Story = {
   args: {
@@ -70,18 +93,7 @@ export const EqualsZoomBreakpoint: Story = {
   },
 };
 
-export const ModalContext: Story = {
-  args: {
-    context: "modal",
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const details = canvas.getByText(detailsText);
-    await expect(details).toBeInTheDocument();
-  },
-};
-
-export const NoData: Story = {
+export const NoDataAvailable: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
@@ -96,7 +108,20 @@ export const NoData: Story = {
   },
 };
 
-export const UserDisabled: Story = {
+export const WithoutZoomData: Story = {
+  args: {
+    context: "card",
+    maxLines: 3,
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const details = canvas.getByText(detailsText);
+    await expect(details).toBeInTheDocument();
+  },
+};
+
+export const CardUserDisabled: Story = {
   args: {
     context: "card",
     maxLines: 3,
@@ -109,15 +134,25 @@ export const UserDisabled: Story = {
   },
 };
 
-export const WithoutZoomData: Story = {
+export const ModalContext: Story = {
   args: {
-    context: "card",
-    maxLines: 3,
-    userBreakpoint: 0,
+    context: "modal",
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const details = canvas.getByText(detailsText);
     await expect(details).toBeInTheDocument();
+  },
+};
+
+export const ModalContextNoData: Story = {
+  args: {
+    context: "modal",
+    details: null,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const details = canvas.queryByText(detailsText);
+    await expect(details).toBeNull();
   },
 };
