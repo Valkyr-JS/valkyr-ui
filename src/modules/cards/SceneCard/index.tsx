@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { LazyQueryResultTuple, OperationVariables } from "@apollo/client";
 import CardGrid from "@/components/cards/layouts/CardGrid";
 import SceneCard, {
   createSceneCardID,
   SceneCardModalContent,
 } from "@/components/cards/SceneCard";
-import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
+import {
+  CardModalNavigation,
+  CardModalWrapper,
+} from "@/components/cards/layouts/CardModal";
 import { DEFAULT } from "@/constants";
 const { PluginApi } = window;
 
@@ -13,7 +17,6 @@ PluginApi.patch.instead<ISceneCardGrid>(
   function (props, _, Original) {
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
-      console.log("ISceneCardGrid: ", props);
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
@@ -21,9 +24,78 @@ PluginApi.patch.instead<ISceneCardGrid>(
       const [modalSceneIndex, setModalSceneIndex] = useState(0);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
+      const [fullData, setFullData] = useState<(Scene | null)[]>(
+        props.scenes.map(() => null),
+      );
+
+      const [loadSceneData]: LazyQueryResultTuple<
+        { findScene: Scene },
+        OperationVariables
+      > = PluginApi.GQL.useFindSceneLazyQuery();
 
       const titleID =
         createSceneCardID(props.scenes[modalSceneIndex].id) + "Modal";
+
+      /** Checks if full scene data is missing, and updates it */
+      const updateFullData = async (index: number) => {
+        if (fullData[index] === null) {
+          // If not, fetch it
+          const galleryID = props.scenes[index].id;
+          await loadSceneData({ variables: { id: galleryID } }).then(
+            ({ data }) => {
+              if (data) {
+                // Add the fetched data to the state
+                const updatedData = fullData.map((d, i) =>
+                  i === index ? data.findScene : d,
+                );
+                setFullData(updatedData);
+              }
+            },
+          );
+        }
+      };
+
+      /** Handle the click event to open the modal. */
+      const handleOpenModal = async (index: number) => {
+        // Set the modal index for reference
+        setModalSceneIndex(index);
+
+        // Ensure data is available
+        await updateFullData(index);
+
+        // Open the modal
+        setModalOpen(true);
+      };
+
+      const navigationProps: CardModalNavigation | undefined =
+        props.scenes.length > 1
+          ? {
+              next: {
+                disabled: modalSceneIndex === props.scenes.length - 1,
+                onClick: async () => {
+                  const nextIndex = modalSceneIndex + 1;
+
+                  // Ensure data is available
+                  await updateFullData(nextIndex);
+
+                  // Open the modal
+                  setModalSceneIndex(nextIndex);
+                },
+              },
+              prev: {
+                disabled: modalSceneIndex === 0,
+                onClick: async () => {
+                  const prevIndex = modalSceneIndex - 1;
+
+                  // Ensure data is available
+                  await updateFullData(prevIndex);
+
+                  // Open the modal
+                  setModalSceneIndex(prevIndex);
+                },
+              },
+            }
+          : undefined;
 
       if (
         pluginConfig &&
@@ -42,9 +114,8 @@ PluginApi.patch.instead<ISceneCardGrid>(
                     stashConfig.interface.continuePlaylistDefault
                   }
                   footer={{
-                    openHandler: () => setModalOpen(!modalOpen),
+                    openHandler: () => handleOpenModal(i),
                     pluginConfig,
-                    setData: () => setModalSceneIndex(i),
                     setSection: setModalSection,
                   }}
                   index={i}
@@ -66,10 +137,11 @@ PluginApi.patch.instead<ISceneCardGrid>(
                 closeHandler={() => setModalOpen(false)}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
                 index={modalSceneIndex}
+                navigation={navigationProps}
                 pluginConfig={pluginConfig}
                 queue={props.queue}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
-                scene={props.scenes[modalSceneIndex]}
+                scene={fullData[modalSceneIndex] as Scene}
                 section={modalSection}
                 setSection={setModalSection}
                 titleID={titleID}
@@ -94,8 +166,31 @@ PluginApi.patch.instead<ISceneCardProps>(
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
+      const [fullData, setFullData] = useState<Scene | null>(null);
+
+      const [loadSceneData]: LazyQueryResultTuple<
+        { findScene: Scene },
+        OperationVariables
+      > = PluginApi.GQL.useFindSceneLazyQuery();
 
       const titleID = createSceneCardID(props.scene.id) + "Modal";
+
+      /** Handle the click event to open the modal. */
+      const handleOpenModal = async () => {
+        // Check if the data has been fetched
+        if (fullData === null) {
+          // If not, fetch it
+          const sceneID = props.scene.id;
+          loadSceneData({ variables: { id: sceneID } }).then(({ data }) => {
+            if (data) {
+              setFullData(data.findScene);
+
+              // Open the modal
+              setModalOpen(true);
+            }
+          });
+        } else setModalOpen(true);
+      };
 
       if (
         pluginConfig &&
@@ -106,7 +201,7 @@ PluginApi.patch.instead<ISceneCardProps>(
             <SceneCard
               continuePlaylist={stashConfig.interface.continuePlaylistDefault}
               footer={{
-                openHandler: () => setModalOpen(!modalOpen),
+                openHandler: () => handleOpenModal(),
                 pluginConfig,
                 setSection: setModalSection,
               }}
@@ -128,7 +223,7 @@ PluginApi.patch.instead<ISceneCardProps>(
                 pluginConfig={pluginConfig}
                 queue={props.queue}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
-                scene={props.scene}
+                scene={fullData as Scene}
                 section={modalSection}
                 setSection={setModalSection}
                 titleID={titleID}

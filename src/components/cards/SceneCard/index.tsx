@@ -11,7 +11,11 @@ import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Resolution from "../data/Resolution";
 import Studio from "../data/Studio";
-import { CardModalContent, CardModalTagsSection } from "../layouts/CardModal";
+import {
+  CardModalContent,
+  CardModalNavigation,
+  CardModalTagsSection,
+} from "../layouts/CardModal";
 import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
@@ -46,8 +50,6 @@ interface SceneCardProps {
 }
 
 const SceneCard: React.FC<SceneCardProps> = (props) => {
-  console.log(`props - '${props.scene.title || props.scene.id}': `, props);
-
   const componentClass = "vui-scene-card";
   const userDataClass = componentClass + "__user-data";
 
@@ -385,6 +387,9 @@ interface SceneCardModalContentProps {
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
 
+  /** Properties required for navigating in the modal. */
+  navigation?: CardModalNavigation;
+
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
 
@@ -395,7 +400,7 @@ interface SceneCardModalContentProps {
   ratingSystem?: RatingSystemOptions;
 
   /** The Stash scene data. */
-  scene: SlimSceneDataFragment;
+  scene: Scene;
 
   /** The currently displayed modal section. */
   section: CardModalSection;
@@ -437,6 +442,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     <CardModalContent
       closeHandler={props.closeHandler}
       link={sceneLink}
+      navigation={props.navigation}
       pluginConfig={props.pluginConfig}
       section={props.section}
       sections={sections}

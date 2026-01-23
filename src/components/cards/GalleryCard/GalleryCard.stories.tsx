@@ -4,8 +4,9 @@ import { expect, fn, within } from "storybook/test";
 import GalleryCard from ".";
 
 // Mock data
-import gallery4521 from "../../../../mocks/galleries/4521.json";
-import gallery17791 from "../../../../mocks/galleries/17791.json";
+import landscapeThumbnail from "../../../../mocks/galleries/landscapeThumbnail.json";
+import portraitThumbnail from "../../../../mocks/galleries/portraitThumbnail.json";
+// import squareThumbnail from "../../../../mocks/galleries/squareThumbnail.json";
 
 const pluginConfig = {
   cards__galleryCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
@@ -49,7 +50,7 @@ const footerProps = {
 
 export const FullData: Story = {
   args: {
-    gallery: gallery17791 as SlimGalleryDataFragment,
+    gallery: landscapeThumbnail as unknown as SlimGalleryDataFragment,
   },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
@@ -61,14 +62,14 @@ export const FullData: Story = {
     await expect(studioLink).toBeInTheDocument();
 
     // Date should render
-    const date = canvas.getByText("Date: 7 October 2025");
+    const date = canvas.getByText("Date: 5 March 2021");
     await expect(date).toBeInTheDocument();
   },
 };
 
 export const LandscapeThumbnail: Story = {
   args: {
-    gallery: gallery17791 as SlimGalleryDataFragment,
+    gallery: landscapeThumbnail as unknown as SlimGalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -84,7 +85,7 @@ export const LandscapeThumbnail: Story = {
 export const LandscapeThumbnailWithFooter: Story = {
   args: {
     footer: footerProps,
-    gallery: gallery17791 as SlimGalleryDataFragment,
+    gallery: landscapeThumbnail as unknown as SlimGalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -99,7 +100,7 @@ export const LandscapeThumbnailWithFooter: Story = {
 
 export const PortraitThumbnail: Story = {
   args: {
-    gallery: gallery4521 as SlimGalleryDataFragment,
+    gallery: portraitThumbnail as unknown as SlimGalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -115,7 +116,7 @@ export const PortraitThumbnail: Story = {
 export const PortraitThumbnailWithFooter: Story = {
   args: {
     footer: footerProps,
-    gallery: gallery4521 as SlimGalleryDataFragment,
+    gallery: portraitThumbnail as unknown as SlimGalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -130,7 +131,7 @@ export const PortraitThumbnailWithFooter: Story = {
 
 export const PortraitThumbnailWithThumbnailBackground: Story = {
   args: {
-    gallery: gallery4521 as SlimGalleryDataFragment,
+    gallery: portraitThumbnail as unknown as SlimGalleryDataFragment,
     pluginConfig: {
       ...pluginConfig,
       cards__galleryCard__thumbnailBackgroundImage: true,
@@ -140,7 +141,7 @@ export const PortraitThumbnailWithThumbnailBackground: Story = {
 
 export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
   args: {
-    gallery: gallery4521 as SlimGalleryDataFragment,
+    gallery: portraitThumbnail as unknown as SlimGalleryDataFragment,
     pluginConfig: {
       ...pluginConfig,
       cards__galleryCard__thumbnailBackgroundStyle: "black",

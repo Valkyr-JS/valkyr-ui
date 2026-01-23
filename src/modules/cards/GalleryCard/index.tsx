@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { LazyQueryResultTuple, OperationVariables } from "@apollo/client";
 import CardGrid from "@/components/cards/layouts/CardGrid";
 import GalleryCard, {
   createGalleryCardID,
   GalleryCardModalContent,
 } from "@/components/cards/GalleryCard";
-import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
+import {
+  CardModalNavigation,
+  CardModalWrapper,
+} from "@/components/cards/layouts/CardModal";
 import { DEFAULT } from "@/constants";
 const { PluginApi } = window;
 
@@ -13,7 +17,6 @@ PluginApi.patch.instead<IGalleryCardGrid>(
   function (props, _, Original) {
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
-      console.log("IGalleryCardGrid: ", props);
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
       const pluginConfig = stashConfig.plugins["valkyr-ui"];
 
@@ -21,9 +24,78 @@ PluginApi.patch.instead<IGalleryCardGrid>(
       const [modalGalleryIndex, setModalGalleryIndex] = useState(0);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
+      const [fullData, setFullData] = useState<(Gallery | null)[]>(
+        props.galleries.map(() => null),
+      );
+
+      const [loadGalleryData]: LazyQueryResultTuple<
+        { findGallery: Gallery },
+        OperationVariables
+      > = PluginApi.GQL.useFindGalleryLazyQuery();
 
       const titleID =
         createGalleryCardID(props.galleries[modalGalleryIndex].id) + "Modal";
+
+      /** Checks if full gallery data is missing, and updates it */
+      const updateFullData = async (index: number) => {
+        if (fullData[index] === null) {
+          // If not, fetch it
+          const galleryID = props.galleries[index].id;
+          await loadGalleryData({ variables: { id: galleryID } }).then(
+            ({ data }) => {
+              if (data) {
+                // Add the fetched data to the state
+                const updatedData = fullData.map((d, i) =>
+                  i === index ? data.findGallery : d,
+                );
+                setFullData(updatedData);
+              }
+            },
+          );
+        }
+      };
+
+      /** Handle the click event to open the modal. */
+      const handleOpenModal = async (index: number) => {
+        // Set the modal index for reference
+        setModalGalleryIndex(index);
+
+        // Ensure data is available
+        await updateFullData(index);
+
+        // Open the modal
+        setModalOpen(true);
+      };
+
+      const navigationProps: CardModalNavigation | undefined =
+        props.galleries.length > 1
+          ? {
+              next: {
+                disabled: modalGalleryIndex === props.galleries.length - 1,
+                onClick: async () => {
+                  const nextIndex = modalGalleryIndex + 1;
+
+                  // Ensure data is available
+                  await updateFullData(nextIndex);
+
+                  // Open the modal
+                  setModalGalleryIndex(nextIndex);
+                },
+              },
+              prev: {
+                disabled: modalGalleryIndex === 0,
+                onClick: async () => {
+                  const prevIndex = modalGalleryIndex - 1;
+
+                  // Ensure data is available
+                  await updateFullData(prevIndex);
+
+                  // Open the modal
+                  setModalGalleryIndex(prevIndex);
+                },
+              },
+            }
+          : undefined;
 
       if (
         pluginConfig &&
@@ -39,9 +111,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                 <GalleryCard
                   key={i}
                   footer={{
-                    openHandler: () => setModalOpen(!modalOpen),
+                    openHandler: () => handleOpenModal(i),
                     pluginConfig,
-                    setData: () => setModalGalleryIndex(i),
                     setSection: setModalSection,
                   }}
                   gallery={gl}
@@ -59,7 +130,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
             >
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
-                gallery={props.galleries[modalGalleryIndex]}
+                gallery={fullData[modalGalleryIndex] as Gallery}
+                navigation={navigationProps}
                 pluginConfig={pluginConfig}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
                 section={modalSection}

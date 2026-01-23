@@ -80,9 +80,6 @@ export interface CardFooterProps {
   /** The sections available to the modal */
   sections: CardModalSectionData[];
 
-  /** Handler that sets data set for the modal. */
-  setData?: () => void;
-
   /** Handler that sets the currently displayed modal section. */
   setSection: (section: CardModalSection) => void;
 }
@@ -94,13 +91,11 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
   const footerClass = componentClass + "__footer";
 
   const handleOpenDetailsSection = () => {
-    if (props.setData !== undefined) props.setData();
     props.setSection("details");
     props.openHandler();
   };
 
   const handleOpenTagsSection = () => {
-    if (props.setData !== undefined) props.setData();
     props.setSection("tags");
     props.openHandler();
   };

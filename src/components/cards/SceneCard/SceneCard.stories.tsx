@@ -4,8 +4,8 @@ import { expect, fn, within } from "storybook/test";
 import SceneCard from ".";
 
 // Mock data
-import scene2414 from "../../../../mocks/scenes/2414.json";
-import scene6439 from "../../../../mocks/scenes/6439.json";
+import landscapeCover from "../../../../mocks/scenes/landscapeCover.json";
+import portraitCover from "../../../../mocks/scenes/portraitCover.json";
 
 const pluginConfig = {
   cards__sceneCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
@@ -48,7 +48,7 @@ const footerProps = {
 
 export const FullData: Story = {
   args: {
-    scene: scene2414 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as SlimSceneDataFragment,
   },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
@@ -60,14 +60,14 @@ export const FullData: Story = {
     await expect(studioLink).toBeInTheDocument();
 
     // Date should render
-    const date = canvas.getByText("Date: 20 September 2020");
+    const date = canvas.getByText("Date: 20 July 2020");
     await expect(date).toBeInTheDocument();
   },
 };
 
 export const LandscapeThumbnail: Story = {
   args: {
-    scene: scene2414 as SlimSceneDataFragment,
+    scene: landscapeCover as unknown as SlimSceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -83,7 +83,7 @@ export const LandscapeThumbnail: Story = {
 export const LandscapeThumbnailWithFooter: Story = {
   args: {
     footer: footerProps,
-    scene: scene2414 as SlimSceneDataFragment,
+    scene: landscapeCover as unknown as SlimSceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -98,7 +98,7 @@ export const LandscapeThumbnailWithFooter: Story = {
 
 export const PortraitThumbnail: Story = {
   args: {
-    scene: scene6439 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as SlimSceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -114,7 +114,7 @@ export const PortraitThumbnail: Story = {
 export const PortraitThumbnailWithFooter: Story = {
   args: {
     footer: footerProps,
-    scene: scene6439 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as SlimSceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -129,7 +129,7 @@ export const PortraitThumbnailWithFooter: Story = {
 
 export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
   args: {
-    scene: scene6439 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as SlimSceneDataFragment,
     pluginConfig: {
       ...pluginConfig,
       cards__sceneCard__thumbnailBackgroundImage: true,
@@ -139,7 +139,7 @@ export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
 
 export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
   args: {
-    scene: scene6439 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as SlimSceneDataFragment,
     pluginConfig: {
       ...pluginConfig,
       cards__sceneCard__thumbnailBackgroundStyle: "black",

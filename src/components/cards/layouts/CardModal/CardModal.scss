@@ -7,6 +7,11 @@ $prefix: variables.$prefix;
     grid-row: body-top / body-bottom;
   }
 
+  &__footer-buttons {
+    display: flex;
+    gap: 5px;
+  }
+
   .modal-content {
     overflow: hidden;
   }

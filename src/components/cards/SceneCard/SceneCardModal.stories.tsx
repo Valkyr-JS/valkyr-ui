@@ -2,8 +2,10 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
 import { SceneCardModalContent } from ".";
-import scene2414 from "../../../../mocks/scenes/2414.json";
-import scene6439 from "../../../../mocks/scenes/6439.json";
+
+// Mock data
+import landscapeCover from "../../../../mocks/scenes/landscapeCover.json";
+import portraitCover from "../../../../mocks/scenes/portraitCover.json";
 
 const meta = {
   title: "Components/Cards/Scene card modal content",
@@ -39,7 +41,7 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultSettings: Story = {
   args: {
-    scene: scene2414 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as Scene,
     titleID: "scene2414Modal",
   },
   play: async ({ args, canvasElement }) => {
@@ -52,14 +54,14 @@ export const DefaultSettings: Story = {
     await expect(studioLink).toBeInTheDocument();
 
     // Date should render
-    const date = canvas.getByText("Date: 20 September 2020");
+    const date = canvas.getByText("Date: 20 July 2020");
     await expect(date).toBeInTheDocument();
   },
 };
 
 export const TagSection: Story = {
   args: {
-    scene: scene2414 as SlimSceneDataFragment,
+    scene: landscapeCover as unknown as Scene,
     section: "tags",
     titleID: "scene2414Modal",
   },
@@ -67,7 +69,7 @@ export const TagSection: Story = {
 
 export const PortraitThumbnail: Story = {
   args: {
-    scene: scene6439 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as Scene,
     titleID: "scene6439Modal",
   },
 };
@@ -77,7 +79,7 @@ export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundImage: true,
     },
-    scene: scene6439 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as Scene,
     titleID: "scene6439Modal",
   },
 };
@@ -87,7 +89,7 @@ export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundStyle: "black",
     },
-    scene: scene6439 as SlimSceneDataFragment,
+    scene: portraitCover as unknown as Scene,
     titleID: "scene6439Modal",
   },
 };
