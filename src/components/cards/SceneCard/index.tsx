@@ -46,8 +46,6 @@ interface SceneCardProps {
 }
 
 const SceneCard: React.FC<SceneCardProps> = (props) => {
-  console.log(`props - '${props.scene.title || props.scene.id}': `, props);
-
   const componentClass = "vui-scene-card";
   const userDataClass = componentClass + "__user-data";
 
