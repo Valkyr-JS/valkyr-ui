@@ -36,28 +36,35 @@ PluginApi.patch.instead<IGalleryCardGrid>(
       const titleID =
         createGalleryCardID(props.galleries[modalGalleryIndex].id) + "Modal";
 
+      /** Checks if full gallery data is missing, and updates it */
+      const updateFullData = async (index: number) => {
+        if (fullData[index] === null) {
+          // If not, fetch it
+          const galleryID = props.galleries[index].id;
+          await loadGalleryData({ variables: { id: galleryID } }).then(
+            ({ data }) => {
+              if (data) {
+                // Add the fetched data to the state
+                const updatedData = fullData.map((d, i) =>
+                  i === index ? data.findGallery : d,
+                );
+                setFullData(updatedData);
+              }
+            },
+          );
+        }
+      };
+
       /** Handle the click event to open the modal. */
       const handleOpenModal = async (index: number) => {
         // Set the modal index for reference
         setModalGalleryIndex(index);
 
-        // Check if the data has been fetched
-        if (fullData[index] === null) {
-          // If not, fetch it
-          const galleryID = props.galleries[index].id;
-          loadGalleryData({ variables: { id: galleryID } }).then(({ data }) => {
-            if (data) {
-              // Add the fetched data to the state
-              const updatedData = fullData.map((d, i) =>
-                i === index ? data.findGallery : d,
-              );
-              setFullData(updatedData);
+        // Ensure data is available
+        await updateFullData(index);
 
-              // Open the modal
-              setModalOpen(true);
-            }
-          });
-        } else setModalOpen(true);
+        // Open the modal
+        setModalOpen(true);
       };
 
       const navigationProps: CardModalNavigation | undefined =
@@ -65,50 +72,26 @@ PluginApi.patch.instead<IGalleryCardGrid>(
           ? {
               next: {
                 disabled: modalGalleryIndex === props.galleries.length - 1,
-                onClick: () => {
+                onClick: async () => {
                   const nextIndex = modalGalleryIndex + 1;
-                  if (fullData[nextIndex] === null) {
-                    // If not, fetch it
-                    const galleryID = props.galleries[nextIndex].id;
-                    loadGalleryData({ variables: { id: galleryID } }).then(
-                      ({ data }) => {
-                        if (data) {
-                          // Add the fetched data to the state
-                          const updatedData = fullData.map((d, i) =>
-                            i === nextIndex ? data.findGallery : d,
-                          );
-                          setFullData(updatedData);
 
-                          // Open the modal
-                          setModalGalleryIndex(nextIndex);
-                        }
-                      },
-                    );
-                  } else setModalGalleryIndex(nextIndex);
+                  // Ensure data is available
+                  await updateFullData(nextIndex);
+
+                  // Open the modal
+                  setModalGalleryIndex(nextIndex);
                 },
               },
               prev: {
                 disabled: modalGalleryIndex === 0,
-                onClick: () => {
+                onClick: async () => {
                   const prevIndex = modalGalleryIndex - 1;
-                  if (fullData[prevIndex] === null) {
-                    // If not, fetch it
-                    const galleryID = props.galleries[prevIndex].id;
-                    loadGalleryData({ variables: { id: galleryID } }).then(
-                      ({ data }) => {
-                        if (data) {
-                          // Add the fetched data to the state
-                          const updatedData = fullData.map((d, i) =>
-                            i === prevIndex ? data.findGallery : d,
-                          );
-                          setFullData(updatedData);
 
-                          // Open the modal
-                          setModalGalleryIndex(prevIndex);
-                        }
-                      },
-                    );
-                  } else setModalGalleryIndex(prevIndex);
+                  // Ensure data is available
+                  await updateFullData(prevIndex);
+
+                  // Open the modal
+                  setModalGalleryIndex(prevIndex);
                 },
               },
             }
