@@ -8,7 +8,11 @@ import Organized from "../data/Organized";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
-import { CardModalContent, CardModalTagsSection } from "../layouts/CardModal";
+import {
+  CardModalContent,
+  CardModalNavigation,
+  CardModalTagsSection,
+} from "../layouts/CardModal";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
@@ -261,6 +265,9 @@ interface GalleryCardModalContentProps {
   /** The Stash gallery data. */
   gallery: Gallery;
 
+  /** Properties required for navigating in the modal. */
+  navigation?: CardModalNavigation;
+
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
 
@@ -299,6 +306,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
     <CardModalContent
       closeHandler={props.closeHandler}
       link={galleryLink}
+      navigation={props.navigation}
       pluginConfig={props.pluginConfig}
       section={props.section}
       sections={sections}

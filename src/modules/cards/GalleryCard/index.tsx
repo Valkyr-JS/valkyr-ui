@@ -5,7 +5,10 @@ import GalleryCard, {
   createGalleryCardID,
   GalleryCardModalContent,
 } from "@/components/cards/GalleryCard";
-import { CardModalWrapper } from "@/components/cards/layouts/CardModal";
+import {
+  CardModalNavigation,
+  CardModalWrapper,
+} from "@/components/cards/layouts/CardModal";
 import { DEFAULT } from "@/constants";
 const { PluginApi } = window;
 
@@ -57,6 +60,60 @@ PluginApi.patch.instead<IGalleryCardGrid>(
         } else setModalOpen(true);
       };
 
+      const navigationProps: CardModalNavigation | undefined =
+        props.galleries.length > 1
+          ? {
+              next: {
+                disabled: modalGalleryIndex === props.galleries.length - 1,
+                onClick: () => {
+                  const nextIndex = modalGalleryIndex + 1;
+                  if (fullData[nextIndex] === null) {
+                    // If not, fetch it
+                    const galleryID = props.galleries[nextIndex].id;
+                    loadGalleryData({ variables: { id: galleryID } }).then(
+                      ({ data }) => {
+                        if (data) {
+                          // Add the fetched data to the state
+                          const updatedData = fullData.map((d, i) =>
+                            i === nextIndex ? data.findGallery : d,
+                          );
+                          setFullData(updatedData);
+
+                          // Open the modal
+                          setModalGalleryIndex(nextIndex);
+                        }
+                      },
+                    );
+                  } else setModalGalleryIndex(nextIndex);
+                },
+              },
+              prev: {
+                disabled: modalGalleryIndex === 0,
+                onClick: () => {
+                  const prevIndex = modalGalleryIndex - 1;
+                  if (fullData[prevIndex] === null) {
+                    // If not, fetch it
+                    const galleryID = props.galleries[prevIndex].id;
+                    loadGalleryData({ variables: { id: galleryID } }).then(
+                      ({ data }) => {
+                        if (data) {
+                          // Add the fetched data to the state
+                          const updatedData = fullData.map((d, i) =>
+                            i === prevIndex ? data.findGallery : d,
+                          );
+                          setFullData(updatedData);
+
+                          // Open the modal
+                          setModalGalleryIndex(prevIndex);
+                        }
+                      },
+                    );
+                  } else setModalGalleryIndex(prevIndex);
+                },
+              },
+            }
+          : undefined;
+
       if (
         pluginConfig &&
         (pluginConfig?.cards__cardGrid__enabled ??
@@ -91,6 +148,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
                 gallery={fullData[modalGalleryIndex] as Gallery}
+                navigation={navigationProps}
                 pluginConfig={pluginConfig}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
                 section={modalSection}

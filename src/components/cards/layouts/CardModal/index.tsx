@@ -9,6 +9,16 @@ import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
 
+export interface CardModalNavigation {
+  next: {
+    disabled: boolean;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
+  };
+  prev: {
+    disabled: boolean;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
+  };
+}
 export interface CardModalContentProps {
   /** Optional classes added alongside the `vui-card-modal` component class. */
   classname?: string;
@@ -18,6 +28,9 @@ export interface CardModalContentProps {
 
   /** The link to the object page. */
   link: string;
+
+  /** Properties required for navigating in the modal. */
+  navigation?: CardModalNavigation;
 
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
@@ -91,6 +104,26 @@ export const CardModalContent: React.FC<
           )}
         </div>
         <div>
+          {props.navigation ? (
+            <>
+              <button
+                className="btn btn-secondary"
+                disabled={props.navigation.prev.disabled}
+                onClick={props.navigation.prev.onClick}
+                type="button"
+              >
+                {intl.formatMessage({ id: "pagination.previous" })}
+              </button>
+              <button
+                className="btn btn-secondary"
+                disabled={props.navigation.next.disabled}
+                onClick={props.navigation.next.onClick}
+                type="button"
+              >
+                {intl.formatMessage({ id: "pagination.next" })}
+              </button>
+            </>
+          ) : null}
           <button
             className="btn btn-secondary"
             onClick={props.closeHandler}
