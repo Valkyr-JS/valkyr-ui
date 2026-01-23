@@ -65,6 +65,7 @@ export const CardModalContent: React.FC<
   const handleSetTagsSection = () => props.setSection("tags");
   const componentClass = "vui-card-modal";
   const bodyClass = componentClass + "__body";
+  const footerButtonsContainerClass = componentClass + "__footer-buttons";
 
   return (
     <>
@@ -103,7 +104,7 @@ export const CardModalContent: React.FC<
             </button>
           )}
         </div>
-        <div>
+        <div className={footerButtonsContainerClass}>
           {props.navigation ? (
             <>
               <button
