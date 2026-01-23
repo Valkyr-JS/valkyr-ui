@@ -2,7 +2,7 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
 import { GalleryCardModalContent } from ".";
-import gallery4521 from "../../../../mocks/galleries/4521.json";
+import portraitThumbnail from "../../../../mocks/galleries/portraitThumbnail.json";
 
 const meta = {
   title: "Components/Cards/Gallery card modal content",
@@ -38,7 +38,7 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultSettings: Story = {
   args: {
-    gallery: gallery4521 as SlimGalleryDataFragment,
+    gallery: portraitThumbnail as unknown as Gallery,
     titleID: "gallery4521Modal",
   },
   play: async ({ args, canvasElement }) => {
@@ -58,7 +58,7 @@ export const DefaultSettings: Story = {
 
 export const TagSection: Story = {
   args: {
-    gallery: gallery4521 as SlimGalleryDataFragment,
+    gallery: portraitThumbnail as unknown as Gallery,
     section: "tags",
     titleID: "scene2414Modal",
   },
@@ -66,7 +66,7 @@ export const TagSection: Story = {
 
 export const WithThumbnailBackground: Story = {
   args: {
-    gallery: gallery4521 as SlimGalleryDataFragment,
+    gallery: portraitThumbnail as unknown as Gallery,
     pluginConfig: { cards__galleryCard__thumbnailBackgroundImage: true },
     titleID: "gallery4521Modal",
   },
@@ -74,7 +74,7 @@ export const WithThumbnailBackground: Story = {
 
 export const WithThumbnailBackgroundStyle: Story = {
   args: {
-    gallery: gallery4521 as SlimGalleryDataFragment,
+    gallery: portraitThumbnail as unknown as Gallery,
     pluginConfig: {
       cards__galleryCard__thumbnailBackgroundStyle: "black",
     },
