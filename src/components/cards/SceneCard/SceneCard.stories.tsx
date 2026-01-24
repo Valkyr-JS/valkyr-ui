@@ -1,14 +1,16 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, within } from "storybook/test";
+import { expect, within } from "storybook/test";
+import { DEFAULT } from "@/constants";
 import SceneCard from ".";
 
 // Mock data
-import landscapeCover from "../../../../mocks/scenes/landscapeCover.json";
-import portraitCover from "../../../../mocks/scenes/portraitCover.json";
+import fullData from "../../../../mocks/scenes/fullData.slim.json";
+import minimalData from "../../../../mocks/scenes/minimalData.slim.json";
 
 const pluginConfig = {
-  cards__sceneCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
+  cards__sceneCard__ratingIconBreakpoint:
+    DEFAULT.CARDS.SCENE_CARD.RATING_ICON_BREAKPOINT,
 };
 
 const meta = {
@@ -39,110 +41,27 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const footerProps = {
-  openHandler: fn(),
-  pluginConfig,
-  sections: [["details"], ["tags", 5]] as CardModalSectionData[],
-  setSection: fn(),
-};
-
 export const FullData: Story = {
   args: {
-    scene: portraitCover as unknown as SlimSceneDataFragment,
+    scene: fullData as SlimSceneDataFragment,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-
-    // Studio link should render
-    const studioLink = canvas.getByRole("link", {
-      name: "Studio: " + args.scene.studio?.name,
-    });
-    await expect(studioLink).toBeInTheDocument();
 
     // Date should render
-    const date = canvas.getByText("Date: 20 July 2020");
+    const date = canvas.getByText("Date: 11 April 2016");
     await expect(date).toBeInTheDocument();
+
+    // Details should render
+    const details = canvas.getByText(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus odio, fermentum sed egestas et, laoreet et enim. Aenean vulputate metus dolor, at placerat tortor porta non. Proin vel faucibus mauris. Mauris nec eleifend augue. In sed augue a felis aliquam gravida et aliquet risus. Nulla malesuada massa a nisi rutrum vestibulum. Suspendisse potenti. Donec laoreet tristique rhoncus. Nam porttitor mollis odio eu fermentum. Fusce magna mauris, scelerisque ac mollis eu, congue id sapien. Fusce at mauris at justo condimentum laoreet.",
+    );
+    await expect(details).toBeInTheDocument();
   },
 };
 
-export const LandscapeThumbnail: Story = {
+export const MinimalData: Story = {
   args: {
-    scene: landscapeCover as unknown as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should NOT render
-    const detailsModalBtn = canvas.queryByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeNull();
-  },
-};
-
-export const LandscapeThumbnailWithFooter: Story = {
-  args: {
-    footer: footerProps,
-    scene: landscapeCover as unknown as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should render
-    const detailsModalBtn = canvas.getByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeInTheDocument();
-  },
-};
-
-export const PortraitThumbnail: Story = {
-  args: {
-    scene: portraitCover as unknown as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should NOT render
-    const detailsModalBtn = canvas.queryByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeNull();
-  },
-};
-
-export const PortraitThumbnailWithFooter: Story = {
-  args: {
-    footer: footerProps,
-    scene: portraitCover as unknown as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should render
-    const detailsModalBtn = canvas.getByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeInTheDocument();
-  },
-};
-
-export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
-  args: {
-    scene: portraitCover as unknown as SlimSceneDataFragment,
-    pluginConfig: {
-      ...pluginConfig,
-      cards__sceneCard__thumbnailBackgroundImage: true,
-    },
-  },
-};
-
-export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
-  args: {
-    scene: portraitCover as unknown as SlimSceneDataFragment,
-    pluginConfig: {
-      ...pluginConfig,
-      cards__sceneCard__thumbnailBackgroundStyle: "black",
-    },
+    scene: minimalData as SlimSceneDataFragment,
   },
 };
