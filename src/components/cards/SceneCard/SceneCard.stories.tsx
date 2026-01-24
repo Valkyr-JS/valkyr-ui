@@ -5,6 +5,7 @@ import { DEFAULT } from "@/constants";
 import SceneCard from ".";
 
 // Mock data
+import filelessData from "../../../../mocks/scenes/filelessData.slim.json";
 import fullData from "../../../../mocks/scenes/fullData.slim.json";
 import minimalData from "../../../../mocks/scenes/minimalData.slim.json";
 
@@ -74,5 +75,11 @@ export const MinimalData: Story = {
     // Duration should render
     const duration = canvas.getByText("Duration: 42 minutes 51 seconds");
     await expect(duration).toBeInTheDocument();
+  },
+};
+
+export const FilelessData: Story = {
+  args: {
+    scene: filelessData as SlimSceneDataFragment,
   },
 };
