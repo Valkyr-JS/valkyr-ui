@@ -76,7 +76,7 @@ export const EqualsZoomBreakpoint: Story = {
   },
 };
 
-export const NoDataAvailable: Story = {
+export const ZeroValue: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
