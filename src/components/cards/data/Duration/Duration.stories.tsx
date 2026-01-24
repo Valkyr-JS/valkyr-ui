@@ -141,7 +141,7 @@ export const ModalContext: Story = {
   },
 };
 
-export const ModalContextNoData: Story = {
+export const ModalContextZeroValue: Story = {
   args: {
     context: "modal",
     duration: 0,
