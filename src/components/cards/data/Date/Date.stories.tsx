@@ -28,6 +28,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const YearOnlyDate: Story = {
+  args: {
+    context: "card",
+    date: "2015",
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const date = canvas.getByText("2015");
+    await expect(date).toBeInTheDocument();
+
+    const srDate = canvas.getByText("Date: 2015");
+    await expect(srDate).toBeInTheDocument();
+  },
+};
+
 export const LocaleFormat: Story = {
   args: {
     context: "card",

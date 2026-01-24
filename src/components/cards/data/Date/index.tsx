@@ -37,18 +37,18 @@ const DateComponent: React.FC<
   const yearMatch = data.match(/^(\d{4})$/);
   if (yearMatch) {
     const year = parseInt(yearMatch[1], 10);
+    const value = props.localeDateFormat ? (
+      <FormattedDate value={Date.UTC(year, 0)} year="numeric" timeZone="utc" />
+    ) : (
+      data
+    );
+
     return (
       <span className={componentClass}>
-        <span className="sr-only">{dateText}: </span>
-        {props.localeDateFormat ? (
-          <FormattedDate
-            value={Date.UTC(year, 0)}
-            year="numeric"
-            timeZone="utc"
-          />
-        ) : (
-          data
-        )}
+        <span className="sr-only">
+          {dateText}: {value}
+        </span>
+        <span aria-hidden>{value}</span>
       </span>
     );
   }
