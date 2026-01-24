@@ -25,6 +25,114 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const OneHour: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    duration: 3600,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const duration = canvas.getByText("1:00:00");
+    await expect(duration).toBeInTheDocument();
+
+    const srDuration = canvas.getByText("Duration: 1 hour");
+    await expect(srDuration).toBeInTheDocument();
+  },
+};
+
+export const OneMinute: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    duration: 60,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const duration = canvas.getByText("1:00");
+    await expect(duration).toBeInTheDocument();
+
+    const srDuration = canvas.getByText("Duration: 1 minute");
+    await expect(srDuration).toBeInTheDocument();
+  },
+};
+
+export const OneSecond: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    duration: 1,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const duration = canvas.getByText("0:01");
+    await expect(duration).toBeInTheDocument();
+
+    const srDuration = canvas.getByText("Duration: 1 second");
+    await expect(srDuration).toBeInTheDocument();
+  },
+};
+
+export const HoursAndMinutes: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    duration: 9600,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const duration = canvas.getByText("2:40:00");
+    await expect(duration).toBeInTheDocument();
+
+    const srDuration = canvas.getByText("Duration: 2 hours 40 minutes");
+    await expect(srDuration).toBeInTheDocument();
+  },
+};
+
+export const HoursAndSeconds: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    duration: 7240,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const duration = canvas.getByText("2:00:40");
+    await expect(duration).toBeInTheDocument();
+
+    const srDuration = canvas.getByText("Duration: 2 hours 40 seconds");
+    await expect(srDuration).toBeInTheDocument();
+  },
+};
+
+export const MinutesAndSeconds: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    duration: 160,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const duration = canvas.getByText("2:40");
+    await expect(duration).toBeInTheDocument();
+
+    const srDuration = canvas.getByText("Duration: 2 minutes 40 seconds");
+    await expect(srDuration).toBeInTheDocument();
+  },
+};
+
 export const WithTimestampPadding: Story = {
   args: {
     context: "card",
