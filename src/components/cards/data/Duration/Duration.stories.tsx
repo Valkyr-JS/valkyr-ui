@@ -25,6 +25,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const WithTimestampPadding: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    timestampPadding: true,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const duration = canvas.getByText("00:37:55");
+    await expect(duration).toBeInTheDocument();
+
+    const srDuration = canvas.getByText(srDurationText);
+    await expect(srDuration).toBeInTheDocument();
+  },
+};
+
 export const AboveZoomBreakpoint: Story = {
   args: {
     context: "card",
