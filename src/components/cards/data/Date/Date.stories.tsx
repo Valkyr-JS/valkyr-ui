@@ -45,6 +45,23 @@ export const YearOnlyDate: Story = {
   },
 };
 
+export const YearMonthDate: Story = {
+  args: {
+    context: "card",
+    date: "2015-12",
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const date = canvas.getByText("2015-12");
+    await expect(date).toBeInTheDocument();
+
+    const srDate = canvas.getByText("Date: December 2015");
+    await expect(srDate).toBeInTheDocument();
+  },
+};
+
 export const LocaleFormat: Story = {
   args: {
     context: "card",
