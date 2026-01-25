@@ -141,3 +141,45 @@ export const SquareThumbnail: Story = {
     gallery: square as SlimGalleryDataFragment,
   },
 };
+
+export const DetailsModalButton: Story = {
+  args: {
+    gallery: square as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    expect(detailsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const TagsModalButton: Story = {
+  args: {
+    gallery: fullData as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoTagsModalButton: Story = {
+  args: {
+    gallery: minimalData as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.queryByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeNull();
+  },
+};
