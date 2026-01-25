@@ -61,9 +61,11 @@ const Resolution: React.FC<
     return (
       <span className={iconClass}>
         <span className="sr-only">
-          {intl.formatMessage({ id: "resolution" })}:{" "}
+          {intl.formatMessage({ id: "resolution" })}: {resolutionIconValue}
         </span>
-        <span title={resolutionValue}>{resolutionIconValue}</span>
+        <span aria-hidden title={resolutionValue}>
+          {resolutionIconValue}
+        </span>
       </span>
     );
   }
@@ -73,9 +75,9 @@ const Resolution: React.FC<
   return (
     <span className={componentClass}>
       <span className="sr-only">
-        {intl.formatMessage({ id: "resolution" })}:{" "}
+        {intl.formatMessage({ id: "resolution" })}: {resolutionValue}
       </span>
-      <span>{resolutionValue}</span>
+      <span aria-hidden>{resolutionValue}</span>
     </span>
   );
 };

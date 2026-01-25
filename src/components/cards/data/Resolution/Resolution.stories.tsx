@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
+import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import Resolution from ".";
+
+const stashResolutionText = "1080p";
+const srResolutionText = "Resolution: 1080p";
 
 const meta = {
   title: "Components/Cards/Data/Resolution",
@@ -13,12 +17,7 @@ const meta = {
     resolution: [1920, 1080],
   },
   argTypes: {
-    currentBreakpoint: {
-      control: { type: "range", min: 0, max: 3 },
-    },
-    userBreakpoint: {
-      control: { type: "range", min: -1, max: 3 },
-    },
+    ...dataComponentArgTypes,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof Resolution>;
@@ -34,8 +33,12 @@ export const AboveZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const resolution = canvas.getByText("1080p");
+
+    const resolution = canvas.getByText(stashResolutionText);
     await expect(resolution).toBeInTheDocument();
+
+    const srResolution = canvas.getByText(srResolutionText);
+    await expect(srResolution).toBeInTheDocument();
   },
 };
 
@@ -47,8 +50,12 @@ export const BelowZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const resolution = canvas.queryByText("1080p");
+
+    const resolution = canvas.queryByText(stashResolutionText);
     await expect(resolution).toBeNull();
+
+    const srResolution = canvas.queryByText(srResolutionText);
+    await expect(srResolution).toBeNull();
   },
 };
 
@@ -60,31 +67,30 @@ export const EqualsZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const resolution = canvas.getByText("1080p");
+
+    const resolution = canvas.getByText(stashResolutionText);
     await expect(resolution).toBeInTheDocument();
+
+    const srResolution = canvas.getByText(srResolutionText);
+    await expect(srResolution).toBeInTheDocument();
   },
 };
 
-export const ModalContext: Story = {
-  args: {
-    context: "modal",
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const resolution = canvas.getByText("1080p");
-    await expect(resolution).toBeInTheDocument();
-  },
-};
-
-export const UserDisabled: Story = {
+export const ZeroValue: Story = {
   args: {
     context: "card",
-    userBreakpoint: -1,
+    resolution: [0, 0],
+    currentBreakpoint: 3,
+    userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const resolution = canvas.queryByText("1080p");
+
+    const resolution = canvas.queryByText(stashResolutionText);
     await expect(resolution).toBeNull();
+
+    const srResolution = canvas.queryByText(srResolutionText);
+    await expect(srResolution).toBeNull();
   },
 };
 
@@ -95,21 +101,58 @@ export const WithoutZoomData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const resolution = canvas.getByText("1080p");
+
+    const resolution = canvas.getByText(stashResolutionText);
     await expect(resolution).toBeInTheDocument();
+
+    const srResolution = canvas.getByText(srResolutionText);
+    await expect(srResolution).toBeInTheDocument();
   },
 };
 
-export const AsIcon: Story = {
+export const CardUserDisabled: Story = {
   args: {
-    asIcon: true,
     context: "card",
-    currentBreakpoint: 3,
-    userBreakpoint: 2,
+    userBreakpoint: -1,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const resolution = canvas.getByText("HD");
+
+    const resolution = canvas.queryByText(stashResolutionText);
+    await expect(resolution).toBeNull();
+
+    const srResolution = canvas.queryByText(srResolutionText);
+    await expect(srResolution).toBeNull();
+  },
+};
+
+export const ModalContext: Story = {
+  args: {
+    context: "modal",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const resolution = canvas.getByText(stashResolutionText);
     await expect(resolution).toBeInTheDocument();
+
+    const srResolution = canvas.getByText(srResolutionText);
+    await expect(srResolution).toBeInTheDocument();
+  },
+};
+
+export const ModalContextZeroValue: Story = {
+  args: {
+    context: "modal",
+    resolution: [0, 0],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const resolution = canvas.queryByText(stashResolutionText);
+    await expect(resolution).toBeNull();
+
+    const srResolution = canvas.queryByText(srResolutionText);
+    await expect(srResolution).toBeNull();
   },
 };
