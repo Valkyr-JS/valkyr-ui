@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
+import {
+  dataComponentArgTypes,
+  ratingArgType,
+} from "../../../../../.storybook/argTypes";
 import RatingBanner from ".";
+
+const ratingText = "Rating: 7.4 out of 10";
 
 const meta = {
   title: "Components/Cards/Data/Rating banner",
@@ -10,17 +16,12 @@ const meta = {
   },
   args: {
     rating100: 74,
+    //@ts-ignore - Storybook maps this to the correct type
+    ratingSystem: "decimal",
   },
   argTypes: {
-    rating100: {
-      control: { type: "range", min: 0, max: 100 },
-    },
-    currentBreakpoint: {
-      control: { type: "range", min: 0, max: 3 },
-    },
-    userBreakpoint: {
-      control: { type: "range", min: -1, max: 3 },
-    },
+    ...dataComponentArgTypes,
+    ...ratingArgType,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof RatingBanner>;
@@ -32,14 +33,14 @@ export const Decimal: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
-    ratingSystem: {
-      type: "decimal",
-    },
+    //@ts-ignore - Storybook maps this to the correct type
+    ratingSystem: "decimal",
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.getByText("Rating: 7.4 out of 10");
+
+    const rating = canvas.getByText(ratingText);
     await expect(rating).toBeInTheDocument();
   },
 };
@@ -48,10 +49,8 @@ export const StarFull: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
-    ratingSystem: {
-      type: "stars",
-      starPrecision: "full",
-    },
+    //@ts-ignore - Storybook maps this to the correct type
+    ratingSystem: "starsFull",
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
@@ -65,10 +64,8 @@ export const StarHalf: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
-    ratingSystem: {
-      type: "stars",
-      starPrecision: "half",
-    },
+    //@ts-ignore - Storybook maps this to the correct type
+    ratingSystem: "starsHalf",
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
@@ -82,10 +79,8 @@ export const StarQuarter: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
-    ratingSystem: {
-      type: "stars",
-      starPrecision: "quarter",
-    },
+    //@ts-ignore - Storybook maps this to the correct type
+    ratingSystem: "starsQuarter",
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
@@ -99,10 +94,8 @@ export const StarTenth: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
-    ratingSystem: {
-      type: "stars",
-      starPrecision: "tenth",
-    },
+    //@ts-ignore - Storybook maps this to the correct type
+    ratingSystem: "starsTenth",
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
@@ -112,19 +105,110 @@ export const StarTenth: Story = {
   },
 };
 
-export const NoData: Story = {
+export const AboveZoomBreakpoint: Story = {
   args: {
     context: "card",
     currentBreakpoint: 3,
-    rating100: null,
-    ratingSystem: {
-      type: "decimal",
-    },
     userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const rating = canvas.queryByText("Rating: 0 out of 10");
+
+    const rating = canvas.getByText(ratingText);
+    await expect(rating).toBeInTheDocument();
+  },
+};
+
+export const BelowZoomBreakpoint: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 0,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const rating = canvas.queryByText(ratingText);
+    await expect(rating).toBeNull();
+  },
+};
+
+export const EqualsZoomBreakpoint: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 2,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const rating = canvas.getByText(ratingText);
+    await expect(rating).toBeInTheDocument();
+  },
+};
+
+export const ZeroValue: Story = {
+  args: {
+    context: "card",
+    currentBreakpoint: 3,
+    rating100: 0,
+    userBreakpoint: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const rating = canvas.queryByText(ratingText);
+    await expect(rating).toBeNull();
+  },
+};
+
+export const WithoutZoomData: Story = {
+  args: {
+    context: "card",
+    userBreakpoint: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const rating = canvas.getByText(ratingText);
+    await expect(rating).toBeInTheDocument();
+  },
+};
+
+export const CardUserDisabled: Story = {
+  args: {
+    context: "card",
+    userBreakpoint: -1,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const rating = canvas.queryByText(ratingText);
+    await expect(rating).toBeNull();
+  },
+};
+
+export const ModalContext: Story = {
+  args: {
+    context: "modal",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const rating = canvas.getByText(ratingText);
+    await expect(rating).toBeInTheDocument();
+  },
+};
+
+export const ModalContextZeroValue: Story = {
+  args: {
+    context: "modal",
+    rating100: 0,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const rating = canvas.queryByText(ratingText);
     await expect(rating).toBeNull();
   },
 };
