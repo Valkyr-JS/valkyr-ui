@@ -60,6 +60,10 @@ export const FullDataDefaults: Story = {
     // O count shount NOT render
     const oCount = canvas.queryByText("O Count: 2");
     await expect(oCount).toBeNull();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
   },
 };
 
@@ -90,6 +94,10 @@ export const FullDataAllEnabled: Story = {
     // O count should render
     const count = canvas.getByText("O Count: 2");
     await expect(count).toBeInTheDocument();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
   },
 };
 
