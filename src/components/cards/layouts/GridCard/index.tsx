@@ -50,6 +50,7 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   return (
     <Card
       className={componentClassList}
+      data-testid="grid-card"
       onMouseOut={props.onMouseOut}
       onMouseOver={props.onMouseOver}
     >

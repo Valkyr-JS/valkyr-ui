@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 import SceneCard from ".";
 
 // Mock data
@@ -152,5 +152,26 @@ export const MinimalData: Story = {
 export const FilelessData: Story = {
   args: {
     scene: filelessData as SlimSceneDataFragment,
+  },
+};
+
+export const PlayPreviewOnHover: Story = {
+  args: {
+    scene: fullData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Get the preview
+    const card = canvas.getByTestId("grid-card");
+    const video = canvas.getByTestId<HTMLVideoElement>("scene-card-preview");
+
+    // Trigger a hover event
+    await userEvent.hover(card);
+    expect(video.paused).toBeFalsy();
+
+    // End a hover event
+    await userEvent.unhover(card);
+    expect(video.paused).toBeTruthy();
   },
 };

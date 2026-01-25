@@ -347,6 +347,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
           <img loading="lazy" alt="" src={props.src} />
           {preview && (
             <video
+              data-testid="scene-card-preview"
               disableRemotePlayback
               playsInline
               muted
