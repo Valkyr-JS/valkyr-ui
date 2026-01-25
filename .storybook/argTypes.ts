@@ -57,3 +57,10 @@ export const ratingArgType: Partial<ArgTypes> = {
     },
   },
 };
+
+/** Common arg type used for card grid zoom level. */
+export const zoomIndexArgType: Partial<ArgTypes> = {
+  zoomIndex: {
+    control: { type: "range", min: 0, max: 3 },
+  },
+};
