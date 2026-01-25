@@ -1,3 +1,45 @@
+/* -------------------------------------- convertRating100 -------------------------------------- */
+
+/** Convert a Stash object `rating100` value to a Stash interface rating. */
+export const convertRating100 = (
+  value: number,
+  options: RatingSystemOptions = { type: "stars", starPrecision: "full" },
+): number => {
+  let ratingNum = 0;
+  if (options.type === "decimal") ratingNum = value / 10;
+  else {
+    switch (options.starPrecision) {
+      case "half":
+        ratingNum = Math.round(value / 10) / 2; // Math.round(74 / 10 = 7.4) / 2 = 3.5
+        break;
+      case "quarter":
+        ratingNum = Math.round(value / 5) / 4; // Math.round(74 / 5 = 14.8) / 4 = 3.75
+        break;
+      case "tenth":
+        ratingNum = Math.round(value / 2) / 10; // Math.round(74 / 2 = 37) / 10 = 3.7
+        break;
+      case "full":
+      default:
+        ratingNum = Math.round(value / 20); // Math.round(74 / 20 = 3.7) = 4
+    }
+  }
+
+  return ratingNum;
+};
+
+/* -------------------------------------- getFileIsPortrait ------------------------------------- */
+
+/** Returns whether a video file is portrait-orientated. */
+export function getFileIsPortrait(
+  file: VideoFileDataFragment | undefined,
+): boolean {
+  const width = file?.width ? file.width : 0;
+  const height = file?.height ? file.height : 0;
+  return height >= width;
+}
+
+/* ---------------------------------------- getRenderData --------------------------------------- */
+
 interface IgetRenderData<T> {
   data: T | undefined;
   zoomIndex: {
@@ -36,13 +78,16 @@ export const getRenderData = <T>(args: IgetRenderData<T>): T | null => {
   return args.data;
 };
 
-type objectData = {
+/* ------------------------------------- getTitleFromObject ------------------------------------- */
+
+interface IgetTitleFromObject {
   files?: Array<GalleryFileDataFragment> | Array<VideoFileDataFragment>;
   name?: Maybe<string>;
   title?: Maybe<string>;
-};
+}
 
-export const getTitleFromObject = (object: objectData): string => {
+/** Get the title from a Stash object, or create one from file data. */
+export const getTitleFromObject = (object: IgetTitleFromObject): string => {
   const file =
     object.files && object.files.length ? object.files[0] : undefined;
   const objectTitle = "name" in object ? object.name : object.title;
@@ -53,6 +98,17 @@ export const getTitleFromObject = (object: objectData): string => {
 
   return title;
 };
+
+/* ---------------------------------------- makeSceneUrl ---------------------------------------- */
+
+interface ImakeSceneUrl {
+  cont?: IPlaySceneOptions["continue"];
+  queue?: {
+    makeLink(sceneID: string, options: IPlaySceneOptions): string;
+  };
+  scene: SceneDataFragment | SlimSceneDataFragment;
+  index?: number;
+}
 
 /** Create a url link to a scene page. */
 export const makeSceneUrl = ({ cont, index, scene, queue }: ImakeSceneUrl) => {
@@ -66,50 +122,7 @@ export const makeSceneUrl = ({ cont, index, scene, queue }: ImakeSceneUrl) => {
   return link as string;
 };
 
-interface ImakeSceneUrl {
-  cont?: IPlaySceneOptions["continue"];
-  queue?: {
-    makeLink(sceneID: string, options: IPlaySceneOptions): string;
-  };
-  scene: SceneDataFragment | SlimSceneDataFragment;
-  index?: number;
-}
-
-/** Convert a Stash object `rating100` value to a Stash interface rating. */
-export const convertRating100 = (
-  value: number,
-  options: RatingSystemOptions = { type: "stars", starPrecision: "full" },
-): number => {
-  let ratingNum = 0;
-  if (options.type === "decimal") ratingNum = value / 10;
-  else {
-    switch (options.starPrecision) {
-      case "half":
-        ratingNum = Math.round(value / 10) / 2; // Math.round(74 / 10 = 7.4) / 2 = 3.5
-        break;
-      case "quarter":
-        ratingNum = Math.round(value / 5) / 4; // Math.round(74 / 5 = 14.8) / 4 = 3.75
-        break;
-      case "tenth":
-        ratingNum = Math.round(value / 2) / 10; // Math.round(74 / 2 = 37) / 10 = 3.7
-        break;
-      case "full":
-      default:
-        ratingNum = Math.round(value / 20); // Math.round(74 / 20 = 3.7) = 4
-    }
-  }
-
-  return ratingNum;
-};
-
-/** Returns whether a video file is portrait-orientated. */
-export function getFileIsPortrait(
-  file: VideoFileDataFragment | undefined,
-): boolean {
-  const width = file?.width ? file.width : 0;
-  const height = file?.height ? file.height : 0;
-  return height >= width;
-}
+/* ---------------------------------------- padTimestamps --------------------------------------- */
 
 /** Adds padding to timestamps to make all units double-figures and include
  * hours. */
