@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
+import { zoomIndexArgType } from "../../../../.storybook/argTypes";
 import SceneCard from ".";
 
 // Mock data
@@ -34,9 +35,7 @@ const meta = {
     zoomIndex: 1,
   },
   argTypes: {
-    zoomIndex: {
-      control: { type: "range", min: 0, max: 3 },
-    },
+    ...zoomIndexArgType,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof SceneCard>;
