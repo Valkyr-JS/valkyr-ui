@@ -66,3 +66,35 @@ export const FullDataDefaults: Story = {
     await expect(studio).toBeInTheDocument();
   },
 };
+
+export const FullDataAllEnabled: Story = {
+  args: {
+    pluginConfig: {
+      cards__galleryCard__ratingIconZoomIndex: 0,
+    },
+    gallery: fullData as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Date should render
+    const date = canvas.getByText("Date: 31 May 2019");
+    await expect(date).toBeInTheDocument();
+
+    // Details should render
+    const details = canvas.getByText(fullData.details);
+    await expect(details).toBeInTheDocument();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
+
+    // Rating banner AND icon should render
+    const ratingBanner = canvas.getAllByText("Rating: 4 stars");
+    await expect(ratingBanner).toHaveLength(2);
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
+  },
+};
