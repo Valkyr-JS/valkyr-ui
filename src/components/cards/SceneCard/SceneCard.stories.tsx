@@ -7,6 +7,8 @@ import SceneCard from ".";
 import filelessData from "../../../../mocks/scenes/filelessData.slim.json";
 import fullData from "../../../../mocks/scenes/fullData.slim.json";
 import minimalData from "../../../../mocks/scenes/minimalData.slim.json";
+import portrait from "../../../../mocks/scenes/portrait.slim.json";
+import square from "../../../../mocks/scenes/square.slim.json";
 
 const meta = {
   title: "Components/Cards/Scene card",
@@ -173,5 +175,41 @@ export const PlayPreviewOnHover: Story = {
     // End a hover event
     await userEvent.unhover(card);
     expect(video.paused).toBeTruthy();
+  },
+};
+
+export const PortraitBackgroundImage: Story = {
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundImage: true,
+    },
+    scene: portrait as SlimSceneDataFragment,
+  },
+};
+
+export const PortraitBackgroundStyle: Story = {
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundStyle: "black",
+    },
+    scene: portrait as SlimSceneDataFragment,
+  },
+};
+
+export const SquareBackgroundImage: Story = {
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundImage: true,
+    },
+    scene: square as SlimSceneDataFragment,
+  },
+};
+
+export const SquareBackgroundStyle: Story = {
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundStyle: "black",
+    },
+    scene: square as SlimSceneDataFragment,
   },
 };

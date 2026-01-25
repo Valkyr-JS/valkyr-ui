@@ -5,7 +5,7 @@ import { SceneCardModalContent } from ".";
 
 // Mock data
 import landscapeCover from "../../../../mocks/scenes/landscapeCover.json";
-import portraitCover from "../../../../mocks/scenes/portraitCover.json";
+import portrait from "../../../../mocks/scenes/portrait.slim.json";
 
 const meta = {
   title: "Components/Cards/Scene card modal content",
@@ -41,7 +41,7 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultSettings: Story = {
   args: {
-    scene: portraitCover as unknown as Scene,
+    scene: portrait as unknown as Scene,
     titleID: "scene2414Modal",
   },
   play: async ({ args, canvasElement }) => {
@@ -69,7 +69,7 @@ export const TagSection: Story = {
 
 export const PortraitThumbnail: Story = {
   args: {
-    scene: portraitCover as unknown as Scene,
+    scene: portrait as unknown as Scene,
     titleID: "scene6439Modal",
   },
 };
@@ -79,7 +79,7 @@ export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundImage: true,
     },
-    scene: portraitCover as unknown as Scene,
+    scene: portrait as unknown as Scene,
     titleID: "scene6439Modal",
   },
 };
@@ -89,7 +89,7 @@ export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundStyle: "black",
     },
-    scene: portraitCover as unknown as Scene,
+    scene: portrait as unknown as Scene,
     titleID: "scene6439Modal",
   },
 };
