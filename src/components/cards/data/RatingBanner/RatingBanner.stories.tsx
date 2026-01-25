@@ -6,7 +6,7 @@ import {
 } from "../../../../../.storybook/argTypes";
 import RatingBanner from ".";
 
-const ratingText = "Rating: 7.4 out of 10";
+const ratingText = "Rating: 4 stars";
 
 const meta = {
   title: "Components/Cards/Data/Rating banner",
@@ -17,7 +17,7 @@ const meta = {
   args: {
     rating100: 74,
     //@ts-ignore - Storybook maps this to the correct type
-    ratingSystem: "decimal",
+    ratingSystem: "starsFull",
   },
   argTypes: {
     ...dataComponentArgTypes,
@@ -40,7 +40,7 @@ export const Decimal: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const rating = canvas.getByText(ratingText);
+    const rating = canvas.getByText("Rating: 7.4 out of 10");
     await expect(rating).toBeInTheDocument();
   },
 };
