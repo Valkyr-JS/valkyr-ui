@@ -100,7 +100,7 @@ export const convertRating100 = (
 export function getFileIsPortrait(file: VideoFileData | undefined): boolean {
   const width = file?.width ? file.width : 0;
   const height = file?.height ? file.height : 0;
-  return height > width;
+  return height >= width;
 }
 
 /** Adds padding to timestamps to make all units double-figures and include

@@ -179,6 +179,7 @@ export const PlayPreviewOnHover: Story = {
 };
 
 export const PortraitBackgroundImage: Story = {
+  name: "Portrait thumbnail with background image",
   args: {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundImage: true,
@@ -188,6 +189,7 @@ export const PortraitBackgroundImage: Story = {
 };
 
 export const PortraitBackgroundStyle: Story = {
+  name: "Portrait thumbnail with background style",
   args: {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundStyle: "black",
@@ -197,6 +199,7 @@ export const PortraitBackgroundStyle: Story = {
 };
 
 export const SquareBackgroundImage: Story = {
+  name: "Square thumbnail with background image",
   args: {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundImage: true,
@@ -206,6 +209,7 @@ export const SquareBackgroundImage: Story = {
 };
 
 export const SquareBackgroundStyle: Story = {
+  name: "Square thumbnail with background style",
   args: {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundStyle: "black",
