@@ -13,6 +13,35 @@ interface GalleryChapterDataFragment {
   };
 }
 
+interface GalleryDataFragment {
+  id: Gallery["id"];
+  created_at: Gallery["created_at"];
+  updated_at: Gallery["updated_at"];
+  title: Gallery["title"];
+  code: Gallery["code"];
+  date: Gallery["date"];
+  urls: Gallery["urls"];
+  details: Gallery["details"];
+  photographer: Gallery["photographer"];
+  rating100: Gallery["rating100"];
+  organized: Gallery["organized"];
+
+  paths: {
+    cover: GalleryPathsType["cover"];
+    preview: GalleryPathsType["preview"];
+  };
+
+  files: Array<GalleryFileDataFragment>;
+  folder: Maybe<FolderDataFragment>;
+
+  chapters: Array<GalleryChapterDataFragment>;
+  studio: Maybe<SlimStudioDataFragment>;
+  tags: Array<SlimTagDataFragment>;
+
+  performers: Array<PerformerDataFragment>;
+  scenes: Array<SlimSceneDataFragment>;
+}
+
 interface GalleryFileDataFragment {
   id: GalleryFile["id"];
   path: GalleryFile["path"];
@@ -33,7 +62,7 @@ interface GroupDataFragment {
   rating100: Group["rating100"];
   director: Group["director"];
 
-  studio: SlimStudioDataFragment;
+  studio: Maybe<SlimStudioDataFragment>;
 
   tags: Array<SlimTagDataFragment>;
 
@@ -105,7 +134,7 @@ interface PerformerDataFragment {
   custom_fields: Performer["custom_fields"];
 }
 
-interface SceneDataFrgment {
+interface SceneDataFragment {
   id: Scene["id"];
   title: Scene["title"];
   code: Scene["code"];
@@ -134,7 +163,7 @@ interface SceneDataFrgment {
   play_history: Scene["play_history"];
   o_history: Scene["o_history"];
 
-  files: Array<VideoFileDataFrgament>;
+  files: Array<VideoFileDataFragment>;
 
   paths: {
     screenshot: ScenePathsType["screenshot"];
@@ -152,7 +181,7 @@ interface SceneDataFrgment {
 
   galleries: Array<SlimGalleryDataFragment>;
 
-  studio: SlimStudioDataFragment;
+  studio: Maybe<SlimStudioDataFragment>;
 
   groups: Array<{
     group: SlimGroupDataFragment;
@@ -221,7 +250,7 @@ interface SlimGalleryDataFragment {
   rating100: Gallery["rating100"];
   organized: Gallery["organized"];
   files: Array<GalleryFileDataFragment>;
-  folder: FolderDataFragment;
+  folder: Maybe<FolderDataFragment>;
   image_count: Gallery["image_count"];
   chapters: Array<{
     id: GalleryChapter["id"];
@@ -275,7 +304,7 @@ interface SlimSceneDataFragment {
   play_duration: Scene["play_duration"];
   play_count: Scene["play_count"];
 
-  files: Array<VideoFileDataFrgament>;
+  files: Array<VideoFileDataFragment>;
 
   paths: {
     screenshot: ScenePathsType["screenshot"];
@@ -289,7 +318,7 @@ interface SlimSceneDataFragment {
     caption: ScenePathsType["caption"];
   };
 
-  scene_markers: {
+  scene_markers: Array<{
     id: SceneMarker["id"];
     title: SceneMarker["title"];
     seconds: SceneMarker["seconds"];
@@ -297,24 +326,24 @@ interface SlimSceneDataFragment {
       id: Tag["id"];
       name: Tag["name"];
     };
-  };
+  }>;
 
   galleries: Array<{
     id: Gallery["id"];
     files: Array<{
       path: GalleryFile["path"];
     }>;
-    folder: {
+    folder: Maybe<{
       path: Folder["path"];
-    };
+    }>;
     title: Gallery["title"];
   }>;
 
-  studio: {
+  studio: Maybe<{
     id: Studio["id"];
     name: Studio["name"];
     image_path: Studio["image_path"];
-  };
+  }>;
 
   groups: Array<{
     group: {
@@ -355,9 +384,9 @@ interface SlimStudioDataFragment {
     stash_id: StashId["stash_id"];
     updated_at: StashId["updated_at"];
   }>;
-  parent_studio: {
+  parent_studio: Maybe<{
     id: Studio["id"];
-  };
+  }>;
   details: Studio["details"];
   rating100: Studio["rating100"];
   aliases: Studio["aliases"];
@@ -384,7 +413,7 @@ interface SlimTagDataFragment {
   }>;
 }
 
-interface VideoFileDataFrgament {
+interface VideoFileDataFragment {
   id: VideoFile["id"];
   path: VideoFile["path"];
   size: VideoFile["size"];

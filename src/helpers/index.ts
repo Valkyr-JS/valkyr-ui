@@ -36,9 +36,15 @@ export const getRenderData = <T>(args: IgetRenderData<T>): T | null => {
   return args.data;
 };
 
-export const getTitleFromObject = (object: SlimStashObject): string => {
+type objectData = {
+  files?: Array<GalleryFileDataFragment> | Array<VideoFileDataFragment>;
+  name?: Maybe<string>;
+  title?: Maybe<string>;
+};
+
+export const getTitleFromObject = (object: objectData): string => {
   const file =
-    "files" in object && object.files.length ? object.files[0] : undefined;
+    object.files && object.files.length ? object.files[0] : undefined;
   const objectTitle = "name" in object ? object.name : object.title;
 
   // Title should be the given title > filename > "Untitled"
@@ -65,7 +71,7 @@ interface ImakeSceneUrl {
   queue?: {
     makeLink(sceneID: string, options: IPlaySceneOptions): string;
   };
-  scene: SlimSceneDataFragment;
+  scene: SceneDataFragment | SlimSceneDataFragment;
   index?: number;
 }
 
@@ -97,7 +103,9 @@ export const convertRating100 = (
 };
 
 /** Returns whether a video file is portrait-orientated. */
-export function getFileIsPortrait(file: VideoFileData | undefined): boolean {
+export function getFileIsPortrait(
+  file: VideoFileDataFragment | undefined,
+): boolean {
   const width = file?.width ? file.width : 0;
   const height = file?.height ? file.height : 0;
   return height >= width;

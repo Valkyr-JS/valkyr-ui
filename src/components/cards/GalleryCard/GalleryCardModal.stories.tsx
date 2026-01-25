@@ -39,7 +39,7 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultSettings: Story = {
   args: {
-    gallery: landscapeThumbnail as unknown as Gallery,
+    gallery: landscapeThumbnail as GalleryDataFragment,
     titleID: "gallery4521Modal",
   },
   play: async ({ args, canvasElement }) => {
@@ -59,7 +59,7 @@ export const DefaultSettings: Story = {
 
 export const TagSection: Story = {
   args: {
-    gallery: portraitThumbnail as unknown as Gallery,
+    gallery: portraitThumbnail as GalleryDataFragment,
     section: "tags",
     titleID: "scene2414Modal",
   },
@@ -67,7 +67,7 @@ export const TagSection: Story = {
 
 export const WithThumbnailBackground: Story = {
   args: {
-    gallery: portraitThumbnail as unknown as Gallery,
+    gallery: portraitThumbnail as GalleryDataFragment,
     pluginConfig: { cards__galleryCard__thumbnailBackgroundImage: true },
     titleID: "gallery4521Modal",
   },
@@ -75,7 +75,7 @@ export const WithThumbnailBackground: Story = {
 
 export const WithThumbnailBackgroundStyle: Story = {
   args: {
-    gallery: portraitThumbnail as unknown as Gallery,
+    gallery: portraitThumbnail as GalleryDataFragment,
     pluginConfig: {
       cards__galleryCard__thumbnailBackgroundStyle: "black",
     },

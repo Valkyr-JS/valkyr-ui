@@ -46,7 +46,7 @@ type Story = StoryObj<typeof meta>;
 
 export const FullData: Story = {
   args: {
-    scene: fullData as unknown as Scene,
+    scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -95,7 +95,7 @@ export const RatingIconNotBanner: Story = {
       cards__sceneCard__ratingBannerZoomIndex: -1,
       cards__galleryCard__ratingIconZoomIndex: 0,
     },
-    scene: fullData as unknown as Scene,
+    scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -108,7 +108,7 @@ export const RatingIconNotBanner: Story = {
 
 export const MinimalData: Story = {
   args: {
-    scene: minimalData as unknown as Scene,
+    scene: minimalData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -127,13 +127,13 @@ export const MinimalData: Story = {
 
 export const FilelessData: Story = {
   args: {
-    scene: filelessData as unknown as Scene,
+    scene: filelessData as SceneDataFragment,
   },
 };
 
 export const MultiFile: Story = {
   args: {
-    scene: multiFile as unknown as Scene,
+    scene: multiFile as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -152,7 +152,7 @@ export const PortraitBackgroundImage: Story = {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundImage: true,
     },
-    scene: portrait as unknown as Scene,
+    scene: portrait as SceneDataFragment,
   },
 };
 
@@ -162,7 +162,7 @@ export const PortraitBackgroundStyle: Story = {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundStyle: "black",
     },
-    scene: portrait as unknown as Scene,
+    scene: portrait as SceneDataFragment,
   },
 };
 
@@ -172,7 +172,7 @@ export const SquareBackgroundImage: Story = {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundImage: true,
     },
-    scene: square as unknown as Scene,
+    scene: square as SceneDataFragment,
   },
 };
 
@@ -182,13 +182,13 @@ export const SquareBackgroundStyle: Story = {
     pluginConfig: {
       cards__sceneCard__thumbnailBackgroundStyle: "black",
     },
-    scene: square as unknown as Scene,
+    scene: square as SceneDataFragment,
   },
 };
 
 export const DetailsSectionButton: Story = {
   args: {
-    scene: square as unknown as Scene,
+    scene: square as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -203,13 +203,13 @@ export const DetailsSectionButton: Story = {
 export const TagsSection: Story = {
   args: {
     section: "tags",
-    scene: fullData as unknown as Scene,
+    scene: fullData as SceneDataFragment,
   },
 };
 
 export const TagsSectionButton: Story = {
   args: {
-    scene: fullData as unknown as Scene,
+    scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -223,7 +223,7 @@ export const TagsSectionButton: Story = {
 
 export const NoTagsSectionButton: Story = {
   args: {
-    scene: square as unknown as Scene,
+    scene: square as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -241,7 +241,7 @@ export const Navigation: Story = {
       next: { disabled: false, onClick: fn() },
       prev: { disabled: false, onClick: fn() },
     },
-    scene: fullData as unknown as Scene,
+    scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -264,7 +264,7 @@ export const NavigationPreviousDisabled: Story = {
       next: { disabled: false, onClick: fn() },
       prev: { disabled: true, onClick: fn() },
     },
-    scene: fullData as unknown as Scene,
+    scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -287,7 +287,7 @@ export const NavigationNextDisabled: Story = {
       next: { disabled: true, onClick: fn() },
       prev: { disabled: false, onClick: fn() },
     },
-    scene: fullData as unknown as Scene,
+    scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

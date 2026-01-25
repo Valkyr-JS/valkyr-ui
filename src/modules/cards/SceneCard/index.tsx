@@ -24,12 +24,12 @@ PluginApi.patch.instead<ISceneCardGrid>(
       const [modalSceneIndex, setModalSceneIndex] = useState(0);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
-      const [fullData, setFullData] = useState<(Scene | null)[]>(
+      const [fullData, setFullData] = useState<(SceneDataFragment | null)[]>(
         props.scenes.map(() => null),
       );
 
       const [loadSceneData]: LazyQueryResultTuple<
-        { findScene: Scene },
+        { findScene: SceneDataFragment },
         OperationVariables
       > = PluginApi.GQL.useFindSceneLazyQuery();
 
@@ -141,7 +141,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                 pluginConfig={pluginConfig}
                 queue={props.queue}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
-                scene={fullData[modalSceneIndex] as Scene}
+                scene={fullData[modalSceneIndex] as SceneDataFragment}
                 section={modalSection}
                 setSection={setModalSection}
                 titleID={titleID}
@@ -166,10 +166,10 @@ PluginApi.patch.instead<ISceneCardProps>(
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
-      const [fullData, setFullData] = useState<Scene | null>(null);
+      const [fullData, setFullData] = useState<SceneDataFragment | null>(null);
 
       const [loadSceneData]: LazyQueryResultTuple<
-        { findScene: Scene },
+        { findScene: SceneDataFragment },
         OperationVariables
       > = PluginApi.GQL.useFindSceneLazyQuery();
 
@@ -223,7 +223,7 @@ PluginApi.patch.instead<ISceneCardProps>(
                 pluginConfig={pluginConfig}
                 queue={props.queue}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
-                scene={fullData as Scene}
+                scene={fullData as SceneDataFragment}
                 section={modalSection}
                 setSection={setModalSection}
                 titleID={titleID}

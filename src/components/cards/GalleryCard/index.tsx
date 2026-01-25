@@ -261,7 +261,7 @@ interface GalleryCardModalContentProps {
   closeHandler: () => void;
 
   /** The Stash gallery data. */
-  gallery: Gallery;
+  gallery: GalleryDataFragment;
 
   /** Properties required for navigating in the modal. */
   navigation?: CardModalNavigation;

@@ -399,7 +399,7 @@ interface SceneCardModalContentProps {
   ratingSystem?: RatingSystemOptions;
 
   /** The Stash scene data. */
-  scene: Scene;
+  scene: SceneDataFragment;
 
   /** The currently displayed modal section. */
   section: CardModalSection;
