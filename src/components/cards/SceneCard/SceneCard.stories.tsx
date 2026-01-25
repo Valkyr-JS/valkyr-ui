@@ -65,9 +65,9 @@ export const FullDataDefaults: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
-    // Rating banner should render
-    const rating = canvas.getByText("Rating: 5 stars");
-    await expect(rating).toBeInTheDocument();
+    // Rating banner should render, but not the rating icon
+    const ratingBanner = canvas.getAllByText("Rating: 5 stars");
+    await expect(ratingBanner).toHaveLength(1);
   },
 };
 
@@ -75,6 +75,7 @@ export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
       cards__sceneCard__oCountBreakpoint: 0,
+      cards__sceneCard__ratingIconBreakpoint: 0,
     },
     scene: fullData as SlimSceneDataFragment,
   },
@@ -103,9 +104,9 @@ export const FullDataAllEnabled: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
-    // Rating banner should render
-    const rating = canvas.getByText("Rating: 5 stars");
-    await expect(rating).toBeInTheDocument();
+    // Rating banner AND icon should render
+    const ratingBanner = canvas.getAllByText("Rating: 5 stars");
+    await expect(ratingBanner).toHaveLength(2);
   },
 };
 
