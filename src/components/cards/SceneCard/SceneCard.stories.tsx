@@ -74,6 +74,10 @@ export const FullDataDefaults: Story = {
     await expect(resolution).toBeInTheDocument();
     const resolutionIcon = canvas.queryByText("Resolution: HD");
     await expect(resolutionIcon).toBeNull();
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
   },
 };
 
@@ -119,6 +123,10 @@ export const FullDataAllEnabled: Story = {
     await expect(resolution).toBeInTheDocument();
     const resolutionIcon = canvas.queryByText("Resolution: HD");
     await expect(resolutionIcon).toBeNull();
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
   },
 };
 
