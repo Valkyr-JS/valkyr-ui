@@ -9,6 +9,7 @@ import SceneCard from "../SceneCard";
 import filelessData from "../../../../mocks/scenes/filelessData.slim.json";
 import fullData from "../../../../mocks/scenes/fullData.slim.json";
 import minimalData from "../../../../mocks/scenes/minimalData.slim.json";
+import multiFile from "../../../../mocks/scenes/multiFile.slim.json";
 import portrait from "../../../../mocks/scenes/portrait.slim.json";
 import square from "../../../../mocks/scenes/square.slim.json";
 
@@ -27,19 +28,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const SceneCards = [fullData, minimalData, filelessData, portrait, square].map(
-  (s) => (
-    <SceneCard
-      footer={{
-        openHandler: fn(),
-        pluginConfig: {},
-        setSection: fn(),
-      }}
-      pluginConfig={{}}
-      scene={s as SlimSceneDataFragment}
-    />
-  ),
-);
+const SceneCards = [
+  fullData,
+  minimalData,
+  multiFile,
+  filelessData,
+  portrait,
+  square,
+].map((s) => (
+  <SceneCard
+    footer={{
+      openHandler: fn(),
+      pluginConfig: {},
+      setSection: fn(),
+    }}
+    pluginConfig={{}}
+    scene={s as SlimSceneDataFragment}
+  />
+));
 
 export const ScenesZoom0: Story = {
   name: "Zoom 0 - Scene cards",

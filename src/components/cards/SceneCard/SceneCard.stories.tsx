@@ -7,6 +7,7 @@ import SceneCard from ".";
 import filelessData from "../../../../mocks/scenes/filelessData.slim.json";
 import fullData from "../../../../mocks/scenes/fullData.slim.json";
 import minimalData from "../../../../mocks/scenes/minimalData.slim.json";
+import multiFile from "../../../../mocks/scenes/multiFile.slim.json";
 import portrait from "../../../../mocks/scenes/portrait.slim.json";
 import square from "../../../../mocks/scenes/square.slim.json";
 
@@ -159,6 +160,21 @@ export const MinimalData: Story = {
 export const FilelessData: Story = {
   args: {
     scene: filelessData as SlimSceneDataFragment,
+  },
+};
+
+export const MultiFile: Story = {
+  args: {
+    scene: multiFile as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Expect the resolution to be based on the primary file, not any other
+    const primaryRes = canvas.getByText("Resolution: 1080p");
+    await expect(primaryRes).toBeInTheDocument();
+    const secondaryRes = canvas.queryByText("Resolution: 720p");
+    await expect(secondaryRes).toBeNull();
   },
 };
 
