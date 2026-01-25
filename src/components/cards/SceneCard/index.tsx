@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import cx from "classnames";
 import { DEFAULT } from "@/constants";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
+import AspectRatio from "../data/AspectRatio";
 import Date from "../data/Date";
 import Details from "../data/Details";
 import Duration from "../data/Duration";
@@ -227,6 +228,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 userZoomIndex={
                   props.pluginConfig.cards__sceneCard__durationZoomIndex ??
                   DEFAULT.CARDS.SCENE_CARD.DURATION_ZOOM_INDEX
+                }
+              />
+              <AspectRatio
+                context="card"
+                currentZoomIndex={props.zoomIndex}
+                resolution={[primaryFile.width, primaryFile.height]}
+                userZoomIndex={
+                  props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
+                  DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX
                 }
               />
               <Resolution
