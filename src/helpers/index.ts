@@ -86,6 +86,7 @@ interface IgetTitleFromObject {
   title?: Maybe<string>;
 }
 
+/** Get the title from a Stash object, or create one from file data. */
 export const getTitleFromObject = (object: IgetTitleFromObject): string => {
   const file =
     object.files && object.files.length ? object.files[0] : undefined;
