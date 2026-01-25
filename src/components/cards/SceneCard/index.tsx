@@ -449,6 +449,13 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     props.scene.files.length > 0 ? props.scene.files[0] : undefined;
   const isPortrait = getFileIsPortrait(primaryFile);
 
+  // Only render technical details if the user has enabled on cards them at any
+  // breakpoint. The data will be available anyway under the file section.
+  // Exceptions are duration and resolution which should always be available.
+  const willRenderAspectRatio =
+    (props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX) > -1;
+
   // Only render one of the two rating options
   const willRenderRatingBanner =
     (props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex ??
@@ -533,10 +540,12 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                       DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
                     }
                   />
-                  <AspectRatio
-                    context="modal"
-                    resolution={[primaryFile.width, primaryFile.height]}
-                  />
+                  {willRenderAspectRatio && (
+                    <AspectRatio
+                      context="modal"
+                      resolution={[primaryFile.width, primaryFile.height]}
+                    />
+                  )}
                   <Resolution
                     asIcon={
                       props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
