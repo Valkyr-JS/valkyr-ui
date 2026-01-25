@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
 import SceneCard from ".";
 
 // Mock data
@@ -24,6 +24,11 @@ const meta = {
     layout: "centered",
   },
   args: {
+    footer: {
+      openHandler: fn(),
+      pluginConfig: {},
+      setSection: fn(),
+    },
     pluginConfig: {},
     zoomBreakpoint: 1,
   },
@@ -215,5 +220,47 @@ export const SquareBackgroundStyle: Story = {
       cards__sceneCard__thumbnailBackgroundStyle: "black",
     },
     scene: square as SlimSceneDataFragment,
+  },
+};
+
+export const DetailsModalButton: Story = {
+  args: {
+    scene: square as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    expect(detailsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const TagsModalButton: Story = {
+  args: {
+    scene: fullData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoTagsModalButton: Story = {
+  args: {
+    scene: square as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.queryByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeNull();
   },
 };
