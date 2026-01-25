@@ -533,6 +533,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                       DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
                     }
                   />
+                  <AspectRatio
+                    context="modal"
+                    resolution={[primaryFile.width, primaryFile.height]}
+                  />
                   <Resolution
                     asIcon={
                       props.pluginConfig.cards__sceneCard__resolutionAsIcon ??

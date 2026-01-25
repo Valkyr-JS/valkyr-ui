@@ -51,6 +51,10 @@ export const FullData: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
+    // Aspect ratio should render
+    const aspectRatio = canvas.getByText("Aspect Ratio: 16 by 9");
+    await expect(aspectRatio).toBeInTheDocument();
+
     // Date should render
     const date = canvas.getByText("Date: 11 April 2016");
     await expect(date).toBeInTheDocument();
