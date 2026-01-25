@@ -32,7 +32,7 @@ const Resolution: React.FC<
   const resolutionValue = TextUtils.resolution(data[0], data[1]);
 
   if (props.asIcon) {
-    const longEdge =
+    const shortEdge =
       props.resolution[0] > props.resolution[1]
         ? props.resolution[1]
         : props.resolution[0];
@@ -40,21 +40,21 @@ const Resolution: React.FC<
     const iconClass = "vui-card-data__resolution-icon";
 
     const resolutionIconValue =
-      longEdge < 720
+      shortEdge < 720
         ? "SD"
-        : longEdge < 1440
+        : shortEdge < 1440
           ? "HD"
-          : longEdge < 1920
+          : shortEdge < 1920
             ? "2K"
-            : longEdge < 2560
+            : shortEdge < 2560
               ? "4K"
-              : longEdge < 3000
+              : shortEdge < 3000
                 ? "5K"
-                : longEdge < 3548
+                : shortEdge < 3548
                   ? "6K"
-                  : longEdge < 3850
+                  : shortEdge < 3850
                     ? "7K"
-                    : longEdge < 6144
+                    : shortEdge < 6144
                       ? "8K"
                       : "XL";
 
