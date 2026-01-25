@@ -200,6 +200,13 @@ export const DetailsSectionButton: Story = {
   },
 };
 
+export const TagsSection: Story = {
+  args: {
+    section: "tags",
+    scene: fullData as unknown as Scene,
+  },
+};
+
 export const TagsSectionButton: Story = {
   args: {
     scene: fullData as unknown as Scene,
