@@ -93,7 +93,7 @@ export const RatingIconNotBanner: Story = {
   args: {
     pluginConfig: {
       cards__sceneCard__ratingBannerZoomIndex: -1,
-      cards__galleryCard__ratingIconZoomIndex: 0,
+      cards__sceneCard__ratingIconZoomIndex: 0,
     },
     scene: fullData as SceneDataFragment,
   },

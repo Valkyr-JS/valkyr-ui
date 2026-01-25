@@ -2,8 +2,13 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
 import { GalleryCardModalContent } from ".";
-import landscapeThumbnail from "../../../../mocks/galleries/landscapeThumbnail.json";
-import portraitThumbnail from "../../../../mocks/galleries/portraitThumbnail.json";
+
+// Mock data
+import filelessData from "../../../../mocks/galleries/filelessData.json";
+import fullData from "../../../../mocks/galleries/fullData.json";
+import minimalData from "../../../../mocks/galleries/minimalData.json";
+import portrait from "../../../../mocks/galleries/portrait.json";
+import square from "../../../../mocks/galleries/square.json";
 
 const meta = {
   title: "Components/Cards/Gallery card modal content",
@@ -30,6 +35,7 @@ const meta = {
     pluginConfig: {},
     section: "details",
     setSection: fn(),
+    titleID: "titleID",
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof GalleryCardModalContent>;
@@ -37,48 +43,208 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultSettings: Story = {
+export const FullData: Story = {
   args: {
-    gallery: landscapeThumbnail as GalleryDataFragment,
-    titleID: "gallery4521Modal",
+    pluginConfig: {
+      cards__galleryCard__ratingIconZoomIndex: 0,
+    },
+    gallery: fullData as GalleryDataFragment,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Studio link should render
-    const studioLink = canvas.getByRole("link", {
-      name: "Studio: " + args.gallery.studio?.name,
-    });
-    await expect(studioLink).toBeInTheDocument();
-
     // Date should render
-    const date = canvas.getByText("Date: 5 March 2021");
+    const date = canvas.getByText("Date: 31 May 2019");
     await expect(date).toBeInTheDocument();
+
+    // Details should render
+    const details = canvas.getByText(fullData.details);
+    await expect(details).toBeInTheDocument();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
+
+    // Rating banner should render, but not the rating icon
+    const ratingBanner = canvas.getAllByText("Rating: 4 stars");
+    await expect(ratingBanner).toHaveLength(1);
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
   },
 };
 
-export const TagSection: Story = {
+export const RatingIconNotBanner: Story = {
   args: {
-    gallery: portraitThumbnail as GalleryDataFragment,
-    section: "tags",
-    titleID: "scene2414Modal",
+    pluginConfig: {
+      cards__galleryCard__ratingBannerZoomIndex: -1,
+      cards__galleryCard__ratingIconZoomIndex: 0,
+    },
+    gallery: fullData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Rating icon should render, but not the rating banner
+    const ratingBanner = canvas.getAllByText("Rating: 4 stars");
+    await expect(ratingBanner).toHaveLength(1);
   },
 };
 
-export const WithThumbnailBackground: Story = {
+export const MinimalData: Story = {
   args: {
-    gallery: portraitThumbnail as GalleryDataFragment,
-    pluginConfig: { cards__galleryCard__thumbnailBackgroundImage: true },
-    titleID: "gallery4521Modal",
+    gallery: minimalData as GalleryDataFragment,
   },
 };
 
-export const WithThumbnailBackgroundStyle: Story = {
+export const FilelessData: Story = {
   args: {
-    gallery: portraitThumbnail as GalleryDataFragment,
+    gallery: filelessData as GalleryDataFragment,
+  },
+};
+
+export const PortraitBackgroundImage: Story = {
+  name: "Portrait thumbnail with background image",
+  args: {
+    pluginConfig: {
+      cards__galleryCard__thumbnailBackgroundImage: true,
+    },
+    gallery: portrait as GalleryDataFragment,
+  },
+};
+
+export const PortraitBackgroundStyle: Story = {
+  name: "Portrait thumbnail with background style",
+  args: {
     pluginConfig: {
       cards__galleryCard__thumbnailBackgroundStyle: "black",
     },
-    titleID: "gallery4521Modal",
+    gallery: portrait as GalleryDataFragment,
+  },
+};
+
+export const SquareThumbnail: Story = {
+  name: "Square thumbnail",
+  args: {
+    gallery: square as GalleryDataFragment,
+  },
+};
+
+export const DetailsSectionButton: Story = {
+  args: {
+    gallery: minimalData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    expect(detailsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const TagsSection: Story = {
+  args: {
+    section: "tags",
+    gallery: fullData as GalleryDataFragment,
+  },
+};
+
+export const TagsSectionButton: Story = {
+  args: {
+    gallery: fullData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoTagsSectionButton: Story = {
+  args: {
+    gallery: minimalData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.queryByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeNull();
+  },
+};
+
+export const Navigation: Story = {
+  args: {
+    navigation: {
+      next: { disabled: false, onClick: fn() },
+      prev: { disabled: false, onClick: fn() },
+    },
+    gallery: fullData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const prevButton = canvas.queryByRole("button", {
+      name: "Previous",
+    });
+    expect(prevButton).not.toBeDisabled();
+
+    const nextButton = canvas.queryByRole("button", {
+      name: "Next",
+    });
+    expect(nextButton).not.toBeDisabled();
+  },
+};
+
+export const NavigationPreviousDisabled: Story = {
+  args: {
+    navigation: {
+      next: { disabled: false, onClick: fn() },
+      prev: { disabled: true, onClick: fn() },
+    },
+    gallery: fullData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const prevButton = canvas.queryByRole("button", {
+      name: "Previous",
+    });
+    expect(prevButton).toBeDisabled();
+
+    const nextButton = canvas.queryByRole("button", {
+      name: "Next",
+    });
+    expect(nextButton).not.toBeDisabled();
+  },
+};
+
+export const NavigationNextDisabled: Story = {
+  args: {
+    navigation: {
+      next: { disabled: true, onClick: fn() },
+      prev: { disabled: false, onClick: fn() },
+    },
+    gallery: fullData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const prevButton = canvas.queryByRole("button", {
+      name: "Previous",
+    });
+    expect(prevButton).not.toBeDisabled();
+
+    const nextButton = canvas.queryByRole("button", {
+      name: "Next",
+    });
+    expect(nextButton).toBeDisabled();
   },
 };
