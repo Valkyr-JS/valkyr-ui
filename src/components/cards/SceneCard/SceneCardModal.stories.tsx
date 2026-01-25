@@ -105,3 +105,125 @@ export const RatingIconNotBanner: Story = {
     await expect(ratingBanner).toHaveLength(1);
   },
 };
+
+export const MinimalData: Story = {
+  args: {
+    scene: minimalData as unknown as Scene,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Duration should render
+    const duration = canvas.getByText("Duration: 42 minutes 51 seconds");
+    await expect(duration).toBeInTheDocument();
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 540p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: SD");
+    await expect(resolutionIcon).toBeNull();
+  },
+};
+
+export const FilelessData: Story = {
+  args: {
+    scene: filelessData as unknown as Scene,
+  },
+};
+
+export const MultiFile: Story = {
+  args: {
+    scene: multiFile as unknown as Scene,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Expect the resolution to be based on the primary file, not any other
+    const primaryRes = canvas.getByText("Resolution: 1080p");
+    await expect(primaryRes).toBeInTheDocument();
+    const secondaryRes = canvas.queryByText("Resolution: 720p");
+    await expect(secondaryRes).toBeNull();
+  },
+};
+
+export const PortraitBackgroundImage: Story = {
+  name: "Portrait thumbnail with background image",
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundImage: true,
+    },
+    scene: portrait as unknown as Scene,
+  },
+};
+
+export const PortraitBackgroundStyle: Story = {
+  name: "Portrait thumbnail with background style",
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundStyle: "black",
+    },
+    scene: portrait as unknown as Scene,
+  },
+};
+
+export const SquareBackgroundImage: Story = {
+  name: "Square thumbnail with background image",
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundImage: true,
+    },
+    scene: square as unknown as Scene,
+  },
+};
+
+export const SquareBackgroundStyle: Story = {
+  name: "Square thumbnail with background style",
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundStyle: "black",
+    },
+    scene: square as unknown as Scene,
+  },
+};
+
+export const DetailsSectionButton: Story = {
+  args: {
+    scene: square as unknown as Scene,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    expect(detailsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const TagsSectionButton: Story = {
+  args: {
+    scene: fullData as unknown as Scene,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoTagsSectionButton: Story = {
+  args: {
+    scene: square as unknown as Scene,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.queryByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeNull();
+  },
+};
