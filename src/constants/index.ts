@@ -17,6 +17,7 @@ export const DEFAULT = {
       THUMBNAIL_BACKGROUND_STYLE: null,
     },
     SCENE_CARD: {
+      ASPECT_RATIO_ZOOM_INDEX: -1,
       DATE_ZOOM_INDEX: 0,
       DETAILS_ZOOM_INDEX: 0,
       DETAILS_MAX_LINES: 3,

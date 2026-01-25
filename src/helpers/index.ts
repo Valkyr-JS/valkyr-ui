@@ -38,6 +38,12 @@ export function getFileIsPortrait(
   return height >= width;
 }
 
+/* ------------------------------------------- getGCD ------------------------------------------- */
+
+/** Get the greatest common denominator of two numbers. */
+export const getGCD = (a: number, b: number): number =>
+  b === 0 ? a : getGCD(b, a % b);
+
 /* ---------------------------------------- getRenderData --------------------------------------- */
 
 interface IgetRenderData<T> {

@@ -44,12 +44,72 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FullData: Story = {
+export const FullDataDefaults: Story = {
   args: {
     scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
+    // Aspect ratio should NOT render
+    const aspectRatio = canvas.queryByText("Aspect Ratio: 16 by 9");
+    await expect(aspectRatio).toBeNull();
+
+    // Date should render
+    const date = canvas.getByText("Date: 11 April 2016");
+    await expect(date).toBeInTheDocument();
+
+    // Details should render
+    const details = canvas.getByText(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus odio, fermentum sed egestas et, laoreet et enim. Aenean vulputate metus dolor, at placerat tortor porta non. Proin vel faucibus mauris. Mauris nec eleifend augue. In sed augue a felis aliquam gravida et aliquet risus. Nulla malesuada massa a nisi rutrum vestibulum. Suspendisse potenti. Donec laoreet tristique rhoncus. Nam porttitor mollis odio eu fermentum. Fusce magna mauris, scelerisque ac mollis eu, congue id sapien. Fusce at mauris at justo condimentum laoreet.",
+    );
+    await expect(details).toBeInTheDocument();
+
+    // Duration should render
+    const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
+    await expect(duration).toBeInTheDocument();
+
+    // O count should render
+    const oCount = canvas.getByText("O Count: 2");
+    await expect(oCount).toBeInTheDocument();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
+
+    // Play count should render
+    const playCount = canvas.getByText("Play Count: 5");
+    await expect(playCount).toBeInTheDocument();
+
+    // Rating banner should render, but not the rating icon
+    const ratingBanner = canvas.getAllByText("Rating: 5 stars");
+    await expect(ratingBanner).toHaveLength(1);
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 1080p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: HD");
+    await expect(resolutionIcon).toBeNull();
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
+  },
+};
+
+export const FullDataAllEnabled: Story = {
+  args: {
+    pluginConfig: {
+      cards__sceneCard__aspectRatioZoomIndex: 0,
+    },
+    scene: fullData as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Aspect ratio should render
+    const aspectRatio = canvas.getByText("Aspect Ratio: 16 by 9");
+    await expect(aspectRatio).toBeInTheDocument();
 
     // Date should render
     const date = canvas.getByText("Date: 11 April 2016");

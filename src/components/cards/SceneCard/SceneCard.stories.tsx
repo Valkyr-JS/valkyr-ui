@@ -50,6 +50,10 @@ export const FullDataDefaults: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
+    // Aspect ratio should NOT render
+    const aspectRatio = canvas.queryByText("Aspect Ratio: 16 by 9");
+    await expect(aspectRatio).toBeNull();
+
     // Date should render
     const date = canvas.getByText("Date: 11 April 2016");
     await expect(date).toBeInTheDocument();
@@ -95,6 +99,7 @@ export const FullDataDefaults: Story = {
 export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
+      cards__sceneCard__aspectRatioZoomIndex: 0,
       cards__sceneCard__oCountZoomIndex: 0,
       cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
@@ -103,6 +108,10 @@ export const FullDataAllEnabled: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
+    // Aspect ratio should render
+    const aspectRatio = canvas.getByText("Aspect Ratio: 16 by 9");
+    await expect(aspectRatio).toBeInTheDocument();
 
     // Date should render
     const date = canvas.getByText("Date: 11 April 2016");

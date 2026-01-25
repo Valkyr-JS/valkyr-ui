@@ -9,6 +9,25 @@ import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { DEFAULT } from "@/constants";
 
 const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
+  const AspectRatioZoomIndex = () => (
+    <NumberSetting
+      heading="Aspect ratio"
+      id="valkyr-ui-cards__sceneCard__aspectRatioZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__aspectRatioZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX
+      }
+    />
+  );
+
   const BlurredThumbnailBackgroundEnabled = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
@@ -335,6 +354,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
             "For each piece of data, you can set the card zoom at which it appears. This allows you to display only select data when cards are smaller, and more data as they get bigger. The value must be between 0 and 3. Alternatively, set it to -1 to turn it off completely.",
         }}
       >
+        <AspectRatioZoomIndex />
         <DateZoomIndex />
         <DetailsZoomIndex />
         <DurationZoomIndex />
