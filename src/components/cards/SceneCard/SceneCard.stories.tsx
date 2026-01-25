@@ -68,6 +68,12 @@ export const FullDataDefaults: Story = {
     // Rating banner should render, but not the rating icon
     const ratingBanner = canvas.getAllByText("Rating: 5 stars");
     await expect(ratingBanner).toHaveLength(1);
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 1080p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: HD");
+    await expect(resolutionIcon).toBeNull();
   },
 };
 
