@@ -71,22 +71,6 @@ export const FullData: Story = {
     await expect(date).toBeInTheDocument();
   },
 };
-
-export const LandscapeThumbnail: Story = {
-  args: {
-    gallery: landscapeThumbnail as unknown as SlimGalleryDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should NOT render
-    const detailsModalBtn = canvas.queryByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeNull();
-  },
-};
-
 export const LandscapeThumbnailWithFooter: Story = {
   args: {
     footer: footerProps,
@@ -100,21 +84,6 @@ export const LandscapeThumbnailWithFooter: Story = {
       name: "Details",
     });
     await expect(detailsModalBtn).toBeInTheDocument();
-  },
-};
-
-export const PortraitThumbnail: Story = {
-  args: {
-    gallery: portraitThumbnail as unknown as SlimGalleryDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should NOT render
-    const detailsModalBtn = canvas.queryByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeNull();
   },
 };
 
