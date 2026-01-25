@@ -37,9 +37,9 @@ const Studio: React.FC<
     <span className={componentClass}>
       <a href={link}>
         <span className="sr-only">
-          {intl.formatMessage({ id: "studio" })}:{" "}
+          {intl.formatMessage({ id: "studio" })}: {data.name}
         </span>
-        {data.name}
+        <span aria-hidden>{data.name}</span>
       </a>
     </span>
   );

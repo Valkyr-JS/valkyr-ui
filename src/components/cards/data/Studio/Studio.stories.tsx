@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
+import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import Studio from ".";
+
+const stashStudioText = "Tushy";
+const srStudioText = "Studio: Tushy";
 
 const meta = {
   title: "Components/Cards/Data/Studio",
@@ -11,16 +15,11 @@ const meta = {
   args: {
     studio: {
       id: "1",
-      name: "Vixen",
+      name: "Tushy",
     },
   },
   argTypes: {
-    currentBreakpoint: {
-      control: { type: "range", min: 0, max: 3 },
-    },
-    userBreakpoint: {
-      control: { type: "range", min: -1, max: 3 },
-    },
+    ...dataComponentArgTypes,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof Studio>;
@@ -36,8 +35,12 @@ export const AboveZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link", { name: "Studio: Vixen" });
-    await expect(link).toBeInTheDocument();
+
+    const count = canvas.getByText(stashStudioText);
+    await expect(count).toBeInTheDocument();
+
+    const srCount = canvas.getByText(srStudioText);
+    await expect(srCount).toBeInTheDocument();
   },
 };
 
@@ -49,8 +52,12 @@ export const BelowZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.queryByRole("link", { name: "Studio: Vixen" });
-    await expect(link).toBeNull();
+
+    const count = canvas.queryByText(stashStudioText);
+    await expect(count).toBeNull();
+
+    const srCount = canvas.queryByText(srStudioText);
+    await expect(srCount).toBeNull();
   },
 };
 
@@ -62,31 +69,30 @@ export const EqualsZoomBreakpoint: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link", { name: "Studio: Vixen" });
-    await expect(link).toBeInTheDocument();
+
+    const count = canvas.getByText(stashStudioText);
+    await expect(count).toBeInTheDocument();
+
+    const srCount = canvas.getByText(srStudioText);
+    await expect(srCount).toBeInTheDocument();
   },
 };
 
-export const ModalContext: Story = {
-  args: {
-    context: "modal",
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const link = canvas.getByRole("link", { name: "Studio: Vixen" });
-    await expect(link).toBeInTheDocument();
-  },
-};
-
-export const UserDisabled: Story = {
+export const NoData: Story = {
   args: {
     context: "card",
-    userBreakpoint: -1,
+    studio: null,
+    currentBreakpoint: 3,
+    userBreakpoint: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.queryByRole("link", { name: "Studio: Vixen" });
-    await expect(link).toBeNull();
+
+    const count = canvas.queryByText(stashStudioText);
+    await expect(count).toBeNull();
+
+    const srCount = canvas.queryByText(srStudioText);
+    await expect(srCount).toBeNull();
   },
 };
 
@@ -97,21 +103,58 @@ export const WithoutZoomData: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.getByRole("link", { name: "Studio: Vixen" });
-    await expect(link).toBeInTheDocument();
+
+    const count = canvas.getByText(stashStudioText);
+    await expect(count).toBeInTheDocument();
+
+    const srCount = canvas.getByText(srStudioText);
+    await expect(srCount).toBeInTheDocument();
   },
 };
 
-export const NoData: Story = {
+export const CardUserDisabled: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
-    studio: null,
-    userBreakpoint: 2,
+    userBreakpoint: -1,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const link = canvas.queryByRole("link", { name: "Studio:" });
-    await expect(link).toBeNull();
+
+    const count = canvas.queryByText(stashStudioText);
+    await expect(count).toBeNull();
+
+    const srCount = canvas.queryByText(srStudioText);
+    await expect(srCount).toBeNull();
+  },
+};
+
+export const ModalContext: Story = {
+  args: {
+    context: "modal",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const count = canvas.getByText(stashStudioText);
+    await expect(count).toBeInTheDocument();
+
+    const srCount = canvas.getByText(srStudioText);
+    await expect(srCount).toBeInTheDocument();
+  },
+};
+
+export const ModalContextNoData: Story = {
+  args: {
+    context: "modal",
+    studio: null,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const count = canvas.queryByText(stashStudioText);
+    await expect(count).toBeNull();
+
+    const srCount = canvas.queryByText(srStudioText);
+    await expect(srCount).toBeNull();
   },
 };
