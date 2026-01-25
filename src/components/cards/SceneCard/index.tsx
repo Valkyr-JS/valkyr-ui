@@ -27,8 +27,8 @@ interface SceneCardProps {
    * current one ends. */
   continuePlaylist?: Maybe<boolean> | undefined;
 
-  /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: Omit<CardFooterProps, "sections">;
+  /** Footer props. */
+  footer: Omit<CardFooterProps, "sections">;
 
   /** The index of the scene in the current page query. */
   index?: ISceneCardProps["index"];
@@ -76,9 +76,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const footerSections: CardModalSectionData[] = [["details"]];
   if (props.scene.tags.length)
     footerSections.push(["tags", props.scene.tags.length]);
-  const footerProps = props.footer
-    ? { ...props.footer, sections: footerSections }
-    : undefined;
+  const footerProps = { ...props.footer, sections: footerSections };
 
   return (
     <GridCard

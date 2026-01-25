@@ -27,6 +27,11 @@ const meta = {
     layout: "centered",
   },
   args: {
+    footer: {
+      openHandler: fn(),
+      pluginConfig: {},
+      setSection: fn(),
+    },
     pluginConfig,
     zoomBreakpoint: 1,
   },

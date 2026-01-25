@@ -20,7 +20,7 @@ import "./GalleryCard.scss";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: Omit<CardFooterProps, "sections">;
+  footer: Omit<CardFooterProps, "sections">;
 
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
@@ -46,9 +46,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   const footerSections: CardModalSectionData[] = [["details"]];
   if (props.gallery.tags.length)
     footerSections.push(["tags", props.gallery.tags.length]);
-  const footerProps = props.footer
-    ? { ...props.footer, sections: footerSections }
-    : undefined;
+  const footerProps = { ...props.footer, sections: footerSections };
 
   return (
     <GridCard
