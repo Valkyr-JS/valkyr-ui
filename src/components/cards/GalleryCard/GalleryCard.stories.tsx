@@ -9,6 +9,7 @@ import filelessData from "../../../../mocks/galleries/filelessData.slim.json";
 import fullData from "../../../../mocks/galleries/fullData.slim.json";
 import minimalData from "../../../../mocks/galleries/minimalData.slim.json";
 import portrait from "../../../../mocks/galleries/portrait.slim.json";
+import square from "../../../../mocks/galleries/square.slim.json";
 
 const meta = {
   title: "Components/Cards/Gallery card",
@@ -131,5 +132,12 @@ export const PortraitBackgroundStyle: Story = {
       cards__galleryCard__thumbnailBackgroundStyle: "black",
     },
     gallery: portrait as SlimGalleryDataFragment,
+  },
+};
+
+export const SquareThumbnail: Story = {
+  name: "Square thumbnail",
+  args: {
+    gallery: square as SlimGalleryDataFragment,
   },
 };
