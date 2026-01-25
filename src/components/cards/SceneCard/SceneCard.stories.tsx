@@ -64,6 +64,10 @@ export const FullDataDefaults: Story = {
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Rating banner should render
+    const rating = canvas.getByText("Rating: 5 stars");
+    await expect(rating).toBeInTheDocument();
   },
 };
 
@@ -98,6 +102,10 @@ export const FullDataAllEnabled: Story = {
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Rating banner should render
+    const rating = canvas.getByText("Rating: 5 stars");
+    await expect(rating).toBeInTheDocument();
   },
 };
 
