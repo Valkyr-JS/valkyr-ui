@@ -64,13 +64,17 @@ export const FullDataDefaults: Story = {
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
 
-    // O count shount NOT render
+    // O count should NOT render
     const oCount = canvas.queryByText("O Count: 2");
     await expect(oCount).toBeNull();
 
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Play count should NOT render
+    const playCount = canvas.queryByText("Play Count: 5");
+    await expect(playCount).toBeNull();
 
     // Rating banner should render, but not the rating icon
     const ratingBanner = canvas.getAllByText("Rating: 5 stars");
@@ -92,6 +96,7 @@ export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
       cards__sceneCard__oCountZoomIndex: 0,
+      cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
     },
     scene: fullData as SlimSceneDataFragment,
@@ -114,12 +119,16 @@ export const FullDataAllEnabled: Story = {
     await expect(duration).toBeInTheDocument();
 
     // O count should render
-    const count = canvas.getByText("O Count: 2");
-    await expect(count).toBeInTheDocument();
+    const oCount = canvas.getByText("O Count: 2");
+    await expect(oCount).toBeInTheDocument();
 
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Play count should render
+    const playCount = canvas.getByText("Play Count: 5");
+    await expect(playCount).toBeInTheDocument();
 
     // Rating banner AND icon should render
     const ratingBanner = canvas.getAllByText("Rating: 5 stars");

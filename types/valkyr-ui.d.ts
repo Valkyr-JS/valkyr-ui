@@ -95,6 +95,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__oCountZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the organized icon on scene cards. */
   cards__sceneCard__organizedZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the play count on scene cards. */
+  cards__sceneCard__playCountZoomIndex?: StashCardGridZoom;
   /** Enables scene card previews. */
   cards__sceneCard__previewsEnabled?: boolean;
   /** The zoom index at which to display the rating banner on scene cards. */

@@ -1,0 +1,12 @@
+.vui-card-data__play-count {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+}

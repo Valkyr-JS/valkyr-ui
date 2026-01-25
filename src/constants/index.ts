@@ -24,6 +24,7 @@ export const DEFAULT = {
       ENABLED: true,
       O_COUNT_ZOOM_INDEX: -1,
       ORGANIZED_ZOOM_INDEX: 0,
+      PLAY_COUNT_ZOOM_INDEX: -1,
       PREVIEWS_ENABLED: true,
       RATING_BANNER_ZOOM_INDEX: 0,
       RATING_ICON_ZOOM_INDEX: -1,
