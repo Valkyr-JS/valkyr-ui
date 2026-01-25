@@ -7,6 +7,7 @@ import Details from "../data/Details";
 import Duration from "../data/Duration";
 import OCount from "../data/OCount";
 import Organized from "../data/Organized";
+import PlayCount from "../data/PlayCount";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Resolution from "../data/Resolution";
@@ -123,6 +124,15 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
             }
           />
           <div className={userDataClass}>
+            <PlayCount
+              context="card"
+              count={props.scene.play_count}
+              currentZoomIndex={props.zoomIndex}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__playCountZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.PLAY_COUNT_ZOOM_INDEX
+              }
+            />
             <OCount
               context="card"
               count={props.scene.o_counter}
