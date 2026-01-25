@@ -113,6 +113,12 @@ export const FullDataAllEnabled: Story = {
     // Rating banner AND icon should render
     const ratingBanner = canvas.getAllByText("Rating: 5 stars");
     await expect(ratingBanner).toHaveLength(2);
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 1080p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: HD");
+    await expect(resolutionIcon).toBeNull();
   },
 };
 
@@ -126,6 +132,12 @@ export const MinimalData: Story = {
     // Duration should render
     const duration = canvas.getByText("Duration: 42 minutes 51 seconds");
     await expect(duration).toBeInTheDocument();
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 540p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: SD");
+    await expect(resolutionIcon).toBeNull();
   },
 };
 
