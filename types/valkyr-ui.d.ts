@@ -81,6 +81,8 @@ interface ValkyrUiConfigMap {
   /** Adds user-defined CSS to the thumbnail background. */
   cards__galleryCard__thumbnailBackgroundStyle?: string | null;
 
+  /** The zoom index at which to display the aspect ratio on scene cards. */
+  cards__sceneCard__aspectRatioZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the date on scene cards. */
   cards__sceneCard__dateZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the details on scene cards. */
