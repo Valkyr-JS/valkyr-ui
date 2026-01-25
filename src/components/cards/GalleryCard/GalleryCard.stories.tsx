@@ -8,6 +8,7 @@ import GalleryCard from ".";
 import filelessData from "../../../../mocks/galleries/filelessData.slim.json";
 import fullData from "../../../../mocks/galleries/fullData.slim.json";
 import minimalData from "../../../../mocks/galleries/minimalData.slim.json";
+import portrait from "../../../../mocks/galleries/portrait.slim.json";
 
 const meta = {
   title: "Components/Cards/Gallery card",
@@ -110,5 +111,25 @@ export const MinimalData: Story = {
 export const FilelessData: Story = {
   args: {
     gallery: filelessData as SlimGalleryDataFragment,
+  },
+};
+
+export const PortraitBackgroundImage: Story = {
+  name: "Portrait thumbnail with background image",
+  args: {
+    pluginConfig: {
+      cards__galleryCard__thumbnailBackgroundImage: true,
+    },
+    gallery: portrait as SlimGalleryDataFragment,
+  },
+};
+
+export const PortraitBackgroundStyle: Story = {
+  name: "Portrait thumbnail with background style",
+  args: {
+    pluginConfig: {
+      cards__galleryCard__thumbnailBackgroundStyle: "black",
+    },
+    gallery: portrait as SlimGalleryDataFragment,
   },
 };
