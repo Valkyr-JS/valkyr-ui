@@ -4,8 +4,12 @@ import { expect, fn, within } from "storybook/test";
 import { SceneCardModalContent } from ".";
 
 // Mock data
-import landscapeCover from "../../../../mocks/scenes/landscapeCover.json";
-import portrait from "../../../../mocks/scenes/portrait.slim.json";
+import filelessData from "../../../../mocks/scenes/filelessData.json";
+import fullData from "../../../../mocks/scenes/fullData.json";
+import minimalData from "../../../../mocks/scenes/minimalData.json";
+import multiFile from "../../../../mocks/scenes/multiFile.json";
+import portrait from "../../../../mocks/scenes/portrait.json";
+import square from "../../../../mocks/scenes/square.json";
 
 const meta = {
   title: "Components/Cards/Scene card modal content",
@@ -32,6 +36,7 @@ const meta = {
     pluginConfig: {},
     section: "details",
     setSection: fn(),
+    titleID: "titleID",
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof SceneCardModalContent>;
@@ -39,57 +44,64 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultSettings: Story = {
+export const FullData: Story = {
   args: {
-    scene: portrait as unknown as Scene,
-    titleID: "scene2414Modal",
+    scene: fullData as unknown as Scene,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Studio link should render
-    const studioLink = canvas.getByRole("link", {
-      name: "Studio: " + args.scene.studio?.name,
-    });
-    await expect(studioLink).toBeInTheDocument();
-
     // Date should render
-    const date = canvas.getByText("Date: 19 May 2020");
+    const date = canvas.getByText("Date: 11 April 2016");
     await expect(date).toBeInTheDocument();
+
+    // Details should render
+    const details = canvas.getByText(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus odio, fermentum sed egestas et, laoreet et enim. Aenean vulputate metus dolor, at placerat tortor porta non. Proin vel faucibus mauris. Mauris nec eleifend augue. In sed augue a felis aliquam gravida et aliquet risus. Nulla malesuada massa a nisi rutrum vestibulum. Suspendisse potenti. Donec laoreet tristique rhoncus. Nam porttitor mollis odio eu fermentum. Fusce magna mauris, scelerisque ac mollis eu, congue id sapien. Fusce at mauris at justo condimentum laoreet.",
+    );
+    await expect(details).toBeInTheDocument();
+
+    // Duration should render
+    const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
+    await expect(duration).toBeInTheDocument();
+
+    // O count shount render
+    const oCount = canvas.getByText("O Count: 2");
+    await expect(oCount).toBeInTheDocument();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
+
+    // Rating banner should render, but not the rating icon
+    const ratingBanner = canvas.getAllByText("Rating: 5 stars");
+    await expect(ratingBanner).toHaveLength(1);
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 1080p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: HD");
+    await expect(resolutionIcon).toBeNull();
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
   },
 };
 
-export const TagSection: Story = {
-  args: {
-    scene: landscapeCover as unknown as Scene,
-    section: "tags",
-    titleID: "scene2414Modal",
-  },
-};
-
-export const PortraitThumbnail: Story = {
-  args: {
-    scene: portrait as unknown as Scene,
-    titleID: "scene6439Modal",
-  },
-};
-
-export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
+export const RatingIconNotBanner: Story = {
   args: {
     pluginConfig: {
-      cards__sceneCard__thumbnailBackgroundImage: true,
+      cards__sceneCard__ratingBannerZoomIndex: -1,
+      cards__galleryCard__ratingIconZoomIndex: 0,
     },
-    scene: portrait as unknown as Scene,
-    titleID: "scene6439Modal",
+    scene: fullData as unknown as Scene,
   },
-};
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
 
-export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
-  args: {
-    pluginConfig: {
-      cards__sceneCard__thumbnailBackgroundStyle: "black",
-    },
-    scene: portrait as unknown as Scene,
-    titleID: "scene6439Modal",
+    // Rating icon should render, but not the rating banner
+    const ratingBanner = canvas.getAllByText("Rating: 5 stars");
+    await expect(ratingBanner).toHaveLength(1);
   },
 };
