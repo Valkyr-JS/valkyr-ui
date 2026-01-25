@@ -5,7 +5,9 @@ import { zoomIndexArgType } from "../../../../.storybook/argTypes";
 import GalleryCard from ".";
 
 // Mock data
+import filelessData from "../../../../mocks/galleries/filelessData.slim.json";
 import fullData from "../../../../mocks/galleries/fullData.slim.json";
+import minimalData from "../../../../mocks/galleries/minimalData.slim.json";
 
 const meta = {
   title: "Components/Cards/Gallery card",
@@ -96,5 +98,17 @@ export const FullDataAllEnabled: Story = {
     // Studio should render
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
+  },
+};
+
+export const MinimalData: Story = {
+  args: {
+    gallery: minimalData as SlimGalleryDataFragment,
+  },
+};
+
+export const FilelessData: Story = {
+  args: {
+    gallery: filelessData as SlimGalleryDataFragment,
   },
 };

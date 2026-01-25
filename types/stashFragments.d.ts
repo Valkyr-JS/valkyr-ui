@@ -257,11 +257,11 @@ interface SlimGalleryDataFragment {
     title: GalleryChapter["title"];
     image_index: GalleryChapter["image_index"];
   }>;
-  studio: {
+  studio: Maybe<{
     id: Studio["id"];
     name: Studio["name"];
     image_path: Studio["image_path"];
-  };
+  }>;
   tags: Array<{
     id: Tag["id"];
     name: Tag["name"];
