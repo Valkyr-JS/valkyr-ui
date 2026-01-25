@@ -1,6 +1,6 @@
 interface IgetRenderData<T> {
   data: T | undefined;
-  zoomBreakpoint: {
+  zoomIndex: {
     current?: number;
     user: number;
   };
@@ -13,25 +13,25 @@ export const getRenderData = <T>(args: IgetRenderData<T>): T | null => {
   // Return null if no data is available
   if (args.data === undefined) return null;
 
-  // Return null if the user has disabled the data, i.e. `zoomBreakpoint.user`
+  // Return null if the user has disabled the data, i.e. `zoomIndex.user`
   // equals `-1`.
-  if (args.zoomBreakpoint?.user === -1) return null;
+  if (args.zoomIndex?.user === -1) return null;
 
-  // Return the data if no breakpoint data is provided, i.e. not in a zoom
+  // Return the data if no zoom index data is provided, i.e. not in a zoom
   // context
-  if (args.zoomBreakpoint.current === undefined) return args.data;
+  if (args.zoomIndex.current === undefined) return args.data;
 
-  // Return null if the user breakpoint is invalid
+  // Return null if the user zoom index is invalid
   if (
-    args.zoomBreakpoint.user < 0 ||
-    args.zoomBreakpoint.user > 3 ||
-    !Number.isInteger(args.zoomBreakpoint.user)
+    args.zoomIndex.user < 0 ||
+    args.zoomIndex.user > 3 ||
+    !Number.isInteger(args.zoomIndex.user)
   )
     return null;
 
-  // Return null if the user breakpoint is greater than the current
-  // breakpoint.
-  if (args.zoomBreakpoint.user > args.zoomBreakpoint.current) return null;
+  // Return null if the user zoom index is greater than the current
+  // zoom index.
+  if (args.zoomIndex.user > args.zoomIndex.current) return null;
 
   return args.data;
 };

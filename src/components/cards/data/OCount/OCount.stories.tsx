@@ -24,11 +24,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const AboveZoomBreakpoint: Story = {
+export const AboveZoomIndex: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
-    userBreakpoint: 2,
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -41,11 +41,11 @@ export const AboveZoomBreakpoint: Story = {
   },
 };
 
-export const BelowZoomBreakpoint: Story = {
+export const BelowZoomIndex: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 0,
-    userBreakpoint: 2,
+    currentZoomIndex: 0,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -58,11 +58,11 @@ export const BelowZoomBreakpoint: Story = {
   },
 };
 
-export const EqualsZoomBreakpoint: Story = {
+export const EqualsZoomIndex: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 2,
-    userBreakpoint: 2,
+    currentZoomIndex: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -79,8 +79,8 @@ export const ZeroValue: Story = {
   args: {
     context: "card",
     count: 0,
-    currentBreakpoint: 3,
-    userBreakpoint: 2,
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -96,7 +96,7 @@ export const ZeroValue: Story = {
 export const WithoutZoomData: Story = {
   args: {
     context: "card",
-    userBreakpoint: 0,
+    userZoomIndex: 0,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -112,7 +112,7 @@ export const WithoutZoomData: Story = {
 export const CardUserDisabled: Story = {
   args: {
     context: "card",
-    userBreakpoint: -1,
+    userZoomIndex: -1,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -6,11 +6,11 @@ type DataComponentProps<T = unknown> = T & {
    * component. */
   context: "card";
 
-  /** The current breakpoint in the browser. */
-  currentBreakpoint?: StashCardGridZoom;
+  /** The current zoom index in the browser. */
+  currentZoomIndex?: StashCardGridZoom;
 
-  /** The user-set breakpoint at which to render the component. */
-  userBreakpoint: StashCardGridZoom;
+  /** The user-set zoom index at which to render the component. */
+  userZoomIndex: StashCardGridZoom;
 };
 
 type DataComponentModalProps<T = unknown> = T & {
@@ -58,55 +58,55 @@ interface ValkyrUiConfigMap {
    * hours. */
   cards__shared__timestampPadding?: boolean;
 
-  /** The zoom breakpoint at which to display the date on gallery cards. */
-  cards__galleryCard__dateBreakpoint?: StashCardGridZoom;
-  /** The zoom breakpoint at which to display the details on gallery cards. */
-  cards__galleryCard__detailsBreakpoint?: StashCardGridZoom;
+  /** The zoom index at which to display the date on gallery cards. */
+  cards__galleryCard__dateZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the details on gallery cards. */
+  cards__galleryCard__detailsZoomIndex?: StashCardGridZoom;
   /** The maximum number of lines to display for details on gallery cards. */
   cards__galleryCard__detailsMaxLines?: number;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
-  /** The zoom breakpoint at which to display the organized icon on gallery
+  /** The zoom index at which to display the organized icon on gallery
    * cards. */
-  cards__galleryCard__organizedBreakpoint?: StashCardGridZoom;
-  /** The zoom breakpoint at which to display the rating banner on gallery
+  cards__galleryCard__organizedZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the rating banner on gallery
    * cards. */
-  cards__galleryCard__ratingBannerBreakpoint?: StashCardGridZoom;
-  /** The zoom breakpoint at which to display the rating icon on gallery cards. */
-  cards__galleryCard__ratingIconBreakpoint?: StashCardGridZoom;
-  /** The zoom breakpoint at which to display the studio link on gallery cards. */
-  cards__galleryCard__studioBreakpoint?: StashCardGridZoom;
+  cards__galleryCard__ratingBannerZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the rating icon on gallery cards. */
+  cards__galleryCard__ratingIconZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the studio link on gallery cards. */
+  cards__galleryCard__studioZoomIndex?: StashCardGridZoom;
   /** Adds a blurred version of the gallery thumbnail to the background. */
   cards__galleryCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */
   cards__galleryCard__thumbnailBackgroundStyle?: string | null;
 
-  /** The zoom breakpoint at which to display the date on scene cards. */
-  cards__sceneCard__dateBreakpoint?: StashCardGridZoom;
-  /** The zoom breakpoint at which to display the details on scene cards. */
-  cards__sceneCard__detailsBreakpoint?: StashCardGridZoom;
+  /** The zoom index at which to display the date on scene cards. */
+  cards__sceneCard__dateZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the details on scene cards. */
+  cards__sceneCard__detailsZoomIndex?: StashCardGridZoom;
   /** The maximum number of lines to display for details on scene cards. */
   cards__sceneCard__detailsMaxLines?: number;
-  /** The zoom breakpoint at which to display the duration on scene cards. */
-  cards__sceneCard__durationBreakpoint?: StashCardGridZoom;
+  /** The zoom index at which to display the duration on scene cards. */
+  cards__sceneCard__durationZoomIndex?: StashCardGridZoom;
   /** Enables Valkyr UI scene cards. */
   cards__sceneCard__enabled?: boolean;
-  /** The zoom breakpoint at which to display the o count on scene cards. */
-  cards__sceneCard__oCountBreakpoint?: StashCardGridZoom;
-  /** The zoom breakpoint at which to display the organized icon on scene cards. */
-  cards__sceneCard__organizedBreakpoint?: StashCardGridZoom;
+  /** The zoom index at which to display the o count on scene cards. */
+  cards__sceneCard__oCountZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the organized icon on scene cards. */
+  cards__sceneCard__organizedZoomIndex?: StashCardGridZoom;
   /** Enables scene card previews. */
   cards__sceneCard__previewsEnabled?: boolean;
-  /** The zoom breakpoint at which to display the rating banner on scene cards. */
-  cards__sceneCard__ratingBannerBreakpoint?: StashCardGridZoom;
-  /** The zoom breakpoint at which to display the rating icon on scene cards. */
-  cards__sceneCard__ratingIconBreakpoint?: StashCardGridZoom;
+  /** The zoom index at which to display the rating banner on scene cards. */
+  cards__sceneCard__ratingBannerZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the rating icon on scene cards. */
+  cards__sceneCard__ratingIconZoomIndex?: StashCardGridZoom;
   /** Displays the resolution as an icon instead of text. */
   cards__sceneCard__resolutionAsIcon?: boolean;
-  /** The zoom breakpoint at which to display the resolution on scene cards. */
-  cards__sceneCard__resolutionBreakpoint?: StashCardGridZoom;
-  /** The zoom breakpoint at which to display the studio link on scene cards. */
-  cards__sceneCard__studioBreakpoint?: StashCardGridZoom;
+  /** The zoom index at which to display the resolution on scene cards. */
+  cards__sceneCard__resolutionZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the studio link on scene cards. */
+  cards__sceneCard__studioZoomIndex?: StashCardGridZoom;
   /** Adds a blurred version of the scene thumbnail to the background. */
   cards__sceneCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */

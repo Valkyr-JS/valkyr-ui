@@ -2,7 +2,7 @@
 @use "../../../../../src/scss/variables";
 
 $cardSpacer: 5px;
-$zoomBreakpoints: variables.$card-zoom-breakpoints;
+$zoomIndexs: variables.$card-zoom-indices;
 
 $maxScreenWidth: 2160px;
 
@@ -29,12 +29,12 @@ $maxScreenWidth: 2160px;
   }
 
   // Generate card widths
-  @each $zoom, $maxCardWidth in $zoomBreakpoints {
+  @each $zoom, $maxCardWidth in $zoomIndexs {
     $maxCardWidthWidthPadding: $maxCardWidth + (2 * $cardSpacer);
-    $breakpointsIn4k: math.ceil(
+    $zoomIndicesIn4k: math.ceil(
       math.div($maxScreenWidth, $maxCardWidthWidthPadding)
     );
-    @for $i from 1 through $breakpointsIn4k {
+    @for $i from 1 through $zoomIndicesIn4k {
       &--zoom-#{$zoom} &__card-wrapper {
         @media (min-width: #{$i * $maxCardWidthWidthPadding}) {
           flex: 0 0 math.div(100%, $i + 1);

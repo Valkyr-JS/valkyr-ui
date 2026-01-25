@@ -31,10 +31,10 @@ const meta = {
       setSection: fn(),
     },
     pluginConfig: {},
-    zoomBreakpoint: 1,
+    zoomIndex: 1,
   },
   argTypes: {
-    zoomBreakpoint: {
+    zoomIndex: {
       control: { type: "range", min: 0, max: 3 },
     },
   },
@@ -92,8 +92,8 @@ export const FullDataDefaults: Story = {
 export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
-      cards__sceneCard__oCountBreakpoint: 0,
-      cards__sceneCard__ratingIconBreakpoint: 0,
+      cards__sceneCard__oCountZoomIndex: 0,
+      cards__sceneCard__ratingIconZoomIndex: 0,
     },
     scene: fullData as SlimSceneDataFragment,
   },

@@ -3,7 +3,7 @@
 $prefix: valkyr-ui;
 $column-gap: functions.toRem(10);
 
-$card-zoom-breakpoints: (
+$card-zoom-indices: (
   0: 240px,
   1: 340px,
   2: 480px,

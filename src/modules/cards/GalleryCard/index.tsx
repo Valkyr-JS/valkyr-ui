@@ -118,7 +118,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   gallery={gl}
                   pluginConfig={pluginConfig}
                   ratingSystem={stashConfig.ui.ratingSystemOptions}
-                  zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
+                  zoomIndex={props.zoomIndex as StashCardGridZoom}
                 />
               ))}
               zoomIndex={props.zoomIndex as StashCardGridZoom}
@@ -169,12 +169,12 @@ PluginApi.patch.instead<IGalleryCardProps>(
         return [
           <>
             <GalleryCard
-              {...props}
               footer={{
                 openHandler: () => setModalOpen(!modalOpen),
                 pluginConfig,
                 setSection: setModalSection,
               }}
+              gallery={props.gallery}
               pluginConfig={pluginConfig}
               ratingSystem={stashConfig.ui.ratingSystemOptions}
             />

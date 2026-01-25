@@ -18,9 +18,9 @@ const Organized: React.FC<
       ? props.organized
       : getRenderData({
           data: props.organized,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 

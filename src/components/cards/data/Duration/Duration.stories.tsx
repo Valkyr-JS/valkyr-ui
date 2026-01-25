@@ -28,9 +28,9 @@ type Story = StoryObj<typeof meta>;
 export const OneHour: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
+    currentZoomIndex: 3,
     duration: 3600,
-    userBreakpoint: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -46,9 +46,9 @@ export const OneHour: Story = {
 export const OneMinute: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
+    currentZoomIndex: 3,
     duration: 60,
-    userBreakpoint: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -64,9 +64,9 @@ export const OneMinute: Story = {
 export const OneSecond: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
+    currentZoomIndex: 3,
     duration: 1,
-    userBreakpoint: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -82,9 +82,9 @@ export const OneSecond: Story = {
 export const HoursAndMinutes: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
+    currentZoomIndex: 3,
     duration: 9600,
-    userBreakpoint: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -100,9 +100,9 @@ export const HoursAndMinutes: Story = {
 export const HoursAndSeconds: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
+    currentZoomIndex: 3,
     duration: 7240,
-    userBreakpoint: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -118,9 +118,9 @@ export const HoursAndSeconds: Story = {
 export const MinutesAndSeconds: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
+    currentZoomIndex: 3,
     duration: 160,
-    userBreakpoint: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -136,9 +136,9 @@ export const MinutesAndSeconds: Story = {
 export const WithTimestampPadding: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
+    currentZoomIndex: 3,
     timestampPadding: true,
-    userBreakpoint: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -151,11 +151,11 @@ export const WithTimestampPadding: Story = {
   },
 };
 
-export const AboveZoomBreakpoint: Story = {
+export const AboveZoomIndex: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
-    userBreakpoint: 2,
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -168,11 +168,11 @@ export const AboveZoomBreakpoint: Story = {
   },
 };
 
-export const BelowZoomBreakpoint: Story = {
+export const BelowZoomIndex: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 0,
-    userBreakpoint: 2,
+    currentZoomIndex: 0,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -185,11 +185,11 @@ export const BelowZoomBreakpoint: Story = {
   },
 };
 
-export const EqualsZoomBreakpoint: Story = {
+export const EqualsZoomIndex: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 2,
-    userBreakpoint: 2,
+    currentZoomIndex: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -205,9 +205,9 @@ export const EqualsZoomBreakpoint: Story = {
 export const ZeroValue: Story = {
   args: {
     context: "card",
-    currentBreakpoint: 3,
+    currentZoomIndex: 3,
     duration: 0,
-    userBreakpoint: 2,
+    userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -223,7 +223,7 @@ export const ZeroValue: Story = {
 export const WithoutZoomData: Story = {
   args: {
     context: "card",
-    userBreakpoint: 0,
+    userZoomIndex: 0,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -239,7 +239,7 @@ export const WithoutZoomData: Story = {
 export const CardUserDisabled: Story = {
   args: {
     context: "card",
-    userBreakpoint: -1,
+    userZoomIndex: -1,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

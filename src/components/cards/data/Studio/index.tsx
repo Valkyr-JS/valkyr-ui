@@ -22,9 +22,9 @@ const Studio: React.FC<
       ? props.studio
       : getRenderData({
           data: props.studio,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 

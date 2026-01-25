@@ -22,9 +22,9 @@ const Duration: React.FC<
       ? props.duration
       : getRenderData({
           data: props.duration,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 

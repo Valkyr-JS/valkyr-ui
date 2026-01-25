@@ -4,7 +4,7 @@
 
 $column-gap: variables.$column-gap;
 $prefix: variables.$prefix;
-$zoomBreakpoints: variables.$card-zoom-breakpoints;
+$zoomIndexs: variables.$card-zoom-indices;
 $zoomThumbnailHeights: (
   0: 180px,
   1: 240px,
@@ -73,8 +73,8 @@ $zoomThumbnailHeights: (
   }
 }
 
-// Generate thumbnail heights for each zoom breakpoint
-@each $zoom, $maxCardWidth in $zoomBreakpoints {
+// Generate thumbnail heights for each zoom index
+@each $zoom, $maxCardWidth in $zoomIndexs {
   $height: map.get(
     $map: $zoomThumbnailHeights,
     $key: $zoom,

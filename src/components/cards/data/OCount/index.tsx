@@ -19,9 +19,9 @@ const OCount: React.FC<
       ? props.count
       : getRenderData({
           data: props.count,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 

@@ -9,7 +9,7 @@ import portraitThumbnail from "../../../../mocks/galleries/portraitThumbnail.jso
 // import squareThumbnail from "../../../../mocks/galleries/squareThumbnail.json";
 
 const pluginConfig = {
-  cards__galleryCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
+  cards__galleryCard__ratingIconZoomIndex: 0 as StashCardGridZoom,
   cards__galleryCard__thumbnailBackgroundImage: false,
 };
 
@@ -33,10 +33,10 @@ const meta = {
       setSection: fn(),
     },
     pluginConfig,
-    zoomBreakpoint: 1,
+    zoomIndex: 1,
   },
   argTypes: {
-    zoomBreakpoint: {
+    zoomIndex: {
       control: { type: "range", min: 0, max: 3 },
     },
   },

@@ -22,9 +22,9 @@ const Resolution: React.FC<
       ? props.resolution
       : getRenderData({
           data: props.resolution,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 

@@ -21,9 +21,9 @@ const DateComponent: React.FC<
       ? props.date
       : getRenderData({
           data: props.date,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 

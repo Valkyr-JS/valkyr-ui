@@ -7,10 +7,10 @@ export const dataComponentArgTypes: Partial<
   context: {
     control: { type: "select", options: ["card", "modal"] },
   },
-  currentBreakpoint: {
+  currentZoomIndex: {
     control: { type: "range", min: 0, max: 3 },
   },
-  userBreakpoint: {
+  userZoomIndex: {
     control: { type: "range", min: -1, max: 3 },
   },
 };

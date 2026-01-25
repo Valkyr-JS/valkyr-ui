@@ -45,8 +45,8 @@ interface SceneCardProps {
   /** The Stash scene data. */
   scene: SlimSceneDataFragment;
 
-  /** The current zoom breakpoint. */
-  zoomBreakpoint?: StashCardGridZoom;
+  /** The current zoom index. */
+  zoomIndex?: StashCardGridZoom;
 }
 
 const SceneCard: React.FC<SceneCardProps> = (props) => {
@@ -107,7 +107,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
             DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_STYLE
           }
           titleID={id}
-          zoomBreakpoint={props.zoomBreakpoint}
+          zoomIndex={props.zoomIndex}
         />
       }
       title={title}
@@ -115,40 +115,40 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
         <>
           <Studio
             context="card"
-            currentBreakpoint={props.zoomBreakpoint}
+            currentZoomIndex={props.zoomIndex}
             studio={props.scene.studio}
-            userBreakpoint={
-              props.pluginConfig.cards__sceneCard__studioBreakpoint ??
-              DEFAULT.CARDS.SCENE_CARD.STUDIO_BREAKPOINT
+            userZoomIndex={
+              props.pluginConfig.cards__sceneCard__studioZoomIndex ??
+              DEFAULT.CARDS.SCENE_CARD.STUDIO_ZOOM_INDEX
             }
           />
           <div className={userDataClass}>
             <OCount
               context="card"
               count={props.scene.o_counter}
-              currentBreakpoint={props.zoomBreakpoint}
-              userBreakpoint={
-                props.pluginConfig.cards__sceneCard__oCountBreakpoint ??
-                DEFAULT.CARDS.SCENE_CARD.O_COUNT_BREAKPOINT
+              currentZoomIndex={props.zoomIndex}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__oCountZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.O_COUNT_ZOOM_INDEX
               }
             />
             <RatingIcon
               context="card"
-              currentBreakpoint={props.zoomBreakpoint}
+              currentZoomIndex={props.zoomIndex}
               rating100={props.scene.rating100}
               ratingSystem={props.ratingSystem}
-              userBreakpoint={
-                props.pluginConfig.cards__sceneCard__ratingIconBreakpoint ??
-                DEFAULT.CARDS.SCENE_CARD.RATING_ICON_BREAKPOINT
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__ratingIconZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.RATING_ICON_ZOOM_INDEX
               }
             />
             <Organized
               context="card"
-              currentBreakpoint={props.zoomBreakpoint}
+              currentZoomIndex={props.zoomIndex}
               organized={props.scene.organized}
-              userBreakpoint={
-                props.pluginConfig.cards__sceneCard__organizedBreakpoint ??
-                DEFAULT.CARDS.SCENE_CARD.ORGANIZED_BREAKPOINT
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__organizedZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.ORGANIZED_ZOOM_INDEX
               }
             />
           </div>
@@ -158,7 +158,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       <SceneCardBody
         pluginConfig={props.pluginConfig}
         scene={props.scene}
-        zoomBreakpoint={props.zoomBreakpoint}
+        zoomIndex={props.zoomIndex}
       />
     </GridCard>
   );
@@ -177,8 +177,8 @@ interface SceneCardBodyProps {
   /** The Stash scene data. */
   scene: SlimSceneDataFragment;
 
-  /** The current zoom breakpoint. */
-  zoomBreakpoint?: StashCardGridZoom;
+  /** The current zoom index. */
+  zoomIndex?: StashCardGridZoom;
 }
 
 const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
@@ -191,15 +191,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
         <ReleaseData>
           <Date
             context="card"
-            currentBreakpoint={props.zoomBreakpoint}
+            currentZoomIndex={props.zoomIndex}
             date={props.scene.date}
             localeDateFormat={
               props.pluginConfig.general__localeDateFormat ??
               DEFAULT.GENERAL.LOCALE_DATE_FORMAT
             }
-            userBreakpoint={
-              props.pluginConfig.cards__sceneCard__dateBreakpoint ??
-              DEFAULT.CARDS.SCENE_CARD.DATE_BREAKPOINT
+            userZoomIndex={
+              props.pluginConfig.cards__sceneCard__dateZoomIndex ??
+              DEFAULT.CARDS.SCENE_CARD.DATE_ZOOM_INDEX
             }
           />
         </ReleaseData>
@@ -208,15 +208,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
             <>
               <Duration
                 context="card"
-                currentBreakpoint={props.zoomBreakpoint}
+                currentZoomIndex={props.zoomIndex}
                 duration={primaryFile.duration}
                 timestampPadding={
                   props.pluginConfig.cards__shared__timestampPadding ??
                   DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
                 }
-                userBreakpoint={
-                  props.pluginConfig.cards__sceneCard__durationBreakpoint ??
-                  DEFAULT.CARDS.SCENE_CARD.DURATION_BREAKPOINT
+                userZoomIndex={
+                  props.pluginConfig.cards__sceneCard__durationZoomIndex ??
+                  DEFAULT.CARDS.SCENE_CARD.DURATION_ZOOM_INDEX
                 }
               />
               <Resolution
@@ -225,11 +225,11 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                   DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
                 }
                 context="card"
-                currentBreakpoint={props.zoomBreakpoint}
+                currentZoomIndex={props.zoomIndex}
                 resolution={[primaryFile.width, primaryFile.height]}
-                userBreakpoint={
-                  props.pluginConfig.cards__sceneCard__resolutionBreakpoint ??
-                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_BREAKPOINT
+                userZoomIndex={
+                  props.pluginConfig.cards__sceneCard__resolutionZoomIndex ??
+                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_ZOOM_INDEX
                 }
               />
             </>
@@ -238,15 +238,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
       </KeyData>
       <Details
         context="card"
-        currentBreakpoint={props.zoomBreakpoint}
+        currentZoomIndex={props.zoomIndex}
         details={props.scene.details}
         maxLines={
           props.pluginConfig.cards__sceneCard__detailsMaxLines ??
           DEFAULT.CARDS.SCENE_CARD.DETAILS_MAX_LINES
         }
-        userBreakpoint={
-          props.pluginConfig.cards__sceneCard__detailsBreakpoint ??
-          DEFAULT.CARDS.SCENE_CARD.DETAILS_BREAKPOINT
+        userZoomIndex={
+          props.pluginConfig.cards__sceneCard__detailsZoomIndex ??
+          DEFAULT.CARDS.SCENE_CARD.DETAILS_ZOOM_INDEX
         }
       />
     </>
@@ -295,8 +295,8 @@ interface SceneCardThumbnailProps {
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
 
-  /** The current zoom breakpoint. */
-  zoomBreakpoint?: StashCardGridZoom;
+  /** The current zoom index. */
+  zoomIndex?: StashCardGridZoom;
 }
 
 export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
@@ -358,12 +358,12 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
         </div>
         <RatingBanner
           context={props.context}
-          currentBreakpoint={props.zoomBreakpoint}
+          currentZoomIndex={props.zoomIndex}
           rating100={props.rating100}
           ratingSystem={props.ratingSystem}
-          userBreakpoint={
-            props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
-            DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT
+          userZoomIndex={
+            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex ??
+            DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_ZOOM_INDEX
           }
         />
       </a>
@@ -431,8 +431,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
-    (props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
-      DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_BREAKPOINT) > -1;
+    (props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_ZOOM_INDEX) > -1;
 
   const sections: CardModalSectionData[] = [["details"]];
   if (props.scene.tags.length) sections.push(["tags", props.scene.tags.length]);
