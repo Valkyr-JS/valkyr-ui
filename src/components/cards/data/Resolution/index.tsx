@@ -38,33 +38,53 @@ const Resolution: React.FC<
         : props.resolution[0];
 
     const iconClass = "vui-card-data__resolution-icon";
+    let iconText = "";
+    let srIconText = intl.formatMessage({ id: "resolution" }) + ": ";
 
-    const resolutionIconValue =
-      shortEdge < 720
-        ? "SD"
-        : shortEdge < 1440
-          ? "HD"
-          : shortEdge < 1920
-            ? "2K"
-            : shortEdge < 2560
-              ? "4K"
-              : shortEdge < 3000
-                ? "5K"
-                : shortEdge < 3548
-                  ? "6K"
-                  : shortEdge < 3850
-                    ? "7K"
-                    : shortEdge < 6144
-                      ? "8K"
-                      : "XL";
+    switch (true) {
+      case shortEdge < 720:
+        iconText = "SD";
+        srIconText += "Standard definition";
+        break;
+      case shortEdge < 1440:
+        iconText = "HD";
+        srIconText += "High definition";
+        break;
+      case shortEdge < 2160:
+        iconText = "2K";
+        srIconText += "2K";
+        break;
+      case shortEdge < 2880:
+        iconText = "4K";
+        srIconText += "4K";
+        break;
+      case shortEdge < 3384:
+        iconText = "5K";
+        srIconText += "5K";
+        break;
+      case shortEdge < 3500:
+        iconText = "6K";
+        srIconText += "6K";
+        break;
+      case shortEdge < 4320:
+        iconText = "7K";
+        srIconText += "7K";
+        break;
+      case shortEdge < 6144:
+        iconText = "8K";
+        srIconText += "8K";
+        break;
+      default:
+        iconText = "XL";
+        srIconText += "Extra large";
+        break;
+    }
 
     return (
       <span className={iconClass}>
-        <span className="sr-only">
-          {intl.formatMessage({ id: "resolution" })}: {resolutionIconValue}
-        </span>
+        <span className="sr-only">{srIconText}</span>
         <span aria-hidden title={resolutionValue}>
-          {resolutionIconValue}
+          {iconText}
         </span>
       </span>
     );
