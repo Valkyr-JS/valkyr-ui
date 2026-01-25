@@ -65,13 +65,17 @@ export const FullData: Story = {
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
 
-    // O count shount render
+    // O count should render
     const oCount = canvas.getByText("O Count: 2");
     await expect(oCount).toBeInTheDocument();
 
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Play count should render
+    const playCount = canvas.getByText("Play Count: 5");
+    await expect(playCount).toBeInTheDocument();
 
     // Rating banner should render, but not the rating icon
     const ratingBanner = canvas.getAllByText("Rating: 5 stars");

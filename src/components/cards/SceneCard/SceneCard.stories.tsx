@@ -64,7 +64,7 @@ export const FullDataDefaults: Story = {
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
 
-    // O count shount NOT render
+    // O count should NOT render
     const oCount = canvas.queryByText("O Count: 2");
     await expect(oCount).toBeNull();
 
@@ -72,7 +72,7 @@ export const FullDataDefaults: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
-    // Play count shount NOT render
+    // Play count should NOT render
     const playCount = canvas.queryByText("Play Count: 5");
     await expect(playCount).toBeNull();
 
@@ -126,7 +126,7 @@ export const FullDataAllEnabled: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
-    // Play count shount NOT render
+    // Play count should render
     const playCount = canvas.getByText("Play Count: 5");
     await expect(playCount).toBeInTheDocument();
 

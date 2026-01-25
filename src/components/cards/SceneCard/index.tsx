@@ -483,6 +483,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
         <>
           <Studio context="modal" studio={props.scene.studio} />
           <div className={userDataClass}>
+            <PlayCount context="modal" count={props.scene.play_count} />
             <OCount context="modal" count={props.scene.o_counter} />
             {willRenderRatingBanner ? null : (
               <RatingIcon
