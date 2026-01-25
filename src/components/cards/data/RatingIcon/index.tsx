@@ -23,9 +23,9 @@ const RatingIcon: React.FC<
       ? (props.rating100 ?? 0)
       : getRenderData({
           data: props.rating100,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 

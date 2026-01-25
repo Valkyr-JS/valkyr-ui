@@ -1,15 +1,16 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, within } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
+import { zoomIndexArgType } from "../../../../.storybook/argTypes";
 import SceneCard from ".";
 
 // Mock data
-import landscapeCover from "../../../../mocks/scenes/landscapeCover.json";
-import portraitCover from "../../../../mocks/scenes/portraitCover.json";
-
-const pluginConfig = {
-  cards__sceneCard__ratingIconBreakpoint: 0 as StashCardGridZoom,
-};
+import filelessData from "../../../../mocks/scenes/filelessData.slim.json";
+import fullData from "../../../../mocks/scenes/fullData.slim.json";
+import minimalData from "../../../../mocks/scenes/minimalData.slim.json";
+import multiFile from "../../../../mocks/scenes/multiFile.slim.json";
+import portrait from "../../../../mocks/scenes/portrait.slim.json";
+import square from "../../../../mocks/scenes/square.slim.json";
 
 const meta = {
   title: "Components/Cards/Scene card",
@@ -25,13 +26,16 @@ const meta = {
     layout: "centered",
   },
   args: {
-    pluginConfig,
-    zoomBreakpoint: 1,
+    footer: {
+      openHandler: fn(),
+      pluginConfig: {},
+      setSection: fn(),
+    },
+    pluginConfig: {},
+    zoomIndex: 1,
   },
   argTypes: {
-    zoomBreakpoint: {
-      control: { type: "range", min: 0, max: 3 },
-    },
+    ...zoomIndexArgType,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof SceneCard>;
@@ -39,110 +43,239 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const footerProps = {
-  openHandler: fn(),
-  pluginConfig,
-  sections: [["details"], ["tags", 5]] as CardModalSectionData[],
-  setSection: fn(),
-};
-
-export const FullData: Story = {
+export const FullDataDefaults: Story = {
   args: {
-    scene: portraitCover as unknown as SlimSceneDataFragment,
+    scene: fullData as SlimSceneDataFragment,
   },
-  play: async ({ args, canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-
-    // Studio link should render
-    const studioLink = canvas.getByRole("link", {
-      name: "Studio: " + args.scene.studio?.name,
-    });
-    await expect(studioLink).toBeInTheDocument();
 
     // Date should render
-    const date = canvas.getByText("Date: 20 July 2020");
+    const date = canvas.getByText("Date: 11 April 2016");
     await expect(date).toBeInTheDocument();
+
+    // Details should render
+    const details = canvas.getByText(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus odio, fermentum sed egestas et, laoreet et enim. Aenean vulputate metus dolor, at placerat tortor porta non. Proin vel faucibus mauris. Mauris nec eleifend augue. In sed augue a felis aliquam gravida et aliquet risus. Nulla malesuada massa a nisi rutrum vestibulum. Suspendisse potenti. Donec laoreet tristique rhoncus. Nam porttitor mollis odio eu fermentum. Fusce magna mauris, scelerisque ac mollis eu, congue id sapien. Fusce at mauris at justo condimentum laoreet.",
+    );
+    await expect(details).toBeInTheDocument();
+
+    // Duration should render
+    const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
+    await expect(duration).toBeInTheDocument();
+
+    // O count shount NOT render
+    const oCount = canvas.queryByText("O Count: 2");
+    await expect(oCount).toBeNull();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
+
+    // Rating banner should render, but not the rating icon
+    const ratingBanner = canvas.getAllByText("Rating: 5 stars");
+    await expect(ratingBanner).toHaveLength(1);
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 1080p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: HD");
+    await expect(resolutionIcon).toBeNull();
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
   },
 };
 
-export const LandscapeThumbnail: Story = {
+export const FullDataAllEnabled: Story = {
   args: {
-    scene: landscapeCover as unknown as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should NOT render
-    const detailsModalBtn = canvas.queryByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeNull();
-  },
-};
-
-export const LandscapeThumbnailWithFooter: Story = {
-  args: {
-    footer: footerProps,
-    scene: landscapeCover as unknown as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should render
-    const detailsModalBtn = canvas.getByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeInTheDocument();
-  },
-};
-
-export const PortraitThumbnail: Story = {
-  args: {
-    scene: portraitCover as unknown as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should NOT render
-    const detailsModalBtn = canvas.queryByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeNull();
-  },
-};
-
-export const PortraitThumbnailWithFooter: Story = {
-  args: {
-    footer: footerProps,
-    scene: portraitCover as unknown as SlimSceneDataFragment,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Link to card modal details section should render
-    const detailsModalBtn = canvas.getByRole("button", {
-      name: "Details",
-    });
-    await expect(detailsModalBtn).toBeInTheDocument();
-  },
-};
-
-export const PortraitThumbnailWithThumbnailBackgroundImage: Story = {
-  args: {
-    scene: portraitCover as unknown as SlimSceneDataFragment,
     pluginConfig: {
-      ...pluginConfig,
+      cards__sceneCard__oCountZoomIndex: 0,
+      cards__sceneCard__ratingIconZoomIndex: 0,
+    },
+    scene: fullData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Date should render
+    const date = canvas.getByText("Date: 11 April 2016");
+    await expect(date).toBeInTheDocument();
+
+    // Details should render
+    const details = canvas.getByText(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus odio, fermentum sed egestas et, laoreet et enim. Aenean vulputate metus dolor, at placerat tortor porta non. Proin vel faucibus mauris. Mauris nec eleifend augue. In sed augue a felis aliquam gravida et aliquet risus. Nulla malesuada massa a nisi rutrum vestibulum. Suspendisse potenti. Donec laoreet tristique rhoncus. Nam porttitor mollis odio eu fermentum. Fusce magna mauris, scelerisque ac mollis eu, congue id sapien. Fusce at mauris at justo condimentum laoreet.",
+    );
+    await expect(details).toBeInTheDocument();
+
+    // Duration should render
+    const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
+    await expect(duration).toBeInTheDocument();
+
+    // O count should render
+    const count = canvas.getByText("O Count: 2");
+    await expect(count).toBeInTheDocument();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
+
+    // Rating banner AND icon should render
+    const ratingBanner = canvas.getAllByText("Rating: 5 stars");
+    await expect(ratingBanner).toHaveLength(2);
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 1080p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: HD");
+    await expect(resolutionIcon).toBeNull();
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
+  },
+};
+
+export const MinimalData: Story = {
+  args: {
+    scene: minimalData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Duration should render
+    const duration = canvas.getByText("Duration: 42 minutes 51 seconds");
+    await expect(duration).toBeInTheDocument();
+
+    // Resolution should render as text, not as an icon
+    const resolution = canvas.getByText("Resolution: 540p");
+    await expect(resolution).toBeInTheDocument();
+    const resolutionIcon = canvas.queryByText("Resolution: SD");
+    await expect(resolutionIcon).toBeNull();
+  },
+};
+
+export const FilelessData: Story = {
+  args: {
+    scene: filelessData as SlimSceneDataFragment,
+  },
+};
+
+export const MultiFile: Story = {
+  args: {
+    scene: multiFile as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Expect the resolution to be based on the primary file, not any other
+    const primaryRes = canvas.getByText("Resolution: 1080p");
+    await expect(primaryRes).toBeInTheDocument();
+    const secondaryRes = canvas.queryByText("Resolution: 720p");
+    await expect(secondaryRes).toBeNull();
+  },
+};
+
+export const PlayPreviewOnHover: Story = {
+  args: {
+    scene: fullData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Get the preview
+    const card = canvas.getByTestId("grid-card");
+    const video = canvas.getByTestId<HTMLVideoElement>("scene-card-preview");
+
+    // Trigger a hover event
+    await userEvent.hover(card);
+    expect(video.paused).toBeFalsy();
+
+    // End a hover event
+    await userEvent.unhover(card);
+    expect(video.paused).toBeTruthy();
+  },
+};
+
+export const PortraitBackgroundImage: Story = {
+  name: "Portrait thumbnail with background image",
+  args: {
+    pluginConfig: {
       cards__sceneCard__thumbnailBackgroundImage: true,
     },
+    scene: portrait as SlimSceneDataFragment,
   },
 };
 
-export const PortraitThumbnailWithThumbnailBackgroundStyle: Story = {
+export const PortraitBackgroundStyle: Story = {
+  name: "Portrait thumbnail with background style",
   args: {
-    scene: portraitCover as unknown as SlimSceneDataFragment,
     pluginConfig: {
-      ...pluginConfig,
       cards__sceneCard__thumbnailBackgroundStyle: "black",
     },
+    scene: portrait as SlimSceneDataFragment,
+  },
+};
+
+export const SquareBackgroundImage: Story = {
+  name: "Square thumbnail with background image",
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundImage: true,
+    },
+    scene: square as SlimSceneDataFragment,
+  },
+};
+
+export const SquareBackgroundStyle: Story = {
+  name: "Square thumbnail with background style",
+  args: {
+    pluginConfig: {
+      cards__sceneCard__thumbnailBackgroundStyle: "black",
+    },
+    scene: square as SlimSceneDataFragment,
+  },
+};
+
+export const DetailsModalButton: Story = {
+  args: {
+    scene: square as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    expect(detailsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const TagsModalButton: Story = {
+  args: {
+    scene: fullData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoTagsModalButton: Story = {
+  args: {
+    scene: square as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.queryByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeNull();
   },
 };

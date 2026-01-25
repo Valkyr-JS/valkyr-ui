@@ -9,40 +9,40 @@ import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { DEFAULT } from "@/constants";
 
 const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
-  const DateBreakpoint = () => (
+  const DateZoomIndex = () => (
     <NumberSetting
       heading="Date"
-      id="valkyr-ui-cards__galleryCard__dateBreakpoint"
+      id="valkyr-ui-cards__galleryCard__dateZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__galleryCard__dateBreakpoint: v,
+            cards__galleryCard__dateZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__galleryCard__dateBreakpoint ??
-        DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
+        props.pluginConfig.cards__galleryCard__dateZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.DATE_ZOOM_INDEX
       }
     />
   );
 
-  const DetailsBreakpoint = () => (
+  const DetailsZoomIndex = () => (
     <NumberSetting
       heading="Details"
-      id="valkyr-ui-cards__galleryCard__detailsBreakpoint"
+      id="valkyr-ui-cards__galleryCard__detailsZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__galleryCard__detailsBreakpoint: v,
+            cards__galleryCard__detailsZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__galleryCard__detailsBreakpoint ??
-        DEFAULT.CARDS.GALLERY_CARD.DETAILS_BREAKPOINT
+        props.pluginConfig.cards__galleryCard__detailsZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.DETAILS_ZOOM_INDEX
       }
     />
   );
@@ -67,78 +67,78 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
-  const OrganizedBreakpoint = () => (
+  const OrganizedZoomIndex = () => (
     <NumberSetting
       heading="Organized icon"
-      id="valkyr-ui-cards__galleryCard__organizedBreakpoint"
+      id="valkyr-ui-cards__galleryCard__organizedZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__galleryCard__organizedBreakpoint: v,
+            cards__galleryCard__organizedZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__galleryCard__organizedBreakpoint ??
-        DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_BREAKPOINT
+        props.pluginConfig.cards__galleryCard__organizedZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_ZOOM_INDEX
       }
     />
   );
 
-  const RatingBannerBreakpoint = () => (
+  const RatingBannerZoomIndex = () => (
     <NumberSetting
       heading="Rating banner"
-      id="valkyr-ui-cards__galleryCard__ratingBannerBreakpoint"
+      id="valkyr-ui-cards__galleryCard__ratingBannerZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__galleryCard__ratingBannerBreakpoint: v,
+            cards__galleryCard__ratingBannerZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
-        DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT
+        props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_ZOOM_INDEX
       }
     />
   );
 
-  const RatingIconBreakpoint = () => (
+  const RatingIconZoomIndex = () => (
     <NumberSetting
       heading="Rating icon"
-      id="valkyr-ui-cards__galleryCard__ratingIconBreakpoint"
+      id="valkyr-ui-cards__galleryCard__ratingIconZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__galleryCard__ratingIconBreakpoint: v,
+            cards__galleryCard__ratingIconZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__galleryCard__ratingIconBreakpoint ??
-        DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_BREAKPOINT
+        props.pluginConfig.cards__galleryCard__ratingIconZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_ZOOM_INDEX
       }
     />
   );
 
-  const StudioBreakpoint = () => (
+  const StudioZoomIndex = () => (
     <NumberSetting
       heading="Studio"
-      id="valkyr-ui-cards__galleryCard__studioBreakpoint"
+      id="valkyr-ui-cards__galleryCard__studioZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__galleryCard__studioBreakpoint: v,
+            cards__galleryCard__studioZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__galleryCard__studioBreakpoint ??
-        DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
+        props.pluginConfig.cards__galleryCard__studioZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.STUDIO_ZOOM_INDEX
       }
     />
   );
@@ -208,17 +208,17 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
       <SettingGroup
         collapsible
         settingProps={{
-          heading: "Card zoom data breakpoints",
+          heading: "Card zoom index data",
           subHeading:
             "For each piece of data, you can set the card zoom at which it appears. This allows you to display only select data when cards are smaller, and more data as they get bigger. The value must be between 0 and 3. Alternatively, set it to -1 to turn it off completely.",
         }}
       >
-        <DateBreakpoint />
-        <DetailsBreakpoint />
-        <OrganizedBreakpoint />
-        <RatingBannerBreakpoint />
-        <RatingIconBreakpoint />
-        <StudioBreakpoint />
+        <DateZoomIndex />
+        <DetailsZoomIndex />
+        <OrganizedZoomIndex />
+        <RatingBannerZoomIndex />
+        <RatingIconZoomIndex />
+        <StudioZoomIndex />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Thumbnails" }}>
         <BlurredThumbnailBackgroundEnabled />

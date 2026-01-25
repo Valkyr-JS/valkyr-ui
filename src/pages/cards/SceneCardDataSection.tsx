@@ -32,40 +32,40 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
-  const DateBreakpoint = () => (
+  const DateZoomIndex = () => (
     <NumberSetting
       heading="Date"
-      id="valkyr-ui-cards__sceneCard__dateBreakpoint"
+      id="valkyr-ui-cards__sceneCard__dateZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__dateBreakpoint: v,
+            cards__sceneCard__dateZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__dateBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.DATE_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__dateZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.DATE_ZOOM_INDEX
       }
     />
   );
 
-  const DetailsBreakpoint = () => (
+  const DetailsZoomIndex = () => (
     <NumberSetting
       heading="Details"
-      id="valkyr-ui-cards__sceneCard__detailsBreakpoint"
+      id="valkyr-ui-cards__sceneCard__detailsZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__detailsBreakpoint: v,
+            cards__sceneCard__detailsZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__detailsBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.DETAILS_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__detailsZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.DETAILS_ZOOM_INDEX
       }
     />
   );
@@ -90,59 +90,59 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
-  const DurationBreakpoint = () => (
+  const DurationZoomIndex = () => (
     <NumberSetting
       heading="Duration"
-      id="valkyr-ui-cards__sceneCard__durationBreakpoint"
+      id="valkyr-ui-cards__sceneCard__durationZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__durationBreakpoint: v,
+            cards__sceneCard__durationZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__durationBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.DURATION_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__durationZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.DURATION_ZOOM_INDEX
       }
     />
   );
 
-  const OCountBreakpoint = () => (
+  const OCountZoomIndex = () => (
     <NumberSetting
       heading="O count"
-      id="valkyr-ui-cards__sceneCard__oCountBreakpoint"
+      id="valkyr-ui-cards__sceneCard__oCountZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__oCountBreakpoint: v,
+            cards__sceneCard__oCountZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__oCountBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.O_COUNT_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__oCountZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.O_COUNT_ZOOM_INDEX
       }
     />
   );
 
-  const OrganizedBreakpoint = () => (
+  const OrganizedZoomIndex = () => (
     <NumberSetting
       heading="Organized icon"
-      id="valkyr-ui-cards__sceneCard__organizedBreakpoint"
+      id="valkyr-ui-cards__sceneCard__organizedZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__organizedBreakpoint: v,
+            cards__sceneCard__organizedZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__organizedBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.ORGANIZED_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__organizedZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.ORGANIZED_ZOOM_INDEX
       }
     />
   );
@@ -170,40 +170,40 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
-  const RatingBannerBreakpoint = () => (
+  const RatingBannerZoomIndex = () => (
     <NumberSetting
       heading="Rating banner"
-      id="valkyr-ui-cards__sceneCard__ratingBannerBreakpoint"
+      id="valkyr-ui-cards__sceneCard__ratingBannerZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__ratingBannerBreakpoint: v,
+            cards__sceneCard__ratingBannerZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__ratingBannerBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_ZOOM_INDEX
       }
     />
   );
 
-  const RatingIconBreakpoint = () => (
+  const RatingIconZoomIndex = () => (
     <NumberSetting
       heading="Rating icon"
-      id="valkyr-ui-cards__sceneCard__ratingIconBreakpoint"
+      id="valkyr-ui-cards__sceneCard__ratingIconZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__ratingIconBreakpoint: v,
+            cards__sceneCard__ratingIconZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__ratingIconBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.RATING_ICON_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__ratingIconZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.RATING_ICON_ZOOM_INDEX
       }
     />
   );
@@ -231,40 +231,40 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
-  const ResolutionBreakpoint = () => (
+  const ResolutionZoomIndex = () => (
     <NumberSetting
       heading="Resolution"
-      id="valkyr-ui-cards__sceneCard__resolutionBreakpoint"
+      id="valkyr-ui-cards__sceneCard__resolutionZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__resolutionBreakpoint: v,
+            cards__sceneCard__resolutionZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__resolutionBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.RESOLUTION_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__resolutionZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.RESOLUTION_ZOOM_INDEX
       }
     />
   );
 
-  const StudioBreakpoint = () => (
+  const StudioZoomIndex = () => (
     <NumberSetting
       heading="Studio"
-      id="valkyr-ui-cards__sceneCard__studioBreakpoint"
+      id="valkyr-ui-cards__sceneCard__studioZoomIndex"
       onChange={(v) => {
         if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
           props.configUpdateHandler({
             ...props.pluginConfig,
-            cards__sceneCard__studioBreakpoint: v,
+            cards__sceneCard__studioZoomIndex: v,
           });
         }
       }}
       value={
-        props.pluginConfig.cards__sceneCard__studioBreakpoint ??
-        DEFAULT.CARDS.SCENE_CARD.STUDIO_BREAKPOINT
+        props.pluginConfig.cards__sceneCard__studioZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.STUDIO_ZOOM_INDEX
       }
     />
   );
@@ -311,20 +311,20 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
       <SettingGroup
         collapsible
         settingProps={{
-          heading: "Card zoom data breakpoints",
+          heading: "Card zoom index data",
           subHeading:
             "For each piece of data, you can set the card zoom at which it appears. This allows you to display only select data when cards are smaller, and more data as they get bigger. The value must be between 0 and 3. Alternatively, set it to -1 to turn it off completely.",
         }}
       >
-        <DateBreakpoint />
-        <DetailsBreakpoint />
-        <DurationBreakpoint />
-        <OCountBreakpoint />
-        <OrganizedBreakpoint />
-        <RatingBannerBreakpoint />
-        <RatingIconBreakpoint />
-        <ResolutionBreakpoint />
-        <StudioBreakpoint />
+        <DateZoomIndex />
+        <DetailsZoomIndex />
+        <DurationZoomIndex />
+        <OCountZoomIndex />
+        <OrganizedZoomIndex />
+        <RatingBannerZoomIndex />
+        <RatingIconZoomIndex />
+        <ResolutionZoomIndex />
+        <StudioZoomIndex />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Thumbnails" }}>
         <PreviewsEnabled />

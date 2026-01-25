@@ -13,8 +13,8 @@ interface GridCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
   classname?: string;
 
-  /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: CardFooterProps;
+  /** Footer props */
+  footer: CardFooterProps;
 
   /** HTML ID used for aria labelling. */
   id: string;
@@ -50,6 +50,7 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   return (
     <Card
       className={componentClassList}
+      data-testid="grid-card"
       onMouseOut={props.onMouseOut}
       onMouseOver={props.onMouseOver}
     >
@@ -58,7 +59,7 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
         <CardTitle id={props.id} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
         <div className={bodyClass}>{props.children}</div>
-        {props.footer && <CardFooter {...props.footer} />}
+        <CardFooter {...props.footer} />
       </div>
     </Card>
   );

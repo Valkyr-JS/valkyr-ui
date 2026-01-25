@@ -22,9 +22,9 @@ const Resolution: React.FC<
       ? props.resolution
       : getRenderData({
           data: props.resolution,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 
@@ -32,38 +32,60 @@ const Resolution: React.FC<
   const resolutionValue = TextUtils.resolution(data[0], data[1]);
 
   if (props.asIcon) {
-    const longEdge =
+    const shortEdge =
       props.resolution[0] > props.resolution[1]
         ? props.resolution[1]
         : props.resolution[0];
 
     const iconClass = "vui-card-data__resolution-icon";
+    let iconText = "";
+    let srIconText = intl.formatMessage({ id: "resolution" }) + ": ";
 
-    const resolutionIconValue =
-      longEdge < 720
-        ? "SD"
-        : longEdge < 1440
-          ? "HD"
-          : longEdge < 1920
-            ? "2K"
-            : longEdge < 2560
-              ? "4K"
-              : longEdge < 3000
-                ? "5K"
-                : longEdge < 3548
-                  ? "6K"
-                  : longEdge < 3850
-                    ? "7K"
-                    : longEdge < 6144
-                      ? "8K"
-                      : "XL";
+    switch (true) {
+      case shortEdge < 720:
+        iconText = "SD";
+        srIconText += "Standard definition";
+        break;
+      case shortEdge < 1440:
+        iconText = "HD";
+        srIconText += "High definition";
+        break;
+      case shortEdge < 2160:
+        iconText = "2K";
+        srIconText += "2K";
+        break;
+      case shortEdge < 2880:
+        iconText = "4K";
+        srIconText += "4K";
+        break;
+      case shortEdge < 3384:
+        iconText = "5K";
+        srIconText += "5K";
+        break;
+      case shortEdge < 3500:
+        iconText = "6K";
+        srIconText += "6K";
+        break;
+      case shortEdge < 4320:
+        iconText = "7K";
+        srIconText += "7K";
+        break;
+      case shortEdge < 6144:
+        iconText = "8K";
+        srIconText += "8K";
+        break;
+      default:
+        iconText = "XL";
+        srIconText += "Extra large";
+        break;
+    }
 
     return (
       <span className={iconClass}>
-        <span className="sr-only">
-          {intl.formatMessage({ id: "resolution" })}:{" "}
+        <span className="sr-only">{srIconText}</span>
+        <span aria-hidden title={resolutionValue}>
+          {iconText}
         </span>
-        <span title={resolutionValue}>{resolutionIconValue}</span>
       </span>
     );
   }
@@ -73,9 +95,9 @@ const Resolution: React.FC<
   return (
     <span className={componentClass}>
       <span className="sr-only">
-        {intl.formatMessage({ id: "resolution" })}:{" "}
+        {intl.formatMessage({ id: "resolution" })}: {resolutionValue}
       </span>
-      <span>{resolutionValue}</span>
+      <span aria-hidden>{resolutionValue}</span>
     </span>
   );
 };

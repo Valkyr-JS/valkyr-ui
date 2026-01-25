@@ -20,7 +20,7 @@ import "./GalleryCard.scss";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
-  footer?: Omit<CardFooterProps, "sections">;
+  footer: Omit<CardFooterProps, "sections">;
 
   /** The gallery data passed from native Stash components. */
   gallery: SlimGalleryDataFragment;
@@ -31,8 +31,8 @@ interface GalleryCardProps {
   /** The user's Stash rating system configuration */
   ratingSystem?: RatingSystemOptions;
 
-  /** The current zoom breakpoint. */
-  zoomBreakpoint?: StashCardGridZoom;
+  /** The current zoom index. */
+  zoomIndex?: StashCardGridZoom;
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = (props) => {
@@ -46,9 +46,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   const footerSections: CardModalSectionData[] = [["details"]];
   if (props.gallery.tags.length)
     footerSections.push(["tags", props.gallery.tags.length]);
-  const footerProps = props.footer
-    ? { ...props.footer, sections: footerSections }
-    : undefined;
+  const footerProps = { ...props.footer, sections: footerSections };
 
   return (
     <GridCard
@@ -74,7 +72,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_STYLE
           }
           titleID={id}
-          zoomBreakpoint={props.zoomBreakpoint}
+          zoomIndex={props.zoomIndex}
         />
       }
       title={title}
@@ -82,31 +80,31 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
         <>
           <Studio
             context="card"
-            currentBreakpoint={props.zoomBreakpoint}
+            currentZoomIndex={props.zoomIndex}
             studio={props.gallery.studio}
-            userBreakpoint={
-              props.pluginConfig.cards__galleryCard__studioBreakpoint ??
-              DEFAULT.CARDS.GALLERY_CARD.STUDIO_BREAKPOINT
+            userZoomIndex={
+              props.pluginConfig.cards__galleryCard__studioZoomIndex ??
+              DEFAULT.CARDS.GALLERY_CARD.STUDIO_ZOOM_INDEX
             }
           />
           <div className={userDataClass}>
             <RatingIcon
               context="card"
-              currentBreakpoint={props.zoomBreakpoint}
+              currentZoomIndex={props.zoomIndex}
               rating100={props.gallery.rating100}
               ratingSystem={props.ratingSystem}
-              userBreakpoint={
-                props.pluginConfig.cards__galleryCard__ratingIconBreakpoint ??
-                DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_BREAKPOINT
+              userZoomIndex={
+                props.pluginConfig.cards__galleryCard__ratingIconZoomIndex ??
+                DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_ZOOM_INDEX
               }
             />
             <Organized
               context="card"
-              currentBreakpoint={props.zoomBreakpoint}
+              currentZoomIndex={props.zoomIndex}
               organized={props.gallery.organized}
-              userBreakpoint={
-                props.pluginConfig.cards__galleryCard__organizedBreakpoint ??
-                DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_BREAKPOINT
+              userZoomIndex={
+                props.pluginConfig.cards__galleryCard__organizedZoomIndex ??
+                DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_ZOOM_INDEX
               }
             />
           </div>
@@ -116,7 +114,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       <GalleryCardBody
         gallery={props.gallery}
         pluginConfig={props.pluginConfig}
-        zoomBreakpoint={props.zoomBreakpoint}
+        zoomIndex={props.zoomIndex}
       />
     </GridCard>
   );
@@ -135,8 +133,8 @@ interface GalleryCardBodyProps {
   /** The user's plugin configuration for Valkyr UI. */
   pluginConfig: ValkyrUiConfigMap;
 
-  /** The current zoom breakpoint. */
-  zoomBreakpoint?: StashCardGridZoom;
+  /** The current zoom index. */
+  zoomIndex?: StashCardGridZoom;
 }
 
 const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
@@ -146,30 +144,30 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
         <ReleaseData>
           <Date
             context="card"
-            currentBreakpoint={props.zoomBreakpoint}
+            currentZoomIndex={props.zoomIndex}
             date={props.gallery.date}
             localeDateFormat={
               props.pluginConfig.general__localeDateFormat ??
               DEFAULT.GENERAL.LOCALE_DATE_FORMAT
             }
-            userBreakpoint={
-              props.pluginConfig.cards__galleryCard__dateBreakpoint ??
-              DEFAULT.CARDS.GALLERY_CARD.DATE_BREAKPOINT
+            userZoomIndex={
+              props.pluginConfig.cards__galleryCard__dateZoomIndex ??
+              DEFAULT.CARDS.GALLERY_CARD.DATE_ZOOM_INDEX
             }
           />
         </ReleaseData>
       </KeyData>
       <Details
         context="card"
-        currentBreakpoint={props.zoomBreakpoint}
+        currentZoomIndex={props.zoomIndex}
         details={props.gallery.details}
         maxLines={
           props.pluginConfig.cards__galleryCard__detailsMaxLines ??
           DEFAULT.CARDS.GALLERY_CARD.DETAILS_MAX_LINES
         }
-        userBreakpoint={
-          props.pluginConfig.cards__galleryCard__detailsBreakpoint ??
-          DEFAULT.CARDS.GALLERY_CARD.DETAILS_BREAKPOINT
+        userZoomIndex={
+          props.pluginConfig.cards__galleryCard__detailsZoomIndex ??
+          DEFAULT.CARDS.GALLERY_CARD.DETAILS_ZOOM_INDEX
         }
       />
     </>
@@ -209,8 +207,8 @@ interface GalleryCardThumbnailProps {
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
 
-  /** The current zoom breakpoint. */
-  zoomBreakpoint?: StashCardGridZoom;
+  /** The current zoom index. */
+  zoomIndex?: StashCardGridZoom;
 }
 
 export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
@@ -241,12 +239,12 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
         </div>
         <RatingBanner
           context={props.context}
-          currentBreakpoint={props.zoomBreakpoint}
+          currentZoomIndex={props.zoomIndex}
           rating100={props.rating100}
           ratingSystem={props.ratingSystem}
-          userBreakpoint={
-            props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
-            DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT
+          userZoomIndex={
+            props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex ??
+            DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_ZOOM_INDEX
           }
         />
       </a>
@@ -263,7 +261,7 @@ interface GalleryCardModalContentProps {
   closeHandler: () => void;
 
   /** The Stash gallery data. */
-  gallery: Gallery;
+  gallery: GalleryDataFragment;
 
   /** Properties required for navigating in the modal. */
   navigation?: CardModalNavigation;
@@ -299,8 +297,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
-    (props.pluginConfig.cards__galleryCard__ratingBannerBreakpoint ??
-      DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_BREAKPOINT) > -1;
+    (props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex ??
+      DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_ZOOM_INDEX) > -1;
 
   return (
     <CardModalContent

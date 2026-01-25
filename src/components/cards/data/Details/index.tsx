@@ -20,9 +20,9 @@ const Details: React.FC<
       ? props.details
       : getRenderData({
           data: props.details,
-          zoomBreakpoint: {
-            current: props.currentBreakpoint,
-            user: props.userBreakpoint,
+          zoomIndex: {
+            current: props.currentZoomIndex,
+            user: props.userZoomIndex,
           },
         });
 

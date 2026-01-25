@@ -118,7 +118,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   gallery={gl}
                   pluginConfig={pluginConfig}
                   ratingSystem={stashConfig.ui.ratingSystemOptions}
-                  zoomBreakpoint={props.zoomIndex as StashCardGridZoom}
+                  zoomIndex={props.zoomIndex as StashCardGridZoom}
                 />
               ))}
               zoomIndex={props.zoomIndex as StashCardGridZoom}
@@ -130,7 +130,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
             >
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
-                gallery={fullData[modalGalleryIndex] as Gallery}
+                gallery={fullData[modalGalleryIndex] as GalleryDataFragment}
                 navigation={navigationProps}
                 pluginConfig={pluginConfig}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
@@ -158,8 +158,33 @@ PluginApi.patch.instead<IGalleryCardProps>(
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSection, setModalSection] =
         useState<CardModalSection>("details");
+      const [fullData, setFullData] = useState<GalleryDataFragment | null>(
+        null,
+      );
+
+      const [loadGalleryData]: LazyQueryResultTuple<
+        { findGallery: GalleryDataFragment },
+        OperationVariables
+      > = PluginApi.GQL.useFindGalleryLazyQuery();
 
       const titleID = createGalleryCardID(props.gallery.id) + "Modal";
+
+      /** Handle the click event to open the modal. */
+      const handleOpenModal = async () => {
+        // Check if the data has been fetched
+        if (fullData === null) {
+          // If not, fetch it
+          const galleryID = props.gallery.id;
+          loadGalleryData({ variables: { id: galleryID } }).then(({ data }) => {
+            if (data) {
+              setFullData(data.findGallery);
+
+              // Open the modal
+              setModalOpen(true);
+            }
+          });
+        } else setModalOpen(true);
+      };
 
       if (
         pluginConfig &&
@@ -169,12 +194,12 @@ PluginApi.patch.instead<IGalleryCardProps>(
         return [
           <>
             <GalleryCard
-              {...props}
               footer={{
-                openHandler: () => setModalOpen(!modalOpen),
+                openHandler: () => handleOpenModal(),
                 pluginConfig,
                 setSection: setModalSection,
               }}
+              gallery={props.gallery}
               pluginConfig={pluginConfig}
               ratingSystem={stashConfig.ui.ratingSystemOptions}
             />
@@ -185,7 +210,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
             >
               <GalleryCardModalContent
                 closeHandler={() => setModalOpen(false)}
-                gallery={props.gallery}
+                gallery={fullData as GalleryDataFragment}
                 pluginConfig={pluginConfig}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}
                 section={modalSection}
