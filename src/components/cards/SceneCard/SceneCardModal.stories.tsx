@@ -227,3 +227,72 @@ export const NoTagsSectionButton: Story = {
     expect(tagsModalBtn).toBeNull();
   },
 };
+
+export const Navigation: Story = {
+  args: {
+    navigation: {
+      next: { disabled: false, onClick: fn() },
+      prev: { disabled: false, onClick: fn() },
+    },
+    scene: fullData as unknown as Scene,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const prevButton = canvas.queryByRole("button", {
+      name: "Previous",
+    });
+    expect(prevButton).not.toBeDisabled();
+
+    const nextButton = canvas.queryByRole("button", {
+      name: "Next",
+    });
+    expect(nextButton).not.toBeDisabled();
+  },
+};
+
+export const NavigationPreviousDisabled: Story = {
+  args: {
+    navigation: {
+      next: { disabled: false, onClick: fn() },
+      prev: { disabled: true, onClick: fn() },
+    },
+    scene: fullData as unknown as Scene,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const prevButton = canvas.queryByRole("button", {
+      name: "Previous",
+    });
+    expect(prevButton).toBeDisabled();
+
+    const nextButton = canvas.queryByRole("button", {
+      name: "Next",
+    });
+    expect(nextButton).not.toBeDisabled();
+  },
+};
+
+export const NavigationNextDisabled: Story = {
+  args: {
+    navigation: {
+      next: { disabled: true, onClick: fn() },
+      prev: { disabled: false, onClick: fn() },
+    },
+    scene: fullData as unknown as Scene,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const prevButton = canvas.queryByRole("button", {
+      name: "Previous",
+    });
+    expect(prevButton).not.toBeDisabled();
+
+    const nextButton = canvas.queryByRole("button", {
+      name: "Next",
+    });
+    expect(nextButton).toBeDisabled();
+  },
+};
