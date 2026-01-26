@@ -54,6 +54,10 @@ export const FullDataDefaults: Story = {
     const aspectRatio = canvas.queryByText("Aspect Ratio: 16 by 9");
     await expect(aspectRatio).toBeNull();
 
+    // Aspect ratio should NOT render
+    const bitRate = canvas.queryByText("Bit Rate: 12.42 megabits per second");
+    await expect(bitRate).toBeNull();
+
     // Date should render
     const date = canvas.getByText("Date: 11 April 2016");
     await expect(date).toBeInTheDocument();
@@ -100,6 +104,7 @@ export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
       cards__sceneCard__aspectRatioZoomIndex: 0,
+      cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__oCountZoomIndex: 0,
       cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
@@ -112,6 +117,10 @@ export const FullDataAllEnabled: Story = {
     // Aspect ratio should render
     const aspectRatio = canvas.getByText("Aspect Ratio: 16 by 9");
     await expect(aspectRatio).toBeInTheDocument();
+
+    // Bit rate should render
+    const bitRate = canvas.getByText("Bit Rate: 12.42 megabits per second");
+    await expect(bitRate).toBeInTheDocument();
 
     // Date should render
     const date = canvas.getByText("Date: 11 April 2016");
