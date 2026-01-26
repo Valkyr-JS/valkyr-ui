@@ -137,7 +137,7 @@ export const FullDataAllEnabled: Story = {
     );
     await expect(details).toBeInTheDocument();
 
-    // Director should NOT render
+    // Director should render
     const director = canvas.getByText("Director: Greg Lansky");
     await expect(director).toBeInTheDocument();
 

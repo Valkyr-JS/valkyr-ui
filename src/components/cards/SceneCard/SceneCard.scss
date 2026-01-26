@@ -110,7 +110,7 @@ $prefix: variables.$prefix;
   .vui-card-modal {
     &__body {
       display: grid;
-      grid-template-rows: [scene-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom scene-card-modal-body-bottom];
+      grid-template-rows: [scene-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom director-top] auto [director-bottom scene-card-modal-body-bottom];
     }
   }
 }

@@ -585,6 +585,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
             </FileData>
           </KeyData>
           <Details context="modal" details={props.scene.details} />
+          <Director context="modal" director={props.scene.director} />
         </>
       )}
     </CardModalContent>
