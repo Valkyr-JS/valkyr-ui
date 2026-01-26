@@ -97,7 +97,7 @@ $prefix: variables.$prefix;
   .vui-grid-card {
     &__body {
       display: grid;
-      grid-template-rows: [scene-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom scene-body-bottom];
+      grid-template-rows: [scene-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom director-top] auto [director-bottom scene-body-bottom];
     }
   }
 }
