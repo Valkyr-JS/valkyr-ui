@@ -28,6 +28,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const BitRateZoomIndex = () => (
+    <NumberSetting
+      heading="Bit rate"
+      id="valkyr-ui-cards__sceneCard__bitRateZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__bitRateZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX
+      }
+    />
+  );
+
   const BlurredThumbnailBackgroundEnabled = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
@@ -355,6 +374,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         }}
       >
         <AspectRatioZoomIndex />
+        <BitRateZoomIndex />
         <DateZoomIndex />
         <DetailsZoomIndex />
         <DurationZoomIndex />
