@@ -465,6 +465,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   const willRenderAspectRatio =
     (props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX) > -1;
+  const willRenderBitRate =
+    (props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX) > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
@@ -555,6 +558,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                       context="modal"
                       resolution={[primaryFile.width, primaryFile.height]}
                     />
+                  )}
+                  {willRenderBitRate && (
+                    <BitRate bytes={primaryFile.bit_rate} context="modal" />
                   )}
                   <Resolution
                     asIcon={

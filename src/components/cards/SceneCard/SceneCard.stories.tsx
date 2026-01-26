@@ -54,7 +54,7 @@ export const FullDataDefaults: Story = {
     const aspectRatio = canvas.queryByText("Aspect Ratio: 16 by 9");
     await expect(aspectRatio).toBeNull();
 
-    // Aspect ratio should NOT render
+    // Bit rate should NOT render
     const bitRate = canvas.queryByText("Bit Rate: 12.42 megabits per second");
     await expect(bitRate).toBeNull();
 
