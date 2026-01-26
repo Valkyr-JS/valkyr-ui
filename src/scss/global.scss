@@ -4,10 +4,7 @@ $prefix: variables.$prefix;
 
 :root {
   --#{$prefix}-body-color: #f5f8fa;
-
-  // Slightly lighter than native Stash, to pass AA WCAG
-  --#{$prefix}-link-color: #42b1fa;
-
+  --#{$prefix}-link-color: var(--#{$prefix}-body-color);
   --#{$prefix}-title-color: var(--#{$prefix}-body-color);
 
   --#{$prefix}-card-bg-color: #30404d;

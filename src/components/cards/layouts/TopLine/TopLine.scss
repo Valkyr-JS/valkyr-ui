@@ -14,4 +14,14 @@ $prefix: variables.$prefix;
   &:empty {
     display: none !important;
   }
+
+  a {
+    color: inherit;
+    opacity: var(--#{$prefix}-card-top-line-opacity);
+
+    &:hover {
+      opacity: 1;
+      text-decoration: none;
+    }
+  }
 }
