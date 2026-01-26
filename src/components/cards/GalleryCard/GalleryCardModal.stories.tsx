@@ -45,9 +45,6 @@ type Story = StoryObj<typeof meta>;
 
 export const FullData: Story = {
   args: {
-    pluginConfig: {
-      cards__galleryCard__ratingIconZoomIndex: 0,
-    },
     gallery: fullData as GalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -64,6 +61,10 @@ export const FullData: Story = {
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Photographer should render
+    const photographer = canvas.getByText("Photographer: Pho Tographer");
+    await expect(photographer).toBeInTheDocument();
 
     // Rating banner should render, but not the rating icon
     const ratingBanner = canvas.getAllByText("Rating: 4 stars");

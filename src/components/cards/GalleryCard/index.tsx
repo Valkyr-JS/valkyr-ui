@@ -5,6 +5,7 @@ import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
 import Organized from "../data/Organized";
+import Photographer from "../data/Photographer";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
@@ -13,6 +14,7 @@ import {
   CardModalNavigation,
   CardModalTagsSection,
 } from "../layouts/CardModal";
+import CastCrew from "../layouts/CastCrew";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
@@ -170,6 +172,17 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
           DEFAULT.CARDS.GALLERY_CARD.DETAILS_ZOOM_INDEX
         }
       />
+      <CastCrew>
+        <Photographer
+          context="card"
+          currentZoomIndex={props.zoomIndex}
+          photographer={props.gallery.photographer}
+          userZoomIndex={
+            props.pluginConfig.cards__galleryCard__photographerZoomIndex ??
+            DEFAULT.CARDS.GALLERY_CARD.PHOTOGRAPHER_ZOOM_INDEX
+          }
+        />
+      </CastCrew>
     </>
   );
 };
@@ -363,6 +376,12 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
             </ReleaseData>
           </KeyData>
           <Details context="modal" details={props.gallery.details} />
+          <CastCrew>
+            <Photographer
+              context="modal"
+              photographer={props.gallery.photographer}
+            />
+          </CastCrew>
         </>
       )}
     </CardModalContent>

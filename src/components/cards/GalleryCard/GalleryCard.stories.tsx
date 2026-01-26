@@ -61,6 +61,10 @@ export const FullDataDefaults: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
+    // Photographer should NOT render
+    const photographer = canvas.queryByText("Photographer: Pho Tographer");
+    await expect(photographer).toBeNull();
+
     // Rating banner should render, but not the rating icon
     const ratingBanner = canvas.getAllByText("Rating: 4 stars");
     await expect(ratingBanner).toHaveLength(1);
@@ -74,6 +78,7 @@ export const FullDataDefaults: Story = {
 export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
+      cards__galleryCard__photographerZoomIndex: 0,
       cards__galleryCard__ratingIconZoomIndex: 0,
     },
     gallery: fullData as SlimGalleryDataFragment,
@@ -92,6 +97,10 @@ export const FullDataAllEnabled: Story = {
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Photographer should render
+    const photographer = canvas.getByText("Photographer: Pho Tographer");
+    await expect(photographer).toBeInTheDocument();
 
     // Rating banner AND icon should render
     const ratingBanner = canvas.getAllByText("Rating: 4 stars");

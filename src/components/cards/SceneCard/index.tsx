@@ -3,8 +3,10 @@ import cx from "classnames";
 import { DEFAULT } from "@/constants";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import AspectRatio from "../data/AspectRatio";
+import BitRate from "../data/BitRate";
 import Date from "../data/Date";
 import Details from "../data/Details";
+import Director from "../data/Director";
 import Duration from "../data/Duration";
 import OCount from "../data/OCount";
 import Organized from "../data/Organized";
@@ -18,14 +20,12 @@ import {
   CardModalNavigation,
   CardModalTagsSection,
 } from "../layouts/CardModal";
+import CastCrew from "../layouts/CastCrew";
 import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
-import BitRate from "../data/BitRate";
-import Director from "../data/Director";
-import CastCrew from "../layouts/CastCrew";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the

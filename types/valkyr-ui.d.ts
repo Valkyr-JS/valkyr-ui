@@ -69,6 +69,8 @@ interface ValkyrUiConfigMap {
   /** The zoom index at which to display the organized icon on gallery
    * cards. */
   cards__galleryCard__organizedZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the photographer on gallery cards. */
+  cards__galleryCard__photographerZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the rating banner on gallery
    * cards. */
   cards__galleryCard__ratingBannerZoomIndex?: StashCardGridZoom;

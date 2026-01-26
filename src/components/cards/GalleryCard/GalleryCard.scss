@@ -68,7 +68,7 @@ $zoomThumbnailHeights: (
   .vui-grid-card {
     &__body {
       display: grid;
-      grid-template-rows: [gallery-card-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom gallery-card-body-bottom];
+      grid-template-rows: [gallery-card-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom cast-crew-top] auto [cast-crew-bottom gallery-card-body-bottom];
     }
   }
 }
@@ -99,7 +99,7 @@ $zoomThumbnailHeights: (
   .vui-card-modal {
     &__body {
       display: grid;
-      grid-template-rows: [gallery-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom gallery-card-modal-body-bottom];
+      grid-template-rows: [gallery-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom cast-crew-top] auto [cast-crew-bottom gallery-card-modal-body-bottom];
     }
   }
 }
