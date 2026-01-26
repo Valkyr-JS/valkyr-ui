@@ -191,15 +191,35 @@ export const FilelessData: Story = {
 
 export const MultiFile: Story = {
   args: {
+    pluginConfig: {
+      cards__sceneCard__aspectRatioZoomIndex: 0,
+      cards__sceneCard__bitRateZoomIndex: 0,
+    },
     scene: multiFile as SlimSceneDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Expect the resolution to be based on the primary file, not any other
+    // Aspect ratio
+    const primaryAspectRatio = canvas.getByText("Aspect Ratio: 16 by 9");
+    await expect(primaryAspectRatio).toBeInTheDocument();
+    const secondaryAspectRatio = canvas.queryByText("Aspect Ratio: 27 by 16");
+    await expect(secondaryAspectRatio).toBeNull();
+
+    // Bit rate
+    const primaryBitRate = canvas.getByText(
+      "Bit Rate: 8.6 megabits per second",
+    );
+    await expect(primaryBitRate).toBeInTheDocument();
+    const secondaryBitRate = canvas.queryByText(
+      "Bit Rate: 0.86 megabits per second",
+    );
+    await expect(secondaryBitRate).toBeNull();
+
+    // Resolution
     const primaryRes = canvas.getByText("Resolution: 1080p");
     await expect(primaryRes).toBeInTheDocument();
-    const secondaryRes = canvas.queryByText("Resolution: 720p");
+    const secondaryRes = canvas.queryByText("Resolution: 640p");
     await expect(secondaryRes).toBeNull();
   },
 };
