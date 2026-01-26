@@ -3,6 +3,10 @@
 $prefix: variables.$prefix;
 
 .vui-grid-card {
+  a {
+    color: var(--#{$prefix}-link-color);
+  }
+
   padding: 0;
   background-color: var(--#{$prefix}-card-bg-color);
 
