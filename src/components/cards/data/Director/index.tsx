@@ -1,7 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
-import "./Director.scss";
 
 interface DirectorProps {
   /** The scene director. */

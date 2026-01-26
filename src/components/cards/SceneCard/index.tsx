@@ -25,6 +25,7 @@ import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
 import BitRate from "../data/BitRate";
 import Director from "../data/Director";
+import CastCrew from "../layouts/CastCrew";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -280,15 +281,17 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
           DEFAULT.CARDS.SCENE_CARD.DETAILS_ZOOM_INDEX
         }
       />
-      <Director
-        context="card"
-        currentZoomIndex={props.zoomIndex}
-        director={props.scene.director}
-        userZoomIndex={
-          props.pluginConfig.cards__sceneCard__directorZoomIndex ??
-          DEFAULT.CARDS.SCENE_CARD.DIRECTOR_ZOOM_INDEX
-        }
-      />
+      <CastCrew>
+        <Director
+          context="card"
+          currentZoomIndex={props.zoomIndex}
+          director={props.scene.director}
+          userZoomIndex={
+            props.pluginConfig.cards__sceneCard__directorZoomIndex ??
+            DEFAULT.CARDS.SCENE_CARD.DIRECTOR_ZOOM_INDEX
+          }
+        />
+      </CastCrew>
     </>
   );
 };
@@ -585,7 +588,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
             </FileData>
           </KeyData>
           <Details context="modal" details={props.scene.details} />
-          <Director context="modal" director={props.scene.director} />
+          <CastCrew>
+            <Director context="modal" director={props.scene.director} />
+          </CastCrew>
         </>
       )}
     </CardModalContent>
