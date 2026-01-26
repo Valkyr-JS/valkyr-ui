@@ -97,7 +97,7 @@ $prefix: variables.$prefix;
   .vui-grid-card {
     &__body {
       display: grid;
-      grid-template-rows: [scene-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom scene-body-bottom];
+      grid-template-rows: [scene-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom cast-crew-top] auto [cast-crew-bottom scene-body-bottom];
     }
   }
 }
@@ -110,7 +110,7 @@ $prefix: variables.$prefix;
   .vui-card-modal {
     &__body {
       display: grid;
-      grid-template-rows: [scene-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom scene-card-modal-body-bottom];
+      grid-template-rows: [scene-card-modal-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom cast-crew-top] auto [cast-crew-bottom scene-card-modal-body-bottom];
     }
   }
 }

@@ -69,6 +69,10 @@ export const FullDataDefaults: Story = {
     );
     await expect(details).toBeInTheDocument();
 
+    // Director should render
+    const director = canvas.getByText("Director: Greg Lansky");
+    await expect(director).toBeInTheDocument();
+
     // Duration should render
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
@@ -129,6 +133,10 @@ export const FullDataAllEnabled: Story = {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus odio, fermentum sed egestas et, laoreet et enim. Aenean vulputate metus dolor, at placerat tortor porta non. Proin vel faucibus mauris. Mauris nec eleifend augue. In sed augue a felis aliquam gravida et aliquet risus. Nulla malesuada massa a nisi rutrum vestibulum. Suspendisse potenti. Donec laoreet tristique rhoncus. Nam porttitor mollis odio eu fermentum. Fusce magna mauris, scelerisque ac mollis eu, congue id sapien. Fusce at mauris at justo condimentum laoreet.",
     );
     await expect(details).toBeInTheDocument();
+
+    // Director should render
+    const director = canvas.getByText("Director: Greg Lansky");
+    await expect(director).toBeInTheDocument();
 
     // Duration should render
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");

@@ -3,6 +3,10 @@
 $prefix: variables.$prefix;
 
 .vui-card-modal {
+  a {
+    color: var(--#{$prefix}-link-color);
+  }
+
   &__body {
     grid-row: body-top / body-bottom;
   }

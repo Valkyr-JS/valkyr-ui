@@ -22,6 +22,7 @@ export const DEFAULT = {
       DATE_ZOOM_INDEX: 0,
       DETAILS_ZOOM_INDEX: 0,
       DETAILS_MAX_LINES: 3,
+      DIRECTOR_ZOOM_INDEX: -1,
       DURATION_ZOOM_INDEX: 0,
       ENABLED: true,
       O_COUNT_ZOOM_INDEX: -1,

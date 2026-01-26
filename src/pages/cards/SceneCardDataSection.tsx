@@ -128,6 +128,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const DirectorZoomIndex = () => (
+    <NumberSetting
+      heading="Director"
+      id="valkyr-ui-cards__sceneCard__directorZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__directorZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__directorZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.DIRECTOR_ZOOM_INDEX
+      }
+    />
+  );
+
   const DurationZoomIndex = () => (
     <NumberSetting
       heading="Duration"
@@ -377,6 +396,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <BitRateZoomIndex />
         <DateZoomIndex />
         <DetailsZoomIndex />
+        <DirectorZoomIndex />
         <DurationZoomIndex />
         <OCountZoomIndex />
         <OrganizedZoomIndex />

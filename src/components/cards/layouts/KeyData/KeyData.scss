@@ -11,4 +11,8 @@ $prefix: variables.$prefix;
   column-gap: $column-gap;
   margin-bottom: 5px;
   font-size: var(--#{$prefix}-card-font-sm);
+
+  &:empty {
+    display: none !important;
+  }
 }
