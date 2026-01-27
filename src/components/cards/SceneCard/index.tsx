@@ -3,6 +3,7 @@ import cx from "classnames";
 import { DEFAULT } from "@/constants";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import AspectRatio from "../data/AspectRatio";
+import AudioCodec from "../data/AudioCodec";
 import BitRate from "../data/BitRate";
 import Date from "../data/Date";
 import Details from "../data/Details";
@@ -271,6 +272,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX
               }
             />
+            <AudioCodec
+              context="card"
+              codec={primaryFile.audio_codec}
+              currentZoomIndex={props.zoomIndex}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__audioCodecZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.AUDIO_CODEX_ZOOM_INDEX
+              }
+            />
             <FrameRate
               context="card"
               currentZoomIndex={props.zoomIndex}
@@ -506,6 +516,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   const willRenderAspectRatio =
     (props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX) > -1;
+  const willRenderAudioCodec =
+    (props.pluginConfig.cards__sceneCard__audioCodecZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.AUDIO_CODEX_ZOOM_INDEX) > -1;
   const willRenderBitRate =
     (props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX) > -1;
@@ -616,6 +629,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 )}
                 {willRenderVideoCodec && (
                   <VideoCodec codec={primaryFile.video_codec} context="modal" />
+                )}
+                {willRenderAudioCodec && (
+                  <AudioCodec codec={primaryFile.audio_codec} context="modal" />
                 )}
                 {willRenderFrameRate && (
                   <FrameRate context="modal" rate={primaryFile.frame_rate} />
