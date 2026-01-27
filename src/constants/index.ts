@@ -40,6 +40,7 @@ export const DEFAULT = {
       STUDIO_ZOOM_INDEX: 0,
       THUMBNAIL_BACKGROUND_IMAGE: false,
       THUMBNAIL_BACKGROUND_STYLE: null,
+      VIDEO_CODEX_ZOOM_INDEX: -1,
     },
     SHARED: {
       ENABLE_FOOTER_BUTTON_COUNTS: true,
