@@ -86,6 +86,26 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const ImageCollectionIconZoomIndex = () => (
+    <NumberSetting
+      heading="Image collection icon"
+      id="valkyr-ui-cards__galleryCard__imageCollectionIconZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__imageCollectionIconZoomIndex: v,
+          });
+        }
+      }}
+      subHeading="Indicates a gallery made up of loose images, as opposed to one created from a ZIP file."
+      value={
+        props.pluginConfig.cards__galleryCard__imageCollectionIconZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.IMAGE_COLLECTION_ICON_ZOOM_INDEX
+      }
+    />
+  );
+
   const OrganizedZoomIndex = () => (
     <NumberSetting
       heading="Organized icon"
@@ -193,6 +213,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
           });
         }
       }}
+      subHeading="Indicates a gallery created from a ZIP file, as opposed to one made up of loose images."
       value={
         props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
         DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX
@@ -273,6 +294,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DateZoomIndex />
         <DetailsZoomIndex />
         <FileSizeZoomIndex />
+        <ImageCollectionIconZoomIndex />
         <OrganizedZoomIndex />
         <PhotographerZoomIndex />
         <RatingBannerZoomIndex />
