@@ -6,6 +6,7 @@ import Date from "../data/Date";
 import Details from "../data/Details";
 import FileSize from "../data/FileSize";
 import ImageCollectionIcon from "../data/ImageCollectionIcon";
+import ImageCount from "../data/ImageCount";
 import Organized from "../data/Organized";
 import Photographer from "../data/Photographer";
 import RatingBanner from "../data/RatingBanner";
@@ -196,6 +197,15 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
               props.pluginConfig
                 .cards__galleryCard__imageCollectionIconZoomIndex ??
               DEFAULT.CARDS.GALLERY_CARD.IMAGE_COLLECTION_ICON_ZOOM_INDEX
+            }
+          />
+          <ImageCount
+            context="card"
+            currentZoomIndex={props.zoomIndex}
+            count={props.gallery.image_count}
+            userZoomIndex={
+              props.pluginConfig.cards__galleryCard__imageCountZoomIndex ??
+              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT
             }
           />
         </FileData>
