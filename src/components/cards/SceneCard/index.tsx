@@ -8,6 +8,7 @@ import Date from "../data/Date";
 import Details from "../data/Details";
 import Director from "../data/Director";
 import Duration from "../data/Duration";
+import FileSize from "../data/FileSize";
 import OCount from "../data/OCount";
 import Organized from "../data/Organized";
 import PlayCount from "../data/PlayCount";
@@ -230,6 +231,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
               userZoomIndex={
                 props.pluginConfig.cards__sceneCard__durationZoomIndex ??
                 DEFAULT.CARDS.SCENE_CARD.DURATION_ZOOM_INDEX
+              }
+            />
+            <FileSize
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              bytes={primaryFile.size}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX
               }
             />
             <AspectRatio
