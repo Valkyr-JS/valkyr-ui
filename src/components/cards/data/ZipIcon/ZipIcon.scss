@@ -1,12 +1,4 @@
 .vui-card-data__zip-icon {
   display: flex;
   align-items: center;
-
-  svg {
-    margin: 0;
-
-    &:not(:last-child) {
-      margin-right: 5px;
-    }
-  }
 }

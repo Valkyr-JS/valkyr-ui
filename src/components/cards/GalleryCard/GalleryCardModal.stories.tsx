@@ -77,6 +77,10 @@ export const FullDataDefaults: Story = {
     // Studio should render
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
+
+    // Zip icon should NOT render
+    const zipIcon = canvas.queryByText("ZIP file");
+    await expect(zipIcon).toBeNull();
   },
 };
 
@@ -84,6 +88,7 @@ export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
       cards__galleryCard__fileSizeZoomIndex: 0,
+      cards__galleryCard__zipIconZoomIndex: 0,
     },
     gallery: fullData as GalleryDataFragment,
   },
@@ -117,6 +122,10 @@ export const FullDataAllEnabled: Story = {
     // Studio should render
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
+
+    // Zip icon should render
+    const zipIcon = canvas.getByText("ZIP file");
+    await expect(zipIcon).toBeInTheDocument();
   },
 };
 

@@ -344,6 +344,9 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const willRenderFileSize =
     (props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
       DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
+  const willRenderZipIcon =
+    (props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
+      DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX) > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
@@ -415,6 +418,12 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
               <FileData>
                 {willRenderFileSize && (
                   <FileSize context="modal" bytes={primaryFile.size} />
+                )}
+                {willRenderZipIcon && (
+                  <ZipIcon
+                    context="modal"
+                    isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
+                  />
                 )}
               </FileData>
             )}
