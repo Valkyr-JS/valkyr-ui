@@ -68,6 +68,9 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__enabled?: boolean;
   /** The zoom index at which to display the file size on gallery cards. */
   cards__galleryCard__fileSizeZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the image collection icon on gallery
+   * cards. */
+  cards__galleryCard__imageCollectionIconZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the organized icon on gallery
    * cards. */
   cards__galleryCard__organizedZoomIndex?: StashCardGridZoom;
@@ -84,6 +87,8 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */
   cards__galleryCard__thumbnailBackgroundStyle?: string | null;
+  /** The zoom index at which to display the zip icon on gallery cards. */
+  cards__galleryCard__zipIconZoomIndex?: StashCardGridZoom;
 
   /** The zoom index at which to display the aspect ratio on scene cards. */
   cards__sceneCard__aspectRatioZoomIndex?: StashCardGridZoom;

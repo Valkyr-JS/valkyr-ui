@@ -5,11 +5,13 @@ import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
 import FileSize from "../data/FileSize";
+import ImageCollectionIcon from "../data/ImageCollectionIcon";
 import Organized from "../data/Organized";
 import Photographer from "../data/Photographer";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
+import ZipIcon from "../data/ZipIcon";
 import {
   CardModalContent,
   CardModalNavigation,
@@ -163,19 +165,40 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
             }
           />
         </ReleaseData>
-        {primaryFile && (
-          <FileData>
-            <FileSize
-              context="card"
-              currentZoomIndex={props.zoomIndex}
-              bytes={primaryFile.size}
-              userZoomIndex={
-                props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
-                DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX
-              }
-            />
-          </FileData>
-        )}
+        <FileData>
+          {primaryFile && (
+            <>
+              <FileSize
+                context="card"
+                currentZoomIndex={props.zoomIndex}
+                bytes={primaryFile.size}
+                userZoomIndex={
+                  props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
+                  DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX
+                }
+              />
+              <ZipIcon
+                context="card"
+                currentZoomIndex={props.zoomIndex}
+                isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
+                userZoomIndex={
+                  props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
+                  DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX
+                }
+              />
+            </>
+          )}
+          <ImageCollectionIcon
+            context="card"
+            currentZoomIndex={props.zoomIndex}
+            isCollection={!primaryFile}
+            userZoomIndex={
+              props.pluginConfig
+                .cards__galleryCard__imageCollectionIconZoomIndex ??
+              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COLLECTION_ICON_ZOOM_INDEX
+            }
+          />
+        </FileData>
       </KeyData>
       <Details
         context="card"
@@ -334,6 +357,9 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const willRenderFileSize =
     (props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
       DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
+  const willRenderZipIcon =
+    (props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
+      DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX) > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
@@ -401,13 +427,25 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
                 }
               />
             </ReleaseData>
-            {primaryFile && (
-              <FileData>
-                {willRenderFileSize && (
-                  <FileSize context="modal" bytes={primaryFile.size} />
-                )}
-              </FileData>
-            )}
+            <FileData>
+              {primaryFile && (
+                <>
+                  {willRenderFileSize && (
+                    <FileSize context="modal" bytes={primaryFile.size} />
+                  )}
+                  {willRenderZipIcon && (
+                    <ZipIcon
+                      context="modal"
+                      isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
+                    />
+                  )}
+                </>
+              )}
+              <ImageCollectionIcon
+                context="modal"
+                isCollection={!primaryFile}
+              />
+            </FileData>
           </KeyData>
           <Details context="modal" details={props.gallery.details} />
           <CastCrew>

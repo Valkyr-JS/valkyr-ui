@@ -62,6 +62,10 @@ export const FullDataDefaults: Story = {
     const fileSize = canvas.queryByText("File Size: 75.12 megabytes");
     await expect(fileSize).toBeNull();
 
+    // Image collection icon should NOT render
+    const imageCollectionIcon = canvas.queryByText("Image collection");
+    await expect(imageCollectionIcon).toBeNull();
+
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
@@ -77,6 +81,10 @@ export const FullDataDefaults: Story = {
     // Studio should render
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
+
+    // Zip icon should NOT render
+    const zipIcon = canvas.queryByText("ZIP file");
+    await expect(zipIcon).toBeNull();
   },
 };
 
@@ -84,6 +92,8 @@ export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
       cards__galleryCard__fileSizeZoomIndex: 0,
+      cards__galleryCard__imageCollectionIconZoomIndex: 0,
+      cards__galleryCard__zipIconZoomIndex: 0,
     },
     gallery: fullData as GalleryDataFragment,
   },
@@ -102,6 +112,11 @@ export const FullDataAllEnabled: Story = {
     const fileSize = canvas.getByText("File Size: 75.12 megabytes");
     await expect(fileSize).toBeInTheDocument();
 
+    // Image collection icon should NOT render because this is a zip file -
+    // positive test is separate
+    const imageCollectionIcon = canvas.queryByText("Image collection");
+    await expect(imageCollectionIcon).toBeNull();
+
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
@@ -117,6 +132,31 @@ export const FullDataAllEnabled: Story = {
     // Studio should render
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
+
+    // Zip icon should render
+    const zipIcon = canvas.getByText("ZIP file");
+    await expect(zipIcon).toBeInTheDocument();
+  },
+};
+
+export const IsImageCollection: Story = {
+  args: {
+    gallery: square as GalleryDataFragment,
+    pluginConfig: {
+      cards__galleryCard__imageCollectionIconZoomIndex: 0,
+      cards__galleryCard__zipIconZoomIndex: 0,
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Image collection icon should render
+    const imageCollectionIcon = canvas.getByText("Image collection");
+    await expect(imageCollectionIcon).toBeInTheDocument();
+
+    // Zip icon should NOT render
+    const zipIcon = canvas.queryByText("ZIP file");
+    await expect(zipIcon).toBeNull();
   },
 };
 
