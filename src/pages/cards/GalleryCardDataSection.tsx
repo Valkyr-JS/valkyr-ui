@@ -67,6 +67,25 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const FileSizeZoomIndex = () => (
+    <NumberSetting
+      heading="File size"
+      id="valkyr-ui-cards__galleryCard__fileSizeZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__fileSizeZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX
+      }
+    />
+  );
+
   const OrganizedZoomIndex = () => (
     <NumberSetting
       heading="Organized icon"
@@ -234,6 +253,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
       >
         <DateZoomIndex />
         <DetailsZoomIndex />
+        <FileSizeZoomIndex />
         <OrganizedZoomIndex />
         <PhotographerZoomIndex />
         <RatingBannerZoomIndex />

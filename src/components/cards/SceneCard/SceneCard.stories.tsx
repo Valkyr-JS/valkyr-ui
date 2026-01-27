@@ -76,6 +76,10 @@ export const FullDataDefaults: Story = {
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
 
+    // File size icon should NOT render
+    const fileSize = canvas.queryByText("File Size: 3.29 gigabytes");
+    await expect(fileSize).toBeNull();
+
     // O count should NOT render
     const oCount = canvas.queryByText("O Count: 2");
     await expect(oCount).toBeNull();
@@ -110,6 +114,7 @@ export const FullDataAllEnabled: Story = {
       cards__sceneCard__aspectRatioZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__directorZoomIndex: 0,
+      cards__sceneCard__fileSizeZoomIndex: 0,
       cards__sceneCard__oCountZoomIndex: 0,
       cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
@@ -144,6 +149,10 @@ export const FullDataAllEnabled: Story = {
     // Duration should render
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
+
+    // File size icon should render
+    const fileSize = canvas.getByText("File Size: 3.29 gigabytes");
+    await expect(fileSize).toBeInTheDocument();
 
     // O count should render
     const oCount = canvas.getByText("O Count: 2");

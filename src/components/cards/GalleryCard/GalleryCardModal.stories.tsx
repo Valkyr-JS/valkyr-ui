@@ -43,7 +43,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FullData: Story = {
+export const FullDataDefaults: Story = {
   args: {
     gallery: fullData as GalleryDataFragment,
   },
@@ -57,6 +57,50 @@ export const FullData: Story = {
     // Details should render
     const details = canvas.getByText(fullData.details);
     await expect(details).toBeInTheDocument();
+
+    // File size icon should NOT render
+    const fileSize = canvas.queryByText("File Size: 75.12 megabytes");
+    await expect(fileSize).toBeNull();
+
+    // Organized icon should render
+    const organized = canvas.getByText("Organised");
+    await expect(organized).toBeInTheDocument();
+
+    // Photographer should render
+    const photographer = canvas.getByText("Photographer: Pho Tographer");
+    await expect(photographer).toBeInTheDocument();
+
+    // Rating banner should render, but not the rating icon
+    const ratingBanner = canvas.getAllByText("Rating: 4 stars");
+    await expect(ratingBanner).toHaveLength(1);
+
+    // Studio should render
+    const studio = canvas.getByText("Studio: Tushy");
+    await expect(studio).toBeInTheDocument();
+  },
+};
+
+export const FullDataAllEnabled: Story = {
+  args: {
+    pluginConfig: {
+      cards__galleryCard__fileSizeZoomIndex: 0,
+    },
+    gallery: fullData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Date should render
+    const date = canvas.getByText("Date: 31 May 2019");
+    await expect(date).toBeInTheDocument();
+
+    // Details should render
+    const details = canvas.getByText(fullData.details);
+    await expect(details).toBeInTheDocument();
+
+    // File size icon should render
+    const fileSize = canvas.getByText("File Size: 75.12 megabytes");
+    await expect(fileSize).toBeInTheDocument();
 
     // Organized icon should render
     const organized = canvas.getByText("Organised");

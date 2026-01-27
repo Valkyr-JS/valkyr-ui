@@ -8,6 +8,7 @@ import Date from "../data/Date";
 import Details from "../data/Details";
 import Director from "../data/Director";
 import Duration from "../data/Duration";
+import FileSize from "../data/FileSize";
 import OCount from "../data/OCount";
 import Organized from "../data/Organized";
 import PlayCount from "../data/PlayCount";
@@ -217,56 +218,63 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
             }
           />
         </ReleaseData>
-        <FileData>
-          {primaryFile && (
-            <>
-              <Duration
-                context="card"
-                currentZoomIndex={props.zoomIndex}
-                duration={primaryFile.duration}
-                timestampPadding={
-                  props.pluginConfig.cards__shared__timestampPadding ??
-                  DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
-                }
-                userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__durationZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.DURATION_ZOOM_INDEX
-                }
-              />
-              <AspectRatio
-                context="card"
-                currentZoomIndex={props.zoomIndex}
-                resolution={[primaryFile.width, primaryFile.height]}
-                userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX
-                }
-              />
-              <BitRate
-                bytes={primaryFile.bit_rate}
-                context="card"
-                currentZoomIndex={props.zoomIndex}
-                userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX
-                }
-              />
-              <Resolution
-                asIcon={
-                  props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
-                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
-                }
-                context="card"
-                currentZoomIndex={props.zoomIndex}
-                resolution={[primaryFile.width, primaryFile.height]}
-                userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__resolutionZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_ZOOM_INDEX
-                }
-              />
-            </>
-          )}
-        </FileData>
+        {primaryFile && (
+          <FileData>
+            <Duration
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              duration={primaryFile.duration}
+              timestampPadding={
+                props.pluginConfig.cards__shared__timestampPadding ??
+                DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+              }
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__durationZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.DURATION_ZOOM_INDEX
+              }
+            />
+            <FileSize
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              bytes={primaryFile.size}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX
+              }
+            />
+            <AspectRatio
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              resolution={[primaryFile.width, primaryFile.height]}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX
+              }
+            />
+            <BitRate
+              bytes={primaryFile.bit_rate}
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX
+              }
+            />
+            <Resolution
+              asIcon={
+                props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+                DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+              }
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              resolution={[primaryFile.width, primaryFile.height]}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__resolutionZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.RESOLUTION_ZOOM_INDEX
+              }
+            />
+          </FileData>
+        )}
       </KeyData>
       <Details
         context="card"
@@ -481,6 +489,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   const willRenderBitRate =
     (props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX) > -1;
+  const willRenderFileSize =
+    (props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
@@ -555,37 +566,38 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 }
               />
             </ReleaseData>
-            <FileData>
-              {primaryFile && (
-                <>
-                  <Duration
-                    context="modal"
-                    duration={primaryFile.duration}
-                    timestampPadding={
-                      props.pluginConfig.cards__shared__timestampPadding ??
-                      DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
-                    }
-                  />
-                  {willRenderAspectRatio && (
-                    <AspectRatio
-                      context="modal"
-                      resolution={[primaryFile.width, primaryFile.height]}
-                    />
-                  )}
-                  {willRenderBitRate && (
-                    <BitRate bytes={primaryFile.bit_rate} context="modal" />
-                  )}
-                  <Resolution
-                    asIcon={
-                      props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
-                      DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
-                    }
+            {primaryFile && (
+              <FileData>
+                <Duration
+                  context="modal"
+                  duration={primaryFile.duration}
+                  timestampPadding={
+                    props.pluginConfig.cards__shared__timestampPadding ??
+                    DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                  }
+                />
+                {willRenderFileSize && (
+                  <FileSize context="modal" bytes={primaryFile.size} />
+                )}
+                {willRenderAspectRatio && (
+                  <AspectRatio
                     context="modal"
                     resolution={[primaryFile.width, primaryFile.height]}
                   />
-                </>
-              )}
-            </FileData>
+                )}
+                {willRenderBitRate && (
+                  <BitRate bytes={primaryFile.bit_rate} context="modal" />
+                )}
+                <Resolution
+                  asIcon={
+                    props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+                    DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+                  }
+                  context="modal"
+                  resolution={[primaryFile.width, primaryFile.height]}
+                />
+              </FileData>
+            )}
           </KeyData>
           <Details context="modal" details={props.scene.details} />
           <CastCrew>

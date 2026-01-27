@@ -57,6 +57,10 @@ export const FullDataDefaults: Story = {
     const details = canvas.getByText(fullData.details);
     await expect(details).toBeInTheDocument();
 
+    // File size icon should NOT render
+    const fileSize = canvas.queryByText("File Size: 75.12 megabytes");
+    await expect(fileSize).toBeNull();
+
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
@@ -78,6 +82,7 @@ export const FullDataDefaults: Story = {
 export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
+      cards__galleryCard__fileSizeZoomIndex: 0,
       cards__galleryCard__photographerZoomIndex: 0,
       cards__galleryCard__ratingIconZoomIndex: 0,
     },
@@ -93,6 +98,10 @@ export const FullDataAllEnabled: Story = {
     // Details should render
     const details = canvas.getByText(fullData.details);
     await expect(details).toBeInTheDocument();
+
+    // File size icon should render
+    const fileSize = canvas.getByText("File Size: 75.12 megabytes");
+    await expect(fileSize).toBeInTheDocument();
 
     // Organized icon should render
     const organized = canvas.getByText("Organised");

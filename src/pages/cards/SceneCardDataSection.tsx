@@ -166,6 +166,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const FileSizeZoomIndex = () => (
+    <NumberSetting
+      heading="File size"
+      id="valkyr-ui-cards__sceneCard__fileSizeZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__fileSizeZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX
+      }
+    />
+  );
+
   const OCountZoomIndex = () => (
     <NumberSetting
       heading="O count"
@@ -398,6 +417,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DetailsZoomIndex />
         <DirectorZoomIndex />
         <DurationZoomIndex />
+        <FileSizeZoomIndex />
         <OCountZoomIndex />
         <OrganizedZoomIndex />
         <PlayCountZoomIndex />
