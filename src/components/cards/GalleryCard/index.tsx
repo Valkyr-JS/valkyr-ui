@@ -168,27 +168,25 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
         </ReleaseData>
         <FileData>
           {primaryFile && (
-            <>
-              <FileSize
-                context="card"
-                currentZoomIndex={props.zoomIndex}
-                bytes={primaryFile.size}
-                userZoomIndex={
-                  props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
-                  DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX
-                }
-              />
-              <ZipIcon
-                context="card"
-                currentZoomIndex={props.zoomIndex}
-                isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
-                userZoomIndex={
-                  props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
-                  DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX
-                }
-              />
-            </>
+            <FileSize
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              bytes={primaryFile.size}
+              userZoomIndex={
+                props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
+                DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX
+              }
+            />
           )}
+          <ImageCount
+            context="card"
+            currentZoomIndex={props.zoomIndex}
+            count={props.gallery.image_count}
+            userZoomIndex={
+              props.pluginConfig.cards__galleryCard__imageCountZoomIndex ??
+              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT
+            }
+          />
           <ImageCollectionIcon
             context="card"
             currentZoomIndex={props.zoomIndex}
@@ -199,15 +197,17 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
               DEFAULT.CARDS.GALLERY_CARD.IMAGE_COLLECTION_ICON_ZOOM_INDEX
             }
           />
-          <ImageCount
-            context="card"
-            currentZoomIndex={props.zoomIndex}
-            count={props.gallery.image_count}
-            userZoomIndex={
-              props.pluginConfig.cards__galleryCard__imageCountZoomIndex ??
-              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT
-            }
-          />
+          {primaryFile && (
+            <ZipIcon
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
+              userZoomIndex={
+                props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
+                DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX
+              }
+            />
+          )}
         </FileData>
       </KeyData>
       <Details
@@ -365,9 +365,11 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   // Only render technical details if the user has enabled on cards them at any
   // breakpoint. The data will be available anyway under the file section.
   const willRenderFileSize =
+    primaryFile &&
     (props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
       DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
   const willRenderZipIcon =
+    primaryFile &&
     (props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
       DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX) > -1;
 
@@ -438,24 +440,20 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
               />
             </ReleaseData>
             <FileData>
-              {primaryFile && (
-                <>
-                  {willRenderFileSize && (
-                    <FileSize context="modal" bytes={primaryFile.size} />
-                  )}
-                  {willRenderZipIcon && (
-                    <ZipIcon
-                      context="modal"
-                      isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
-                    />
-                  )}
-                </>
+              {willRenderFileSize && (
+                <FileSize context="modal" bytes={primaryFile.size} />
               )}
+              <ImageCount context="modal" count={props.gallery.image_count} />
               <ImageCollectionIcon
                 context="modal"
                 isCollection={!primaryFile}
               />
-              <ImageCount context="modal" count={props.gallery.image_count} />
+              {willRenderZipIcon && (
+                <ZipIcon
+                  context="modal"
+                  isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
+                />
+              )}
             </FileData>
           </KeyData>
           <Details context="modal" details={props.gallery.details} />
