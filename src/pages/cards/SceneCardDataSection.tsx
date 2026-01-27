@@ -166,6 +166,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const FrameRateZoomIndex = () => (
+    <NumberSetting
+      heading="Frame rate"
+      id="valkyr-ui-cards__sceneCard__frameRateZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__frameRateZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__frameRateZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.FRAME_RATE_ZOOM_INDEX
+      }
+    />
+  );
+
   const FileSizeZoomIndex = () => (
     <NumberSetting
       heading="File size"
@@ -418,6 +437,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DirectorZoomIndex />
         <DurationZoomIndex />
         <FileSizeZoomIndex />
+        <FrameRateZoomIndex />
         <OCountZoomIndex />
         <OrganizedZoomIndex />
         <PlayCountZoomIndex />
