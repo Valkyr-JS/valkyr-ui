@@ -455,6 +455,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
                 context="modal"
                 isCollection={!primaryFile}
               />
+              <ImageCount context="modal" count={props.gallery.image_count} />
             </FileData>
           </KeyData>
           <Details context="modal" details={props.gallery.details} />
