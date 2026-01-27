@@ -23,6 +23,21 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const CountIs1: Story = {
+  args: {
+    context: "card",
+    count: 1,
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const srCount = canvas.getByText("1 image");
+    await expect(srCount).toBeInTheDocument();
+  },
+};
+
 export const AboveZoomIndex: Story = {
   args: {
     context: "card",

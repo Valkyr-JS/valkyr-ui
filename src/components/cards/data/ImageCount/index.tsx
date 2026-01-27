@@ -27,10 +27,17 @@ const ImageCount: React.FC<
 
   const componentClass = "vui-card-data__image-count";
 
+  // Get the correct message depending on whether there is only one image or
+  // more in the gallery
+  const message =
+    data === 1
+      ? intl.formatMessage({ id: "image" })
+      : intl.formatMessage({ id: "images" });
+
   return (
     <span className={componentClass}>
       <span>
-        {data} {intl.formatMessage({ id: "images" }).toLocaleLowerCase()}
+        {data} {message.toLocaleLowerCase()}
       </span>
     </span>
   );
