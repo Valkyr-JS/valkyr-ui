@@ -71,6 +71,8 @@ interface ValkyrUiConfigMap {
   /** The zoom index at which to display the image collection icon on gallery
    * cards. */
   cards__galleryCard__imageCollectionIconZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the image count on gallery cards. */
+  cards__galleryCard__imageCountZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the organized icon on gallery
    * cards. */
   cards__galleryCard__organizedZoomIndex?: StashCardGridZoom;

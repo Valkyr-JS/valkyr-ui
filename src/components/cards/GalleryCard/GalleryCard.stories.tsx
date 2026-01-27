@@ -65,6 +65,10 @@ export const FullDataDefaults: Story = {
     const imageCollectionIcon = canvas.queryByText("Image collection");
     await expect(imageCollectionIcon).toBeNull();
 
+    // Image count should render
+    const imageCount = canvas.getByText("50 images");
+    await expect(imageCount).toBeInTheDocument();
+
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
@@ -117,6 +121,10 @@ export const FullDataAllEnabled: Story = {
     // positive test is separate
     const imageCollectionIcon = canvas.queryByText("Image collection");
     await expect(imageCollectionIcon).toBeNull();
+
+    // Image count should render
+    const imageCount = canvas.getByText("50 images");
+    await expect(imageCount).toBeInTheDocument();
 
     // Organized icon should render
     const organized = canvas.getByText("Organised");
