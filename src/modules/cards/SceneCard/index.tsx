@@ -110,6 +110,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
               cards={props.scenes.map((sc, i) => (
                 <SceneCard
                   key={i}
+                  abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
                   continuePlaylist={
                     stashConfig.interface.continuePlaylistDefault
                   }
@@ -134,6 +135,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
               titleID={titleID}
             >
               <SceneCardModalContent
+                abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
                 closeHandler={() => setModalOpen(false)}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
                 index={modalSceneIndex}
@@ -199,6 +201,7 @@ PluginApi.patch.instead<ISceneCardProps>(
         return [
           <>
             <SceneCard
+              abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
               continuePlaylist={stashConfig.interface.continuePlaylistDefault}
               footer={{
                 openHandler: () => handleOpenModal(),
@@ -217,6 +220,7 @@ PluginApi.patch.instead<ISceneCardProps>(
               titleID={titleID}
             >
               <SceneCardModalContent
+                abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
                 closeHandler={() => setModalOpen(false)}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
                 index={props.index}

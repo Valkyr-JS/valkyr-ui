@@ -26,6 +26,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    abbreviateCounters: false,
     footer: {
       openHandler: fn(),
       pluginConfig: {},

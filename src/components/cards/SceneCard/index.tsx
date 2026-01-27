@@ -32,6 +32,9 @@ import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
 
 interface SceneCardProps {
+  /** Whether counter data should be abbreviated. */
+  abbreviateCounters: boolean;
+
   /** Stash user setting for whether to continue to the next scene when the
    * current one ends. */
   continuePlaylist?: Maybe<boolean> | undefined;
@@ -142,6 +145,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
               }
             />
             <OCount
+              abbreviate={props.abbreviateCounters}
               context="card"
               count={props.scene.o_counter}
               currentZoomIndex={props.zoomIndex}
@@ -457,6 +461,9 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
 /* ---------------------------------------------------------------------------------------------- */
 
 interface SceneCardModalContentProps {
+  /** Whether counter data should be abbreviated. */
+  abbreviateCounters: boolean;
+
   /** Handler for closing the modal. */
   closeHandler: () => void;
 
@@ -577,7 +584,11 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           <Studio context="modal" studio={props.scene.studio} />
           <div className={userDataClass}>
             <PlayCount context="modal" count={props.scene.play_count} />
-            <OCount context="modal" count={props.scene.o_counter} />
+            <OCount
+              abbreviate={props.abbreviateCounters}
+              context="modal"
+              count={props.scene.o_counter}
+            />
             {willRenderRatingBanner ? null : (
               <RatingIcon
                 context="modal"
