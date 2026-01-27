@@ -5,7 +5,8 @@ import { getRenderData } from "@/helpers";
 import "./ZipIcon.scss";
 
 interface ZipIconProps {
-  /** Whether the media is a zip file. */
+  /** Whether the gallery is a zip file, as opposed to a collection of image
+   * files. */
   isZip: boolean;
 }
 
