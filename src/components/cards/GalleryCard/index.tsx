@@ -5,11 +5,13 @@ import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
 import FileSize from "../data/FileSize";
+import ImageCollectionIcon from "../data/ImageCollectionIcon";
 import Organized from "../data/Organized";
 import Photographer from "../data/Photographer";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
+import ZipIcon from "../data/ZipIcon";
 import {
   CardModalContent,
   CardModalNavigation,
@@ -21,8 +23,6 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
-import ZipIcon from "../data/ZipIcon";
-import ImageCollectionIcon from "../data/ImageCollectionIcon";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -427,19 +427,25 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
                 }
               />
             </ReleaseData>
-            {primaryFile && (
-              <FileData>
-                {willRenderFileSize && (
-                  <FileSize context="modal" bytes={primaryFile.size} />
-                )}
-                {willRenderZipIcon && (
-                  <ZipIcon
-                    context="modal"
-                    isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
-                  />
-                )}
-              </FileData>
-            )}
+            <FileData>
+              {primaryFile && (
+                <>
+                  {willRenderFileSize && (
+                    <FileSize context="modal" bytes={primaryFile.size} />
+                  )}
+                  {willRenderZipIcon && (
+                    <ZipIcon
+                      context="modal"
+                      isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
+                    />
+                  )}
+                </>
+              )}
+              <ImageCollectionIcon
+                context="modal"
+                isCollection={!primaryFile}
+              />
+            </FileData>
           </KeyData>
           <Details context="modal" details={props.gallery.details} />
           <CastCrew>
