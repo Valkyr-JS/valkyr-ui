@@ -109,6 +109,10 @@ export const FullDataDefaults: Story = {
     // Studio should render
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
+
+    // Video codec should NOT render
+    const videoCodec = canvas.queryByText("Video Codec: h264");
+    await expect(videoCodec).toBeNull();
   },
 };
 
@@ -123,6 +127,7 @@ export const FullDataAllEnabled: Story = {
       cards__sceneCard__oCountZoomIndex: 0,
       cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
+      cards__sceneCard__videoCodecZoomIndex: 0,
     },
     scene: fullData as SlimSceneDataFragment,
   },
@@ -188,6 +193,10 @@ export const FullDataAllEnabled: Story = {
     // Studio should render
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
+
+    // Video codec should render
+    const videoCodec = canvas.getByText("Video Codec: h264");
+    await expect(videoCodec).toBeInTheDocument();
   },
 };
 
@@ -223,6 +232,7 @@ export const MultiFile: Story = {
       cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__fileSizeZoomIndex: 0,
       cards__sceneCard__frameRateZoomIndex: 0,
+      cards__sceneCard__videoCodecZoomIndex: 0,
     },
     scene: multiFile as SlimSceneDataFragment,
   },
@@ -274,6 +284,12 @@ export const MultiFile: Story = {
     await expect(primaryRes).toBeInTheDocument();
     const secondaryRes = canvas.queryByText("Resolution: 108p");
     await expect(secondaryRes).toBeNull();
+
+    // Video codec should render
+    const primaryVideoCodec = canvas.getByText("Video Codec: h264");
+    await expect(primaryVideoCodec).toBeInTheDocument();
+    const secondaryVideoCodec = canvas.queryByText("Video Codec: mpeg2");
+    await expect(secondaryVideoCodec).toBeNull();
   },
 };
 

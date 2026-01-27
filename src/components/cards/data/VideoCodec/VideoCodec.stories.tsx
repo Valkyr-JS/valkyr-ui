@@ -3,8 +3,8 @@ import { expect, within } from "storybook/test";
 import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import VideoCodec from ".";
 
-const stashBitRateText = "h264";
-const srBitRateText = "Video Codec: h264";
+const stashVideoCodecText = "h264";
+const srVideoCodecText = "Video Codec: h264";
 
 const meta = {
   title: "Components/Cards/Data/Video Codec",
@@ -33,11 +33,11 @@ export const AboveZoomIndex: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const bitRate = canvas.getByText(stashBitRateText);
-    await expect(bitRate).toBeInTheDocument();
+    const videoCodec = canvas.getByText(stashVideoCodecText);
+    await expect(videoCodec).toBeInTheDocument();
 
-    const srBitRate = canvas.getByText(srBitRateText);
-    await expect(srBitRate).toBeInTheDocument();
+    const srVideoCodec = canvas.getByText(srVideoCodecText);
+    await expect(srVideoCodec).toBeInTheDocument();
   },
 };
 
@@ -50,11 +50,11 @@ export const BelowZoomIndex: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const bitRate = canvas.queryByText(stashBitRateText);
-    await expect(bitRate).toBeNull();
+    const videoCodec = canvas.queryByText(stashVideoCodecText);
+    await expect(videoCodec).toBeNull();
 
-    const srBitRate = canvas.queryByText(srBitRateText);
-    await expect(srBitRate).toBeNull();
+    const srVideoCodec = canvas.queryByText(srVideoCodecText);
+    await expect(srVideoCodec).toBeNull();
   },
 };
 
@@ -67,11 +67,11 @@ export const EqualsZoomIndex: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const bitRate = canvas.getByText(stashBitRateText);
-    await expect(bitRate).toBeInTheDocument();
+    const videoCodec = canvas.getByText(stashVideoCodecText);
+    await expect(videoCodec).toBeInTheDocument();
 
-    const srBitRate = canvas.getByText(srBitRateText);
-    await expect(srBitRate).toBeInTheDocument();
+    const srVideoCodec = canvas.getByText(srVideoCodecText);
+    await expect(srVideoCodec).toBeInTheDocument();
   },
 };
 
@@ -85,11 +85,11 @@ export const NoData: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const bitRate = canvas.queryByText(stashBitRateText);
-    await expect(bitRate).toBeNull();
+    const videoCodec = canvas.queryByText(stashVideoCodecText);
+    await expect(videoCodec).toBeNull();
 
-    const srBitRate = canvas.queryByText(srBitRateText);
-    await expect(srBitRate).toBeNull();
+    const srVideoCodec = canvas.queryByText(srVideoCodecText);
+    await expect(srVideoCodec).toBeNull();
   },
 };
 
@@ -101,11 +101,11 @@ export const WithoutZoomData: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const bitRate = canvas.getByText(stashBitRateText);
-    await expect(bitRate).toBeInTheDocument();
+    const videoCodec = canvas.getByText(stashVideoCodecText);
+    await expect(videoCodec).toBeInTheDocument();
 
-    const srBitRate = canvas.getByText(srBitRateText);
-    await expect(srBitRate).toBeInTheDocument();
+    const srVideoCodec = canvas.getByText(srVideoCodecText);
+    await expect(srVideoCodec).toBeInTheDocument();
   },
 };
 
@@ -117,11 +117,11 @@ export const CardUserDisabled: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const bitRate = canvas.queryByText(stashBitRateText);
-    await expect(bitRate).toBeNull();
+    const videoCodec = canvas.queryByText(stashVideoCodecText);
+    await expect(videoCodec).toBeNull();
 
-    const srBitRate = canvas.queryByText(srBitRateText);
-    await expect(srBitRate).toBeNull();
+    const srVideoCodec = canvas.queryByText(srVideoCodecText);
+    await expect(srVideoCodec).toBeNull();
   },
 };
 
@@ -132,11 +132,11 @@ export const ModalContext: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const bitRate = canvas.getByText(stashBitRateText);
-    await expect(bitRate).toBeInTheDocument();
+    const videoCodec = canvas.getByText(stashVideoCodecText);
+    await expect(videoCodec).toBeInTheDocument();
 
-    const srBitRate = canvas.getByText(srBitRateText);
-    await expect(srBitRate).toBeInTheDocument();
+    const srVideoCodec = canvas.getByText(srVideoCodecText);
+    await expect(srVideoCodec).toBeInTheDocument();
   },
 };
 
@@ -148,10 +148,10 @@ export const ModalContextNoCodec: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const bitRate = canvas.queryByText(stashBitRateText);
-    await expect(bitRate).toBeNull();
+    const videoCodec = canvas.queryByText(stashVideoCodecText);
+    await expect(videoCodec).toBeNull();
 
-    const srBitRate = canvas.queryByText(srBitRateText);
-    await expect(srBitRate).toBeNull();
+    const srVideoCodec = canvas.queryByText(srVideoCodecText);
+    await expect(srVideoCodec).toBeNull();
   },
 };
