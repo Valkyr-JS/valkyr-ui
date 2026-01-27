@@ -6,6 +6,9 @@ import { getRenderData } from "@/helpers";
 import "./PlayCount.scss";
 
 interface PlayCountProps {
+  /** Whether the number should be rounded to the nearest thousand. */
+  abbreviate: boolean;
+
   /** The play count. */
   count: Maybe<number> | undefined;
 }
@@ -30,13 +33,17 @@ const PlayCount: React.FC<
 
   const componentClass = "vui-card-data__play-count";
 
+  // Round to the nearest thousand if needed
+  const value =
+    props.abbreviate && data > 1000 ? Math.round(data / 100) / 10 + "k" : data;
+
   return (
     <span className={componentClass}>
       <FontAwesomeIcon icon={faEye} />
       <span className="sr-only">
-        {intl.formatMessage({ id: "play_count" })}: {data}
+        {intl.formatMessage({ id: "play_count" })}: {value}
       </span>
-      <span aria-hidden>{data}</span>
+      <span aria-hidden>{value}</span>
     </span>
   );
 };

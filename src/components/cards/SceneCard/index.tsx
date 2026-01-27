@@ -136,6 +136,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           />
           <div className={userDataClass}>
             <PlayCount
+              abbreviate={props.abbreviateCounters}
               context="card"
               count={props.scene.play_count}
               currentZoomIndex={props.zoomIndex}
@@ -583,7 +584,11 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
         <>
           <Studio context="modal" studio={props.scene.studio} />
           <div className={userDataClass}>
-            <PlayCount context="modal" count={props.scene.play_count} />
+            <PlayCount
+              abbreviate={props.abbreviateCounters}
+              context="modal"
+              count={props.scene.play_count}
+            />
             <OCount
               abbreviate={props.abbreviateCounters}
               context="modal"

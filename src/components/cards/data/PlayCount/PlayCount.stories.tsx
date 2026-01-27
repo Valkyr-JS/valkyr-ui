@@ -13,6 +13,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    abbreviate: false,
     count: 3,
   },
   argTypes: {
@@ -23,6 +24,38 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const Abbreviated: Story = {
+  args: {
+    abbreviate: true,
+    context: "card",
+    count: 69420,
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const srCount = canvas.getByText("Play Count: 69.4k");
+    await expect(srCount).toBeInTheDocument();
+  },
+};
+
+export const Unabbreviated: Story = {
+  args: {
+    abbreviate: false,
+    context: "card",
+    count: 69420,
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const srCount = canvas.getByText("Play Count: 69420");
+    await expect(srCount).toBeInTheDocument();
+  },
+};
 
 export const AboveZoomIndex: Story = {
   args: {
