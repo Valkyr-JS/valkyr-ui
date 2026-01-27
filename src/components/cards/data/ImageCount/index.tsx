@@ -3,6 +3,9 @@ import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 
 interface ImageCountProps {
+  /** Whether the number should be rounded to the nearest thousand. */
+  abbreviate: boolean;
+
   /** The image count. */
   count: number | undefined;
 }
@@ -27,6 +30,10 @@ const ImageCount: React.FC<
 
   const componentClass = "vui-card-data__image-count";
 
+  // Round to the nearest thousand if needed
+  const value =
+    props.abbreviate && data > 1000 ? Math.round(data / 100) / 10 + "k" : data;
+
   // Get the correct message depending on whether there is only one image or
   // more in the gallery
   const message =
@@ -37,7 +44,7 @@ const ImageCount: React.FC<
   return (
     <span className={componentClass}>
       <span>
-        {data} {message.toLocaleLowerCase()}
+        {value} {message.toLocaleLowerCase()}
       </span>
     </span>
   );

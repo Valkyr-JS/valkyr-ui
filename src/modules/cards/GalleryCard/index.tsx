@@ -110,6 +110,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               cards={props.galleries.map((gl, i) => (
                 <GalleryCard
                   key={i}
+                  abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
                   footer={{
                     openHandler: () => handleOpenModal(i),
                     pluginConfig,
@@ -129,6 +130,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               titleID={titleID}
             >
               <GalleryCardModalContent
+                abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
                 closeHandler={() => setModalOpen(false)}
                 gallery={fullData[modalGalleryIndex] as GalleryDataFragment}
                 navigation={navigationProps}
@@ -194,6 +196,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
         return [
           <>
             <GalleryCard
+              abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
               footer={{
                 openHandler: () => handleOpenModal(),
                 pluginConfig,
@@ -209,6 +212,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
               titleID={titleID}
             >
               <GalleryCardModalContent
+                abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
                 closeHandler={() => setModalOpen(false)}
                 gallery={fullData as GalleryDataFragment}
                 pluginConfig={pluginConfig}
