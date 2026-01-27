@@ -19,6 +19,7 @@ export const DEFAULT = {
       THUMBNAIL_BACKGROUND_STYLE: null,
     },
     SCENE_CARD: {
+      AUDIO_CODEX_ZOOM_INDEX: -1,
       ASPECT_RATIO_ZOOM_INDEX: -1,
       BIT_RATE_ZOOM_INDEX: -1,
       DATE_ZOOM_INDEX: 0,
