@@ -33,7 +33,7 @@ interface GalleryDataFragment {
 
   files: Array<GalleryFileDataFragment>;
   folder: Maybe<FolderDataFragment>;
-
+  image_count: Gallery["image_count"];
   chapters: Array<GalleryChapterDataFragment>;
   studio: Maybe<SlimStudioDataFragment>;
   tags: Array<SlimTagDataFragment>;
