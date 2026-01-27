@@ -3,6 +3,7 @@ import cx from "classnames";
 import { DEFAULT } from "@/constants";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import AspectRatio from "../data/AspectRatio";
+import AudioCodec from "../data/AudioCodec";
 import BitRate from "../data/BitRate";
 import Date from "../data/Date";
 import Details from "../data/Details";
@@ -29,7 +30,6 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
-import AudioCodec from "../data/AudioCodec";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -516,6 +516,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   const willRenderAspectRatio =
     (props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX) > -1;
+  const willRenderAudioCodec =
+    (props.pluginConfig.cards__sceneCard__audioCodecZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.AUDIO_CODEX_ZOOM_INDEX) > -1;
   const willRenderBitRate =
     (props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX) > -1;
@@ -626,6 +629,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 )}
                 {willRenderVideoCodec && (
                   <VideoCodec codec={primaryFile.video_codec} context="modal" />
+                )}
+                {willRenderAudioCodec && (
+                  <AudioCodec codec={primaryFile.audio_codec} context="modal" />
                 )}
                 {willRenderFrameRate && (
                   <FrameRate context="modal" rate={primaryFile.frame_rate} />

@@ -55,6 +55,10 @@ export const FullDataDefaults: Story = {
     const aspectRatio = canvas.queryByText("Aspect Ratio: 16 by 9");
     await expect(aspectRatio).toBeNull();
 
+    // Audio codec should NOT render
+    const audioCodec = canvas.queryByText("Audio Codec: aac");
+    await expect(audioCodec).toBeNull();
+
     // Bit rate should NOT render
     const bitRate = canvas.queryByText("Bit Rate: 12.42 megabits per second");
     await expect(bitRate).toBeNull();
@@ -121,6 +125,7 @@ export const FullDataAllEnabled: Story = {
   args: {
     pluginConfig: {
       cards__sceneCard__aspectRatioZoomIndex: 0,
+      cards__sceneCard__audioCodecZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__fileSizeZoomIndex: 0,
       cards__sceneCard__frameRateZoomIndex: 0,
@@ -134,6 +139,10 @@ export const FullDataAllEnabled: Story = {
     // Aspect ratio should render
     const aspectRatio = canvas.getByText("Aspect Ratio: 16 by 9");
     await expect(aspectRatio).toBeInTheDocument();
+
+    // Audio codec should render
+    const audioCodec = canvas.getByText("Audio Codec: aac");
+    await expect(audioCodec).toBeInTheDocument();
 
     // Bit rate should render
     const bitRate = canvas.getByText("Bit Rate: 12.42 megabits per second");
@@ -243,6 +252,7 @@ export const MultiFile: Story = {
   args: {
     pluginConfig: {
       cards__sceneCard__aspectRatioZoomIndex: 0,
+      cards__sceneCard__audioCodecZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__fileSizeZoomIndex: 0,
       cards__sceneCard__frameRateZoomIndex: 0,
@@ -258,6 +268,12 @@ export const MultiFile: Story = {
     await expect(primaryAspectRatio).toBeInTheDocument();
     const secondaryAspectRatio = canvas.queryByText("Aspect Ratio: 160 by 9");
     await expect(secondaryAspectRatio).toBeNull();
+
+    // Audio codec should render
+    const primaryAudioCodec = canvas.getByText("Audio Codec: aac");
+    await expect(primaryAudioCodec).toBeInTheDocument();
+    const secondaryAudioCodec = canvas.queryByText("Audio Codec: mp3");
+    await expect(secondaryAudioCodec).toBeNull();
 
     // Bit rate
     const primaryBitRate = canvas.getByText(
