@@ -30,7 +30,7 @@ const ZipIcon: React.FC<
   return (
     <span className={componentClass}>
       <FontAwesomeIcon icon={faFileZipper} />
-      <span className="sr-only">ZIP file gallery</span>
+      <span className="sr-only">ZIP file</span>
     </span>
   );
 };

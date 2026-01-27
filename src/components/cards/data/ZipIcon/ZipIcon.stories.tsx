@@ -3,7 +3,7 @@ import { expect, within } from "storybook/test";
 import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import ZipIcon from ".";
 
-const srZipText = "ZIP file gallery";
+const srZipText = "ZIP file";
 
 const meta = {
   title: "Components/Cards/Data/Zip icon",

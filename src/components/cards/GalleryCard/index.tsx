@@ -21,6 +21,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
+import ZipIcon from "../data/ZipIcon";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -172,6 +173,15 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
               userZoomIndex={
                 props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
                 DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX
+              }
+            />
+            <ZipIcon
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
+              userZoomIndex={
+                props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
+                DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX
               }
             />
           </FileData>
