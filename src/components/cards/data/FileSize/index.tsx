@@ -27,7 +27,7 @@ const FileSize: React.FC<
   const componentClass = "vui-card-data__file-size";
 
   // Round to two decimal places
-  const [value, divisions] = roundBytes(props.bytes);
+  const [value, divisions] = roundBytes(data);
 
   return (
     <span className={componentClass}>
