@@ -43,6 +43,7 @@ const resolution = (width: number, height: number) => {
   if (number >= 144) {
     return "144p";
   }
+  return `${number}p`;
 };
 
 /**
