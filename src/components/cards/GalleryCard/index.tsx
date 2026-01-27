@@ -26,6 +26,9 @@ import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
 
 interface GalleryCardProps {
+  /** Whether counter data should be abbreviated. */
+  abbreviateCounters: boolean;
+
   /** Footer props. Leave `undefined` to not render the footer. */
   footer: Omit<CardFooterProps, "sections">;
 
@@ -119,6 +122,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       }
     >
       <GalleryCardBody
+        abbreviateCounters={props.abbreviateCounters}
         gallery={props.gallery}
         pluginConfig={props.pluginConfig}
         zoomIndex={props.zoomIndex}
@@ -134,6 +138,9 @@ export default GalleryCard;
 /* ---------------------------------------------------------------------------------------------- */
 
 interface GalleryCardBodyProps {
+  /** Whether counter data should be abbreviated. */
+  abbreviateCounters: boolean;
+
   /** The Stash gallery data */
   gallery: SlimGalleryDataFragment;
 
@@ -179,6 +186,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
             />
           )}
           <ImageCount
+            abbreviate={props.abbreviateCounters}
             context="card"
             currentZoomIndex={props.zoomIndex}
             count={props.gallery.image_count}
@@ -321,6 +329,9 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
 /* ---------------------------------------------------------------------------------------------- */
 
 interface GalleryCardModalContentProps {
+  /** Whether counter data should be abbreviated. */
+  abbreviateCounters: boolean;
+
   /** Handler for closing the modal. */
   closeHandler: () => void;
 
@@ -443,7 +454,11 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
               {willRenderFileSize && (
                 <FileSize context="modal" bytes={primaryFile.size} />
               )}
-              <ImageCount context="modal" count={props.gallery.image_count} />
+              <ImageCount
+                abbreviate={props.abbreviateCounters}
+                context="modal"
+                count={props.gallery.image_count}
+              />
               <ImageCollectionIcon
                 context="modal"
                 isCollection={!primaryFile}

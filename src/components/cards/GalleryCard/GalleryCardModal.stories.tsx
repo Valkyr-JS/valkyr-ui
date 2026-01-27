@@ -31,6 +31,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    abbreviateCounters: false,
     closeHandler: fn(),
     pluginConfig: {},
     section: "details",

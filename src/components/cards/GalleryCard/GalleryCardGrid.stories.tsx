@@ -35,6 +35,7 @@ const GalleryCards = [
   square,
 ].map((g) => (
   <GalleryCard
+    abbreviateCounters={false}
     footer={{
       openHandler: fn(),
       pluginConfig: {},

@@ -24,6 +24,7 @@ interface ExtendedConfigResult extends ConfigResult {
     "valkyr-ui"?: ValkyrUiConfigMap;
   };
   ui: {
+    abbreviateCounters?: boolean;
     ratingSystemOptions?: RatingSystemOptions;
   };
 }

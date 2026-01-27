@@ -12,6 +12,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    abbreviate: false,
     count: 66,
   },
   argTypes: {
@@ -34,6 +35,38 @@ export const CountIs1: Story = {
     const canvas = within(canvasElement);
 
     const srCount = canvas.getByText("1 image");
+    await expect(srCount).toBeInTheDocument();
+  },
+};
+
+export const Abbreviated: Story = {
+  args: {
+    abbreviate: true,
+    context: "card",
+    count: 69420,
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const srCount = canvas.getByText("69.4k images");
+    await expect(srCount).toBeInTheDocument();
+  },
+};
+
+export const Unabbreviated: Story = {
+  args: {
+    abbreviate: false,
+    context: "card",
+    count: 69420,
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const srCount = canvas.getByText("69420 images");
     await expect(srCount).toBeInTheDocument();
   },
 };

@@ -37,6 +37,7 @@ const SceneCards = [
   square,
 ].map((s) => (
   <SceneCard
+    abbreviateCounters={false}
     footer={{
       openHandler: fn(),
       pluginConfig: {},
