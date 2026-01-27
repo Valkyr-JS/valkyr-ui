@@ -127,6 +127,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */
   cards__sceneCard__thumbnailBackgroundStyle?: string | null;
+  /** The zoom index at which to display the video codec on scene cards. */
+  cards__sceneCard__videoCodecZoomIndex?: StashCardGridZoom;
 
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;

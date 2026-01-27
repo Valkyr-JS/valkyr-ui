@@ -9,6 +9,7 @@ import Details from "../data/Details";
 import Director from "../data/Director";
 import Duration from "../data/Duration";
 import FileSize from "../data/FileSize";
+import FrameRate from "../data/FrameRate";
 import OCount from "../data/OCount";
 import Organized from "../data/Organized";
 import PlayCount from "../data/PlayCount";
@@ -16,6 +17,7 @@ import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Resolution from "../data/Resolution";
 import Studio from "../data/Studio";
+import VideoCodec from "../data/VideoCodec";
 import {
   CardModalContent,
   CardModalNavigation,
@@ -27,7 +29,6 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
-import FrameRate from "../data/FrameRate";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -259,6 +260,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
               userZoomIndex={
                 props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
                 DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX
+              }
+            />
+            <VideoCodec
+              context="card"
+              codec={primaryFile.video_codec}
+              currentZoomIndex={props.zoomIndex}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__videoCodecZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX
               }
             />
             <FrameRate
@@ -505,6 +515,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   const willRenderFrameRate =
     (props.pluginConfig.cards__sceneCard__frameRateZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.FRAME_RATE_ZOOM_INDEX) > -1;
+  const willRenderVideoCodec =
+    (props.pluginConfig.cards__sceneCard__videoCodecZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX) > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
@@ -600,6 +613,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 )}
                 {willRenderBitRate && (
                   <BitRate bytes={primaryFile.bit_rate} context="modal" />
+                )}
+                {willRenderVideoCodec && (
+                  <VideoCodec codec={primaryFile.video_codec} context="modal" />
                 )}
                 {willRenderFrameRate && (
                   <FrameRate context="modal" rate={primaryFile.frame_rate} />
