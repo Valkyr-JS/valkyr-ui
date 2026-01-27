@@ -15,10 +15,12 @@ import {
   CardModalTagsSection,
 } from "../layouts/CardModal";
 import CastCrew from "../layouts/CastCrew";
+import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
+import FileSize from "../data/FileSize";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -140,6 +142,9 @@ interface GalleryCardBodyProps {
 }
 
 const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
+  const primaryFile =
+    props.gallery.files.length > 0 ? props.gallery.files[0] : undefined;
+
   return (
     <>
       <KeyData>
@@ -158,6 +163,19 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
             }
           />
         </ReleaseData>
+        {primaryFile && (
+          <FileData>
+            <FileSize
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              bytes={primaryFile.size}
+              userZoomIndex={
+                props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
+                DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX
+              }
+            />
+          </FileData>
+        )}
       </KeyData>
       <Details
         context="card"
