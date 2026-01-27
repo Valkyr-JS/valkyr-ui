@@ -28,6 +28,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const AudioCodecZoomIndex = () => (
+    <NumberSetting
+      heading="Audio codec"
+      id="valkyr-ui-cards__sceneCard__audioCodecZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__audioCodecZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__audioCodecZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.AUDIO_CODEX_ZOOM_INDEX
+      }
+    />
+  );
+
   const BitRateZoomIndex = () => (
     <NumberSetting
       heading="Bit rate"
@@ -450,6 +469,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         }}
       >
         <AspectRatioZoomIndex />
+        <AudioCodecZoomIndex />
         <BitRateZoomIndex />
         <DateZoomIndex />
         <DetailsZoomIndex />
