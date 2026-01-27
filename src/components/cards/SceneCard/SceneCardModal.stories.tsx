@@ -77,6 +77,10 @@ export const FullDataDefaults: Story = {
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
 
+    // File size icon should NOT render
+    const fileSize = canvas.queryByText("File Size: 3.29 gigabytes");
+    await expect(fileSize).toBeNull();
+
     // O count should render
     const oCount = canvas.getByText("O Count: 2");
     await expect(oCount).toBeInTheDocument();
@@ -110,6 +114,7 @@ export const FullDataAllEnabled: Story = {
     pluginConfig: {
       cards__sceneCard__aspectRatioZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
+      cards__sceneCard__fileSizeZoomIndex: 0,
     },
     scene: fullData as SceneDataFragment,
   },
@@ -141,6 +146,10 @@ export const FullDataAllEnabled: Story = {
     // Duration should render
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
+
+    // File size icon should render
+    const fileSize = canvas.getByText("File Size: 3.29 gigabytes");
+    await expect(fileSize).toBeInTheDocument();
 
     // O count should render
     const oCount = canvas.getByText("O Count: 2");

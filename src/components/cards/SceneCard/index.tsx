@@ -489,6 +489,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   const willRenderBitRate =
     (props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX) > -1;
+  const willRenderFileSize =
+    (props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
@@ -573,6 +576,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                     DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
                   }
                 />
+                {willRenderFileSize && (
+                  <FileSize context="modal" bytes={primaryFile.size} />
+                )}
                 {willRenderAspectRatio && (
                   <AspectRatio
                     context="modal"
