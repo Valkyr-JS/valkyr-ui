@@ -25,6 +25,7 @@
   "homepage": "https://github.com/Valkyr-JS/valkyr-ui#readme",
   "peerDependencies": {
     "@apollo/client": "^3.13.4",
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-regular-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^0.2.6",

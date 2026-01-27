@@ -6,7 +6,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
 import * as pkg from "./package.json" with { type: "json" };
-import "dotenv/config"
+import "dotenv/config";
 
 const dest = process.env.STASH_PLUGIN_DEST ?? "dist";
 const pluginID = pkg.default.name;
@@ -16,6 +16,8 @@ const banner = `window.require = function(name) {
     switch (name) {
         case "@apollo/client":
             return window.PluginApi.libraries.Apollo
+        case "@fortawesome/free-brands-svg-icons":
+            return window.PluginApi.libraries.FontAwesomeBrands
         case "@fortawesome/free-regular-svg-icons":
             return window.PluginApi.libraries.FontAwesomeRegular
         case "@fortawesome/free-solid-svg-icons":
