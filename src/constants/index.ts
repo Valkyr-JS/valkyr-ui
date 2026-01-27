@@ -17,6 +17,7 @@ export const DEFAULT = {
       STUDIO_ZOOM_INDEX: 0,
       THUMBNAIL_BACKGROUND_IMAGE: false,
       THUMBNAIL_BACKGROUND_STYLE: null,
+      ZIP_ICON_ZOOM_INDEX: -1,
     },
     SCENE_CARD: {
       AUDIO_CODEX_ZOOM_INDEX: -1,

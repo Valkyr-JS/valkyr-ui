@@ -84,6 +84,8 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */
   cards__galleryCard__thumbnailBackgroundStyle?: string | null;
+  /** The zoom index at which to display the zip icon on gallery cards. */
+  cards__galleryCard__zipIconZoomIndex?: StashCardGridZoom;
 
   /** The zoom index at which to display the aspect ratio on scene cards. */
   cards__sceneCard__aspectRatioZoomIndex?: StashCardGridZoom;
