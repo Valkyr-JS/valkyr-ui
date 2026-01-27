@@ -29,6 +29,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
+import AudioCodec from "../data/AudioCodec";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -269,6 +270,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
               userZoomIndex={
                 props.pluginConfig.cards__sceneCard__videoCodecZoomIndex ??
                 DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX
+              }
+            />
+            <AudioCodec
+              context="card"
+              codec={primaryFile.audio_codec}
+              currentZoomIndex={props.zoomIndex}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__audioCodecZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.AUDIO_CODEX_ZOOM_INDEX
               }
             />
             <FrameRate
