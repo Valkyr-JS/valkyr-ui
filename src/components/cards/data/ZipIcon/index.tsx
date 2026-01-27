@@ -1,5 +1,5 @@
 import React from "react";
-import { faFileZipper } from "@fortawesome/free-solid-svg-icons";
+import { faFileZip } from "@fortawesome/pro-solid-svg-icons/faFileZip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getRenderData } from "@/helpers";
 import "./ZipIcon.scss";
@@ -30,7 +30,7 @@ const ZipIcon: React.FC<
 
   return (
     <span className={componentClass}>
-      <FontAwesomeIcon icon={faFileZipper} />
+      <FontAwesomeIcon icon={faFileZip} />
       <span className="sr-only">ZIP file</span>
     </span>
   );

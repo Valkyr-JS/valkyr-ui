@@ -1,5 +1,5 @@
 import React from "react";
-import { faFileImage } from "@fortawesome/free-solid-svg-icons";
+import { faImageStack } from "@fortawesome/pro-solid-svg-icons/faImageStack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getRenderData } from "@/helpers";
 import "./ImageCollectionIcon.scss";
@@ -31,7 +31,7 @@ const ImageCollectionIcon: React.FC<
 
   return (
     <span className={componentClass}>
-      <FontAwesomeIcon icon={faFileImage} />
+      <FontAwesomeIcon icon={faImageStack} />
       <span className="sr-only">Image collection</span>
     </span>
   );
