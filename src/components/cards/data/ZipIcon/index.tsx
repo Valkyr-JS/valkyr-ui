@@ -1,7 +1,6 @@
 import React from "react";
 import { faFileZipper } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 import "./ZipIcon.scss";
 
@@ -13,8 +12,6 @@ interface ZipIconProps {
 const ZipIcon: React.FC<
   DataComponentProps<ZipIconProps> | DataComponentModalProps<ZipIconProps>
 > = (props) => {
-  const intl = useIntl();
-
   const data =
     props.context === "modal"
       ? props.isZip
