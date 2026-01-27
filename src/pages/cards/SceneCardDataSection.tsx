@@ -420,6 +420,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
+  const VideoCodecZoomIndex = () => (
+    <NumberSetting
+      heading="Video codec"
+      id="valkyr-ui-cards__sceneCard__videoCodecZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__videoCodecZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__videoCodecZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX
+      }
+    />
+  );
+
   return (
     <SettingSection id="scene-data" heading="Scene card data">
       <SettingGroup
@@ -445,6 +464,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <RatingIconZoomIndex />
         <ResolutionZoomIndex />
         <StudioZoomIndex />
+        <VideoCodecZoomIndex />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Thumbnails" }}>
         <PreviewsEnabled />
