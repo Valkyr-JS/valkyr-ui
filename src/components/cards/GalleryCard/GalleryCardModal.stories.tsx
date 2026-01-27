@@ -58,6 +58,10 @@ export const FullDataDefaults: Story = {
     const details = canvas.getByText(fullData.details);
     await expect(details).toBeInTheDocument();
 
+    // File size icon should NOT render
+    const fileSize = canvas.queryByText("File Size: 75.12 megabytes");
+    await expect(fileSize).toBeNull();
+
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();

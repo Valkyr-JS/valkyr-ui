@@ -329,6 +329,12 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const primaryFile =
     props.gallery.files.length > 0 ? props.gallery.files[0] : undefined;
 
+  // Only render technical details if the user has enabled on cards them at any
+  // breakpoint. The data will be available anyway under the file section.
+  const willRenderFileSize =
+    (props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
+      DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
+
   // Only render one of the two rating options
   const willRenderRatingBanner =
     (props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex ??
@@ -397,7 +403,9 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
             </ReleaseData>
             {primaryFile && (
               <FileData>
-                <FileSize context="modal" bytes={primaryFile.size} />
+                {willRenderFileSize && (
+                  <FileSize context="modal" bytes={primaryFile.size} />
+                )}
               </FileData>
             )}
           </KeyData>
