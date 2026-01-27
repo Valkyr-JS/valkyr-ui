@@ -181,6 +181,25 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const ZipIconZoomIndex = () => (
+    <NumberSetting
+      heading="Zip folder icon"
+      id="valkyr-ui-cards__galleryCard__zipIconZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__zipIconZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX
+      }
+    />
+  );
+
   const BlurredThumbnailBackgroundEnabled = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
@@ -259,6 +278,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <RatingBannerZoomIndex />
         <RatingIconZoomIndex />
         <StudioZoomIndex />
+        <ZipIconZoomIndex />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Thumbnails" }}>
         <BlurredThumbnailBackgroundEnabled />
