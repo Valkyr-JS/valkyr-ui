@@ -103,6 +103,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__enabled?: boolean;
   /** The zoom index at which to display the file size on scene cards. */
   cards__sceneCard__fileSizeZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the frame rate on scene cards. */
+  cards__sceneCard__frameRateZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the o count on scene cards. */
   cards__sceneCard__oCountZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the organized icon on scene cards. */

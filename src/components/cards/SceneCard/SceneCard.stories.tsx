@@ -76,9 +76,13 @@ export const FullDataDefaults: Story = {
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
 
-    // File size icon should NOT render
+    // File size should NOT render
     const fileSize = canvas.queryByText("File Size: 3.29 gigabytes");
     await expect(fileSize).toBeNull();
+
+    // Frame rate should NOT render
+    const frameRate = canvas.queryByText("Frame Rate: 23.98 frames per second");
+    await expect(frameRate).toBeNull();
 
     // O count should NOT render
     const oCount = canvas.queryByText("O Count: 2");
@@ -115,6 +119,7 @@ export const FullDataAllEnabled: Story = {
       cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__directorZoomIndex: 0,
       cards__sceneCard__fileSizeZoomIndex: 0,
+      cards__sceneCard__frameRateZoomIndex: 0,
       cards__sceneCard__oCountZoomIndex: 0,
       cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
@@ -153,6 +158,10 @@ export const FullDataAllEnabled: Story = {
     // File size icon should render
     const fileSize = canvas.getByText("File Size: 3.29 gigabytes");
     await expect(fileSize).toBeInTheDocument();
+
+    // Frame rate should render
+    const frameRate = canvas.getByText("Frame Rate: 23.98 frames per second");
+    await expect(frameRate).toBeInTheDocument();
 
     // O count should render
     const oCount = canvas.getByText("O Count: 2");
@@ -212,6 +221,8 @@ export const MultiFile: Story = {
     pluginConfig: {
       cards__sceneCard__aspectRatioZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
+      cards__sceneCard__fileSizeZoomIndex: 0,
+      cards__sceneCard__frameRateZoomIndex: 0,
     },
     scene: multiFile as SlimSceneDataFragment,
   },
@@ -221,7 +232,7 @@ export const MultiFile: Story = {
     // Aspect ratio
     const primaryAspectRatio = canvas.getByText("Aspect Ratio: 16 by 9");
     await expect(primaryAspectRatio).toBeInTheDocument();
-    const secondaryAspectRatio = canvas.queryByText("Aspect Ratio: 27 by 16");
+    const secondaryAspectRatio = canvas.queryByText("Aspect Ratio: 160 by 9");
     await expect(secondaryAspectRatio).toBeNull();
 
     // Bit rate
@@ -234,10 +245,34 @@ export const MultiFile: Story = {
     );
     await expect(secondaryBitRate).toBeNull();
 
+    // Duration
+    const primaryDuration = canvas.getByText("Duration: 29 minutes 3 seconds");
+    await expect(primaryDuration).toBeInTheDocument();
+    const secondaryDuration = canvas.queryByText(
+      "Duration: 2 minutes 54 seconds",
+    );
+    await expect(secondaryDuration).toBeNull();
+
+    // File size
+    const primaryFileSize = canvas.getByText("File Size: 1.75 gigabytes");
+    await expect(primaryFileSize).toBeInTheDocument();
+    const secondaryFileSize = canvas.queryByText("File Size: 17.89 megabytes");
+    await expect(secondaryFileSize).toBeNull();
+
+    // Frame rate
+    const primaryFrameRate = canvas.getByText(
+      "Frame Rate: 29.97 frames per second",
+    );
+    await expect(primaryFrameRate).toBeInTheDocument();
+    const secondaryFrameRate = canvas.queryByText(
+      "Frame Rate: 2.99 frames per second",
+    );
+    await expect(secondaryFrameRate).toBeNull();
+
     // Resolution
     const primaryRes = canvas.getByText("Resolution: 1080p");
     await expect(primaryRes).toBeInTheDocument();
-    const secondaryRes = canvas.queryByText("Resolution: 640p");
+    const secondaryRes = canvas.queryByText("Resolution: 108p");
     await expect(secondaryRes).toBeNull();
   },
 };

@@ -27,6 +27,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
+import FrameRate from "../data/FrameRate";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -258,6 +259,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
               userZoomIndex={
                 props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
                 DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX
+              }
+            />
+            <FrameRate
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              rate={primaryFile.frame_rate}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__frameRateZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.FRAME_RATE_ZOOM_INDEX
               }
             />
             <Resolution
@@ -492,6 +502,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   const willRenderFileSize =
     (props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
       DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
+  const willRenderFrameRate =
+    (props.pluginConfig.cards__sceneCard__frameRateZoomIndex ??
+      DEFAULT.CARDS.SCENE_CARD.FRAME_RATE_ZOOM_INDEX) > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
@@ -587,6 +600,9 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 )}
                 {willRenderBitRate && (
                   <BitRate bytes={primaryFile.bit_rate} context="modal" />
+                )}
+                {willRenderFrameRate && (
+                  <FrameRate context="modal" rate={primaryFile.frame_rate} />
                 )}
                 <Resolution
                   asIcon={
