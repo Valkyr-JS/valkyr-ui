@@ -27,6 +27,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
+import FrameRate from "../data/FrameRate";
 
 interface SceneCardProps {
   /** Stash user setting for whether to continue to the next scene when the
@@ -258,6 +259,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
               userZoomIndex={
                 props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
                 DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX
+              }
+            />
+            <FrameRate
+              context="card"
+              currentZoomIndex={props.zoomIndex}
+              rate={primaryFile.frame_rate}
+              userZoomIndex={
+                props.pluginConfig.cards__sceneCard__frameRateZoomIndex ??
+                DEFAULT.CARDS.SCENE_CARD.FRAME_RATE_ZOOM_INDEX
               }
             />
             <Resolution
