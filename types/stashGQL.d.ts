@@ -5,6 +5,9 @@ type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T
 type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+const defaultOptions = {} as const;
+// Generated on 2026-01-27T12:17:58+00:00
+
 /** All built-in and custom scalars, mapped to their actual values */
 type Scalars = {
   ID: { input: string; output: string; }
@@ -12,24 +15,27 @@ type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  Any: { input: any; output: any; }
+  Any: { input: unknown; output: unknown; }
   /** A String -> Boolean map */
-  BoolMap: { input: any; output: any; }
-  Int64: { input: any; output: any; }
+  BoolMap: { input: { [key: string]: boolean }; output: { [key: string]: boolean }; }
+  Int64: { input: number; output: number; }
   /** A String -> Any map */
-  Map: { input: any; output: any; }
+  Map: { input: { [key: string]: unknown }; output: { [key: string]: unknown }; }
   /** A plugin ID -> Map (String -> Any map) map */
-  PluginConfigMap: { input: any; output: any; }
+  PluginConfigMap: { input: { [id: string]: { [key: string]: unknown } }; output: { [id: string]: { [key: string]: unknown } }; }
+  SavedObjectFilter: { input: SavedObjectFilter; output: SavedObjectFilter; }
+  SavedUIOptions: { input: SavedUIOptions; output: SavedUIOptions; }
   /** An RFC3339 timestamp */
-  Time: { input: any; output: any; }
+  Time: { input: string; output: string; }
   /**
    * Timestamp is a point in time. It is always output as RFC3339-compatible time points.
    * It can be input as a RFC3339 string, or as "<4h" for "4 hours in the past" or ">5m"
    * for "5 minutes in the future"
    */
-  Timestamp: { input: any; output: any; }
+  Timestamp: { input: string; output: string; }
+  UIConfig: { input: IUIConfig; output: IUIConfig; }
   /** A multipart file upload */
-  Upload: { input: any; output: any; }
+  Upload: { input: File; output: File; }
 };
 
 type AddTempDlnaipInput = {
@@ -119,12 +125,12 @@ type BasicFileFingerprintArgs = {
   type: Scalars['String']['input'];
 };
 
-const enum BlobsStorageType {
+enum BlobsStorageType {
   /** Database */
   Database = 'DATABASE',
   /** Filesystem */
   Filesystem = 'FILESYSTEM'
-};
+}
 
 type BulkGalleryUpdateInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
@@ -278,11 +284,11 @@ type BulkUpdateGroupDescriptionsInput = {
   mode: BulkUpdateIdMode;
 };
 
-const enum BulkUpdateIdMode {
+enum BulkUpdateIdMode {
   Add = 'ADD',
   Remove = 'REMOVE',
   Set = 'SET'
-};
+}
 
 type BulkUpdateIds = {
   ids?: InputMaybe<Array<Scalars['ID']['input']>>;
@@ -299,10 +305,10 @@ type CircumcisionCriterionInput = {
   value?: InputMaybe<Array<CircumisedEnum>>;
 };
 
-const enum CircumisedEnum {
+enum CircumisedEnum {
   Cut = 'CUT',
   Uncut = 'UNCUT'
-};
+}
 
 type CleanGeneratedInput = {
   /** Clean blob files without blob entries */
@@ -461,7 +467,7 @@ type ConfigGeneralInput = {
   maxStreamingTranscodeSize?: InputMaybe<StreamingResolutionEnum>;
   /** Max generated transcode size */
   maxTranscodeSize?: InputMaybe<StreamingResolutionEnum>;
-  /** Path to import/export files */
+  /** Path to import/files */
   metadataPath?: InputMaybe<Scalars['String']['input']>;
   /** Number of parallel tasks to start during scan/generate */
   parallelTasks?: InputMaybe<Scalars['Int']['input']>;
@@ -585,7 +591,7 @@ type ConfigGeneralResult = {
   maxStreamingTranscodeSize?: Maybe<StreamingResolutionEnum>;
   /** Max generated transcode size */
   maxTranscodeSize?: Maybe<StreamingResolutionEnum>;
-  /** Path to import/export files */
+  /** Path to import/files */
   metadataPath: Scalars['String']['output'];
   /** Number of parallel tasks to start during scan/generate */
   parallelTasks: Scalars['Int']['output'];
@@ -673,6 +679,8 @@ type ConfigInterfaceInput = {
   /** Custom Locales */
   customLocales?: InputMaybe<Scalars['String']['input']>;
   customLocalesEnabled?: InputMaybe<Scalars['Boolean']['input']>;
+  /** When true, disables all customizations (plugins, CSS, JavaScript, locales) for troubleshooting */
+  disableCustomizations?: InputMaybe<Scalars['Boolean']['input']>;
   /** Set to true to disable creating new objects via the dropdown menus */
   disableDropdownCreate?: InputMaybe<ConfigDisableDropdownCreateInput>;
   /** Funscript Time Offset */
@@ -723,6 +731,8 @@ type ConfigInterfaceResult = {
   /** Custom Locales */
   customLocales?: Maybe<Scalars['String']['output']>;
   customLocalesEnabled?: Maybe<Scalars['Boolean']['output']>;
+  /** When true, disables all customizations (plugins, CSS, JavaScript, locales) for troubleshooting */
+  disableCustomizations?: Maybe<Scalars['Boolean']['output']>;
   /** Fields are true if creating via dropdown menus are disabled */
   disableDropdownCreate: ConfigDisableDropdownCreate;
   /** Funscript Time Offset */
@@ -768,7 +778,7 @@ type ConfigResult = {
   interface: ConfigInterfaceResult;
   plugins: Scalars['PluginConfigMap']['output'];
   scraping: ConfigScrapingResult;
-  ui: Scalars['Map']['output'];
+  ui: Scalars['UIConfig']['output'];
 };
 
 
@@ -800,7 +810,7 @@ type ConfigScrapingResult = {
   scraperUserAgent?: Maybe<Scalars['String']['output']>;
 };
 
-const enum CriterionModifier {
+enum CriterionModifier {
   /** >= AND <= */
   Between = 'BETWEEN',
   /** = */
@@ -825,7 +835,7 @@ const enum CriterionModifier {
   NotMatchesRegex = 'NOT_MATCHES_REGEX',
   /** IS NOT NULL */
   NotNull = 'NOT_NULL'
-};
+}
 
 type CustomFieldCriterionInput = {
   field: Scalars['String']['input'];
@@ -942,7 +952,7 @@ type FileSetFingerprintsInput = {
   id: Scalars['ID']['input'];
 };
 
-const enum FilterMode {
+enum FilterMode {
   Galleries = 'GALLERIES',
   Groups = 'GROUPS',
   Images = 'IMAGES',
@@ -952,7 +962,7 @@ const enum FilterMode {
   SceneMarkers = 'SCENE_MARKERS',
   Studios = 'STUDIOS',
   Tags = 'TAGS'
-};
+}
 
 type FindFilesResultType = {
   __typename?: 'FindFilesResultType';
@@ -1195,6 +1205,8 @@ type GalleryDestroyInput = {
    */
   delete_file?: InputMaybe<Scalars['Boolean']['input']>;
   delete_generated?: InputMaybe<Scalars['Boolean']['input']>;
+  /** If true, delete the file entry from the database if the file is not assigned to any other objects */
+  destroy_file_entry?: InputMaybe<Scalars['Boolean']['input']>;
   ids: Array<Scalars['ID']['input']>;
 };
 
@@ -1340,14 +1352,14 @@ type GenderCriterionInput = {
   value_list?: InputMaybe<Array<GenderEnum>>;
 };
 
-const enum GenderEnum {
+enum GenderEnum {
   Female = 'FEMALE',
   Intersex = 'INTERSEX',
   Male = 'MALE',
   NonBinary = 'NON_BINARY',
   TransgenderFemale = 'TRANSGENDER_FEMALE',
   TransgenderMale = 'TRANSGENDER_MALE'
-};
+}
 
 type GenerateApiKeyInput = {
   clear?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1358,6 +1370,10 @@ type GenerateMetadataInput = {
   covers?: InputMaybe<Scalars['Boolean']['input']>;
   /** Generate transcodes even if not required */
   forceTranscodes?: InputMaybe<Scalars['Boolean']['input']>;
+  /** image ids to generate for */
+  imageIDs?: InputMaybe<Array<Scalars['ID']['input']>>;
+  /** Generate image phashes during scan */
+  imagePhashes?: InputMaybe<Scalars['Boolean']['input']>;
   imagePreviews?: InputMaybe<Scalars['Boolean']['input']>;
   imageThumbnails?: InputMaybe<Scalars['Boolean']['input']>;
   interactiveHeatmapsSpeeds?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1368,6 +1384,7 @@ type GenerateMetadataInput = {
   markers?: InputMaybe<Scalars['Boolean']['input']>;
   /** overwrite existing media */
   overwrite?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Generate video phashes during scan */
   phashes?: InputMaybe<Scalars['Boolean']['input']>;
   previewOptions?: InputMaybe<GeneratePreviewOptionsInput>;
   previews?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1575,11 +1592,11 @@ type GroupUpdateInput = {
   urls?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
-const enum HashAlgorithm {
+enum HashAlgorithm {
   Md5 = 'MD5',
   /** oshash */
   Oshash = 'OSHASH'
-};
+}
 
 type HierarchicalMultiCriterionInput = {
   depth?: InputMaybe<Scalars['Int']['input']>;
@@ -1609,7 +1626,7 @@ type IdentifyFieldOptionsInput = {
   strategy: IdentifyFieldStrategy;
 };
 
-const enum IdentifyFieldStrategy {
+enum IdentifyFieldStrategy {
   /** Never sets the field value */
   Ignore = 'IGNORE',
   /**
@@ -1623,7 +1640,7 @@ const enum IdentifyFieldStrategy {
    * scraped values.
    */
   Overwrite = 'OVERWRITE'
-};
+}
 
 type IdentifyMetadataInput = {
   /** Options defined here override the configured defaults */
@@ -1723,6 +1740,8 @@ type Image = {
 type ImageDestroyInput = {
   delete_file?: InputMaybe<Scalars['Boolean']['input']>;
   delete_generated?: InputMaybe<Scalars['Boolean']['input']>;
+  /** If true, delete the file entry from the database if the file is not assigned to any other objects */
+  destroy_file_entry?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['ID']['input'];
 };
 
@@ -1812,6 +1831,8 @@ type ImageFilterType = {
   performers?: InputMaybe<MultiCriterionInput>;
   /** Filter by related performers that meet this criteria */
   performers_filter?: InputMaybe<PerformerFilterType>;
+  /** Filter by file phash distance */
+  phash_distance?: InputMaybe<PhashDistanceCriterionInput>;
   /** Filter by photographer */
   photographer?: InputMaybe<StringCriterionInput>;
   rating100?: InputMaybe<IntCriterionInput>;
@@ -1834,16 +1855,16 @@ type ImageFilterType = {
   url?: InputMaybe<StringCriterionInput>;
 };
 
-const enum ImageLightboxDisplayMode {
+enum ImageLightboxDisplayMode {
   FitX = 'FIT_X',
   FitXy = 'FIT_XY',
   Original = 'ORIGINAL'
-};
+}
 
-const enum ImageLightboxScrollMode {
+enum ImageLightboxScrollMode {
   PanY = 'PAN_Y',
   Zoom = 'ZOOM'
-};
+}
 
 type ImagePathsType = {
   __typename?: 'ImagePathsType';
@@ -1875,20 +1896,22 @@ type ImageUpdateInput = {
 type ImagesDestroyInput = {
   delete_file?: InputMaybe<Scalars['Boolean']['input']>;
   delete_generated?: InputMaybe<Scalars['Boolean']['input']>;
+  /** If true, delete the file entry from the database if the file is not assigned to any other objects */
+  destroy_file_entry?: InputMaybe<Scalars['Boolean']['input']>;
   ids: Array<Scalars['ID']['input']>;
 };
 
-const enum ImportDuplicateEnum {
+enum ImportDuplicateEnum {
   Fail = 'FAIL',
   Ignore = 'IGNORE',
   Overwrite = 'OVERWRITE'
-};
+}
 
-const enum ImportMissingRefEnum {
+enum ImportMissingRefEnum {
   Create = 'CREATE',
   Fail = 'FAIL',
   Ignore = 'IGNORE'
-};
+}
 
 type ImportObjectsInput = {
   duplicateBehaviour: ImportDuplicateEnum;
@@ -1915,14 +1938,14 @@ type Job = {
   subTasks?: Maybe<Array<Scalars['String']['output']>>;
 };
 
-const enum JobStatus {
+enum JobStatus {
   Cancelled = 'CANCELLED',
   Failed = 'FAILED',
   Finished = 'FINISHED',
   Ready = 'READY',
   Running = 'RUNNING',
   Stopping = 'STOPPING'
-};
+}
 
 type JobStatusUpdate = {
   __typename?: 'JobStatusUpdate';
@@ -1930,11 +1953,11 @@ type JobStatusUpdate = {
   type: JobStatusUpdateType;
 };
 
-const enum JobStatusUpdateType {
+enum JobStatusUpdateType {
   Add = 'ADD',
   Remove = 'REMOVE',
   Update = 'UPDATE'
-};
+}
 
 type LatestVersion = {
   __typename?: 'LatestVersion';
@@ -1951,14 +1974,14 @@ type LogEntry = {
   time: Scalars['Time']['output'];
 };
 
-const enum LogLevel {
+enum LogLevel {
   Debug = 'Debug',
   Error = 'Error',
   Info = 'Info',
   Progress = 'Progress',
   Trace = 'Trace',
   Warning = 'Warning'
-};
+}
 
 type MarkerStringsResultType = {
   __typename?: 'MarkerStringsResultType';
@@ -2136,13 +2159,15 @@ type Mutation = {
    * if input is provided, then the entire UI configuration is replaced
    * if partial is provided, then the partial UI configuration is merged into the existing UI configuration
    */
-  configureUI: Scalars['Map']['output'];
+  configureUI: Scalars['UIConfig']['output'];
   /**
    * sets a single UI key value
    * key is a dot separated path to the value
    */
   configureUISetting: Scalars['Map']['output'];
   deleteFiles: Scalars['Boolean']['output'];
+  /** Deletes file entries from the database without deleting the files from the filesystem */
+  destroyFiles: Scalars['Boolean']['output'];
   destroySavedFilter: Scalars['Boolean']['output'];
   /** Disables DLNA for an optional duration. Has no effect if DLNA is disabled by default */
   disableDLNA: Scalars['Boolean']['output'];
@@ -2233,6 +2258,7 @@ type Mutation = {
   optimiseDatabase: Scalars['ID']['output'];
   performerCreate?: Maybe<Performer>;
   performerDestroy: Scalars['Boolean']['output'];
+  performerMerge: Performer;
   performerUpdate?: Maybe<Performer>;
   performersDestroy: Scalars['Boolean']['output'];
   /** DANGEROUS: Execute an arbitrary SQL statement that returns rows. */
@@ -2471,6 +2497,11 @@ type MutationDeleteFilesArgs = {
 };
 
 
+type MutationDestroyFilesArgs = {
+  ids: Array<Scalars['ID']['input']>;
+};
+
+
 type MutationDestroySavedFilterArgs = {
   input: DestroyFilterInput;
 };
@@ -2685,6 +2716,11 @@ type MutationPerformerCreateArgs = {
 
 type MutationPerformerDestroyArgs = {
   input: PerformerDestroyInput;
+};
+
+
+type MutationPerformerMergeArgs = {
+  input: PerformerMergeInput;
 };
 
 
@@ -2983,14 +3019,14 @@ type OrientationCriterionInput = {
   value: Array<OrientationEnum>;
 };
 
-const enum OrientationEnum {
+enum OrientationEnum {
   /** Landscape */
   Landscape = 'LANDSCAPE',
   /** Portrait */
   Portrait = 'PORTRAIT',
   /** Square */
   Square = 'SQUARE'
-};
+}
 
 type PHashDuplicationCriterionInput = {
   /** Currently unimplemented */
@@ -3029,10 +3065,10 @@ type PackageSpecInput = {
   sourceURL: Scalars['String']['input'];
 };
 
-const enum PackageType {
+enum PackageType {
   Plugin = 'Plugin',
   Scraper = 'Scraper'
-};
+}
 
 type Performer = {
   __typename?: 'Performer';
@@ -3202,8 +3238,13 @@ type PerformerFilterType = {
   scene_count?: InputMaybe<IntCriterionInput>;
   /** Filter by related scenes that meet this criteria */
   scenes_filter?: InputMaybe<SceneFilterType>;
-  /** Filter by StashID */
+  /**
+   * Filter by StashID
+   * @deprecated use stash_ids_endpoint instead
+   */
   stash_id_endpoint?: InputMaybe<StashIdCriterionInput>;
+  /** Filter by StashIDs */
+  stash_ids_endpoint?: InputMaybe<StashIDsCriterionInput>;
   /** Filter by studios where performer appears in scene/image/gallery */
   studios?: InputMaybe<HierarchicalMultiCriterionInput>;
   /** Filter by tag count */
@@ -3220,6 +3261,12 @@ type PerformerFilterType = {
   url?: InputMaybe<StringCriterionInput>;
   /** Filter by weight */
   weight?: InputMaybe<IntCriterionInput>;
+};
+
+type PerformerMergeInput = {
+  destination: Scalars['ID']['input'];
+  source: Array<Scalars['ID']['input']>;
+  values?: InputMaybe<PerformerUpdateInput>;
 };
 
 type PerformerUpdateInput = {
@@ -3319,11 +3366,11 @@ type PluginSetting = {
   type: PluginSettingTypeEnum;
 };
 
-const enum PluginSettingTypeEnum {
+enum PluginSettingTypeEnum {
   Boolean = 'BOOLEAN',
   Number = 'NUMBER',
   String = 'STRING'
-};
+}
 
 type PluginTask = {
   __typename?: 'PluginTask';
@@ -3341,7 +3388,7 @@ type PluginValueInput = {
   str?: InputMaybe<Scalars['String']['input']>;
 };
 
-const enum PreviewPreset {
+enum PreviewPreset {
   /** X264_FAST */
   Fast = 'fast',
   /** X264_MEDIUM */
@@ -3356,7 +3403,7 @@ const enum PreviewPreset {
   Veryfast = 'veryfast',
   /** X264_VERYSLOW */
   Veryslow = 'veryslow'
-};
+}
 
 /** The query root for this schema */
 type Query = {
@@ -3911,7 +3958,7 @@ type ResolutionCriterionInput = {
   value: ResolutionEnum;
 };
 
-const enum ResolutionEnum {
+enum ResolutionEnum {
   /** 8K */
   EightK = 'EIGHT_K',
   /** 5K */
@@ -3945,7 +3992,7 @@ const enum ResolutionEnum {
   VrHd = 'VR_HD',
   /** 540p */
   WebHd = 'WEB_HD'
-};
+}
 
 type SqlExecResult = {
   __typename?: 'SQLExecResult';
@@ -3976,8 +4023,8 @@ type SaveFilterInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
   mode: FilterMode;
   name: Scalars['String']['input'];
-  object_filter?: InputMaybe<Scalars['Map']['input']>;
-  ui_options?: InputMaybe<Scalars['Map']['input']>;
+  object_filter?: InputMaybe<Scalars['SavedObjectFilter']['input']>;
+  ui_options?: InputMaybe<Scalars['SavedUIOptions']['input']>;
 };
 
 type SavedFilter = {
@@ -3991,8 +4038,8 @@ type SavedFilter = {
   id: Scalars['ID']['output'];
   mode: FilterMode;
   name: Scalars['String']['output'];
-  object_filter?: Maybe<Scalars['Map']['output']>;
-  ui_options?: Maybe<Scalars['Map']['output']>;
+  object_filter?: Maybe<Scalars['SavedObjectFilter']['output']>;
+  ui_options?: Maybe<Scalars['SavedUIOptions']['output']>;
 };
 
 type SavedFindFilterType = {
@@ -4021,9 +4068,11 @@ type ScanMetadataInput = {
   scanGenerateClipPreviews?: InputMaybe<Scalars['Boolean']['input']>;
   /** Generate covers during scan */
   scanGenerateCovers?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Generate image phashes during scan */
+  scanGenerateImagePhashes?: InputMaybe<Scalars['Boolean']['input']>;
   /** Generate image previews during scan */
   scanGenerateImagePreviews?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Generate phashes during scan */
+  /** Generate video phashes during scan */
   scanGeneratePhashes?: InputMaybe<Scalars['Boolean']['input']>;
   /** Generate previews during scan */
   scanGeneratePreviews?: InputMaybe<Scalars['Boolean']['input']>;
@@ -4041,9 +4090,11 @@ type ScanMetadataOptions = {
   scanGenerateClipPreviews: Scalars['Boolean']['output'];
   /** Generate covers during scan */
   scanGenerateCovers: Scalars['Boolean']['output'];
+  /** Generate image phashes during scan */
+  scanGenerateImagePhashes?: Maybe<Scalars['Boolean']['output']>;
   /** Generate image previews during scan */
   scanGenerateImagePreviews: Scalars['Boolean']['output'];
-  /** Generate phashes during scan */
+  /** Generate video phashes during scan */
   scanGeneratePhashes: Scalars['Boolean']['output'];
   /** Generate previews during scan */
   scanGeneratePreviews: Scalars['Boolean']['output'];
@@ -4131,6 +4182,8 @@ type SceneCreateInput = {
 type SceneDestroyInput = {
   delete_file?: InputMaybe<Scalars['Boolean']['input']>;
   delete_generated?: InputMaybe<Scalars['Boolean']['input']>;
+  /** If true, delete the file entry from the database if the file is not assigned to any other objects */
+  destroy_file_entry?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['ID']['input'];
 };
 
@@ -4244,8 +4297,15 @@ type SceneFilterType = {
   resolution?: InputMaybe<ResolutionCriterionInput>;
   /** Filter by resume time */
   resume_time?: InputMaybe<IntCriterionInput>;
-  /** Filter by StashID */
+  /** Filter by StashID count */
+  stash_id_count?: InputMaybe<IntCriterionInput>;
+  /**
+   * Filter by StashID
+   * @deprecated use stash_ids_endpoint instead
+   */
   stash_id_endpoint?: InputMaybe<StashIdCriterionInput>;
+  /** Filter by StashIDs */
+  stash_ids_endpoint?: InputMaybe<StashIDsCriterionInput>;
   /** Filter to only include scenes with this studio */
   studios?: InputMaybe<HierarchicalMultiCriterionInput>;
   /** Filter by related studios that meet this criteria */
@@ -4477,18 +4537,20 @@ type SceneUpdateInput = {
 type ScenesDestroyInput = {
   delete_file?: InputMaybe<Scalars['Boolean']['input']>;
   delete_generated?: InputMaybe<Scalars['Boolean']['input']>;
+  /** If true, delete the file entry from the database if the file is not assigned to any other objects */
+  destroy_file_entry?: InputMaybe<Scalars['Boolean']['input']>;
   ids: Array<Scalars['ID']['input']>;
 };
 
 /** Type of the content a scraper generates */
-const enum ScrapeContentType {
+enum ScrapeContentType {
   Gallery = 'GALLERY',
   Group = 'GROUP',
   Image = 'IMAGE',
   Movie = 'MOVIE',
   Performer = 'PERFORMER',
   Scene = 'SCENE'
-};
+}
 
 type ScrapeMultiPerformersInput = {
   /** Instructs to query by scene fingerprints */
@@ -4564,14 +4626,14 @@ type ScrapeSingleTagInput = {
   query?: InputMaybe<Scalars['String']['input']>;
 };
 
-const enum ScrapeType {
+enum ScrapeType {
   /** From existing object */
   Fragment = 'FRAGMENT',
   /** From text query */
   Name = 'NAME',
   /** From URL */
   Url = 'URL'
-};
+}
 
 /** Scraped Content is the forming union over the different scrapers */
 type ScrapedContent = ScrapedGallery | ScrapedGroup | ScrapedImage | ScrapedMovie | ScrapedPerformer | ScrapedScene | ScrapedStudio | ScrapedTag;
@@ -4910,10 +4972,10 @@ type SetupInput = {
   storeBlobsInDatabase: Scalars['Boolean']['input'];
 };
 
-const enum SortDirectionEnum {
+enum SortDirectionEnum {
   Asc = 'ASC',
   Desc = 'DESC'
-};
+}
 
 type StashBox = {
   __typename?: 'StashBox';
@@ -5054,7 +5116,7 @@ type StashId = {
 type StashIdCriterionInput = {
   /**
    * If present, this value is treated as a predicate.
-   * That is, it will filter based on stash_ids with the matching endpoint
+   * That is, it will filter based on stash_id with the matching endpoint
    */
   endpoint?: InputMaybe<Scalars['String']['input']>;
   modifier: CriterionModifier;
@@ -5065,6 +5127,16 @@ type StashIdInput = {
   endpoint: Scalars['String']['input'];
   stash_id: Scalars['String']['input'];
   updated_at?: InputMaybe<Scalars['Time']['input']>;
+};
+
+type StashIDsCriterionInput = {
+  /**
+   * If present, this value is treated as a predicate.
+   * That is, it will filter based on stash_ids with the matching endpoint
+   */
+  endpoint?: InputMaybe<Scalars['String']['input']>;
+  modifier: CriterionModifier;
+  stash_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 type StatsResultType = {
@@ -5087,7 +5159,7 @@ type StatsResultType = {
   total_play_duration: Scalars['Float']['output'];
 };
 
-const enum StreamingResolutionEnum {
+enum StreamingResolutionEnum {
   /** 4k */
   FourK = 'FOUR_K',
   /** 1080p */
@@ -5100,7 +5172,7 @@ const enum StreamingResolutionEnum {
   Standard = 'STANDARD',
   /** 720p */
   StandardHd = 'STANDARD_HD'
-};
+}
 
 type StringCriterionInput = {
   modifier: CriterionModifier;
@@ -5223,8 +5295,13 @@ type StudioFilterType = {
   scene_count?: InputMaybe<IntCriterionInput>;
   /** Filter by related scenes that meet this criteria */
   scenes_filter?: InputMaybe<SceneFilterType>;
-  /** Filter by StashID */
+  /**
+   * Filter by StashID
+   * @deprecated use stash_ids_endpoint instead
+   */
   stash_id_endpoint?: InputMaybe<StashIdCriterionInput>;
+  /** Filter by StashIDs */
+  stash_ids_endpoint?: InputMaybe<StashIDsCriterionInput>;
   /** Filter by tag count */
   tag_count?: InputMaybe<IntCriterionInput>;
   /** Filter to only include studios with these tags */
@@ -5275,11 +5352,11 @@ type SystemStatus = {
   workingDir: Scalars['String']['output'];
 };
 
-const enum SystemStatusEnum {
+enum SystemStatusEnum {
   NeedsMigration = 'NEEDS_MIGRATION',
   Ok = 'OK',
   Setup = 'SETUP'
-};
+}
 
 type Tag = {
   __typename?: 'Tag';
@@ -5417,8 +5494,13 @@ type TagFilterType = {
   scenes_filter?: InputMaybe<SceneFilterType>;
   /** Filter by tag sort_name */
   sort_name?: InputMaybe<StringCriterionInput>;
-  /** Filter by StashID */
+  /**
+   * Filter by StashID
+   * @deprecated use stash_ids_endpoint instead
+   */
   stash_id_endpoint?: InputMaybe<StashIdCriterionInput>;
+  /** Filter by StashID */
+  stash_ids_endpoint?: InputMaybe<StashIDsCriterionInput>;
   /** Filter by number of studios with this tag */
   studio_count?: InputMaybe<IntCriterionInput>;
   /** Filter by last update time */
