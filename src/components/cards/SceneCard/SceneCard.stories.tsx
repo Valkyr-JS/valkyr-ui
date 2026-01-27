@@ -76,7 +76,7 @@ export const FullDataDefaults: Story = {
     const duration = canvas.getByText("Duration: 37 minutes 55 seconds");
     await expect(duration).toBeInTheDocument();
 
-    // File size icon should NOT render
+    // File size should NOT render
     const fileSize = canvas.queryByText("File Size: 3.29 gigabytes");
     await expect(fileSize).toBeNull();
 
