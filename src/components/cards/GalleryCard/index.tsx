@@ -4,6 +4,7 @@ import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
+import FileSize from "../data/FileSize";
 import Organized from "../data/Organized";
 import Photographer from "../data/Photographer";
 import RatingBanner from "../data/RatingBanner";
@@ -20,7 +21,6 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
-import FileSize from "../data/FileSize";
 
 interface GalleryCardProps {
   /** Footer props. Leave `undefined` to not render the footer. */
@@ -326,6 +326,9 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   if (props.gallery.tags.length)
     sections.push(["tags", props.gallery.tags.length]);
 
+  const primaryFile =
+    props.gallery.files.length > 0 ? props.gallery.files[0] : undefined;
+
   // Only render one of the two rating options
   const willRenderRatingBanner =
     (props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex ??
@@ -392,6 +395,11 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
                 }
               />
             </ReleaseData>
+            {primaryFile && (
+              <FileData>
+                <FileSize context="modal" bytes={primaryFile.size} />
+              </FileData>
+            )}
           </KeyData>
           <Details context="modal" details={props.gallery.details} />
           <CastCrew>
