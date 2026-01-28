@@ -62,8 +62,6 @@ type SlimStashObject =
 /** The config for the Valkyr UI plugin. Stash only creates config properties
  * when they are changed. By default they are `undefined`. */
 interface ValkyrUiConfigMap {
-  /** Enables Valkyr UI card grids for all enabled card types. */
-  cards__cardGrid__enabled?: boolean;
   /** Enables counts for associated object modal sections. */
   cards__shared__enableCounts?: boolean;
   /** Adds padding to timestamps to make all units double-figures and include

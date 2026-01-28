@@ -99,8 +99,6 @@ PluginApi.patch.instead<IGalleryCardGrid>(
 
       if (
         pluginConfig &&
-        (pluginConfig?.cards__cardGrid__enabled ??
-          DEFAULT.CARDS.CARD_GRID.ENABLED) &&
         (pluginConfig?.cards__galleryCard__enabled ??
           DEFAULT.CARDS.GALLERY_CARD.ENABLED)
       )
