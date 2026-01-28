@@ -99,8 +99,6 @@ PluginApi.patch.instead<ISceneCardGrid>(
 
       if (
         pluginConfig &&
-        (pluginConfig?.cards__cardGrid__enabled ??
-          DEFAULT.CARDS.CARD_GRID.ENABLED) &&
         (pluginConfig?.cards__sceneCard__enabled ??
           DEFAULT.CARDS.SCENE_CARD.ENABLED)
       )

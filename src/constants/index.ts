@@ -1,9 +1,6 @@
 /** `DEFAULT.MODULE.COMPONENT.SETTING` */
 export const DEFAULT = {
   CARDS: {
-    CARD_GRID: {
-      ENABLED: true,
-    },
     GALLERY_CARD: {
       DATE_ZOOM_INDEX: 0,
       DETAILS_ZOOM_INDEX: 0,
