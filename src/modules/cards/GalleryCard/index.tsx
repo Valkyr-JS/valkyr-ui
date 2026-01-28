@@ -122,8 +122,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   }
                   pluginConfig={pluginConfig}
                   ratingSystem={stashConfig.ui.ratingSystemOptions}
-                  selecting={props.selectedIds.size > 0}
                   selected={props.selectedIds.has(gl.id)}
+                  selecting={props.selectedIds.size > 0}
                   zoomIndex={props.zoomIndex as StashCardGridZoom}
                 />
               ))}

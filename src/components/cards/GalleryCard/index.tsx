@@ -66,8 +66,8 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       link={galleryLink}
       onSelectedChanged={props.onSelectedChanged}
       pluginConfig={props.pluginConfig}
-      selecting={props.selecting}
       selected={props.selected}
+      selecting={props.selecting}
       thumbnail={
         <GalleryCardThumbnail
           context="card"
