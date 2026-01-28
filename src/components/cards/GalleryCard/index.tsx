@@ -25,7 +25,7 @@ import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
 
-interface GalleryCardProps extends SelectableCard {
+interface GalleryCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
   abbreviateCounters: boolean;
 

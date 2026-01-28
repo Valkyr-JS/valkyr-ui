@@ -9,7 +9,7 @@ import TopLine from "../TopLine";
 import "./GridCard.scss";
 import { DEFAULT } from "@/constants";
 
-interface GridCardProps extends SelectableCard {
+interface GridCardProps extends SelectableCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
   classname?: string;
 
@@ -88,7 +88,14 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
         <CardTitle id={props.id} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
         <div className={bodyClass}>{props.children}</div>
-        <CardFooter {...props.footer} />
+        <CardFooter
+          {...props.footer}
+          selectionProps={{
+            selected: props.selected,
+            selecting: props.selecting,
+            onSelectedChanged: props.onSelectedChanged,
+          }}
+        />
       </div>
     </Card>
   );
@@ -114,7 +121,9 @@ export interface CardFooterProps {
   setSection: (section: CardModalSection) => void;
 }
 
-const CardFooter: React.FC<CardFooterProps> = (props) => {
+const CardFooter: React.FC<
+  CardFooterProps & { selectionProps: SelectableCardProps }
+> = (props) => {
   const intl = useIntl();
 
   const componentClass = "vui-grid-card";
@@ -136,6 +145,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
         <button
           type="button"
           className="minimal btn"
+          disabled={props.selectionProps.selecting}
           onClick={handleOpenDetailsSection}
           title={intl.formatMessage({ id: "details" })}
         >
@@ -146,6 +156,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
         <button
           type="button"
           className="minimal btn"
+          disabled={props.selectionProps.selecting}
           onClick={handleOpenTagsSection}
           title={intl.formatMessage({ id: "tags" })}
         >

@@ -31,7 +31,7 @@ import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
 
-interface SceneCardProps extends SelectableCard {
+interface SceneCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
   abbreviateCounters: boolean;
 

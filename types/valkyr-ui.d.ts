@@ -29,7 +29,7 @@ interface ExtendedConfigResult extends ConfigResult {
   };
 }
 
-interface SelectableCard {
+interface SelectableCardProps {
   /** Whether Stash's card selection mode is currently active. */
   selecting?: boolean;
 
