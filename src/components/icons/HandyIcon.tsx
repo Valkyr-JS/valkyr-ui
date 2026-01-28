@@ -2,14 +2,10 @@ import React from "react";
 
 const HandyIcon: React.FC = () => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    focusable="false"
-    width="1em"
-    height="1em"
-    style={{ transform: "rotate(360deg)" }}
+    className="svg-inline--fa"
+    role="img"
     viewBox="0 0 27 35"
-    preserveAspectRatio="xMidYMid meet"
+    aria-hidden="true"
   >
     <path
       fill="currentColor"
