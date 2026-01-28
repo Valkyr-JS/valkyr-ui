@@ -30,8 +30,13 @@ interface ExtendedConfigResult extends ConfigResult {
 }
 
 interface SelectableCard {
+  /** Whether Stash's card selection mode is currently active. */
   selecting?: boolean;
+
+  /** Whether this card is selected. */
   selected?: boolean;
+
+  /** Executed on changing selection state of the card. */
   onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
 }
 
