@@ -86,6 +86,8 @@ interface ValkyrUiConfigMap {
   /** The zoom index at which to display the organized icon on gallery
    * cards. */
   cards__galleryCard__organizedZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the performer list on gallery cards. */
+  cards__galleryCard__performerListZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the photographer on gallery cards. */
   cards__galleryCard__photographerZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the rating banner on gallery
@@ -130,6 +132,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__oCountZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the organized icon on scene cards. */
   cards__sceneCard__organizedZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the performer list on scene cards. */
+  cards__sceneCard__performerListZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the play count on scene cards. */
   cards__sceneCard__playCountZoomIndex?: StashCardGridZoom;
   /** Enables scene card previews. */
