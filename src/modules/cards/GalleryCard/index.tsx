@@ -117,8 +117,13 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                     setSection: setModalSection,
                   }}
                   gallery={gl}
+                  onSelectedChanged={(selected: boolean, shiftKey: boolean) =>
+                    props.onSelectChange(gl.id, selected, shiftKey)
+                  }
                   pluginConfig={pluginConfig}
                   ratingSystem={stashConfig.ui.ratingSystemOptions}
+                  selecting={props.selectedIds.size > 0}
+                  selected={props.selectedIds.has(gl.id)}
                   zoomIndex={props.zoomIndex as StashCardGridZoom}
                 />
               ))}

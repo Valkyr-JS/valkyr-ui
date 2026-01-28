@@ -43,6 +43,11 @@ interface GalleryCardProps {
 
   /** The current zoom index. */
   zoomIndex?: StashCardGridZoom;
+
+  // Stash card props for card selection
+  selecting?: boolean;
+  selected?: boolean;
+  onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = (props) => {
@@ -64,7 +69,10 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       footer={footerProps}
       id={id}
       link={galleryLink}
+      onSelectedChanged={props.onSelectedChanged}
       pluginConfig={props.pluginConfig}
+      selecting={props.selecting}
+      selected={props.selected}
       thumbnail={
         <GalleryCardThumbnail
           context="card"
