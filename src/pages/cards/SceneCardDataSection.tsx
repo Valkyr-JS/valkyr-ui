@@ -223,6 +223,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const InteractiveZoomIndex = () => (
+    <NumberSetting
+      heading="Interactive icon"
+      id="valkyr-ui-cards__sceneCard__interactiveZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__interactiveZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__interactiveZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.INTERACTIVE
+      }
+    />
+  );
+
   const OCountZoomIndex = () => (
     <NumberSetting
       heading="O count"
@@ -477,6 +496,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <DurationZoomIndex />
         <FileSizeZoomIndex />
         <FrameRateZoomIndex />
+        <InteractiveZoomIndex />
         <OCountZoomIndex />
         <OrganizedZoomIndex />
         <PlayCountZoomIndex />

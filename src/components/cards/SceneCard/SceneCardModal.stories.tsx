@@ -6,6 +6,7 @@ import { SceneCardModalContent } from ".";
 // Mock data
 import filelessData from "../../../../mocks/scenes/filelessData.json";
 import fullData from "../../../../mocks/scenes/fullData.json";
+import interactive from "../../../../mocks/scenes/interactive.json";
 import minimalData from "../../../../mocks/scenes/minimalData.json";
 import multiFile from "../../../../mocks/scenes/multiFile.json";
 import portrait from "../../../../mocks/scenes/portrait.json";
@@ -90,6 +91,10 @@ export const FullDataDefaults: Story = {
     const frameRate = canvas.queryByText("Frame Rate: 23.98 frames per second");
     await expect(frameRate).toBeNull();
 
+    // Interactive icon should NOT render
+    const interactive = canvas.queryByText("Interactive");
+    await expect(interactive).toBeNull();
+
     // O count should render
     const oCount = canvas.getByText("O Count: 2");
     await expect(oCount).toBeInTheDocument();
@@ -130,6 +135,7 @@ export const FullDataAllEnabled: Story = {
       cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__fileSizeZoomIndex: 0,
       cards__sceneCard__frameRateZoomIndex: 0,
+      cards__sceneCard__interactiveZoomIndex: 0,
       cards__sceneCard__videoCodecZoomIndex: 0,
     },
     scene: fullData as SceneDataFragment,
@@ -174,6 +180,10 @@ export const FullDataAllEnabled: Story = {
     // Frame rate should render
     const frameRate = canvas.getByText("Frame Rate: 23.98 frames per second");
     await expect(frameRate).toBeInTheDocument();
+
+    // Interactive icon should NOT render as this scene isn't interactive.
+    const interactive = canvas.queryByText("Interactive");
+    await expect(interactive).toBeNull();
 
     // O count should render
     const oCount = canvas.getByText("O Count: 2");
@@ -321,6 +331,20 @@ export const MultiFile: Story = {
     await expect(primaryVideoCodec).toBeInTheDocument();
     const secondaryVideoCodec = canvas.queryByText("Video Codec: mpeg2");
     await expect(secondaryVideoCodec).toBeNull();
+  },
+};
+
+export const Interactive: Story = {
+  args: {
+    pluginConfig: { cards__sceneCard__interactiveZoomIndex: 0 },
+    scene: interactive as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Aspect ratio should render
+    const aspectRatio = canvas.getByText("Interactive");
+    await expect(aspectRatio).toBeInTheDocument();
   },
 };
 
