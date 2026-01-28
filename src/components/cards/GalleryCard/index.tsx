@@ -25,7 +25,7 @@ import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
 
-interface GalleryCardProps {
+interface GalleryCardProps extends SelectableCard {
   /** Whether counter data should be abbreviated. */
   abbreviateCounters: boolean;
 
@@ -43,11 +43,6 @@ interface GalleryCardProps {
 
   /** The current zoom index. */
   zoomIndex?: StashCardGridZoom;
-
-  // Stash card props for card selection
-  selecting?: boolean;
-  selected?: boolean;
-  onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
 }
 
 const GalleryCard: React.FC<GalleryCardProps> = (props) => {

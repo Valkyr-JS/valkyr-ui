@@ -9,7 +9,7 @@ import TopLine from "../TopLine";
 import "./GridCard.scss";
 import { DEFAULT } from "@/constants";
 
-interface GridCardProps {
+interface GridCardProps extends SelectableCard {
   /** Optional classes added alongside the `vui-grid-card` component class. */
   classname?: string;
 
@@ -39,11 +39,6 @@ interface GridCardProps {
 
   /** The data components to be displayed on the top line. */
   topLine?: React.ReactNode;
-
-  // Stash card props for card selection
-  selecting?: boolean;
-  selected?: boolean;
-  onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
 }
 
 const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {

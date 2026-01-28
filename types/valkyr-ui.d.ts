@@ -29,6 +29,12 @@ interface ExtendedConfigResult extends ConfigResult {
   };
 }
 
+interface SelectableCard {
+  selecting?: boolean;
+  selected?: boolean;
+  onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
+}
+
 interface SettingsTabProps {
   /** The function that updates the user's plugin config. */
   configUpdateHandler: (updatedConfig: ValkyrUiConfigMap) => void;
