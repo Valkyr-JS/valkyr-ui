@@ -7,6 +7,11 @@ $prefix: variables.$prefix;
     color: var(--#{$prefix}-link-color);
   }
 
+  // Stop color from changing when hovering over minimal buttons.
+  button.minimal:disabled {
+    color: #f5f8fa;
+  }
+
   .card-controls {
     align-items: center;
     display: flex;
