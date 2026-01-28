@@ -636,47 +636,59 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                 }
               />
             </ReleaseData>
-            {primaryFile && (
-              <FileData>
-                <Duration
-                  context="modal"
-                  duration={primaryFile.duration}
-                  timestampPadding={
-                    props.pluginConfig.cards__shared__timestampPadding ??
-                    DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
-                  }
-                />
-                {willRenderFileSize && (
-                  <FileSize context="modal" bytes={primaryFile.size} />
-                )}
-                {willRenderAspectRatio && (
-                  <AspectRatio
+            <FileData>
+              {primaryFile && (
+                <>
+                  <Duration
+                    context="modal"
+                    duration={primaryFile.duration}
+                    timestampPadding={
+                      props.pluginConfig.cards__shared__timestampPadding ??
+                      DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                    }
+                  />
+                  {willRenderFileSize && (
+                    <FileSize context="modal" bytes={primaryFile.size} />
+                  )}
+                  {willRenderAspectRatio && (
+                    <AspectRatio
+                      context="modal"
+                      resolution={[primaryFile.width, primaryFile.height]}
+                    />
+                  )}
+                  {willRenderBitRate && (
+                    <BitRate bytes={primaryFile.bit_rate} context="modal" />
+                  )}
+                  {willRenderVideoCodec && (
+                    <VideoCodec
+                      codec={primaryFile.video_codec}
+                      context="modal"
+                    />
+                  )}
+                  {willRenderAudioCodec && (
+                    <AudioCodec
+                      codec={primaryFile.audio_codec}
+                      context="modal"
+                    />
+                  )}
+                  {willRenderFrameRate && (
+                    <FrameRate context="modal" rate={primaryFile.frame_rate} />
+                  )}
+                  <Resolution
+                    asIcon={
+                      props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
+                      DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+                    }
                     context="modal"
                     resolution={[primaryFile.width, primaryFile.height]}
                   />
-                )}
-                {willRenderBitRate && (
-                  <BitRate bytes={primaryFile.bit_rate} context="modal" />
-                )}
-                {willRenderVideoCodec && (
-                  <VideoCodec codec={primaryFile.video_codec} context="modal" />
-                )}
-                {willRenderAudioCodec && (
-                  <AudioCodec codec={primaryFile.audio_codec} context="modal" />
-                )}
-                {willRenderFrameRate && (
-                  <FrameRate context="modal" rate={primaryFile.frame_rate} />
-                )}
-                <Resolution
-                  asIcon={
-                    props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
-                    DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
-                  }
-                  context="modal"
-                  resolution={[primaryFile.width, primaryFile.height]}
-                />
-              </FileData>
-            )}
+                </>
+              )}
+              <Interactive
+                context="modal"
+                interactive={props.scene.interactive}
+              />
+            </FileData>
           </KeyData>
           <Details context="modal" details={props.scene.details} />
           <CastCrew>
