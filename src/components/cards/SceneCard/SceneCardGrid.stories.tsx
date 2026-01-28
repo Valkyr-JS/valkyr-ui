@@ -8,6 +8,7 @@ import SceneCard from "../SceneCard";
 // Mock data
 import filelessData from "../../../../mocks/scenes/filelessData.slim.json";
 import fullData from "../../../../mocks/scenes/fullData.slim.json";
+import interactive from "../../../../mocks/scenes/interactive.slim.json";
 import minimalData from "../../../../mocks/scenes/minimalData.slim.json";
 import multiFile from "../../../../mocks/scenes/multiFile.slim.json";
 import portrait from "../../../../mocks/scenes/portrait.slim.json";
@@ -30,6 +31,7 @@ type Story = StoryObj<typeof meta>;
 
 const SceneCards = [
   fullData,
+  interactive,
   minimalData,
   multiFile,
   filelessData,
