@@ -280,6 +280,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const PerformerListZoomIndex = () => (
+    <NumberSetting
+      heading="Performer list"
+      id="valkyr-ui-cards__sceneCard__performerListZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__performerListZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__performerListZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.PERFORMER_LIST_ZOOM_INDEX
+      }
+    />
+  );
+
   const PlayCountZoomIndex = () => (
     <NumberSetting
       heading="Play count"
@@ -499,6 +518,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <InteractiveZoomIndex />
         <OCountZoomIndex />
         <OrganizedZoomIndex />
+        <PerformerListZoomIndex />
         <PlayCountZoomIndex />
         <RatingBannerZoomIndex />
         <RatingIconZoomIndex />

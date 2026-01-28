@@ -144,6 +144,25 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const PerformerListZoomIndex = () => (
+    <NumberSetting
+      heading="Performer list"
+      id="valkyr-ui-cards__galleryCard__performerListZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__performerListZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__galleryCard__performerListZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.PERFORMER_LIST_ZOOM_INDEX
+      }
+    />
+  );
+
   const PhotographerZoomIndex = () => (
     <NumberSetting
       heading="Photographer"
@@ -316,6 +335,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <ImageCollectionIconZoomIndex />
         <ImageCountIconZoomIndex />
         <OrganizedZoomIndex />
+        <PerformerListZoomIndex />
         <PhotographerZoomIndex />
         <RatingBannerZoomIndex />
         <RatingIconZoomIndex />
