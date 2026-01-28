@@ -25,7 +25,7 @@ import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
 
-interface GalleryCardProps {
+interface GalleryCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
   abbreviateCounters: boolean;
 
@@ -64,7 +64,10 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       footer={footerProps}
       id={id}
       link={galleryLink}
+      onSelectedChanged={props.onSelectedChanged}
       pluginConfig={props.pluginConfig}
+      selected={props.selected}
+      selecting={props.selecting}
       thumbnail={
         <GalleryCardThumbnail
           context="card"

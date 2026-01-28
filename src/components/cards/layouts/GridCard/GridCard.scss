@@ -7,6 +7,36 @@ $prefix: variables.$prefix;
     color: var(--#{$prefix}-link-color);
   }
 
+  // Stop color from changing when hovering over minimal buttons.
+  button.minimal:disabled {
+    color: #f5f8fa;
+  }
+
+  .card-controls {
+    align-items: center;
+    display: flex;
+    left: 0.5rem;
+    position: absolute;
+    top: 0.7rem;
+    z-index: 1;
+  }
+
+  .card-check {
+    height: 1.2rem;
+    opacity: 0;
+    width: 1.2rem;
+    padding-left: 15px;
+
+    &:checked {
+      opacity: 0.75;
+    }
+  }
+
+  &:hover .card-check {
+    opacity: 0.75;
+    transition: opacity 0.5s;
+  }
+
   padding: 0;
   background-color: var(--#{$prefix}-card-bg-color);
 

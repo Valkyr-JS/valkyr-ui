@@ -31,7 +31,7 @@ import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./SceneCard.scss";
 
-interface SceneCardProps {
+interface SceneCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
   abbreviateCounters: boolean;
 
@@ -96,9 +96,12 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       footer={footerProps}
       id={id}
       link={sceneLink}
+      onSelectedChanged={props.onSelectedChanged}
       onMouseOut={() => setIsHovered(false)}
       onMouseOver={() => setIsHovered(true)}
       pluginConfig={props.pluginConfig}
+      selected={props.selected}
+      selecting={props.selecting}
       thumbnail={
         <SceneCardThumbnail
           cardIsHovered={isHovered}

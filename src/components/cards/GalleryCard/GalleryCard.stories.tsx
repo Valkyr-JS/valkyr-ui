@@ -32,6 +32,7 @@ const meta = {
       setSection: fn(),
     },
     pluginConfig: {},
+    selecting: false,
     zoomIndex: 1,
   },
   argTypes: {
@@ -248,5 +249,25 @@ export const NoTagsModalButton: Story = {
       name: "Tags",
     });
     expect(tagsModalBtn).toBeNull();
+  },
+};
+
+export const DisableModalsWhenSelecting: Story = {
+  args: {
+    gallery: fullData as SlimGalleryDataFragment,
+    selecting: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const detailsModalBtn = canvas.getByRole("button", {
+      name: "Details",
+    });
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Tags",
+    });
+
+    expect(detailsModalBtn).toBeDisabled();
+    expect(tagsModalBtn).toBeDisabled();
   },
 };

@@ -120,10 +120,15 @@ PluginApi.patch.instead<ISceneCardGrid>(
                     setSection: setModalSection,
                   }}
                   index={i}
+                  onSelectedChanged={(selected: boolean, shiftKey: boolean) =>
+                    props.onSelectChange(sc.id, selected, shiftKey)
+                  }
                   pluginConfig={pluginConfig}
                   queue={props.queue}
                   ratingSystem={stashConfig.ui.ratingSystemOptions}
                   scene={sc}
+                  selected={props.selectedIds.has(sc.id)}
+                  selecting={props.selectedIds.size > 0}
                   zoomIndex={props.zoomIndex as StashCardGridZoom}
                 />
               ))}

@@ -29,6 +29,17 @@ interface ExtendedConfigResult extends ConfigResult {
   };
 }
 
+interface SelectableCardProps {
+  /** Whether Stash's card selection mode is currently active. */
+  selecting?: boolean;
+
+  /** Whether this card is selected. */
+  selected?: boolean;
+
+  /** Executed on changing selection state of the card. */
+  onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
+}
+
 interface SettingsTabProps {
   /** The function that updates the user's plugin config. */
   configUpdateHandler: (updatedConfig: ValkyrUiConfigMap) => void;

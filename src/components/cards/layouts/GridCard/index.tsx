@@ -2,14 +2,14 @@ import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo, faTag } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
-import { Card } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
 import { DEFAULT } from "@/constants";
 
-interface GridCardProps {
+interface GridCardProps extends SelectableCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
   classname?: string;
 
@@ -47,19 +47,55 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   const contentClass = componentClass + "__content";
   const componentClassList = cx(componentClass, props.classname);
 
+  /* ------------------------------------ Stash card selection ------------------------------------ */
+
+  // Recreate the checkbox selection functionality found in native Stash cards
+
+  function handleImageClick(event: React.MouseEvent<HTMLElement, MouseEvent>) {
+    const { shiftKey } = event;
+
+    if (!props.onSelectedChanged) {
+      return;
+    }
+
+    if (props.selecting) {
+      props.onSelectedChanged(!props.selected, shiftKey);
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
+  /* ------------------------------------------ Component ----------------------------------------- */
+
   return (
     <Card
       className={componentClassList}
       data-testid="grid-card"
+      onClick={handleImageClick}
       onMouseOut={props.onMouseOut}
       onMouseOver={props.onMouseOver}
     >
+      <Controls>
+        {props.onSelectedChanged && (
+          <Checkbox
+            selected={props.selected}
+            onSelectedChanged={props.onSelectedChanged}
+          />
+        )}
+      </Controls>
       {props.thumbnail}
       <div className={contentClass}>
         <CardTitle id={props.id} link={props.link} text={props.title} />
         <TopLine>{props.topLine}</TopLine>
         <div className={bodyClass}>{props.children}</div>
-        <CardFooter {...props.footer} />
+        <CardFooter
+          {...props.footer}
+          selectionProps={{
+            selected: props.selected,
+            selecting: props.selecting,
+            onSelectedChanged: props.onSelectedChanged,
+          }}
+        />
       </div>
     </Card>
   );
@@ -85,7 +121,9 @@ export interface CardFooterProps {
   setSection: (section: CardModalSection) => void;
 }
 
-const CardFooter: React.FC<CardFooterProps> = (props) => {
+const CardFooter: React.FC<
+  CardFooterProps & { selectionProps: SelectableCardProps }
+> = (props) => {
   const intl = useIntl();
 
   const componentClass = "vui-grid-card";
@@ -107,6 +145,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
         <button
           type="button"
           className="minimal btn"
+          disabled={props.selectionProps.selecting}
           onClick={handleOpenDetailsSection}
           title={intl.formatMessage({ id: "details" })}
         >
@@ -117,6 +156,7 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
         <button
           type="button"
           className="minimal btn"
+          disabled={props.selectionProps.selecting}
           onClick={handleOpenTagsSection}
           title={intl.formatMessage({ id: "tags" })}
         >
@@ -131,4 +171,33 @@ const CardFooter: React.FC<CardFooterProps> = (props) => {
       )}
     </div>
   );
+};
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                       Checkbox component                                       */
+/* ---------------------------------------------------------------------------------------------- */
+
+const Checkbox: React.FC<{
+  selected?: boolean;
+  onSelectedChanged?: (selected: boolean, shiftKey: boolean) => void;
+}> = ({ selected = false, onSelectedChanged }) => {
+  let shiftKey = false;
+
+  return (
+    <Form.Control
+      type="checkbox"
+      // #2750 - add mousetrap class to ensure keyboard shortcuts work
+      className="card-check mousetrap"
+      checked={selected}
+      onChange={() => onSelectedChanged!(!selected, shiftKey)}
+      onClick={(event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+        shiftKey = event.shiftKey;
+        event.stopPropagation();
+      }}
+    />
+  );
+};
+
+const Controls: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+  return <div className="card-controls">{children}</div>;
 };
