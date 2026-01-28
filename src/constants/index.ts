@@ -30,6 +30,7 @@ export const DEFAULT = {
       ENABLED: true,
       FILE_SIZE_ZOOM_INDEX: -1,
       FRAME_RATE_ZOOM_INDEX: -1,
+      INTERACTIVE: -1,
       O_COUNT_ZOOM_INDEX: -1,
       ORGANIZED_ZOOM_INDEX: 0,
       PLAY_COUNT_ZOOM_INDEX: -1,
