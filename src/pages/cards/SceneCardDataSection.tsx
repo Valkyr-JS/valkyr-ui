@@ -237,7 +237,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
       }}
       value={
         props.pluginConfig.cards__sceneCard__interactiveZoomIndex ??
-        DEFAULT.CARDS.SCENE_CARD.INTERACTIVE
+        DEFAULT.CARDS.SCENE_CARD.INTERACTIVE_ZOOM_INDEX
       }
     />
   );

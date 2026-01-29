@@ -322,7 +322,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
             interactive={props.scene.interactive}
             userZoomIndex={
               props.pluginConfig.cards__sceneCard__interactiveZoomIndex ??
-              DEFAULT.CARDS.SCENE_CARD.INTERACTIVE
+              DEFAULT.CARDS.SCENE_CARD.INTERACTIVE_ZOOM_INDEX
             }
           />
         </FileData>

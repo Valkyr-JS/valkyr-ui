@@ -196,7 +196,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
             count={props.gallery.image_count}
             userZoomIndex={
               props.pluginConfig.cards__galleryCard__imageCountZoomIndex ??
-              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT
+              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT_ZOOM_INDEX
             }
           />
           <ImageCollectionIcon
