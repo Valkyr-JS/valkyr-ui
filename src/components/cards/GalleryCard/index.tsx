@@ -8,6 +8,7 @@ import FileSize from "../data/FileSize";
 import ImageCollectionIcon from "../data/ImageCollectionIcon";
 import ImageCount from "../data/ImageCount";
 import Organized from "../data/Organized";
+import PerformerList from "../data/PerformerList";
 import Photographer from "../data/Photographer";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
@@ -24,7 +25,6 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
-import PerformerList from "../data/PerformerList";
 
 interface GalleryCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
