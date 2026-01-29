@@ -48,6 +48,7 @@ export const DEFAULT = {
     },
     SHARED: {
       ENABLE_FOOTER_BUTTON_COUNTS: true,
+      PERFORMER_LIST_GENDER_COLORS: false,
       TIMESTAMP_PADDING: false,
     },
   },
