@@ -5,6 +5,7 @@ $prefix: variables.$prefix;
 .vui-card-data {
   &__performer-list {
     ul {
+      display: inline;
       list-style: none;
       margin-bottom: 0;
       padding-left: 0;
@@ -18,14 +19,21 @@ $prefix: variables.$prefix;
       }
     }
 
-    li + li:last-child::before {
-      content: " and ";
+    &--overflow {
+      li:nth-of-type(n + 1)::after {
+        content: ", ";
+      }
+    }
+
+    &:not(&--overflow) {
+      li + li:last-child::before {
+        content: " and ";
+      }
     }
 
     li:nth-of-type(n + 2):not(:last-child)::before {
       content: ", ";
     }
-
     a {
       color: inherit;
     }

@@ -82,14 +82,14 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
       heading="Max list length"
       id="valkyr-ui-cards__shared__performerListMaxItems"
       onChange={(v) => {
-        if (v >= 1 && Number.isInteger(v)) {
+        if (v >= 0 && Number.isInteger(v)) {
           props.configUpdateHandler({
             ...props.pluginConfig,
             cards__shared__performerListMaxItems: v,
           });
         }
       }}
-      subHeading="Sets the maximum number of names displayed in the performer list. Cards will display 'and X more' if more performers are featured."
+      subHeading="Sets the maximum number of names displayed in the performer list. Cards will display 'and X more' if more performers are featured. Set to 0 for no limit."
       value={
         props.pluginConfig.cards__shared__performerListMaxItems ??
         DEFAULT.CARDS.SHARED.PERFORMER_LIST_MAX_ITEMS
