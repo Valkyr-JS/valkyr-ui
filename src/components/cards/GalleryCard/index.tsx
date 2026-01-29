@@ -24,6 +24,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
+import PerformerList from "../data/PerformerList";
 
 interface GalleryCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
@@ -235,6 +236,15 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
         }
       />
       <CastCrew>
+        <PerformerList
+          context="card"
+          currentZoomIndex={props.zoomIndex}
+          performers={props.gallery.performers}
+          userZoomIndex={
+            props.pluginConfig.cards__galleryCard__performerListZoomIndex ??
+            DEFAULT.CARDS.GALLERY_CARD.PERFORMER_LIST_ZOOM_INDEX
+          }
+        />
         <Photographer
           context="card"
           currentZoomIndex={props.zoomIndex}
