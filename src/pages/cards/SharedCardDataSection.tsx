@@ -50,9 +50,33 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
+  const PerformerListGenderColors = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.cards__shared__performerListGenderColors ??
+        DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Performer list gendered colors"
+        id="valkyr-ui-cards__shared__performerListGenderColors"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__shared__performerListGenderColors: newState,
+          });
+        }}
+        subHeading="Sets the font color of names in performer lists according to their gender."
+      />
+    );
+  };
+
   return (
     <SettingSection id="cards-shared" heading="Shared card settings">
       <FooterCountsEnabled />
+      <PerformerListGenderColors />
       <PadTimestamps />
     </SettingSection>
   );
