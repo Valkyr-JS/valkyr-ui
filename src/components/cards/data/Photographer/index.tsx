@@ -1,6 +1,7 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
+import "./Photographer.scss";
 
 interface PhotographerProps {
   /** The photographer. */
