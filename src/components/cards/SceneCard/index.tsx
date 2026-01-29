@@ -14,6 +14,7 @@ import FrameRate from "../data/FrameRate";
 import Interactive from "../data/Interactive";
 import OCount from "../data/OCount";
 import Organized from "../data/Organized";
+import PerformerList from "../data/PerformerList";
 import PlayCount from "../data/PlayCount";
 import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
@@ -340,6 +341,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
         }
       />
       <CastCrew>
+        <PerformerList
+          context="card"
+          currentZoomIndex={props.zoomIndex}
+          performers={props.scene.performers}
+          userZoomIndex={
+            props.pluginConfig.cards__sceneCard__performerListZoomIndex ??
+            DEFAULT.CARDS.SCENE_CARD.PERFORMER_LIST_ZOOM_INDEX
+          }
+        />
         <Director
           context="card"
           currentZoomIndex={props.zoomIndex}
@@ -692,6 +702,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           </KeyData>
           <Details context="modal" details={props.scene.details} />
           <CastCrew>
+            <PerformerList
+              context="modal"
+              performers={props.scene.performers}
+            />
             <Director context="modal" director={props.scene.director} />
           </CastCrew>
         </>

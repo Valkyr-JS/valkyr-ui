@@ -75,6 +75,12 @@ export const FullDataDefaults: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
+    // Performer list should render
+    const performerA = canvas.getByRole("link", { name: "Gabbie Carter" });
+    const performerB = canvas.getByRole("link", { name: "Markus Dupree" });
+    await expect(performerA).toBeInTheDocument();
+    await expect(performerB).toBeInTheDocument();
+
     // Photographer should render
     const photographer = canvas.getByText("Photographer: Pho Tographer");
     await expect(photographer).toBeInTheDocument();
@@ -129,6 +135,12 @@ export const FullDataAllEnabled: Story = {
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Performer list should render
+    const performerA = canvas.getByRole("link", { name: "Gabbie Carter" });
+    const performerB = canvas.getByRole("link", { name: "Markus Dupree" });
+    await expect(performerA).toBeInTheDocument();
+    await expect(performerB).toBeInTheDocument();
 
     // Photographer should render
     const photographer = canvas.getByText("Photographer: Pho Tographer");

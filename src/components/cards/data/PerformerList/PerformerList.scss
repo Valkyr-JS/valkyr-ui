@@ -1,0 +1,21 @@
+.vui-card-data {
+  &__performer-list {
+    ul {
+      list-style: none;
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+
+    li {
+      display: inline;
+    }
+
+    li + li:last-child::before {
+      content: " and ";
+    }
+
+    li:nth-of-type(n + 2):not(:last-child)::before {
+      content: ", ";
+    }
+  }
+}

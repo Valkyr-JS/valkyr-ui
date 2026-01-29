@@ -103,6 +103,12 @@ export const FullDataDefaults: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
+    // Performer list should render
+    const performerA = canvas.getByRole("link", { name: "Leah Gotti" });
+    const performerB = canvas.getByRole("link", { name: "Xander Corvus" });
+    await expect(performerA).toBeInTheDocument();
+    await expect(performerB).toBeInTheDocument();
+
     // Play count should render
     const playCount = canvas.getByText("Play Count: 5");
     await expect(playCount).toBeInTheDocument();
@@ -192,6 +198,12 @@ export const FullDataAllEnabled: Story = {
     // Organized icon should render
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
+
+    // Performer list should render
+    const performerA = canvas.getByRole("link", { name: "Leah Gotti" });
+    const performerB = canvas.getByRole("link", { name: "Xander Corvus" });
+    await expect(performerA).toBeInTheDocument();
+    await expect(performerB).toBeInTheDocument();
 
     // Play count should render
     const playCount = canvas.getByText("Play Count: 5");
