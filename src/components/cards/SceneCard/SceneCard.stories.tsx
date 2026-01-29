@@ -103,11 +103,11 @@ export const FullDataDefaults: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
-    // Performer list should render
-    const performerA = canvas.getByRole("link", { name: "Leah Gotti" });
-    const performerB = canvas.getByRole("link", { name: "Xander Corvus" });
-    await expect(performerA).toBeInTheDocument();
-    await expect(performerB).toBeInTheDocument();
+    // Performer list should NOT render
+    const performerA = canvas.queryByRole("link", { name: "Leah Gotti" });
+    const performerB = canvas.queryByRole("link", { name: "Xander Corvus" });
+    await expect(performerA).toBeNull();
+    await expect(performerB).toBeNull();
 
     // Play count should NOT render
     const playCount = canvas.queryByText("Play Count: 5");
@@ -144,6 +144,7 @@ export const FullDataAllEnabled: Story = {
       cards__sceneCard__frameRateZoomIndex: 0,
       cards__sceneCard__interactiveZoomIndex: 0,
       cards__sceneCard__oCountZoomIndex: 0,
+      cards__sceneCard__performerListZoomIndex: 0,
       cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
       cards__sceneCard__videoCodecZoomIndex: 0,
