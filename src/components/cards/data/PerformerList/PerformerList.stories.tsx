@@ -21,6 +21,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    max: undefined,
     performers: performerData,
     useGenderedColors: false,
   },
@@ -35,34 +36,110 @@ type Story = StoryObj<typeof meta>;
 
 export const OnePerformer: Story = {
   args: {
-    context: "modal",
+    context: "card",
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
     performers: [performerData[0]],
   },
 };
 
 export const TwoPerformers: Story = {
   args: {
-    context: "modal",
+    context: "card",
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
     performers: [performerData[0], performerData[1]],
   },
 };
 
 export const ThreePerformers: Story = {
   args: {
-    context: "modal",
+    context: "card",
+    currentZoomIndex: 3,
     performers: [performerData[0], performerData[1], performerData[2]],
+    userZoomIndex: 2,
   },
 };
 
 export const FourPerformers: Story = {
   args: {
-    context: "modal",
+    context: "card",
+    currentZoomIndex: 3,
     performers: [
       performerData[0],
       performerData[1],
       performerData[2],
       performerData[3],
     ],
+    userZoomIndex: 2,
+  },
+};
+
+export const OnePerformerMaxTwo: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    max: 2,
+    userZoomIndex: 2,
+    performers: [performerData[0]],
+  },
+};
+
+export const TwoPerformersMaxTwo: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    max: 2,
+    userZoomIndex: 2,
+    performers: [performerData[0], performerData[1]],
+  },
+};
+
+export const ThreePerformersMaxTwo: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    max: 2,
+    performers: [performerData[0], performerData[1], performerData[2]],
+    userZoomIndex: 2,
+  },
+};
+
+export const FourPerformersMaxTwo: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    max: 2,
+    performers: [
+      performerData[0],
+      performerData[1],
+      performerData[2],
+      performerData[3],
+    ],
+    userZoomIndex: 2,
+  },
+};
+
+export const OverflowMax: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    max: 2,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const performerA = canvas.getByRole("link", { name: "Gabbie Carter" });
+    const performerB = canvas.getByRole("link", { name: "Xander Corvus" });
+    const performerC = canvas.queryByRole("link", { name: "Angel Youngs" });
+    const performerD = canvas.queryByRole("link", { name: "Emma Rose" });
+    const overflowText = canvas.getByText("and 2 more");
+    await expect(performerA).toBeInTheDocument();
+    await expect(performerB).toBeInTheDocument();
+    await expect(performerC).toBeNull();
+    await expect(performerD).toBeNull();
+    await expect(overflowText).toBeInTheDocument();
   },
 };
 

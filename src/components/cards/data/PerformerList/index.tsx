@@ -5,12 +5,17 @@ import { getRenderData } from "@/helpers";
 import "./PerformerList.scss";
 
 interface PerformerListProps {
+  /** The maximum number of names to show in the list before being cut off. */
+  max: number | undefined;
+
   /** The list of performers */
   performers: {
     id: Performer["id"];
     gender: Maybe<GenderEnum> | undefined;
     name: Performer["name"];
   }[];
+
+  /** Whether to set names in gender-specific colors. */
   useGenderedColors: boolean;
 }
 
@@ -33,16 +38,31 @@ const PerformerList: React.FC<
 
   if (!data) return null;
 
+  /* ------------------------------------------ Overflow ------------------------------------------ */
+
+  const visiblePerformers = !!props.max ? data.slice(0, props.max) : data;
+  const numCutPerformers = data.length - visiblePerformers.length;
+  const overflowText = numCutPerformers ? (
+    <span> and {numCutPerformers} more</span>
+  ) : null;
+
+  /* ------------------------------------------ Component ----------------------------------------- */
+
   const componentClass = "vui-card-data__performer-list";
+  const overflowClass = componentClass + "--overflow";
   const itemClass = "vui-card-data__performer-list-item";
 
+  const componentClassList = cx(componentClass, {
+    [overflowClass]: !!numCutPerformers,
+  });
+
   return (
-    <div className={componentClass}>
+    <div className={componentClassList}>
       <span className="sr-only">
         {intl.formatMessage({ id: "performers" })}:
       </span>
       <ul>
-        {data?.map((p) => {
+        {visiblePerformers?.map((p) => {
           const gender = !p.gender
             ? "unknown"
             : p.gender.toLowerCase().split("_").join("-");
@@ -59,6 +79,7 @@ const PerformerList: React.FC<
           );
         })}
       </ul>
+      {overflowText}
     </div>
   );
 };

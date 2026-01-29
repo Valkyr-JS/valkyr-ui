@@ -66,6 +66,9 @@ interface ValkyrUiConfigMap {
   cards__shared__enableCounts?: boolean;
   /** Sets the font color of performer names according to their gender. */
   cards__shared__performerListGenderColors?: boolean;
+  /** The number of performers that will be listed by name before being cut off
+   * with `+ X more`. */
+  cards__shared__performerListMaxItems?: number;
   /** Adds padding to timestamps to make all units double-figures and include
    * hours. */
   cards__shared__timestampPadding?: boolean;

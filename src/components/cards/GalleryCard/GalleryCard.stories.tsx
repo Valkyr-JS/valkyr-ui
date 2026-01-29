@@ -75,11 +75,11 @@ export const FullDataDefaults: Story = {
     const organized = canvas.getByText("Organised");
     await expect(organized).toBeInTheDocument();
 
-    // Performer list should render
-    const performerA = canvas.getByRole("link", { name: "Gabbie Carter" });
-    const performerB = canvas.getByRole("link", { name: "Markus Dupree" });
-    await expect(performerA).toBeInTheDocument();
-    await expect(performerB).toBeInTheDocument();
+    // Performer list should NOT render
+    const performerA = canvas.queryByRole("link", { name: "Gabbie Carter" });
+    const performerB = canvas.queryByRole("link", { name: "Markus Dupree" });
+    await expect(performerA).toBeNull();
+    await expect(performerB).toBeNull();
 
     // Photographer should NOT render
     const photographer = canvas.queryByText("Photographer: Pho Tographer");
@@ -104,6 +104,7 @@ export const FullDataAllEnabled: Story = {
     pluginConfig: {
       cards__galleryCard__fileSizeZoomIndex: 0,
       cards__galleryCard__imageCollectionIconZoomIndex: 0,
+      cards__galleryCard__performerListZoomIndex: 0,
       cards__galleryCard__photographerZoomIndex: 0,
       cards__galleryCard__ratingIconZoomIndex: 0,
       cards__galleryCard__zipIconZoomIndex: 0,
