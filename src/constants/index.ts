@@ -49,6 +49,7 @@ export const DEFAULT = {
     SHARED: {
       ENABLE_FOOTER_BUTTON_COUNTS: true,
       PERFORMER_LIST_GENDER_COLORS: false,
+      PERFORMER_LIST_MAX_ITEMS: 5,
       TIMESTAMP_PADDING: false,
     },
   },
