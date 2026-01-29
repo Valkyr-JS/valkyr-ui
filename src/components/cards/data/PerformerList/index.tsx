@@ -8,7 +8,7 @@ interface PerformerListProps {
   /** The list of performers */
   performers: {
     id: Performer["id"];
-    gender: GenderEnum;
+    gender: Maybe<GenderEnum> | undefined;
     name: Performer["name"];
   }[];
   useGenderedColors: boolean;
@@ -43,8 +43,10 @@ const PerformerList: React.FC<
       </span>
       <ul>
         {data?.map((p) => {
-          const genderClass =
-            itemClass + "--" + p.gender.toLowerCase().split("_").join("-");
+          const gender = !p.gender
+            ? "unknown"
+            : p.gender.toLowerCase().split("_").join("-");
+          const genderClass = itemClass + "--" + gender;
 
           const itemClassList = cx(itemClass, {
             [genderClass]: props.useGenderedColors,
