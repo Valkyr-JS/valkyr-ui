@@ -68,7 +68,7 @@ interface ValkyrUiConfigMap {
   cards__shared__performerListGenderColors?: boolean;
   /** The number of performers that will be listed by name before being cut off
    * with `+ X more`. */
-  cards__shared__performerListMaxItems?: boolean;
+  cards__shared__performerListMaxItems?: number;
   /** Adds padding to timestamps to make all units double-figures and include
    * hours. */
   cards__shared__timestampPadding?: boolean;
