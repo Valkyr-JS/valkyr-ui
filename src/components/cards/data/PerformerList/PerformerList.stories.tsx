@@ -74,7 +74,7 @@ export const NoDataAvailable: Story = {
   args: {
     context: "card",
     currentZoomIndex: 3,
-    photographer: null,
+    performers: [],
     userZoomIndex: 2,
   },
   play: async ({ canvasElement }) => {
@@ -134,7 +134,7 @@ export const ModalContext: Story = {
 export const ModalContextNoData: Story = {
   args: {
     context: "modal",
-    photographer: null,
+    performers: [],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
