@@ -2,7 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import PerformerList from ".";
-import fullData from "../../../../../mocks/galleries/fullData.slim.json";
+
+const performerData = [
+  { id: "1", name: "Gabbie Carter" },
+  { id: "2", name: "Xander Corvus" },
+  { id: "3", name: "Angel Youngs" },
+  { id: "4", name: "Emma Rose" },
+];
 
 const meta = {
   title: "Components/Cards/Data/PerformerList",
@@ -11,7 +17,7 @@ const meta = {
     layout: "centered",
   },
   args: {
-    performers: fullData.performers,
+    performers: performerData,
   },
   argTypes: {
     ...dataComponentArgTypes,
@@ -21,6 +27,39 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const OnePerformer: Story = {
+  args: {
+    context: "modal",
+    performers: [performerData[0]],
+  },
+};
+
+export const TwoPerformers: Story = {
+  args: {
+    context: "modal",
+    performers: [performerData[0], performerData[1]],
+  },
+};
+
+export const ThreePerformers: Story = {
+  args: {
+    context: "modal",
+    performers: [performerData[0], performerData[1], performerData[2]],
+  },
+};
+
+export const FourPerformers: Story = {
+  args: {
+    context: "modal",
+    performers: [
+      performerData[0],
+      performerData[1],
+      performerData[2],
+      performerData[3],
+    ],
+  },
+};
 
 export const AboveZoomIndex: Story = {
   args: {
