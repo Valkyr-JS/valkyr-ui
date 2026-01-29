@@ -120,7 +120,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
       }}
       value={
         props.pluginConfig.cards__galleryCard__imageCountZoomIndex ??
-        DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT
+        DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT_ZOOM_INDEX
       }
     />
   );

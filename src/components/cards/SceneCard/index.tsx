@@ -322,7 +322,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
             interactive={props.scene.interactive}
             userZoomIndex={
               props.pluginConfig.cards__sceneCard__interactiveZoomIndex ??
-              DEFAULT.CARDS.SCENE_CARD.INTERACTIVE
+              DEFAULT.CARDS.SCENE_CARD.INTERACTIVE_ZOOM_INDEX
             }
           />
         </FileData>
@@ -345,6 +345,10 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
           context="card"
           currentZoomIndex={props.zoomIndex}
           performers={props.scene.performers}
+          useGenderedColors={
+            props.pluginConfig.cards__shared__performerListGenderColors ??
+            DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+          }
           userZoomIndex={
             props.pluginConfig.cards__sceneCard__performerListZoomIndex ??
             DEFAULT.CARDS.SCENE_CARD.PERFORMER_LIST_ZOOM_INDEX
@@ -705,6 +709,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
             <PerformerList
               context="modal"
               performers={props.scene.performers}
+              useGenderedColors={
+                props.pluginConfig.cards__shared__performerListGenderColors ??
+                DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+              }
             />
             <Director context="modal" director={props.scene.director} />
           </CastCrew>

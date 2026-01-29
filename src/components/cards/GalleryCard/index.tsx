@@ -196,7 +196,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
             count={props.gallery.image_count}
             userZoomIndex={
               props.pluginConfig.cards__galleryCard__imageCountZoomIndex ??
-              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT
+              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT_ZOOM_INDEX
             }
           />
           <ImageCollectionIcon
@@ -240,6 +240,10 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
           context="card"
           currentZoomIndex={props.zoomIndex}
           performers={props.gallery.performers}
+          useGenderedColors={
+            props.pluginConfig.cards__shared__performerListGenderColors ??
+            DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+          }
           userZoomIndex={
             props.pluginConfig.cards__galleryCard__performerListZoomIndex ??
             DEFAULT.CARDS.GALLERY_CARD.PERFORMER_LIST_ZOOM_INDEX
@@ -489,6 +493,10 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
             <PerformerList
               context="modal"
               performers={props.gallery.performers}
+              useGenderedColors={
+                props.pluginConfig.cards__shared__performerListGenderColors ??
+                DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+              }
             />
             <Photographer
               context="modal"

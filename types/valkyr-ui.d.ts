@@ -64,6 +64,8 @@ type SlimStashObject =
 interface ValkyrUiConfigMap {
   /** Enables counts for associated object modal sections. */
   cards__shared__enableCounts?: boolean;
+  /** Sets the font color of performer names according to their gender. */
+  cards__shared__performerListGenderColors?: boolean;
   /** Adds padding to timestamps to make all units double-figures and include
    * hours. */
   cards__shared__timestampPadding?: boolean;

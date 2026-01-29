@@ -4,10 +4,14 @@ import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import PerformerList from ".";
 
 const performerData = [
-  { id: "1", name: "Gabbie Carter" },
-  { id: "2", name: "Xander Corvus" },
-  { id: "3", name: "Angel Youngs" },
-  { id: "4", name: "Emma Rose" },
+  { id: "1", gender: "FEMALE" as GenderEnum.Female, name: "Gabbie Carter" },
+  { id: "2", gender: "MALE" as GenderEnum.Male, name: "Xander Corvus" },
+  { id: "3", gender: "FEMALE" as GenderEnum.Female, name: "Angel Youngs" },
+  {
+    id: "4",
+    gender: "TRANSGENDER_FEMALE" as GenderEnum.TransgenderMale,
+    name: "Emma Rose",
+  },
 ];
 
 const meta = {
@@ -18,6 +22,7 @@ const meta = {
   },
   args: {
     performers: performerData,
+    useGenderedColors: false,
   },
   argTypes: {
     ...dataComponentArgTypes,
@@ -58,6 +63,14 @@ export const FourPerformers: Story = {
       performerData[2],
       performerData[3],
     ],
+  },
+};
+
+export const GenderedColors: Story = {
+  args: {
+    context: "modal",
+    performers: performerData,
+    useGenderedColors: true,
   },
 };
 
