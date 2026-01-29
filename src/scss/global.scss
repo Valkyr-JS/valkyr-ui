@@ -2,6 +2,14 @@
 
 $prefix: variables.$prefix;
 
+$stash-gender-female: #f38cac;
+$stash-gender-intersex: #c8a2c8;
+$stash-gender-male: #89cff0;
+$stash-gender-nonbinary: #c8a2c8;
+$stash-gender-transfemale: #c8a2c8;
+$stash-gender-transmale: #c8a2c8;
+$stash-gender-unknown: #f5f8fa;
+
 :root {
   --#{$prefix}-body-color: #f5f8fa;
   --#{$prefix}-link-color: var(--#{$prefix}-body-color);
@@ -17,4 +25,12 @@ $prefix: variables.$prefix;
   --#{$prefix}-card-top-line-opacity: 0.8;
 
   --#{$prefix}-card-modal-max-width: 640px;
+
+  --#{$prefix}-gender-color--female: #{$stash-gender-female};
+  --#{$prefix}-gender-color--intersex: #{$stash-gender-intersex};
+  --#{$prefix}-gender-color--male: #{$stash-gender-male};
+  --#{$prefix}-gender-color--nonbinary: #{$stash-gender-nonbinary};
+  --#{$prefix}-gender-color--transfemale: #{$stash-gender-transfemale};
+  --#{$prefix}-gender-color--transmale: #{$stash-gender-transmale};
+  --#{$prefix}-gender-color--unknown: #{$stash-gender-unknown};
 }
