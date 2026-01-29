@@ -77,7 +77,7 @@ export const FullDataDefaults: Story = {
 
     // Performer list should render
     const performerA = canvas.getByRole("link", { name: "Gabbie Carter" });
-    const performerB = canvas.getByRole("link", { name: "Xander Corvus" });
+    const performerB = canvas.getByRole("link", { name: "Markus Dupree" });
     await expect(performerA).toBeInTheDocument();
     await expect(performerB).toBeInTheDocument();
 
@@ -140,7 +140,7 @@ export const FullDataAllEnabled: Story = {
 
     // Performer list should render
     const performerA = canvas.getByRole("link", { name: "Gabbie Carter" });
-    const performerB = canvas.getByRole("link", { name: "Xander Corvus" });
+    const performerB = canvas.getByRole("link", { name: "Markus Dupree" });
     await expect(performerA).toBeInTheDocument();
     await expect(performerB).toBeInTheDocument();
 

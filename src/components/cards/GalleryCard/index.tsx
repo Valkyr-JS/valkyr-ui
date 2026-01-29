@@ -486,6 +486,10 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           </KeyData>
           <Details context="modal" details={props.gallery.details} />
           <CastCrew>
+            <PerformerList
+              context="modal"
+              performers={props.gallery.performers}
+            />
             <Photographer
               context="modal"
               photographer={props.gallery.photographer}
