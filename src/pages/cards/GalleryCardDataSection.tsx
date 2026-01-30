@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
   BooleanSetting,
+  NumberSetting,
   SettingGroup,
+  StringSetting,
 } from "@/components/stash/Settings/Inputs";
-import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting";
-import { StringSetting } from "@/components/stash/Settings/Inputs/StringSetting";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { DEFAULT } from "@/constants";
 
