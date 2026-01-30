@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   BooleanSetting,
+  ModalSetting,
   NumberSetting,
   SettingGroup,
 } from "@/components/stash/Settings/Inputs";
@@ -77,6 +78,39 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
+  const PerformerListSortFilter = () => {
+    const [value, setValue] = useState<GenderEnum[]>(
+      props.pluginConfig.cards__shared__performerListSortFilter ??
+        DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER,
+    );
+
+    return (
+      <ModalSetting
+        heading="Sort and filter by gender"
+        id="valkyr-ui-cards__shared__performerListSortFilter"
+        value={value}
+        onChange={(v) => {
+          setValue(v);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__shared__performerListSortFilter: v,
+          });
+        }}
+        renderField={(value, setValue) => <span>Hello there</span>}
+        renderValue={(val) => {
+          return (
+            <>
+              {val?.map((v) => (
+                <span>{v}</span>
+              ))}
+            </>
+          );
+        }}
+        subHeading="Customise the order of performer names by gender, as well as filtering out genders. Leave empty to leave unfiltered and order alphabetically."
+      />
+    );
+  };
+
   const PerformerListMaxItems = () => (
     <NumberSetting
       heading="Max list length"
@@ -106,6 +140,7 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
       >
         <PerformerListGenderColors />
         <PerformerListMaxItems />
+        <PerformerListSortFilter />
       </SettingGroup>
       <PadTimestamps />
     </SettingSection>
