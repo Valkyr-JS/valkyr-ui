@@ -54,8 +54,11 @@ interface ISceneCardProps {
 }
 interface ISetting {
   id?: string;
+  advanced?: boolean;
   className?: string;
   heading?: React.ReactNode;
+  headingID?: string;
+  subHeadingID?: string;
   subHeading?: React.ReactNode;
   tooltip?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
@@ -92,4 +95,3 @@ interface RatingSystemOptions {
 
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/utils/rating.ts#L1 */
 type RatingSystemType = "stars" | "decimal";
-
