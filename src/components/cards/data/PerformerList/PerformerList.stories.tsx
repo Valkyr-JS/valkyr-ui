@@ -12,6 +12,11 @@ const performerData = [
     gender: "TRANSGENDER_FEMALE" as GenderEnum.TransgenderMale,
     name: "Emma Rose",
   },
+  {
+    id: "5",
+    gender: null,
+    name: "Big Dave",
+  },
 ];
 
 const meta = {
@@ -21,6 +26,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    genderSortFilter: undefined,
     max: undefined,
     performers: performerData,
     useGenderedColors: false,
@@ -120,6 +126,63 @@ export const FourPerformersMaxTwo: Story = {
   },
 };
 
+export const GenderFilter: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    genderSortFilter: [
+      "FEMALE" as GenderEnum.Female,
+      "TRANSGENDER_FEMALE" as GenderEnum.TransgenderMale,
+    ],
+    performers: performerData,
+    useGenderedColors: true,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const performers = canvas.getAllByRole("link");
+    const performerA = within(performers[0]).getByText("Angel Youngs");
+    const performerB = within(performers[1]).getByText("Gabbie Carter");
+    const performerC = within(performers[2]).getByText("Emma Rose");
+    const performerD = canvas.queryByRole("link", { name: "Xander Corvus" });
+    const performerE = canvas.queryByRole("link", { name: "Big Dave" });
+
+    await expect(performerA).toBeInTheDocument();
+    await expect(performerB).toBeInTheDocument();
+    await expect(performerC).toBeInTheDocument();
+    await expect(performerD).toBeNull();
+    await expect(performerE).toBeNull();
+  },
+};
+
+export const GenderUnfiltered: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    genderSortFilter: undefined,
+    performers: performerData,
+    useGenderedColors: true,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const performers = canvas.getAllByRole("link");
+    const performerA = within(performers[0]).getByText("Angel Youngs");
+    const performerB = within(performers[1]).getByText("Big Dave");
+    const performerC = within(performers[2]).getByText("Emma Rose");
+    const performerD = within(performers[3]).getByText("Gabbie Carter");
+    const performerE = within(performers[4]).getByText("Xander Corvus");
+
+    await expect(performerA).toBeInTheDocument();
+    await expect(performerB).toBeInTheDocument();
+    await expect(performerC).toBeInTheDocument();
+    await expect(performerD).toBeInTheDocument();
+    await expect(performerE).toBeInTheDocument();
+  },
+};
+
 export const OverflowMax: Story = {
   args: {
     context: "card",
@@ -130,15 +193,17 @@ export const OverflowMax: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const performerA = canvas.getByRole("link", { name: "Gabbie Carter" });
-    const performerB = canvas.getByRole("link", { name: "Xander Corvus" });
-    const performerC = canvas.queryByRole("link", { name: "Angel Youngs" });
+    const performerA = canvas.queryByRole("link", { name: "Gabbie Carter" });
+    const performerB = canvas.queryByRole("link", { name: "Xander Corvus" });
+    const performerC = canvas.getByRole("link", { name: "Angel Youngs" });
     const performerD = canvas.queryByRole("link", { name: "Emma Rose" });
-    const overflowText = canvas.getByText("and 2 more");
-    await expect(performerA).toBeInTheDocument();
-    await expect(performerB).toBeInTheDocument();
-    await expect(performerC).toBeNull();
+    const performerE = canvas.getByRole("link", { name: "Big Dave" });
+    const overflowText = canvas.getByText("and 3 more");
+    await expect(performerA).toBeNull();
+    await expect(performerB).toBeNull();
+    await expect(performerC).toBeInTheDocument();
     await expect(performerD).toBeNull();
+    await expect(performerE).toBeInTheDocument();
     await expect(overflowText).toBeInTheDocument();
   },
 };
