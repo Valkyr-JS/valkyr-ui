@@ -69,7 +69,7 @@ const PerformerList: React.FC<
     }
   };
 
-  const sortedList = filteredList.sort(genderSorter);
+  const sortedList = [...filteredList].sort(genderSorter);
 
   /* ------------------------------------------ Overflow ------------------------------------------ */
 
