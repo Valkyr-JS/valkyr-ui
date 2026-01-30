@@ -6,7 +6,7 @@ import "./PerformerList.scss";
 
 interface PerformerData {
   id: Performer["id"];
-  gender: Maybe<GenderEnum> | undefined;
+  gender: Maybe<GenderEnum>;
   name: Performer["name"];
 }
 

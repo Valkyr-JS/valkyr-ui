@@ -50,6 +50,7 @@ export const DEFAULT = {
       ENABLE_FOOTER_BUTTON_COUNTS: true,
       PERFORMER_LIST_GENDER_COLORS: false,
       PERFORMER_LIST_MAX_ITEMS: 5,
+      PERFORMER_LIST_SORT_FILTER: [],
       TIMESTAMP_PADDING: false,
     },
   },

@@ -69,6 +69,9 @@ interface ValkyrUiConfigMap {
   /** The number of performers that will be listed by name before being cut off
    * with `+ X more`. */
   cards__shared__performerListMaxItems?: number;
+  /** Sets which genders are visible in the performer list, and the order they
+   * appear in. Leave undefined to sort names alphabetically. */
+  cards__shared__performerListSortFilter?: GenderEnum[];
   /** Adds padding to timestamps to make all units double-figures and include
    * hours. */
   cards__shared__timestampPadding?: boolean;
