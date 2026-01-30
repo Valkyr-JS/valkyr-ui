@@ -38,10 +38,15 @@ const PerformerList: React.FC<
 
   if (!data) return null;
 
+  /* ------------------------------------ Sorting and filtering ----------------------------------- */
+
+  // Default to alphabetical order
+  const sortedList = data.sort((a, b) => a.name.localeCompare(b.name));
+
   /* ------------------------------------------ Overflow ------------------------------------------ */
 
-  const visiblePerformers = !!props.max ? data.slice(0, props.max) : data;
-  const numCutPerformers = data.length - visiblePerformers.length;
+  const visibleList = !!props.max ? sortedList.slice(0, props.max) : sortedList;
+  const numCutPerformers = data.length - visibleList.length;
   const overflowText = numCutPerformers ? (
     <span> and {numCutPerformers} more</span>
   ) : null;
@@ -62,7 +67,7 @@ const PerformerList: React.FC<
         {intl.formatMessage({ id: "performers" })}:
       </span>
       <ul>
-        {visiblePerformers?.map((p) => {
+        {visibleList?.map((p) => {
           const gender = !p.gender
             ? "unknown"
             : p.gender.toLowerCase().split("_").join("-");
