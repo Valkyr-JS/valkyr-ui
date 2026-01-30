@@ -239,6 +239,10 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
         <PerformerList
           context="card"
           currentZoomIndex={props.zoomIndex}
+          genderSortFilter={
+            props.pluginConfig.cards__shared__performerListSortFilter ??
+            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+          }
           max={
             props.pluginConfig.cards__shared__performerListMaxItems ??
             DEFAULT.CARDS.SHARED.PERFORMER_LIST_MAX_ITEMS
@@ -496,6 +500,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           <CastCrew>
             <PerformerList
               context="modal"
+              genderSortFilter={[]}
               max={undefined}
               performers={props.gallery.performers}
               useGenderedColors={
