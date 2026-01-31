@@ -88,43 +88,41 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
   };
 
   return (
-    <div>
-      <ul>
-        {order.map((or, i) => (
-          <li key={i}>
-            <button
-              className="btn minimal"
-              disabled={i === 0 || or.disabled}
-              onClick={() => handleMoveUp(i)}
-              type="button"
-            >
-              <FontAwesomeIcon icon={faUp} />
-              <span className="sr-only">Move up</span>
-            </button>
-            <button
-              className="btn minimal"
-              disabled={i === options.length - 1 || or.disabled}
-              onClick={() => handleMoveDown(i)}
-              type="button"
-            >
-              <FontAwesomeIcon icon={faDown} />
-              <span className="sr-only">Move down</span>
-            </button>
-            <button
-              className="btn minimal"
-              onClick={() => handleToggleDisable(i)}
-              type="button"
-            >
-              <FontAwesomeIcon icon={or.disabled ? faXmark : faCheck} />
-              <span className="sr-only">
-                {or.disabled ? "Enable" : "Disable"}
-              </span>
-            </button>
-            <span>{or.label}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ol>
+      {order.map((or, i) => (
+        <li key={i}>
+          <button
+            className="btn minimal"
+            disabled={i === 0 || or.disabled}
+            onClick={() => handleMoveUp(i)}
+            type="button"
+          >
+            <FontAwesomeIcon icon={faUp} />
+            <span className="sr-only">Move up</span>
+          </button>
+          <button
+            className="btn minimal"
+            disabled={i === options.length - 1 || or.disabled}
+            onClick={() => handleMoveDown(i)}
+            type="button"
+          >
+            <FontAwesomeIcon icon={faDown} />
+            <span className="sr-only">Move down</span>
+          </button>
+          <button
+            className="btn minimal"
+            onClick={() => handleToggleDisable(i)}
+            type="button"
+          >
+            <FontAwesomeIcon icon={or.disabled ? faXmark : faCheck} />
+            <span className="sr-only">
+              {or.disabled ? "Enable" : "Disable"}
+            </span>
+          </button>
+          <span>{or.label}</span>
+        </li>
+      ))}
+    </ol>
   );
 };
 
