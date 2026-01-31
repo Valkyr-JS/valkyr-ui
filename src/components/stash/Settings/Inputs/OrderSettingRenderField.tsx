@@ -74,7 +74,7 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
           <li key={i}>
             <button
               className="btn minimal"
-              disabled={i === 0}
+              disabled={i === 0 || or.disabled}
               onClick={() => handleMoveUp(i)}
               type="button"
             >
@@ -83,7 +83,7 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
             </button>
             <button
               className="btn minimal"
-              disabled={i === options.length - 1}
+              disabled={i === options.length - 1 || or.disabled}
               onClick={() => handleMoveDown(i)}
               type="button"
             >
