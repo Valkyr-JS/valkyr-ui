@@ -18,6 +18,18 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
 
   const [order, setOrder] = useState(options);
 
+  const handleMoveDown = (orIndex: number) => {
+    // Swap the clicked option with the option after it.
+    const updatedOrder = order.map((or, i) => {
+      if (i === orIndex + 1) return order[orIndex];
+      if (i === orIndex) return order[orIndex + 1];
+      return or;
+    });
+
+    setOrder(updatedOrder);
+    props.setValue(updatedOrder.map((or) => or.label));
+  };
+
   const handleMoveUp = (orIndex: number) => {
     // Swap the clicked option with the option before it.
     const updatedOrder = order.map((or, i) => {
@@ -25,7 +37,7 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
       if (i === orIndex) return order[orIndex - 1];
       return or;
     });
-    console.log("updatedOptions: ", updatedOrder);
+
     setOrder(updatedOrder);
     props.setValue(updatedOrder.map((or) => or.label));
   };
@@ -42,7 +54,11 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
             >
               Up
             </button>
-            <button disabled={i === options.length - 1} type="button">
+            <button
+              disabled={i === options.length - 1}
+              onClick={() => handleMoveDown(i)}
+              type="button"
+            >
               Down
             </button>
             <button type="button">{or.disabled ? "Enable" : "Disable"}</button>
