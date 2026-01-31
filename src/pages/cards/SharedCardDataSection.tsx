@@ -7,7 +7,7 @@ import {
 } from "@/components/stash/Settings/Inputs";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { DEFAULT } from "@/constants";
-import OrderSettingRenderField from "@/components/stash/Settings/Inputs/OrderSettingRenderField";
+import * as OrderSetting from "@/components/stash/Settings/Inputs/OrderSetting";
 
 const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
   const FooterCountsEnabled = () => {
@@ -98,9 +98,8 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
           });
         }}
         renderField={(value, setValue) => {
-          console.log("value: ", value);
           return (
-            <OrderSettingRenderField
+            <OrderSetting.RenderField
               allOptions={[
                 "FEMALE",
                 "MALE",
@@ -115,13 +114,7 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
           );
         }}
         renderValue={(val) => {
-          return (
-            <>
-              {val?.map((v, i) => (
-                <span key={i}>{v.toLocaleLowerCase()}</span>
-              ))}
-            </>
-          );
+          return <OrderSetting.RenderValue value={val} />;
         }}
         subHeading="Customise the order of performer names by gender, as well as filtering out genders. Disable all to leave unfiltered and order alphabetically."
       />
