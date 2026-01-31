@@ -10,25 +10,40 @@ interface OrderSettingRenderFieldProps {
   value: Array<string>;
 }
 
+interface OrderOption {
+  disabled: boolean;
+  label: string;
+}
+
+const optionSorter = (a: OrderOption, b: OrderOption) => {
+  if (!a.disabled && b.disabled) return -1;
+  if (!b.disabled) return 1;
+  return a.label.localeCompare(b.label);
+};
+
 const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
   props,
 ) => {
   // Create the enabled/disabled data based on which options are featured in the
   // value array.
-  const options = props.allOptions.map((opt) => ({
-    label: opt,
-    disabled: !props.value.includes(opt),
-  }));
+  const options: OrderOption[] = props.allOptions
+    .map((opt) => ({
+      label: opt,
+      disabled: !props.value.includes(opt),
+    }))
+    .sort(optionSorter);
 
   const [order, setOrder] = useState(options);
 
   const handleMoveDown = (orIndex: number) => {
     // Swap the clicked option with the option after it.
-    const updatedOrder = order.map((or, i) => {
-      if (i === orIndex + 1) return order[orIndex];
-      if (i === orIndex) return order[orIndex + 1];
-      return or;
-    });
+    const updatedOrder = order
+      .map((or, i) => {
+        if (i === orIndex + 1) return order[orIndex];
+        if (i === orIndex) return order[orIndex + 1];
+        return or;
+      })
+      .sort(optionSorter);
 
     setOrder(updatedOrder);
 
@@ -40,11 +55,13 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
 
   const handleMoveUp = (orIndex: number) => {
     // Swap the clicked option with the option before it.
-    const updatedOrder = order.map((or, i) => {
-      if (i === orIndex - 1) return order[orIndex];
-      if (i === orIndex) return order[orIndex - 1];
-      return or;
-    });
+    const updatedOrder = order
+      .map((or, i) => {
+        if (i === orIndex - 1) return order[orIndex];
+        if (i === orIndex) return order[orIndex - 1];
+        return or;
+      })
+      .sort(optionSorter);
 
     setOrder(updatedOrder);
 
@@ -55,10 +72,12 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
   };
 
   const handleToggleDisable = (orIndex: number) => {
-    const updatedOrder = order.map((or, i) => {
-      if (i === orIndex) return { ...or, disabled: !or.disabled };
-      return or;
-    });
+    const updatedOrder = order
+      .map((or, i) => {
+        if (i === orIndex) return { ...or, disabled: !or.disabled };
+        return or;
+      })
+      .sort(optionSorter);
     setOrder(updatedOrder);
 
     const updatedValue = updatedOrder
