@@ -31,7 +31,11 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
     });
 
     setOrder(updatedOrder);
-    props.setValue(updatedOrder.map((or) => or.label));
+
+    const updatedValue = updatedOrder
+      .filter((or) => !or.disabled)
+      .map((or) => or.label);
+    props.setValue(updatedValue);
   };
 
   const handleMoveUp = (orIndex: number) => {
@@ -43,7 +47,11 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
     });
 
     setOrder(updatedOrder);
-    props.setValue(updatedOrder.map((or) => or.label));
+
+    const updatedValue = updatedOrder
+      .filter((or) => !or.disabled)
+      .map((or) => or.label);
+    props.setValue(updatedValue);
   };
 
   const handleToggleDisable = (orIndex: number) => {
@@ -52,6 +60,11 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
       return or;
     });
     setOrder(updatedOrder);
+
+    const updatedValue = updatedOrder
+      .filter((or) => !or.disabled)
+      .map((or) => or.label);
+    props.setValue(updatedValue);
   };
 
   return (
