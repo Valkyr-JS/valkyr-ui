@@ -101,8 +101,15 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
           console.log("value: ", value);
           return (
             <OrderSettingRenderField
-              allOptions={["FEMALE", "MALE", "UNKNOWN"]}
-              value={value ?? ["FEMALE", "MALE"]}
+              allOptions={[
+                "FEMALE",
+                "MALE",
+                "TRANSGENDER_MALE",
+                "TRANSGENDER_FEMALE",
+                "INTERSEX",
+                "NONBINARY",
+              ]}
+              value={value ?? []}
               setValue={(v) => setValue(v as GenderEnum[])}
             />
           );
