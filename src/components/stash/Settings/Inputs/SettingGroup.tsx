@@ -30,7 +30,7 @@ const SettingGroup: React.FC<PropsWithChildren<ISettingGroup>> = (props) => {
       >
         <FontAwesomeIcon fixedWidth icon={open ? faChevronUp : faChevronDown} />
         <span className="sr-only">
-          {open ? intl.formatMessage({ id: "close" }) : "Open"}
+          {open ? intl.formatMessage({ id: "actions.close" }) : "Open"}
         </span>
       </Button>
     );
