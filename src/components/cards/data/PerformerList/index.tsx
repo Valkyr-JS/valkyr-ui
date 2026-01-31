@@ -54,19 +54,31 @@ const PerformerList: React.FC<
     : data;
 
   const genderSorter = (a: PerformerData, b: PerformerData): number => {
-    const genderA = a.gender ?? ("UNKNOWN" as GenderEnum);
-    const genderB = b.gender ?? ("UNKNOWN" as GenderEnum);
-    switch (true) {
-      // Sort by gender if a filter has been provided and they are not the same.
-      case genderSortFilter.length && genderA !== genderB:
-        return (
-          genderSortFilter.indexOf(genderA) - genderSortFilter.indexOf(genderB)
-        );
+    const genderA = a.gender;
+    const genderB = b.gender;
 
-      // Otherwise sort by name
-      default:
-        return a.name.localeCompare(b.name);
+    if (genderSortFilter.length) {
+      switch (true) {
+        // Check for null/undefined genders and order them last
+        case !genderA && !genderB:
+          return 0;
+        case !genderA:
+          return 1;
+        case !genderB:
+          return -1;
+
+        // Order by the given gender order
+        case genderA !== genderB:
+          return (
+            genderSortFilter.indexOf(genderA) -
+            genderSortFilter.indexOf(genderB)
+          );
+
+        default:
+          return a.name.localeCompare(b.name);
+      }
     }
+    return a.name.localeCompare(b.name);
   };
 
   const sortedList = [...filteredList].sort(genderSorter);
