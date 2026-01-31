@@ -18,7 +18,7 @@ interface OrderOption {
 const optionSorter = (a: OrderOption, b: OrderOption) => {
   if (!a.disabled && b.disabled) return -1;
   if (!b.disabled) return 1;
-  return a.label.localeCompare(b.label);
+  return 0;
 };
 
 const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
