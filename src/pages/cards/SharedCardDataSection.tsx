@@ -97,18 +97,21 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
             cards__shared__performerListSortFilter: v,
           });
         }}
-        renderField={(value, setValue) => (
-          <OrderSettingRenderField
-            options={["FEMALE", "MALE"]}
-            order={value ?? []}
-            setOrder={(v) => setValue(v as GenderEnum[])}
-          />
-        )}
+        renderField={(value, setValue) => {
+          console.log("value: ", value);
+          return (
+            <OrderSettingRenderField
+              allOptions={["FEMALE", "MALE", "UNKNOWN"]}
+              value={value ?? ["FEMALE", "MALE"]}
+              setValue={(v) => setValue(v as GenderEnum[])}
+            />
+          );
+        }}
         renderValue={(val) => {
           return (
             <>
-              {val?.map((v) => (
-                <span>{v}</span>
+              {val?.map((v, i) => (
+                <span key={i}>{v.toLocaleLowerCase()}</span>
               ))}
             </>
           );

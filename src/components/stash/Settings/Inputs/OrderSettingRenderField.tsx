@@ -1,74 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface OrderSettingRenderFieldProps {
-  options: Array<string>;
-  setOrder: React.Dispatch<React.SetStateAction<Array<string>>>;
-  order: Array<string>;
+  allOptions: Array<string>;
+  setValue: React.Dispatch<React.SetStateAction<Array<string>>>;
+  value: Array<string>;
 }
 
 const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
   props,
 ) => {
-  // TODO - MANAGE STATE HERE
+  // Create the enabled/disabled data based on which options are featured in the
+  // value array.
+  const options = props.allOptions.map((opt) => ({
+    label: opt,
+    disabled: !props.value.includes(opt),
+  }));
 
-  const handleUp = (pos: number) => {
-    // Remove the option from its existing position
-    const newValue = props.order.filter((_v, i) => i !== pos);
-    console.log(newValue);
+  const [order, setOrder] = useState(options);
 
-    // Add it to the new position
-    newValue.splice(pos - 1, 0);
-
-    // Update the state
-    props.setOrder(newValue);
+  const handleMoveUp = (orIndex: number) => {
+    // Swap the clicked option with the option before it.
+    const updatedOrder = order.map((or, i) => {
+      if (i === orIndex - 1) return order[orIndex];
+      if (i === orIndex) return order[orIndex - 1];
+      return or;
+    });
+    console.log("updatedOptions: ", updatedOrder);
+    setOrder(updatedOrder);
+    props.setValue(updatedOrder.map((or) => or.label));
   };
-
-  const handleToggleEnable = (enable: boolean, pos: number) => {
-    let newValue = props.order;
-    // If enabling, add the option to the end of the list
-    if (enable) newValue.push(props.options[pos]);
-    else newValue = newValue.filter((_o, i) => i !== pos);
-
-    // Update the state
-    props.setOrder(newValue);
-  };
-
-  // Sort the options by the current order. Any not included in the order should
-  // be added last and set as disabled.
-  const orderedOptions: { disabled: boolean; label: string }[] = [];
-  props.order.forEach((o) =>
-    orderedOptions.push({ disabled: false, label: o }),
-  );
-  props.options.forEach((opt) => {
-    if (orderedOptions.findIndex((o) => o.label === opt) === -1)
-      orderedOptions.push({ disabled: true, label: opt });
-  });
 
   return (
     <div>
       <ul>
-        {orderedOptions.map((opt, i) => (
+        {order.map((or, i) => (
           <li key={i}>
             <button
-              disabled={i === 0 || opt.disabled}
+              disabled={i === 0}
+              onClick={() => handleMoveUp(i)}
               type="button"
-              onClick={() => handleUp(i)}
             >
               Up
             </button>
-            <button
-              disabled={i === orderedOptions.length - 1 || opt.disabled}
-              type="button"
-            >
+            <button disabled={i === options.length - 1} type="button">
               Down
             </button>
-            <button
-              type="button"
-              onClick={() => handleToggleEnable(!opt.disabled, i)}
-            >
-              {opt.disabled ? "Enable" : "Disable"}
-            </button>
-            <span>{opt.label}</span>
+            <button type="button">{or.disabled ? "Enable" : "Disable"}</button>
+            <span>{or.label}</span>
           </li>
         ))}
       </ul>
