@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { faUp } from "@fortawesome/pro-solid-svg-icons/faUp";
+import { faDown } from "@fortawesome/pro-solid-svg-icons/faDown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faXmark } from "@fortawesome/pro-solid-svg-icons";
 
 interface OrderSettingRenderFieldProps {
   allOptions: Array<string>;
@@ -48,20 +52,29 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
         {order.map((or, i) => (
           <li key={i}>
             <button
+              className="btn minimal"
               disabled={i === 0}
               onClick={() => handleMoveUp(i)}
               type="button"
             >
-              Up
+              <FontAwesomeIcon icon={faUp} />
+              <span className="sr-only">Move up</span>
             </button>
             <button
+              className="btn minimal"
               disabled={i === options.length - 1}
               onClick={() => handleMoveDown(i)}
               type="button"
             >
-              Down
+              <FontAwesomeIcon icon={faDown} />
+              <span className="sr-only">Move down</span>
             </button>
-            <button type="button">{or.disabled ? "Enable" : "Disable"}</button>
+            <button className="btn minimal" type="button">
+              <FontAwesomeIcon icon={or.disabled ? faXmark : faCheck} />
+              <span className="sr-only">
+                {or.disabled ? "Enable" : "Disable"}
+              </span>
+            </button>
             <span>{or.label}</span>
           </li>
         ))}
