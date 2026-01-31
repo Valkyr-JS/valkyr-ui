@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import {
   BooleanSetting,
+  ModalSetting,
+  NumberSetting,
   SettingGroup,
 } from "@/components/stash/Settings/Inputs";
-import { NumberSetting } from "@/components/stash/Settings/Inputs/NumberSetting";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { DEFAULT } from "@/constants";
+import * as OrderSetting from "@/components/stash/Settings/Inputs/OrderSetting";
 
 const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
   const FooterCountsEnabled = () => {
@@ -77,6 +79,49 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
+  const PerformerListSortFilter = () => {
+    const [value, setValue] = useState<GenderEnum[]>(
+      props.pluginConfig.cards__shared__performerListSortFilter ??
+        DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER,
+    );
+
+    return (
+      <ModalSetting
+        heading="Sort and filter by gender"
+        id="valkyr-ui-cards__shared__performerListSortFilter"
+        value={value}
+        onChange={(v) => {
+          setValue(v);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__shared__performerListSortFilter: v,
+          });
+        }}
+        renderField={(value, setValue) => {
+          return (
+            <OrderSetting.RenderField
+              allOptions={[
+                "FEMALE",
+                "MALE",
+                "TRANSGENDER_MALE",
+                "TRANSGENDER_FEMALE",
+                "INTERSEX",
+                "NONBINARY",
+                "UNKNOWN"
+              ]}
+              value={value ?? []}
+              setValue={(v) => setValue(v as GenderEnum[])}
+            />
+          );
+        }}
+        renderValue={(val) => {
+          return <OrderSetting.RenderValue value={val} />;
+        }}
+        subHeading="Customise the order of performer names by gender, as well as filtering out genders. Disable all to leave unfiltered and order alphabetically."
+      />
+    );
+  };
+
   const PerformerListMaxItems = () => (
     <NumberSetting
       heading="Max list length"
@@ -106,6 +151,7 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
       >
         <PerformerListGenderColors />
         <PerformerListMaxItems />
+        <PerformerListSortFilter />
       </SettingGroup>
       <PadTimestamps />
     </SettingSection>

@@ -4,16 +4,23 @@ import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 import "./PerformerList.scss";
 
+interface PerformerData {
+  id: Performer["id"];
+  gender: Maybe<GenderEnum> | undefined;
+  name: Performer["name"];
+}
+
 interface PerformerListProps {
+  /** An array of Gender enums in the order they should appear. Genders not
+   * included will be filtered out. Leave undefined to leave genders unfiltered
+   * and names in alphabetical order.  */
+  genderSortFilter: GenderEnum[] | undefined;
+
   /** The maximum number of names to show in the list before being cut off. */
   max: number | undefined;
 
   /** The list of performers */
-  performers: {
-    id: Performer["id"];
-    gender: Maybe<GenderEnum> | undefined;
-    name: Performer["name"];
-  }[];
+  performers: PerformerData[];
 
   /** Whether to set names in gender-specific colors. */
   useGenderedColors: boolean;
@@ -23,6 +30,7 @@ const PerformerList: React.FC<
   | DataComponentProps<PerformerListProps>
   | DataComponentModalProps<PerformerListProps>
 > = (props) => {
+  const genderSortFilter = props.genderSortFilter ?? [];
   const intl = useIntl();
 
   const data =
@@ -38,10 +46,43 @@ const PerformerList: React.FC<
 
   if (!data) return null;
 
+  /* ------------------------------------ Sorting and filtering ----------------------------------- */
+
+  // If a gender sort filter was provided, filter out unused genders. Force
+  // `"UNKNOWN"` to be treated as a `GenderEnum` to work with the
+  // `genderSortFilter`.
+  const filteredList = genderSortFilter.length
+    ? data.filter((p) =>
+        genderSortFilter.includes(p.gender ?? ("UNKNOWN" as GenderEnum)),
+      )
+    : data;
+
+  const genderSorter = (a: PerformerData, b: PerformerData): number => {
+    const genderA = a.gender ?? "UNKNOWN";
+    const genderB = b.gender ?? "UNKNOWN";
+
+    if (genderSortFilter.length) {
+      switch (true) {
+        // Order by the given gender order
+        case genderA !== genderB:
+          return (
+            genderSortFilter.indexOf(genderA as GenderEnum) -
+            genderSortFilter.indexOf(genderB as GenderEnum)
+          );
+
+        default:
+          return a.name.localeCompare(b.name);
+      }
+    }
+    return a.name.localeCompare(b.name);
+  };
+
+  const sortedList = [...filteredList].sort(genderSorter);
+
   /* ------------------------------------------ Overflow ------------------------------------------ */
 
-  const visiblePerformers = !!props.max ? data.slice(0, props.max) : data;
-  const numCutPerformers = data.length - visiblePerformers.length;
+  const visibleList = !!props.max ? sortedList.slice(0, props.max) : sortedList;
+  const numCutPerformers = sortedList.length - visibleList.length;
   const overflowText = numCutPerformers ? (
     <span> and {numCutPerformers} more</span>
   ) : null;
@@ -62,7 +103,7 @@ const PerformerList: React.FC<
         {intl.formatMessage({ id: "performers" })}:
       </span>
       <ul>
-        {visiblePerformers?.map((p) => {
+        {visibleList?.map((p) => {
           const gender = !p.gender
             ? "unknown"
             : p.gender.toLowerCase().split("_").join("-");

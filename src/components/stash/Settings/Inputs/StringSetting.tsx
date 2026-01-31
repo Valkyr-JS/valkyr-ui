@@ -10,7 +10,7 @@ interface StringSettingProps extends ISetting {
 }
 // This is a custom build component based on the NumberSetting component, rather
 // than directly copied from a Stash component.
-export const StringSetting: React.FC<StringSettingProps> = (props) => {
+const StringSetting: React.FC<StringSettingProps> = (props) => {
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) =>
     props.onChange(e.target.value);
 
@@ -28,3 +28,5 @@ export const StringSetting: React.FC<StringSettingProps> = (props) => {
     </Setting>
   );
 };
+
+export default StringSetting;

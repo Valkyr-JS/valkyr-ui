@@ -7,7 +7,7 @@ interface INumberSetting extends ISetting {
   onChange: (v: number) => void;
 }
 
-export const NumberSetting: React.FC<INumberSetting> = ({
+const NumberSetting: React.FC<INumberSetting> = ({
   onChange,
   value,
   ...props
@@ -25,3 +25,5 @@ export const NumberSetting: React.FC<INumberSetting> = ({
     </Setting>
   );
 };
+
+export default NumberSetting;

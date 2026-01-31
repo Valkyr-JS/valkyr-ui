@@ -344,6 +344,10 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
         <PerformerList
           context="card"
           currentZoomIndex={props.zoomIndex}
+          genderSortFilter={
+            props.pluginConfig.cards__shared__performerListSortFilter ??
+            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+          }
           max={
             props.pluginConfig.cards__shared__performerListMaxItems ??
             DEFAULT.CARDS.SHARED.PERFORMER_LIST_MAX_ITEMS
@@ -712,6 +716,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           <CastCrew>
             <PerformerList
               context="modal"
+              genderSortFilter={
+                props.pluginConfig.cards__shared__performerListSortFilter ??
+                DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+              }
               max={undefined}
               performers={props.scene.performers}
               useGenderedColors={

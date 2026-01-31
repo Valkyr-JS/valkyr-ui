@@ -58,7 +58,6 @@ interface IgetRenderData<T> {
  * rendered. Returns either the required data object if it will render, or null
  * if it won't. */
 export const getRenderData = <T>(args: IgetRenderData<T>): T | null => {
-  console.log(args.data);
   // Return null if no data is available
   if (args.data === undefined) return null;
 
@@ -84,7 +83,6 @@ export const getRenderData = <T>(args: IgetRenderData<T>): T | null => {
   // Return null if the user zoom index is greater than the current
   // zoom index.
   if (args.zoomIndex.user > args.zoomIndex.current) return null;
-  console.log(args.data);
 
   return args.data;
 };
