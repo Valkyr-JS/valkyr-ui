@@ -716,7 +716,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           <CastCrew>
             <PerformerList
               context="modal"
-              genderSortFilter={[]}
+              genderSortFilter={
+                props.pluginConfig.cards__shared__performerListSortFilter ??
+                DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+              }
               max={undefined}
               performers={props.scene.performers}
               useGenderedColors={
