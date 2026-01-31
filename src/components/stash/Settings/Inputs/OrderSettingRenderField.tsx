@@ -46,6 +46,14 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
     props.setValue(updatedOrder.map((or) => or.label));
   };
 
+  const handleToggleDisable = (orIndex: number) => {
+    const updatedOrder = order.map((or, i) => {
+      if (i === orIndex) return { ...or, disabled: !or.disabled };
+      return or;
+    });
+    setOrder(updatedOrder);
+  };
+
   return (
     <div>
       <ul>
@@ -69,7 +77,11 @@ const OrderSettingRenderField: React.FC<OrderSettingRenderFieldProps> = (
               <FontAwesomeIcon icon={faDown} />
               <span className="sr-only">Move down</span>
             </button>
-            <button className="btn minimal" type="button">
+            <button
+              className="btn minimal"
+              onClick={() => handleToggleDisable(i)}
+              type="button"
+            >
               <FontAwesomeIcon icon={or.disabled ? faXmark : faCheck} />
               <span className="sr-only">
                 {or.disabled ? "Enable" : "Disable"}
