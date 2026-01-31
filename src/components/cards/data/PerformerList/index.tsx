@@ -48,30 +48,26 @@ const PerformerList: React.FC<
 
   /* ------------------------------------ Sorting and filtering ----------------------------------- */
 
-  // If a gender sort filter was provided, filter out unused genders.
+  // If a gender sort filter was provided, filter out unused genders. Force
+  // `"UNKNOWN"` to be treated as a `GenderEnum` to work with the
+  // `genderSortFilter`.
   const filteredList = genderSortFilter.length
-    ? data.filter((p) => !!p.gender && genderSortFilter.includes(p.gender))
+    ? data.filter((p) =>
+        genderSortFilter.includes(p.gender ?? ("UNKNOWN" as GenderEnum)),
+      )
     : data;
 
   const genderSorter = (a: PerformerData, b: PerformerData): number => {
-    const genderA = a.gender;
-    const genderB = b.gender;
+    const genderA = a.gender ?? "UNKNOWN";
+    const genderB = b.gender ?? "UNKNOWN";
 
     if (genderSortFilter.length) {
       switch (true) {
-        // Check for null/undefined genders and order them last
-        case !genderA && !genderB:
-          return 0;
-        case !genderA:
-          return 1;
-        case !genderB:
-          return -1;
-
         // Order by the given gender order
         case genderA !== genderB:
           return (
-            genderSortFilter.indexOf(genderA) -
-            genderSortFilter.indexOf(genderB)
+            genderSortFilter.indexOf(genderA as GenderEnum) -
+            genderSortFilter.indexOf(genderB as GenderEnum)
           );
 
         default:
