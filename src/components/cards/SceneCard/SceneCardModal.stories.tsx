@@ -414,6 +414,41 @@ export const DetailsSectionButton: Story = {
   },
 };
 
+export const PerformersSection: Story = {
+  args: {
+    section: "performers",
+    scene: fullData as SceneDataFragment,
+  },
+};
+
+export const PerformersSectionButton: Story = {
+  args: {
+    scene: fullData as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const performersModalBtn = canvas.getByRole("button", {
+      name: "Performers",
+    });
+    expect(performersModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoPerformersSectionButton: Story = {
+  args: {
+    scene: minimalData as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const performersModalBtn = canvas.queryByRole("button", {
+      name: "Performers",
+    });
+    expect(performersModalBtn).toBeNull();
+  },
+};
+
 export const TagsSection: Story = {
   args: {
     section: "tags",

@@ -24,6 +24,7 @@ import VideoCodec from "../data/VideoCodec";
 import {
   CardModalContent,
   CardModalNavigation,
+  CardModalPerformersSection,
   CardModalTagsSection,
 } from "../layouts/CardModal";
 import CastCrew from "../layouts/CastCrew";
@@ -645,6 +646,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     >
       {props.section === "tags" ? (
         <CardModalTagsSection tags={props.scene.tags} />
+      ) : props.section === "performers" ? (
+        <CardModalPerformersSection performers={props.scene.performers} />
       ) : (
         <>
           <KeyData>

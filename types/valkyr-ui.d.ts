@@ -1,4 +1,4 @@
-type CardModalSection = "details" | "tags";
+type CardModalSection = "details" | "performers" | "tags";
 type CardModalSectionData = [CardModalSection] | [CardModalSection, number];
 
 type DataComponentProps<T = unknown> = T & {

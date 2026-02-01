@@ -17,6 +17,7 @@ import ZipIcon from "../data/ZipIcon";
 import {
   CardModalContent,
   CardModalNavigation,
+  CardModalPerformersSection,
   CardModalTagsSection,
 } from "../layouts/CardModal";
 import CastCrew from "../layouts/CastCrew";
@@ -462,6 +463,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
     >
       {props.section === "tags" ? (
         <CardModalTagsSection tags={props.gallery.tags} />
+      ) : props.section === "performers" ? (
+        <CardModalPerformersSection performers={props.gallery.performers} />
       ) : (
         <>
           <KeyData>

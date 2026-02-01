@@ -172,6 +172,20 @@ export const CardModalWrapper: React.FC<
 };
 
 /* ---------------------------------------------------------------------------------------------- */
+/*                                       Performers section                                       */
+/* ---------------------------------------------------------------------------------------------- */
+
+interface CardModalPerformersSectionProps {
+  performers: { id: Performer["id"]; name: Performer["name"] }[];
+}
+
+export const CardModalPerformersSection: React.FC<
+  CardModalPerformersSectionProps
+> = (props) => {
+  return <div>Performers section</div>;
+};
+
+/* ---------------------------------------------------------------------------------------------- */
 /*                                          Tags section                                          */
 /* ---------------------------------------------------------------------------------------------- */
 
