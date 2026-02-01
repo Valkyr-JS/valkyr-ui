@@ -18,7 +18,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-      const pluginConfig = stashConfig.plugins["valkyr-ui"];
+      const pluginConfig = stashConfig.plugins["valkyr-ui"] ?? {};
 
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSceneIndex, setModalSceneIndex] = useState(0);
@@ -97,11 +97,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
             }
           : undefined;
 
-      if (
-        pluginConfig &&
-        (pluginConfig?.cards__sceneCard__enabled ??
-          DEFAULT.CARDS.SCENE_CARD.ENABLED)
-      )
+      if (pluginConfig?.cards__sceneCard__enabled ?? DEFAULT.CARDS.SCENE_CARD)
         return [
           <>
             <CardGrid
@@ -166,7 +162,7 @@ PluginApi.patch.instead<ISceneCardProps>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-      const pluginConfig = stashConfig.plugins["valkyr-ui"];
+      const pluginConfig = stashConfig.plugins["valkyr-ui"] ?? {};
 
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSection, setModalSection] =
@@ -197,10 +193,7 @@ PluginApi.patch.instead<ISceneCardProps>(
         } else setModalOpen(true);
       };
 
-      if (
-        pluginConfig &&
-        (pluginConfig?.cards__sceneCard__enabled ?? DEFAULT.CARDS.SCENE_CARD)
-      )
+      if (pluginConfig?.cards__sceneCard__enabled ?? DEFAULT.CARDS.SCENE_CARD)
         return [
           <>
             <SceneCard
