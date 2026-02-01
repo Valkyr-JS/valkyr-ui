@@ -9,6 +9,7 @@ import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
 import TextUtils from "@/components/stash/utils/text";
+import GenderIcon from "@/components/stash/Performers/GenderIcon";
 
 export interface CardModalNavigation {
   next: {
@@ -214,6 +215,7 @@ export const CardModalPerformersSection: React.FC<
   const sectionClass = componentClass + "__performer-section";
   const dataWrapperClass = componentClass + "__performer-data-wrapper";
   const imageWrapperClass = componentClass + "__performer-image-wrapper";
+  const iconsClass = componentClass + "__performer-icons";
 
   const disambiguationClass = componentClass + "__performer-disambiguation";
 
@@ -267,6 +269,9 @@ export const CardModalPerformersSection: React.FC<
                   </span>
                 )}
                 <h6>{p.name}</h6>
+                <div className={iconsClass}>
+                  <GenderIcon gender={p.gender ?? null} />
+                </div>
                 {p.birthdate && props.object.date && (
                   <span>
                     {intl.formatMessage({ id: "age_on_date" }, { age })}

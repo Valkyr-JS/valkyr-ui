@@ -77,8 +77,11 @@ $prefix: variables.$prefix;
   &__performer-disambiguation {
     display: block;
     font-size: var(--#{$prefix}-card-font-sm);
-    margin-bottom: 3px;
     opacity: 0.8;
+  }
+
+  &__performer-icons {
+    margin-bottom: 3px;
   }
 
   @media (min-width: 400px) {
