@@ -89,6 +89,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.performers.length)
+    footerSections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length)
     footerSections.push(["tags", props.scene.tags.length]);
   const footerProps = { ...props.footer, sections: footerSections };
@@ -584,6 +586,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_ZOOM_INDEX) > -1;
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.scene.performers.length)
+    sections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length) sections.push(["tags", props.scene.tags.length]);
 
   return (

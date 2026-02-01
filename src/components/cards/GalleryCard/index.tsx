@@ -56,6 +56,8 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   const title = getTitleFromObject(props.gallery);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.performers.length)
+    footerSections.push(["performers", props.gallery.performers.length]);
   if (props.gallery.tags.length)
     footerSections.push(["tags", props.gallery.tags.length]);
   const footerProps = { ...props.footer, sections: footerSections };
@@ -393,6 +395,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const title = getTitleFromObject(props.gallery);
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.performers.length)
+    sections.push(["performers", props.gallery.performers.length]);
   if (props.gallery.tags.length)
     sections.push(["tags", props.gallery.tags.length]);
 

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faTag } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faTag, faUser } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Card, Form } from "react-bootstrap";
 import { useIntl } from "react-intl";
@@ -150,6 +150,17 @@ const CardFooter: React.FC<
           title={intl.formatMessage({ id: "details" })}
         >
           <FontAwesomeIcon icon={faCircleInfo} />
+        </button>
+      )}
+      {props.sections.find((s) => s[0] === "performers") && (
+        <button
+          type="button"
+          className="minimal btn"
+          disabled={props.selectionProps.selecting}
+          onClick={handleOpenDetailsSection}
+          title={intl.formatMessage({ id: "performers" })}
+        >
+          <FontAwesomeIcon icon={faUser} />
         </button>
       )}
       {props.sections.find((s) => s[0] === "tags") && (

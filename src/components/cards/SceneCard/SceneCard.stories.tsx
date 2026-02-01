@@ -423,6 +423,34 @@ export const DetailsModalButton: Story = {
   },
 };
 
+export const PerformersModalButton: Story = {
+  args: {
+    scene: fullData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Performers",
+    });
+    expect(tagsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoPerformersModalButton: Story = {
+  args: {
+    scene: minimalData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.queryByRole("button", {
+      name: "Performers",
+    });
+    expect(tagsModalBtn).toBeNull();
+  },
+};
+
 export const TagsModalButton: Story = {
   args: {
     scene: fullData as SlimSceneDataFragment,
