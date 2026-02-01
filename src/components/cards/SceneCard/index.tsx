@@ -651,7 +651,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       {props.section === "tags" ? (
         <CardModalTagsSection tags={props.scene.tags} />
       ) : props.section === "performers" ? (
-        <CardModalPerformersSection performers={props.scene.performers} />
+        <CardModalPerformersSection
+          object={props.scene}
+          performers={props.scene.performers}
+        />
       ) : (
         <>
           <KeyData>

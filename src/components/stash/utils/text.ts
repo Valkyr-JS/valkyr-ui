@@ -1,3 +1,25 @@
+const getAge = (dateString?: string | null, fromDateString?: string | null) => {
+  if (!dateString) return 0;
+
+  const birthdate = stringToFuzzyDate(dateString);
+  const fromDate = fromDateString
+    ? stringToFuzzyDate(fromDateString)
+    : new Date();
+
+  if (!birthdate || !fromDate) return 0;
+
+  let age = fromDate.getFullYear() - birthdate.getFullYear();
+  if (
+    birthdate.getMonth() > fromDate.getMonth() ||
+    (birthdate.getMonth() >= fromDate.getMonth() &&
+      birthdate.getDate() > fromDate.getDate())
+  ) {
+    age -= 1;
+  }
+
+  return age;
+};
+
 /** https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/utils/text.ts#L363C1-L407C3 */
 const resolution = (width: number, height: number) => {
   const number = width > height ? height : width;
@@ -96,6 +118,27 @@ const secondsToTimestamp = (
   }
 };
 
-const TextUtils = { resolution, secondsToTimestamp };
+const stringToFuzzyDate = (dateString: string) => {
+  if (!dateString) return null;
+
+  const parts = dateString.split("-");
+  // Invalid date string
+  let year = Number(parts[0]);
+  if (isNaN(year)) year = new Date().getFullYear();
+  let monthIndex = 0;
+  if (parts.length > 1) {
+    monthIndex = Math.max(0, Number(parts[1]) - 1);
+    if (monthIndex > 11 || isNaN(monthIndex)) monthIndex = 0;
+  }
+  let day = 1;
+  if (parts.length > 2) {
+    day = Number(parts[2]);
+    if (day > 31 || isNaN(day)) day = 1;
+  }
+
+  return new Date(year, monthIndex, day, 0, 0, 0, 0);
+};
+
+const TextUtils = { age: getAge, resolution, secondsToTimestamp };
 
 export default TextUtils;

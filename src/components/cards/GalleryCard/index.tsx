@@ -468,7 +468,10 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       {props.section === "tags" ? (
         <CardModalTagsSection tags={props.gallery.tags} />
       ) : props.section === "performers" ? (
-        <CardModalPerformersSection performers={props.gallery.performers} />
+        <CardModalPerformersSection
+          object={props.gallery}
+          performers={props.gallery.performers}
+        />
       ) : (
         <>
           <KeyData>

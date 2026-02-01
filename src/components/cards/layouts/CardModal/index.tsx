@@ -8,6 +8,7 @@ import { DEFAULT } from "@/constants";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
+import TextUtils from "@/components/stash/utils/text";
 
 export interface CardModalNavigation {
   next: {
@@ -193,13 +194,44 @@ export const CardModalWrapper: React.FC<
 /* ---------------------------------------------------------------------------------------------- */
 
 interface CardModalPerformersSectionProps {
-  performers: { id: Performer["id"]; name: Performer["name"] }[];
+  object: GalleryDataFragment | SceneDataFragment;
+  performers: PerformerDataFragment[];
 }
 
 export const CardModalPerformersSection: React.FC<
   CardModalPerformersSectionProps
 > = (props) => {
-  return <div>Performers section</div>;
+  const intl = useIntl();
+  const componentClass = "vui-card-modal";
+  const sectionClass = componentClass + "__performer-section";
+  const dataWrapperClass = componentClass + "__performer-data-wrapper";
+  const imageWrapperClass = componentClass + "__performer-image-wrapper";
+
+  return (
+    <div className={sectionClass}>
+      <ul>
+        {props.performers.map((p) => {
+          const age = TextUtils.age(p.birthdate, props.object.date);
+          return (
+            <li key={p.id}>
+              {p.image_path && (
+                <div className={imageWrapperClass}>
+                  <img alt="" src={p.image_path} />
+                </div>
+              )}
+              <div className={dataWrapperClass}>
+                <h6>{p.name}</h6>
+                <span>{p.disambiguation}</span>
+                <span>
+                  {intl.formatMessage({ id: "age_on_date" }, { age })}
+                </span>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
 
 /* ---------------------------------------------------------------------------------------------- */

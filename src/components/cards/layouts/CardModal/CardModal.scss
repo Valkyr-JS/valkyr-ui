@@ -40,6 +40,47 @@ $prefix: variables.$prefix;
     }
   }
 
+  &__performer-section {
+    ul {
+      list-style: none;
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+
+    li {
+      display: flex;
+      flex-direction: column;
+
+      &:not(:last-child) {
+        padding-bottom: 10px;
+        border-bottom: 1px solid white;
+        margin-bottom: 10px;
+      }
+
+      @media (min-width: 400px) {
+        display: grid;
+        grid-template-columns: [performer-section-start performer-section-item-image-start] 160px [performer-section-item-image-end performer-section-item-data-start] 1fr [performer-section-item-data-end performer-section-end];
+      }
+    }
+  }
+
+  &__performer-image-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 240px;
+    margin-bottom: 5px;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  &__performer-data-wrapper {
+    @media (min-width: 400px) {
+      padding-left: 10px;
+    }
+  }
+
   @media (min-width: 992px) {
     .modal-dialog {
       max-width: var(--#{$prefix}-card-modal-max-width);
