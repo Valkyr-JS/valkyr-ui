@@ -228,9 +228,11 @@ export const CardModalPerformersSection: React.FC<
                   </span>
                 )}
                 <h6>{p.name}</h6>
-                <span>
-                  {intl.formatMessage({ id: "age_on_date" }, { age })}
-                </span>
+                {p.birthdate && props.object.date && (
+                  <span>
+                    {intl.formatMessage({ id: "age_on_date" }, { age })}
+                  </span>
+                )}
               </div>
             </li>
           );
