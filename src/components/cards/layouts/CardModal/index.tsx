@@ -1,6 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faTag, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleInfo,
+  faHeart,
+  faTag,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
@@ -271,6 +276,14 @@ export const CardModalPerformersSection: React.FC<
                 <h6>{p.name}</h6>
                 <div className={iconsClass}>
                   <GenderIcon gender={p.gender ?? null} />
+                  {p.favorite && (
+                    <span>
+                      <FontAwesomeIcon icon={faHeart} />
+                      <span className="sr-only">
+                        {intl.formatMessage({ id: "performer_favorite" })}
+                      </span>
+                    </span>
+                  )}
                 </div>
                 {p.birthdate && props.object.date && (
                   <span>
