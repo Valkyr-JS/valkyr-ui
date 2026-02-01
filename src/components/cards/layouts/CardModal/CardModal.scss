@@ -82,8 +82,18 @@ $prefix: variables.$prefix;
 
   &__performer-icons {
     display: flex;
-    gap: 5px;
+    gap: 15px;
     margin-bottom: 3px;
+  }
+
+  &__performer-rating {
+    svg {
+      margin: 0;
+
+      &:not(:last-child) {
+        margin-right: 3px;
+      }
+    }
   }
 
   @media (min-width: 400px) {

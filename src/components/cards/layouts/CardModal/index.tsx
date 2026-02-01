@@ -16,6 +16,7 @@ import TopLine from "../TopLine";
 import "./CardModal.scss";
 import TextUtils from "@/components/stash/utils/text";
 import GenderIcon from "@/components/stash/Performers/GenderIcon";
+import { convertRating100 } from "@/helpers";
 
 export interface CardModalNavigation {
   next: {
@@ -211,6 +212,9 @@ interface CardModalPerformersSectionProps {
 
   /** The list of performers for the object. */
   performers: PerformerDataFragment[];
+
+  /** The user's Stash rating system configuration. */
+  ratingSystem?: RatingSystemOptions;
 }
 
 export const CardModalPerformersSection: React.FC<
@@ -224,6 +228,27 @@ export const CardModalPerformersSection: React.FC<
   const iconsClass = componentClass + "__performer-icons";
 
   const disambiguationClass = componentClass + "__performer-disambiguation";
+
+  /* ------------------------------------------- Rating ------------------------------------------- */
+
+  const ratingClass = componentClass + "__performer-rating";
+  const ratingType = props.ratingSystem?.type ?? "stars";
+
+  const srRatingText = (ratingNum: number) =>
+    ratingType === "decimal"
+      ? `${intl.formatMessage({ id: "rating" })}: ${ratingNum} out of 10`
+      : `${intl.formatMessage({ id: "rating" })}: ${ratingNum} stars`;
+
+  const rating = (ratingNum: number) => {
+    if (!ratingNum) return null;
+    return (
+      <span className={ratingClass}>
+        <FontAwesomeIcon icon={faStar} />
+        <span className="sr-only">{srRatingText(ratingNum)}</span>
+        <span aria-hidden>{ratingNum}</span>
+      </span>
+    );
+  };
 
   /* ------------------------------------------- Sorter ------------------------------------------- */
 
@@ -261,6 +286,11 @@ export const CardModalPerformersSection: React.FC<
       <ul>
         {sortedList.map((p) => {
           const age = TextUtils.age(p.birthdate, props.object.date);
+          const ratingNum = convertRating100(
+            p.rating100 ?? 0,
+            props.ratingSystem,
+          );
+
           return (
             <li key={p.id}>
               {p.image_path && (
@@ -284,6 +314,7 @@ export const CardModalPerformersSection: React.FC<
                       title={p.country}
                     ></span>
                   )}
+                  {rating(ratingNum)}
                   {p.favorite && (
                     <span>
                       <FontAwesomeIcon icon={faHeart} />

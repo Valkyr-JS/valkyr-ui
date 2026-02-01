@@ -658,6 +658,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           }
           object={props.scene}
           performers={props.scene.performers}
+          ratingSystem={props.ratingSystem}
         />
       ) : (
         <>

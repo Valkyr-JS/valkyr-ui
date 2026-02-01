@@ -475,6 +475,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           }
           object={props.gallery}
           performers={props.gallery.performers}
+          ratingSystem={props.ratingSystem}
         />
       ) : (
         <>
