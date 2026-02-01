@@ -166,6 +166,12 @@ const CardFooter: React.FC<
           title={intl.formatMessage({ id: "performers" })}
         >
           <FontAwesomeIcon icon={faUser} />
+          {(props.pluginConfig.cards__shared__enableCounts ??
+          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+            <span aria-hidden>
+              {props.sections.find((s) => s[0] === "performers")?.[1]}
+            </span>
+          ) : null}
         </button>
       )}
       {props.sections.find((s) => s[0] === "tags") && (
