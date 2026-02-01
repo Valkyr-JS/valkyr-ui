@@ -469,6 +469,10 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
         <CardModalTagsSection tags={props.gallery.tags} />
       ) : props.section === "performers" ? (
         <CardModalPerformersSection
+          genderSortFilter={
+            props.pluginConfig.cards__shared__performerListSortFilter ??
+            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+          }
           object={props.gallery}
           performers={props.gallery.performers}
         />

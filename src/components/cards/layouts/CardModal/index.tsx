@@ -194,7 +194,15 @@ export const CardModalWrapper: React.FC<
 /* ---------------------------------------------------------------------------------------------- */
 
 interface CardModalPerformersSectionProps {
+  /** An array of Gender enums in the order they should appear. Unlike the dard
+   * performer list, Genders not included will NOT be filtered out. Leave
+   * undefined to leave genders unfiltered and names in alphabetical order.  */
+  genderSortFilter: GenderEnum[] | undefined;
+
+  /** The Stash object that this list refers to. */
   object: GalleryDataFragment | SceneDataFragment;
+
+  /** The list of performers for the object. */
   performers: PerformerDataFragment[];
 }
 
@@ -209,10 +217,41 @@ export const CardModalPerformersSection: React.FC<
 
   const disambiguationClass = componentClass + "__performer-disambiguation";
 
+  /* ------------------------------------------- Sorter ------------------------------------------- */
+
+  const genderSortFilter = props.genderSortFilter ?? [];
+
+  const genderSorter = (
+    a: PerformerDataFragment,
+    b: PerformerDataFragment,
+  ): number => {
+    const genderA = a.gender ?? "UNKNOWN";
+    const genderB = b.gender ?? "UNKNOWN";
+
+    if (genderSortFilter.length) {
+      switch (true) {
+        // Order by the given gender order
+        case genderA !== genderB:
+          return (
+            genderSortFilter.indexOf(genderA as GenderEnum) -
+            genderSortFilter.indexOf(genderB as GenderEnum)
+          );
+
+        default:
+          return a.name.localeCompare(b.name);
+      }
+    }
+    return a.name.localeCompare(b.name);
+  };
+
+  const sortedList = [...props.performers].sort(genderSorter);
+
+  /* ------------------------------------------ Component ----------------------------------------- */
+
   return (
     <div className={sectionClass}>
       <ul>
-        {props.performers.map((p) => {
+        {sortedList.map((p) => {
           const age = TextUtils.age(p.birthdate, props.object.date);
           return (
             <li key={p.id}>

@@ -652,6 +652,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
         <CardModalTagsSection tags={props.scene.tags} />
       ) : props.section === "performers" ? (
         <CardModalPerformersSection
+          genderSortFilter={
+            props.pluginConfig.cards__shared__performerListSortFilter ??
+            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+          }
           object={props.scene}
           performers={props.scene.performers}
         />
