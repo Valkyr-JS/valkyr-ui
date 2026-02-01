@@ -207,6 +207,8 @@ export const CardModalPerformersSection: React.FC<
   const dataWrapperClass = componentClass + "__performer-data-wrapper";
   const imageWrapperClass = componentClass + "__performer-image-wrapper";
 
+  const disambiguationClass = componentClass + "__performer-disambiguation";
+
   return (
     <div className={sectionClass}>
       <ul>
@@ -220,8 +222,12 @@ export const CardModalPerformersSection: React.FC<
                 </div>
               )}
               <div className={dataWrapperClass}>
+                {p.disambiguation && (
+                  <span className={disambiguationClass}>
+                    {p.disambiguation}
+                  </span>
+                )}
                 <h6>{p.name}</h6>
-                <span>{p.disambiguation}</span>
                 <span>
                   {intl.formatMessage({ id: "age_on_date" }, { age })}
                 </span>

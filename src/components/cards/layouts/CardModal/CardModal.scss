@@ -74,6 +74,13 @@ $prefix: variables.$prefix;
     }
   }
 
+  &__performer-disambiguation {
+    display: block;
+    font-size: var(--#{$prefix}-card-font-sm);
+    margin-bottom: 3px;
+    opacity: 0.8;
+  }
+
   @media (min-width: 400px) {
     &__performer-data-wrapper {
       padding-left: 10px;
