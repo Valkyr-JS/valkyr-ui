@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleInfo,
   faHeart,
+  faStar,
   faTag,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -276,6 +277,15 @@ export const CardModalPerformersSection: React.FC<
                 <h6>{p.name}</h6>
                 <div className={iconsClass}>
                   <GenderIcon gender={p.gender ?? null} />
+                  {p.country && (
+                    <span>
+                      <span
+                        aria-hidden
+                        className={`fi fi-${p.country.toLowerCase()}`}
+                      ></span>
+                      <span className="sr-only">{p.country}</span>
+                    </span>
+                  )}
                   {p.favorite && (
                     <span>
                       <FontAwesomeIcon icon={faHeart} />
