@@ -134,6 +134,11 @@ const CardFooter: React.FC<
     props.openHandler();
   };
 
+  const handleOpenPerformersSection = () => {
+    props.setSection("performers");
+    props.openHandler();
+  };
+
   const handleOpenTagsSection = () => {
     props.setSection("tags");
     props.openHandler();
@@ -157,7 +162,7 @@ const CardFooter: React.FC<
           type="button"
           className="minimal btn"
           disabled={props.selectionProps.selecting}
-          onClick={handleOpenDetailsSection}
+          onClick={handleOpenPerformersSection}
           title={intl.formatMessage({ id: "performers" })}
         >
           <FontAwesomeIcon icon={faUser} />
