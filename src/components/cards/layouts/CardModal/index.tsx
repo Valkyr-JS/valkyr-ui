@@ -329,6 +329,9 @@ export const CardModalPerformersSection: React.FC<
                     {intl.formatMessage({ id: "age_on_date" }, { age })}
                   </span>
                 )}
+                <div>
+                  <a className="btn minimal mt-2" href={`/performers/${p.id}/`}>Read more</a>
+                </div>
               </div>
             </li>
           );
