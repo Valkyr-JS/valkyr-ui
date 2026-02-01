@@ -67,16 +67,15 @@ $prefix: variables.$prefix;
   &__performer-image-wrapper {
     display: flex;
     justify-content: center;
-    height: 240px;
     margin-bottom: 5px;
 
     img {
-      height: 100%;
+      width: 160px;
     }
   }
 
-  &__performer-data-wrapper {
-    @media (min-width: 400px) {
+  @media (min-width: 400px) {
+    &__performer-data-wrapper {
       padding-left: 10px;
     }
   }
