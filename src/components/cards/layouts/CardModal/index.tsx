@@ -278,13 +278,11 @@ export const CardModalPerformersSection: React.FC<
                 <div className={iconsClass}>
                   <GenderIcon gender={p.gender ?? null} />
                   {p.country && (
-                    <span>
-                      <span
-                        aria-hidden
-                        className={`fi fi-${p.country.toLowerCase()}`}
-                      ></span>
-                      <span className="sr-only">{p.country}</span>
-                    </span>
+                    <span
+                      aria-hidden
+                      className={`fi fi-${p.country.toLowerCase()}`}
+                      title={p.country}
+                    ></span>
                   )}
                   {p.favorite && (
                     <span>
