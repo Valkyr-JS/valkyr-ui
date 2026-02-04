@@ -34,3 +34,31 @@ $stash-gender-unknown: #f5f8fa;
   --#{$prefix}-gender-color--transmale: #{$stash-gender-transmale};
   --#{$prefix}-gender-color--unknown: #{$stash-gender-unknown};
 }
+
+.vui-color-female {
+  color: var(--#{$prefix}-gender-color--female) !important;
+}
+
+.vui-color-intersex {
+  color: var(--#{$prefix}-gender-color--intersex) !important;
+}
+
+.vui-color-male {
+  color: var(--#{$prefix}-gender-color--male) !important;
+}
+
+.vui-color-nonbinary {
+  color: var(--#{$prefix}-gender-color--nonbinary) !important;
+}
+
+.vui-color-transfemale {
+  color: var(--#{$prefix}-gender-color--transfemale) !important;
+}
+
+.vui-color-transmale {
+  color: var(--#{$prefix}-gender-color--transmale) !important;
+}
+
+.vui-color-unknown {
+  color: var(--#{$prefix}-gender-color--unknown) !important;
+}

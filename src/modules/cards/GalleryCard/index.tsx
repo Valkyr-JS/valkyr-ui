@@ -18,7 +18,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-      const pluginConfig = stashConfig.plugins["valkyr-ui"];
+      const pluginConfig = stashConfig.plugins["valkyr-ui"] ?? {};
 
       const [modalOpen, setModalOpen] = useState(false);
       const [modalGalleryIndex, setModalGalleryIndex] = useState(0);
@@ -98,9 +98,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
           : undefined;
 
       if (
-        pluginConfig &&
-        (pluginConfig?.cards__galleryCard__enabled ??
-          DEFAULT.CARDS.GALLERY_CARD.ENABLED)
+        pluginConfig?.cards__galleryCard__enabled ??
+        DEFAULT.CARDS.GALLERY_CARD.ENABLED
       )
         return [
           <>
@@ -158,7 +157,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-      const pluginConfig = stashConfig.plugins["valkyr-ui"];
+      const pluginConfig = stashConfig.plugins["valkyr-ui"] ?? {};
 
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSection, setModalSection] =
@@ -192,9 +191,8 @@ PluginApi.patch.instead<IGalleryCardProps>(
       };
 
       if (
-        pluginConfig &&
-        (pluginConfig?.cards__galleryCard__enabled ??
-          DEFAULT.CARDS.GALLERY_CARD.ENABLED)
+        pluginConfig?.cards__galleryCard__enabled ??
+        DEFAULT.CARDS.GALLERY_CARD.ENABLED
       )
         return [
           <>

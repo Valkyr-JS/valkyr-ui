@@ -24,6 +24,7 @@ import VideoCodec from "../data/VideoCodec";
 import {
   CardModalContent,
   CardModalNavigation,
+  CardModalPerformersSection,
   CardModalTagsSection,
 } from "../layouts/CardModal";
 import CastCrew from "../layouts/CastCrew";
@@ -88,6 +89,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.performers.length)
+    footerSections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length)
     footerSections.push(["tags", props.scene.tags.length]);
   const footerProps = { ...props.footer, sections: footerSections };
@@ -583,6 +586,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_ZOOM_INDEX) > -1;
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.scene.performers.length)
+    sections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length) sections.push(["tags", props.scene.tags.length]);
 
   return (
@@ -645,6 +650,16 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     >
       {props.section === "tags" ? (
         <CardModalTagsSection tags={props.scene.tags} />
+      ) : props.section === "performers" ? (
+        <CardModalPerformersSection
+          genderSortFilter={
+            props.pluginConfig.cards__shared__performerListSortFilter ??
+            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+          }
+          object={props.scene}
+          performers={props.scene.performers}
+          ratingSystem={props.ratingSystem}
+        />
       ) : (
         <>
           <KeyData>

@@ -1,6 +1,12 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faTag } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleInfo,
+  faHeart,
+  faStar,
+  faTag,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
@@ -8,6 +14,9 @@ import { DEFAULT } from "@/constants";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
+import TextUtils from "@/components/stash/utils/text";
+import GenderIcon from "@/components/stash/Performers/GenderIcon";
+import { convertRating100 } from "@/helpers";
 
 export interface CardModalNavigation {
   next: {
@@ -62,6 +71,7 @@ export const CardModalContent: React.FC<
 > = (props) => {
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
+  const handleSetPerformersSection = () => props.setSection("performers");
   const handleSetTagsSection = () => props.setSection("tags");
   const componentClass = "vui-card-modal";
   const bodyClass = componentClass + "__body";
@@ -85,6 +95,22 @@ export const CardModalContent: React.FC<
               title={intl.formatMessage({ id: "details" })}
             >
               <FontAwesomeIcon icon={faCircleInfo} />
+            </button>
+          )}
+          {props.sections.find((s) => s[0] === "performers") && (
+            <button
+              type="button"
+              className="minimal btn"
+              onClick={handleSetPerformersSection}
+              title={intl.formatMessage({ id: "performers" })}
+            >
+              <FontAwesomeIcon icon={faUser} />
+              {(props.pluginConfig.cards__shared__enableCounts ??
+              DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+                <span aria-hidden>
+                  {props.sections.find((s) => s[0] === "performers")?.[1]}
+                </span>
+              ) : null}
             </button>
           )}
           {props.sections.find((s) => s[0] === "tags") && (
@@ -168,6 +194,150 @@ export const CardModalWrapper: React.FC<
     >
       {props.children}
     </Modal>
+  );
+};
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                       Performers section                                       */
+/* ---------------------------------------------------------------------------------------------- */
+
+interface CardModalPerformersSectionProps {
+  /** An array of Gender enums in the order they should appear. Unlike the dard
+   * performer list, Genders not included will NOT be filtered out. Leave
+   * undefined to leave genders unfiltered and names in alphabetical order.  */
+  genderSortFilter: GenderEnum[] | undefined;
+
+  /** The Stash object that this list refers to. */
+  object: GalleryDataFragment | SceneDataFragment;
+
+  /** The list of performers for the object. */
+  performers: PerformerDataFragment[];
+
+  /** The user's Stash rating system configuration. */
+  ratingSystem?: RatingSystemOptions;
+}
+
+export const CardModalPerformersSection: React.FC<
+  CardModalPerformersSectionProps
+> = (props) => {
+  const intl = useIntl();
+  const componentClass = "vui-card-modal";
+  const sectionClass = componentClass + "__performer-section";
+  const dataWrapperClass = componentClass + "__performer-data-wrapper";
+  const imageWrapperClass = componentClass + "__performer-image-wrapper";
+  const iconsClass = componentClass + "__performer-icons";
+
+  const disambiguationClass = componentClass + "__performer-disambiguation";
+
+  /* ------------------------------------------- Rating ------------------------------------------- */
+
+  const ratingClass = componentClass + "__performer-rating";
+  const ratingType = props.ratingSystem?.type ?? "stars";
+
+  const srRatingText = (ratingNum: number) =>
+    ratingType === "decimal"
+      ? `${intl.formatMessage({ id: "rating" })}: ${ratingNum} out of 10`
+      : `${intl.formatMessage({ id: "rating" })}: ${ratingNum} stars`;
+
+  const rating = (ratingNum: number) => {
+    if (!ratingNum) return null;
+    return (
+      <span className={ratingClass}>
+        <FontAwesomeIcon icon={faStar} />
+        <span className="sr-only">{srRatingText(ratingNum)}</span>
+        <span aria-hidden>{ratingNum}</span>
+      </span>
+    );
+  };
+
+  /* ------------------------------------------- Sorter ------------------------------------------- */
+
+  const genderSortFilter = props.genderSortFilter ?? [];
+
+  const genderSorter = (
+    a: PerformerDataFragment,
+    b: PerformerDataFragment,
+  ): number => {
+    const genderA = a.gender ?? "UNKNOWN";
+    const genderB = b.gender ?? "UNKNOWN";
+
+    if (genderSortFilter.length) {
+      switch (true) {
+        // Order by the given gender order
+        case genderA !== genderB:
+          return (
+            genderSortFilter.indexOf(genderA as GenderEnum) -
+            genderSortFilter.indexOf(genderB as GenderEnum)
+          );
+
+        default:
+          return a.name.localeCompare(b.name);
+      }
+    }
+    return a.name.localeCompare(b.name);
+  };
+
+  const sortedList = [...props.performers].sort(genderSorter);
+
+  /* ------------------------------------------ Component ----------------------------------------- */
+
+  return (
+    <div className={sectionClass}>
+      <ul>
+        {sortedList.map((p) => {
+          const age = TextUtils.age(p.birthdate, props.object.date);
+          const ratingNum = convertRating100(
+            p.rating100 ?? 0,
+            props.ratingSystem,
+          );
+
+          return (
+            <li key={p.id}>
+              {p.image_path && (
+                <div className={imageWrapperClass}>
+                  <img alt="" src={p.image_path} />
+                </div>
+              )}
+              <div className={dataWrapperClass}>
+                {p.disambiguation && (
+                  <span className={disambiguationClass}>
+                    {p.disambiguation}
+                  </span>
+                )}
+                <h6>{p.name}</h6>
+                <div className={iconsClass}>
+                  <GenderIcon gender={p.gender ?? null} />
+                  {p.country && (
+                    <span
+                      aria-hidden
+                      className={`fi fi-${p.country.toLowerCase()}`}
+                      title={p.country}
+                    ></span>
+                  )}
+                  {rating(ratingNum)}
+                  {p.favorite && (
+                    <span>
+                      <FontAwesomeIcon icon={faHeart} />
+                      <span className="sr-only">
+                        {intl.formatMessage({ id: "performer_favorite" })}
+                      </span>
+                    </span>
+                  )}
+                </div>
+                {p.birthdate && props.object.date && (
+                  <span>
+                    {intl.formatMessage({ id: "age_on_date" }, { age })}
+                  </span>
+                )}
+                <div>
+                  <a className="btn minimal mt-2" href={`/performers/${p.id}/`}>Read more</a>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

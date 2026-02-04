@@ -17,6 +17,7 @@ import ZipIcon from "../data/ZipIcon";
 import {
   CardModalContent,
   CardModalNavigation,
+  CardModalPerformersSection,
   CardModalTagsSection,
 } from "../layouts/CardModal";
 import CastCrew from "../layouts/CastCrew";
@@ -55,6 +56,8 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   const title = getTitleFromObject(props.gallery);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.performers.length)
+    footerSections.push(["performers", props.gallery.performers.length]);
   if (props.gallery.tags.length)
     footerSections.push(["tags", props.gallery.tags.length]);
   const footerProps = { ...props.footer, sections: footerSections };
@@ -392,6 +395,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const title = getTitleFromObject(props.gallery);
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.performers.length)
+    sections.push(["performers", props.gallery.performers.length]);
   if (props.gallery.tags.length)
     sections.push(["tags", props.gallery.tags.length]);
 
@@ -462,6 +467,16 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
     >
       {props.section === "tags" ? (
         <CardModalTagsSection tags={props.gallery.tags} />
+      ) : props.section === "performers" ? (
+        <CardModalPerformersSection
+          genderSortFilter={
+            props.pluginConfig.cards__shared__performerListSortFilter ??
+            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+          }
+          object={props.gallery}
+          performers={props.gallery.performers}
+          ratingSystem={props.ratingSystem}
+        />
       ) : (
         <>
           <KeyData>
