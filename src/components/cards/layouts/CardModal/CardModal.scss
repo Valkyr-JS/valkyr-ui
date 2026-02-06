@@ -34,7 +34,7 @@ $prefix: variables.$prefix;
 
   .modal-body {
     display: grid;
-    grid-template-rows: [content-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-top] 1fr [body-bottom content-bottom];
+    grid-template-rows: [content-top top-line-top] max-content [top-line-bottom title-top] max-content [title-bottom body-top] max-content [body-bottom content-bottom];
   }
 
   .modal-footer {
