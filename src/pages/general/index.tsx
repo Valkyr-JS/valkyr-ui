@@ -30,6 +30,29 @@ const GeneralTab: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
+  const FullHeightModals = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.general__fullHeightModals ??
+        DEFAULT.GENERAL.FULL_HEIGHT_MODALS,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Full height modals"
+        subHeading="Modals will always be rendered at the full height of the browser window."
+        id="valkyr-ui-general__fullHeightModals"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            general__fullHeightModals: newState,
+          });
+        }}
+      />
+    );
+  };
+
   const LocaleDateFormatting = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.general__localeDateFormat ??
@@ -57,6 +80,7 @@ const GeneralTab: React.FC<SettingsTabProps> = (props) => {
     <Form.Group className={componentClassname}>
       <SettingSection id="general" heading="General settings">
         <CloseModalOnOuterClick />
+        <FullHeightModals />
         <LocaleDateFormatting />
       </SettingSection>
     </Form.Group>
