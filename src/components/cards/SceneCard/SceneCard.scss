@@ -8,7 +8,8 @@ $prefix: variables.$prefix;
 /* ---------------------------------------------------------------------------------------------- */
 
 .vui-scene-card,
-.vui-scene-card-modal {
+.vui-scene-card-modal,
+.vui-card-modal__scene-section {
   .vui-card-top-line {
     display: grid;
     grid-template-columns: [top-line-start studio-start] 1fr [studio-end user-data-start] max-content [user-data-end top-line-end];
