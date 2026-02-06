@@ -7,10 +7,56 @@ import { DEFAULT } from "@/constants";
 const GeneralTab: React.FC<SettingsTabProps> = (props) => {
   const componentClassname = "vui-form-group";
 
+  const CloseModalOnOuterClick = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.general__closeModalOnOuterClick ??
+        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Close modals on outer click"
+        subHeading="Modals will close when clicking outside of them, instead of needing to click the 'Close' button."
+        id="valkyr-ui-general__closeModalOnOuterClick"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            general__closeModalOnOuterClick: newState,
+          });
+        }}
+      />
+    );
+  };
+
+  const FullHeightModals = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.general__fullHeightModals ??
+        DEFAULT.GENERAL.FULL_HEIGHT_MODALS,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Full height modals"
+        subHeading="Modals will always be rendered at the full height of the browser window."
+        id="valkyr-ui-general__fullHeightModals"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            general__fullHeightModals: newState,
+          });
+        }}
+      />
+    );
+  };
+
   const LocaleDateFormatting = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.general__localeDateFormat ??
-        DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+        DEFAULT.GENERAL.LOCALE_DATE_FORMAT,
     );
     return (
       <BooleanSetting
@@ -33,6 +79,8 @@ const GeneralTab: React.FC<SettingsTabProps> = (props) => {
   return (
     <Form.Group className={componentClassname}>
       <SettingSection id="general" heading="General settings">
+        <CloseModalOnOuterClick />
+        <FullHeightModals />
         <LocaleDateFormatting />
       </SettingSection>
     </Form.Group>

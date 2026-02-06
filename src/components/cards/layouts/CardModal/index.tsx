@@ -172,6 +172,13 @@ interface CardModalWrapperProps {
   /** Optional classes added alongside the `vui-card-modal` component class. */
   classname?: string;
 
+  /** The event to execute on clicking outside the modal component. */
+  bgClickHandler: (() => void) | undefined;
+
+  /** Whether modals should always be rendered at full height, irrespective of
+   * content. */
+  fullHeightModal: boolean;
+
   /** Whether the modal is currently rendered. */
   show: boolean;
 
@@ -183,12 +190,20 @@ export const CardModalWrapper: React.FC<
   PropsWithChildren<CardModalWrapperProps>
 > = (props) => {
   const componentClass = "vui-card-modal";
-  const componentClassList = cx(componentClass, props.classname);
+  const componentHeightClass = componentClass + "--full-height";
+  const componentClassList = cx(
+    componentClass,
+    {
+      [componentHeightClass]: props.fullHeightModal,
+    },
+    props.classname,
+  );
 
   return (
     <Modal
       aria-labelledby={props.titleID}
       className={componentClassList}
+      onHide={props.bgClickHandler}
       scrollable
       show={props.show}
     >
@@ -330,7 +345,9 @@ export const CardModalPerformersSection: React.FC<
                   </span>
                 )}
                 <div>
-                  <a className="btn minimal mt-2" href={`/performers/${p.id}/`}>Read more</a>
+                  <a className="btn minimal mt-2" href={`/performers/${p.id}/`}>
+                    Read more
+                  </a>
                 </div>
               </div>
             </li>

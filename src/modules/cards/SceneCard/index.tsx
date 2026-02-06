@@ -67,6 +67,16 @@ PluginApi.patch.instead<ISceneCardGrid>(
         setModalOpen(true);
       };
 
+      /** Handle the click event to close the modal. */
+      const handleCloseModal = () => setModalOpen(false);
+
+      /** Handle the click event outside of the modal when it is open. */
+      const handleModalOuterClick =
+        (pluginConfig.general__closeModalOnOuterClick ??
+        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK)
+          ? handleCloseModal
+          : undefined;
+
       const navigationProps: CardModalNavigation | undefined =
         props.scenes.length > 1
           ? {
@@ -129,13 +139,18 @@ PluginApi.patch.instead<ISceneCardGrid>(
               zoomIndex={props.zoomIndex as StashCardGridZoom}
             />
             <CardModalWrapper
+              bgClickHandler={handleModalOuterClick}
               classname="vui-scene-card-modal"
+              fullHeightModal={
+                pluginConfig.general__fullHeightModals ??
+                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
+              }
               show={modalOpen}
               titleID={titleID}
             >
               <SceneCardModalContent
                 abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
-                closeHandler={() => setModalOpen(false)}
+                closeHandler={handleCloseModal}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
                 index={modalSceneIndex}
                 navigation={navigationProps}
@@ -193,6 +208,16 @@ PluginApi.patch.instead<ISceneCardProps>(
         } else setModalOpen(true);
       };
 
+      /** Handle the click event to close the modal. */
+      const handleCloseModal = () => setModalOpen(false);
+
+      /** Handle the click event outside of the modal when it is open. */
+      const handleModalOuterClick =
+        (pluginConfig.general__closeModalOnOuterClick ??
+        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK)
+          ? handleCloseModal
+          : undefined;
+
       if (pluginConfig?.cards__sceneCard__enabled ?? DEFAULT.CARDS.SCENE_CARD)
         return [
           <>
@@ -200,7 +225,7 @@ PluginApi.patch.instead<ISceneCardProps>(
               abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
               continuePlaylist={stashConfig.interface.continuePlaylistDefault}
               footer={{
-                openHandler: () => handleOpenModal(),
+                openHandler: handleOpenModal,
                 pluginConfig,
                 setSection: setModalSection,
               }}
@@ -211,13 +236,18 @@ PluginApi.patch.instead<ISceneCardProps>(
               scene={props.scene}
             />
             <CardModalWrapper
+              bgClickHandler={handleModalOuterClick}
               classname="vui-scene-card-modal"
+              fullHeightModal={
+                pluginConfig.general__fullHeightModals ??
+                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
+              }
               show={modalOpen}
               titleID={titleID}
             >
               <SceneCardModalContent
                 abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
-                closeHandler={() => setModalOpen(false)}
+                closeHandler={handleCloseModal}
                 continuePlaylist={stashConfig.interface.continuePlaylistDefault}
                 index={props.index}
                 pluginConfig={pluginConfig}

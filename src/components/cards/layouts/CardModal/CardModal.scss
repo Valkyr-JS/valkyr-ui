@@ -16,6 +16,14 @@ $prefix: variables.$prefix;
     overflow: hidden;
   }
 
+  &--full-height .modal-content {
+    height: calc(100vh - 1rem);
+
+    @media (min-width: 576px) {
+      height: calc(100vh - 3.5rem);
+    }
+  }
+
   .modal-header {
     border-bottom: 0;
     overflow: hidden;
@@ -26,7 +34,7 @@ $prefix: variables.$prefix;
 
   .modal-body {
     display: grid;
-    grid-template-rows: [content-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-top] 1fr [body-bottom content-bottom];
+    grid-template-rows: [content-top top-line-top] max-content [top-line-bottom title-top] max-content [title-bottom body-top] max-content [body-bottom content-bottom];
   }
 
   .modal-footer {
