@@ -163,6 +163,8 @@ interface ValkyrUiConfigMap {
   /** The zoom index at which to display the video codec on scene cards. */
   cards__sceneCard__videoCodecZoomIndex?: StashCardGridZoom;
 
+  /** Enables closing card modals when clicking outside of the component. */
+  general__closeModalOnOuterClick?: boolean;
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;
 }
