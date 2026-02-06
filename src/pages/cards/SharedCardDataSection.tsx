@@ -106,7 +106,7 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
                 "TRANSGENDER_MALE",
                 "TRANSGENDER_FEMALE",
                 "INTERSEX",
-                "NONBINARY",
+                "NON_BINARY",
                 "UNKNOWN"
               ]}
               value={value ?? []}
