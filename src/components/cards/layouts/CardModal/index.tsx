@@ -10,6 +10,7 @@ import TopLine from "../TopLine";
 import "./CardModal.scss";
 
 export { default as CardModalPerformersSection } from "./sections/CardModalPerformersSection";
+export { default as CardModalScenesSection } from "./sections/CardModalScenesSection";
 export { default as CardModalTagsSection } from "./sections/CardModalTagsSection";
 
 export interface CardModalNavigation {
