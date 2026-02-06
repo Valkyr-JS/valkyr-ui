@@ -139,6 +139,10 @@ PluginApi.patch.instead<IGalleryCardGrid>(
             <CardModalWrapper
               bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
+              fullHeightModal={
+                pluginConfig.general__fullHeightModals ??
+                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
+              }
               show={modalOpen}
               titleID={titleID}
             >
@@ -231,6 +235,10 @@ PluginApi.patch.instead<IGalleryCardProps>(
             <CardModalWrapper
               bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
+              fullHeightModal={
+                pluginConfig.general__fullHeightModals ??
+                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
+              }
               show={modalOpen}
               titleID={titleID}
             >

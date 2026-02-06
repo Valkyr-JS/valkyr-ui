@@ -141,6 +141,10 @@ PluginApi.patch.instead<ISceneCardGrid>(
             <CardModalWrapper
               bgClickHandler={handleModalOuterClick}
               classname="vui-scene-card-modal"
+              fullHeightModal={
+                pluginConfig.general__fullHeightModals ??
+                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
+              }
               show={modalOpen}
               titleID={titleID}
             >
@@ -234,6 +238,10 @@ PluginApi.patch.instead<ISceneCardProps>(
             <CardModalWrapper
               bgClickHandler={handleModalOuterClick}
               classname="vui-scene-card-modal"
+              fullHeightModal={
+                pluginConfig.general__fullHeightModals ??
+                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
+              }
               show={modalOpen}
               titleID={titleID}
             >

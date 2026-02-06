@@ -16,6 +16,14 @@ $prefix: variables.$prefix;
     overflow: hidden;
   }
 
+  &--full-height .modal-content {
+    height: calc(100vh - 1rem);
+
+    @media (min-width: 576px) {
+      height: calc(100vh - 3.5rem);
+    }
+  }
+
   .modal-header {
     border-bottom: 0;
     overflow: hidden;
