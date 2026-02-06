@@ -48,14 +48,15 @@ $prefix: variables.$prefix;
     }
   }
 
-  &__performer-section {
-    ul {
+  &__performer-section,
+  &__scene-section {
+    & > ul {
       list-style: none;
       margin-bottom: 0;
       padding-left: 0;
     }
 
-    li {
+    & > ul > li {
       display: flex;
       flex-direction: column;
 
@@ -72,9 +73,11 @@ $prefix: variables.$prefix;
     }
   }
 
-  &__performer-image-wrapper {
+  &__performer-image-wrapper,
+  &__scene-image-wrapper {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     margin-bottom: 5px;
 
     img {
@@ -105,7 +108,8 @@ $prefix: variables.$prefix;
   }
 
   @media (min-width: 400px) {
-    &__performer-data-wrapper {
+    &__performer-data-wrapper,
+    &__scene-data-wrapper {
       padding-left: 10px;
     }
   }

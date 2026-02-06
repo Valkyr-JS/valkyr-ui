@@ -484,10 +484,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
         />
       ) : props.section === "scenes" ? (
         <CardModalScenesSection
-          genderSortFilter={
-            props.pluginConfig.cards__shared__performerListSortFilter ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
-          }
+          abbreviateCounters={props.abbreviateCounters}
+          pluginConfig={props.pluginConfig}
           object={props.gallery}
           scenes={props.gallery.scenes}
           ratingSystem={props.ratingSystem}
