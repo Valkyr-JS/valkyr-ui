@@ -41,7 +41,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
         if (fullData[index] === null) {
           // If not, fetch it
           const galleryID = props.galleries[index].id;
-          await loadGalleryData({ variables: { id: galleryID } }).then(
+          return await loadGalleryData({ variables: { id: galleryID } }).then(
             ({ data }) => {
               if (data) {
                 // Add the fetched data to the state
@@ -49,10 +49,12 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   i === index ? data.findGallery : d,
                 );
                 setFullData(updatedData);
+                return updatedData[index];
               }
             },
           );
         }
+        return fullData[index];
       };
 
       /** Handle the click event to open the modal. */
@@ -68,7 +70,12 @@ PluginApi.patch.instead<IGalleryCardGrid>(
       };
 
       /** Handle the click event to close the modal. */
-      const handleCloseModal = () => setModalOpen(false);
+      const handleCloseModal = () => {
+        setModalOpen(false);
+
+        // Reset to the details section
+        setModalSection("details");
+      };
 
       /** Handle the click event outside of the modal when it is open. */
       const handleModalOuterClick =
@@ -86,10 +93,19 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   const nextIndex = modalGalleryIndex + 1;
 
                   // Ensure data is available
-                  await updateFullData(nextIndex);
-
-                  // Open the modal
-                  setModalGalleryIndex(nextIndex);
+                  await updateFullData(nextIndex).then((nextData) => {
+                    // If the new target doesn't have data for the current
+                    // section, reset it to details.
+                    if (
+                      (!nextData?.tags.length && modalSection === "tags") ||
+                      (!nextData?.performers.length &&
+                        modalSection === "performers") ||
+                      (!nextData?.scenes.length && modalSection === "scenes")
+                    )
+                      setModalSection("details");
+                    // Open the modal
+                    setModalGalleryIndex(nextIndex);
+                  });
                 },
               },
               prev: {
@@ -98,10 +114,20 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   const prevIndex = modalGalleryIndex - 1;
 
                   // Ensure data is available
-                  await updateFullData(prevIndex);
+                  await updateFullData(prevIndex).then((prevData) => {
+                    // If the new target doesn't have data for the current
+                    // section, reset it to details.
+                    if (
+                      (!prevData?.tags.length && modalSection === "tags") ||
+                      (!prevData?.performers.length &&
+                        modalSection === "performers") ||
+                      (!prevData?.scenes.length && modalSection === "scenes")
+                    )
+                      setModalSection("details");
 
-                  // Open the modal
-                  setModalGalleryIndex(prevIndex);
+                    // Open the modal
+                    setModalGalleryIndex(prevIndex);
+                  });
                 },
               },
             }
