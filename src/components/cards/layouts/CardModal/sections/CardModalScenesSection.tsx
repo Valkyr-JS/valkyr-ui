@@ -17,12 +17,14 @@ import RatingIcon from "@/components/cards/data/RatingIcon";
 import Resolution from "@/components/cards/data/Resolution";
 import Studio from "@/components/cards/data/Studio";
 import VideoCodec from "@/components/cards/data/VideoCodec";
+import CardTitle from "@/components/cards/layouts/Title";
 import CastCrew from "@/components/cards/layouts/CastCrew";
 import FileData from "@/components/cards/layouts/FileData";
 import KeyData from "@/components/cards/layouts/KeyData";
 import ReleaseData from "@/components/cards/layouts/ReleaseData";
 import TopLine from "@/components/cards/layouts/TopLine";
 import { DEFAULT } from "@/constants";
+import { getTitleFromObject, makeSceneUrl } from "@/helpers";
 
 interface CardModalScenesSectionProps {
   /** Whether counter data should be abbreviated. */
@@ -99,15 +101,26 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
       <ul>
         {props.scenes.map((sc) => {
           const primaryFile = getPrimaryFileData(sc);
+          const title = getTitleFromObject(sc);
+          const sceneLink = makeSceneUrl({ scene: sc });
+          const titleID = title + "SceneSection";
+
           return (
             <li key={sc.id}>
               {sc.paths.screenshot && (
                 <div className={imageWrapperClass}>
-                  <img alt="" src={sc.paths.screenshot} />
+                  <a href={sceneLink} aria-labelledby={titleID}>
+                    <img alt="" src={sc.paths.screenshot} />
+                  </a>
                 </div>
               )}
               <div className={dataWrapperClass}>
-                <h6>{sc.title}</h6>
+                <CardTitle
+                  id={titleID}
+                  link={sceneLink}
+                  size={6}
+                  text={title}
+                />
                 <TopLine>
                   <Studio context="modal" studio={sc.studio} />
                   <div className={userDataClass}>
