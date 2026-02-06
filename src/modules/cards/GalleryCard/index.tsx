@@ -49,7 +49,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                   i === index ? data.findGallery : d,
                 );
                 setFullData(updatedData);
-                return updatedData[index];
+                return data.findGallery;
               }
             },
           );

@@ -49,7 +49,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   i === index ? data.findScene : d,
                 );
                 setFullData(updatedData);
-                return updatedData[index];
+                return data.findScene;
               }
             },
           );
