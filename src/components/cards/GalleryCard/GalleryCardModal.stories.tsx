@@ -251,6 +251,41 @@ export const DetailsSectionButton: Story = {
   },
 };
 
+export const TagsSection: Story = {
+  args: {
+    section: "tags",
+    gallery: fullData as GalleryDataFragment,
+  },
+};
+
+export const TagsSectionButton: Story = {
+  args: {
+    gallery: fullData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoTagsSectionButton: Story = {
+  args: {
+    gallery: minimalData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.queryByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeNull();
+  },
+};
+
 export const PerformersSection: Story = {
   args: {
     section: "performers",
@@ -286,38 +321,38 @@ export const NoPerformersSectionButton: Story = {
   },
 };
 
-export const TagsSection: Story = {
+export const ScenesSection: Story = {
   args: {
-    section: "tags",
+    section: "scenes",
     gallery: fullData as GalleryDataFragment,
   },
 };
 
-export const TagsSectionButton: Story = {
+export const ScenesSectionButton: Story = {
   args: {
     gallery: fullData as GalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const tagsModalBtn = canvas.getByRole("button", {
-      name: "Tags",
+    const scenesModalBtn = canvas.getByRole("button", {
+      name: "Scenes",
     });
-    expect(tagsModalBtn).toBeInTheDocument();
+    expect(scenesModalBtn).toBeInTheDocument();
   },
 };
 
-export const NoTagsSectionButton: Story = {
+export const NoScenesSectionButton: Story = {
   args: {
     gallery: minimalData as GalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const tagsModalBtn = canvas.queryByRole("button", {
-      name: "Tags",
+    const scenesModalBtn = canvas.queryByRole("button", {
+      name: "Scenes",
     });
-    expect(tagsModalBtn).toBeNull();
+    expect(scenesModalBtn).toBeNull();
   },
 };
 

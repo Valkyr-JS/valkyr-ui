@@ -1,5 +1,6 @@
 @use "../../../../../src/scss/variables";
 
+$column-gap: variables.$column-gap;
 $prefix: variables.$prefix;
 
 .vui-card-modal {
@@ -10,6 +11,12 @@ $prefix: variables.$prefix;
   &__footer-buttons {
     display: flex;
     gap: 5px;
+  }
+
+  .modal-dialog {
+    @media (min-width: 992px) {
+      max-width: var(--#{$prefix}-card-modal-max-width);
+    }
   }
 
   .modal-content {
@@ -48,14 +55,19 @@ $prefix: variables.$prefix;
     }
   }
 
-  &__performer-section {
-    ul {
+  /* ---------------------------------------------------------------------------------------------- */
+  /*                                            Sections                                            */
+  /* ---------------------------------------------------------------------------------------------- */
+
+  &__performer-section,
+  &__scene-section {
+    & > ul {
       list-style: none;
       margin-bottom: 0;
       padding-left: 0;
     }
 
-    li {
+    & > ul > li {
       display: flex;
       flex-direction: column;
 
@@ -72,15 +84,26 @@ $prefix: variables.$prefix;
     }
   }
 
-  &__performer-image-wrapper {
+  &__performer-image-wrapper,
+  &__scene-image-wrapper {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     margin-bottom: 5px;
 
     img {
       width: 160px;
     }
   }
+
+  &__performer-data-wrapper,
+  &__scene-data-wrapper {
+    @media (min-width: 400px) {
+      padding-left: 10px;
+    }
+  }
+
+  /* -------------------------------------- Performer section ------------------------------------- */
 
   &__performer-disambiguation {
     display: block;
@@ -104,15 +127,23 @@ $prefix: variables.$prefix;
     }
   }
 
-  @media (min-width: 400px) {
-    &__performer-data-wrapper {
-      padding-left: 10px;
+  /* ---------------------------------------- Scene section --------------------------------------- */
+
+  &__scene-data-wrapper {
+    display: grid;
+    grid-template-rows: [scene-section-top top-line-top] max-content [top-line-bottom title-top] max-content [title-bottom key-data-top] max-content [key-data-bottom details-top] 1fr [details-bottom cast-crew-top] max-content [cast-crew-bottom scene-section-bottom];
+
+    h6 {
+      grid-row: title-top / title-bottom;
+      overflow-wrap: anywhere;
     }
   }
 
-  @media (min-width: 992px) {
-    .modal-dialog {
-      max-width: var(--#{$prefix}-card-modal-max-width);
-    }
+  &__user-data {
+    grid-column: user-data-start / user-data-end;
+
+    display: flex;
+    column-gap: $column-gap;
+    opacity: var(--#{$prefix}-card-top-line-opacity);
   }
 }

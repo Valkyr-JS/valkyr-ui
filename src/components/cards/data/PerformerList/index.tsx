@@ -111,7 +111,7 @@ const PerformerList: React.FC<
           });
 
           return (
-            <li className={itemClassList}>
+            <li key={p.id} className={itemClassList}>
               <a href={`/performers/${p.id}/`}>{p.name}</a>
             </li>
           );

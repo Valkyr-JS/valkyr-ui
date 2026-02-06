@@ -41,7 +41,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
         if (fullData[index] === null) {
           // If not, fetch it
           const galleryID = props.scenes[index].id;
-          await loadSceneData({ variables: { id: galleryID } }).then(
+          return await loadSceneData({ variables: { id: galleryID } }).then(
             ({ data }) => {
               if (data) {
                 // Add the fetched data to the state
@@ -49,10 +49,12 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   i === index ? data.findScene : d,
                 );
                 setFullData(updatedData);
+                return data.findScene;
               }
             },
           );
         }
+        return fullData[index];
       };
 
       /** Handle the click event to open the modal. */
@@ -68,7 +70,12 @@ PluginApi.patch.instead<ISceneCardGrid>(
       };
 
       /** Handle the click event to close the modal. */
-      const handleCloseModal = () => setModalOpen(false);
+      const handleCloseModal = () => {
+        setModalOpen(false);
+
+        // Reset to the details section
+        setModalSection("details");
+      };
 
       /** Handle the click event outside of the modal when it is open. */
       const handleModalOuterClick =
@@ -86,10 +93,19 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   const nextIndex = modalSceneIndex + 1;
 
                   // Ensure data is available
-                  await updateFullData(nextIndex);
+                  await updateFullData(nextIndex).then((nextData) => {
+                    // If the new target doesn't have data for the current
+                    // section, reset it to details.
+                    if (
+                      (!nextData?.tags.length && modalSection === "tags") ||
+                      (!nextData?.performers.length &&
+                        modalSection === "performers")
+                    )
+                      setModalSection("details");
 
-                  // Open the modal
-                  setModalSceneIndex(nextIndex);
+                    // Open the modal
+                    setModalSceneIndex(nextIndex);
+                  });
                 },
               },
               prev: {
@@ -98,10 +114,19 @@ PluginApi.patch.instead<ISceneCardGrid>(
                   const prevIndex = modalSceneIndex - 1;
 
                   // Ensure data is available
-                  await updateFullData(prevIndex);
+                  await updateFullData(prevIndex).then((prevData) => {
+                    // If the new target doesn't have data for the current
+                    // section, reset it to details.
+                    if (
+                      (!prevData?.tags.length && modalSection === "tags") ||
+                      (!prevData?.performers.length &&
+                        modalSection === "performers")
+                    )
+                      setModalSection("details");
 
-                  // Open the modal
-                  setModalSceneIndex(prevIndex);
+                    // Open the modal
+                    setModalSceneIndex(prevIndex);
+                  });
                 },
               },
             }
