@@ -44,6 +44,24 @@ export function getFileIsPortrait(
 export const getGCD = (a: number, b: number): number =>
   b === 0 ? a : getGCD(b, a % b);
 
+/* --------------------------------------- getGenderColor --------------------------------------- */
+
+/** Returns the utility color class associated with the given gender. */
+export const getPerformerGenderColorClass = (gender: Maybe<GenderEnum>) => {
+  switch (gender) {
+    case "NON_BINARY":
+      return "vui-color-nonbinary";
+    case "TRANSGENDER_FEMALE":
+      return "vui-color-transfemale";
+    case "TRANSGENDER_MALE":
+      return "vui-color-transmale";
+    case null:
+      return "vui-color-unknown";
+    default:
+      return "vui-color-" + gender.toLowerCase();
+  }
+};
+
 /* ---------------------------------------- getRenderData --------------------------------------- */
 
 interface IgetRenderData<T> {

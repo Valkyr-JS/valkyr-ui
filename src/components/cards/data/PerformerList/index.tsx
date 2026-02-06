@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import { useIntl } from "react-intl";
-import { getRenderData } from "@/helpers";
+import { getPerformerGenderColorClass, getRenderData } from "@/helpers";
 import "./PerformerList.scss";
 
 interface PerformerData {
@@ -104,10 +104,7 @@ const PerformerList: React.FC<
       </span>
       <ul>
         {visibleList?.map((p) => {
-          const gender = !p.gender
-            ? "unknown"
-            : p.gender.toLowerCase().split("_").join("-");
-          const genderClass = itemClass + "--" + gender;
+          const genderClass = getPerformerGenderColorClass(p.gender ?? null);
 
           const itemClassList = cx(itemClass, {
             [genderClass]: props.useGenderedColors,

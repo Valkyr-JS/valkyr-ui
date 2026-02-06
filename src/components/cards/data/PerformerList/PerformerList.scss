@@ -39,28 +39,4 @@ $prefix: variables.$prefix;
       color: inherit;
     }
   }
-
-  &__performer-list-item {
-    &--female {
-      color: var(--#{$prefix}-gender-color--female) !important;
-    }
-    &--intersex {
-      color: var(--#{$prefix}-gender-color--intersex) !important;
-    }
-    &--male {
-      color: var(--#{$prefix}-gender-color--male) !important;
-    }
-    &--nonbinary {
-      color: var(--#{$prefix}-gender-color--nonbinary) !important;
-    }
-    &--transgender-female {
-      color: var(--#{$prefix}-gender-color--transfemale) !important;
-    }
-    &--transgender-male {
-      color: var(--#{$prefix}-gender-color--transmale) !important;
-    }
-    &--transgender-unknown {
-      color: var(--#{$prefix}-gender-color--unknown) !important;
-    }
-  }
 }

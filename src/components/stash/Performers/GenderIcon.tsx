@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cx from "classnames";
 import { useIntl } from "react-intl";
+import { getPerformerGenderColorClass } from "@/helpers";
 
 interface IIconProps {
   gender: Maybe<GenderEnum>;
@@ -46,20 +47,5 @@ const getPerformerGenderIcon = (gender?: Maybe<GenderEnum>) => {
       return faNonBinary;
     default:
       return faTransgenderAlt;
-  }
-};
-
-const getPerformerGenderColorClass = (gender: Maybe<GenderEnum>) => {
-  switch (gender) {
-    case "NON_BINARY":
-      return "vui-color-nonbinary";
-    case "TRANSGENDER_FEMALE":
-      return "vui-color-transfemale";
-    case "TRANSGENDER_MALE":
-      return "vui-color-transmale";
-    case null:
-      return "vui-color-unknown";
-    default:
-      return "vui-color-" + gender.toLowerCase();
   }
 };

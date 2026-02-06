@@ -79,7 +79,7 @@ export const NonBinaryWithColor: Story = {
     performers: [
       { id: "3", gender: "NON_BINARY" as GenderEnum, name: "Non-binary" },
     ],
-    useGenderedColors: false,
+    useGenderedColors: true,
     userZoomIndex: 2,
   },
 };
