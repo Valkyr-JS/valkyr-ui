@@ -157,23 +157,6 @@ const CardFooter: React.FC<
           <FontAwesomeIcon icon={faCircleInfo} />
         </button>
       )}
-      {props.sections.find((s) => s[0] === "performers") && (
-        <button
-          type="button"
-          className="minimal btn"
-          disabled={props.selectionProps.selecting}
-          onClick={handleOpenPerformersSection}
-          title={intl.formatMessage({ id: "performers" })}
-        >
-          <FontAwesomeIcon icon={faUser} />
-          {(props.pluginConfig.cards__shared__enableCounts ??
-          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
-            <span aria-hidden>
-              {props.sections.find((s) => s[0] === "performers")?.[1]}
-            </span>
-          ) : null}
-        </button>
-      )}
       {props.sections.find((s) => s[0] === "tags") && (
         <button
           type="button"
@@ -187,6 +170,23 @@ const CardFooter: React.FC<
           DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "tags")?.[1]}
+            </span>
+          ) : null}
+        </button>
+      )}
+      {props.sections.find((s) => s[0] === "performers") && (
+        <button
+          type="button"
+          className="minimal btn"
+          disabled={props.selectionProps.selecting}
+          onClick={handleOpenPerformersSection}
+          title={intl.formatMessage({ id: "performers" })}
+        >
+          <FontAwesomeIcon icon={faUser} />
+          {(props.pluginConfig.cards__shared__enableCounts ??
+          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+            <span aria-hidden>
+              {props.sections.find((s) => s[0] === "performers")?.[1]}
             </span>
           ) : null}
         </button>
