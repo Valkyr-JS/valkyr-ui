@@ -1,6 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faTag, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleInfo,
+  faCirclePlay,
+  faTag,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Card, Form } from "react-bootstrap";
 import { useIntl } from "react-intl";
@@ -139,6 +144,11 @@ const CardFooter: React.FC<
     props.openHandler();
   };
 
+  const handleOpenScenesSection = () => {
+    props.setSection("scenes");
+    props.openHandler();
+  };
+
   const handleOpenTagsSection = () => {
     props.setSection("tags");
     props.openHandler();
@@ -187,6 +197,23 @@ const CardFooter: React.FC<
           DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "performers")?.[1]}
+            </span>
+          ) : null}
+        </button>
+      )}
+      {props.sections.find((s) => s[0] === "scenes") && (
+        <button
+          type="button"
+          className="minimal btn"
+          disabled={props.selectionProps.selecting}
+          onClick={handleOpenScenesSection}
+          title={intl.formatMessage({ id: "scenes" })}
+        >
+          <FontAwesomeIcon icon={faCirclePlay} />
+          {(props.pluginConfig.cards__shared__enableCounts ??
+          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+            <span aria-hidden>
+              {props.sections.find((s) => s[0] === "scenes")?.[1]}
             </span>
           ) : null}
         </button>

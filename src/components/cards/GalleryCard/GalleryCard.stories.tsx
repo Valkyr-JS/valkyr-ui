@@ -237,6 +237,34 @@ export const DetailsModalButton: Story = {
   },
 };
 
+export const TagsModalButton: Story = {
+  args: {
+    gallery: fullData as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.getByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoTagsModalButton: Story = {
+  args: {
+    gallery: minimalData as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tagsModalBtn = canvas.queryByRole("button", {
+      name: "Tags",
+    });
+    expect(tagsModalBtn).toBeNull();
+  },
+};
+
 export const PerformersModalButton: Story = {
   args: {
     gallery: fullData as SlimGalleryDataFragment,
@@ -265,31 +293,31 @@ export const NoPerformersModalButton: Story = {
   },
 };
 
-export const TagsModalButton: Story = {
+export const ScenesModalButton: Story = {
   args: {
     gallery: fullData as SlimGalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const tagsModalBtn = canvas.getByRole("button", {
-      name: "Tags",
+    const scenesModalBtn = canvas.getByRole("button", {
+      name: "Scenes",
     });
-    expect(tagsModalBtn).toBeInTheDocument();
+    expect(scenesModalBtn).toBeInTheDocument();
   },
 };
 
-export const NoTagsModalButton: Story = {
+export const NoScenesModalButton: Story = {
   args: {
     gallery: minimalData as SlimGalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const tagsModalBtn = canvas.queryByRole("button", {
-      name: "Tags",
+    const scenesModalBtn = canvas.queryByRole("button", {
+      name: "Scenes",
     });
-    expect(tagsModalBtn).toBeNull();
+    expect(scenesModalBtn).toBeNull();
   },
 };
 

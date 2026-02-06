@@ -1,6 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faTag, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleInfo,
+  faCirclePlay,
+  faTag,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
@@ -67,6 +72,7 @@ export const CardModalContent: React.FC<
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
   const handleSetPerformersSection = () => props.setSection("performers");
+  const handleSetScenesSection = () => props.setSection("scenes");
   const handleSetTagsSection = () => props.setSection("tags");
   const componentClass = "vui-card-modal";
   const bodyClass = componentClass + "__body";
@@ -120,6 +126,22 @@ export const CardModalContent: React.FC<
               DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
                 <span aria-hidden>
                   {props.sections.find((s) => s[0] === "performers")?.[1]}
+                </span>
+              ) : null}
+            </button>
+          )}
+          {props.sections.find((s) => s[0] === "scenes") && (
+            <button
+              type="button"
+              className="minimal btn"
+              onClick={handleSetScenesSection}
+              title={intl.formatMessage({ id: "scenes" })}
+            >
+              <FontAwesomeIcon icon={faCirclePlay} />
+              {(props.pluginConfig.cards__shared__enableCounts ??
+              DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+                <span aria-hidden>
+                  {props.sections.find((s) => s[0] === "scenes")?.[1]}
                 </span>
               ) : null}
             </button>
