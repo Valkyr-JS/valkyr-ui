@@ -67,6 +67,16 @@ PluginApi.patch.instead<IGalleryCardGrid>(
         setModalOpen(true);
       };
 
+      /** Handle the click event to close the modal. */
+      const handleCloseModal = () => setModalOpen(false);
+
+      /** Handle the click event outside of the modal when it is open. */
+      const handleModalOuterClick =
+        (pluginConfig.general__closeModalOnOuterClick ??
+        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK)
+          ? handleCloseModal
+          : undefined;
+
       const navigationProps: CardModalNavigation | undefined =
         props.galleries.length > 1
           ? {
@@ -127,13 +137,14 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               zoomIndex={props.zoomIndex as StashCardGridZoom}
             />
             <CardModalWrapper
+              bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
               show={modalOpen}
               titleID={titleID}
             >
               <GalleryCardModalContent
                 abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
-                closeHandler={() => setModalOpen(false)}
+                closeHandler={handleCloseModal}
                 gallery={fullData[modalGalleryIndex] as GalleryDataFragment}
                 navigation={navigationProps}
                 pluginConfig={pluginConfig}
@@ -190,6 +201,16 @@ PluginApi.patch.instead<IGalleryCardProps>(
         } else setModalOpen(true);
       };
 
+      /** Handle the click event to close the modal. */
+      const handleCloseModal = () => setModalOpen(false);
+
+      /** Handle the click event outside of the modal when it is open. */
+      const handleModalOuterClick =
+        (pluginConfig.general__closeModalOnOuterClick ??
+        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK)
+          ? handleCloseModal
+          : undefined;
+
       if (
         pluginConfig?.cards__galleryCard__enabled ??
         DEFAULT.CARDS.GALLERY_CARD.ENABLED
@@ -208,13 +229,14 @@ PluginApi.patch.instead<IGalleryCardProps>(
               ratingSystem={stashConfig.ui.ratingSystemOptions}
             />
             <CardModalWrapper
+              bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
               show={modalOpen}
               titleID={titleID}
             >
               <GalleryCardModalContent
                 abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
-                closeHandler={() => setModalOpen(false)}
+                closeHandler={handleCloseModal}
                 gallery={fullData as GalleryDataFragment}
                 pluginConfig={pluginConfig}
                 ratingSystem={stashConfig.ui.ratingSystemOptions}

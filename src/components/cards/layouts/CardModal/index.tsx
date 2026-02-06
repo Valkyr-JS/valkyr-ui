@@ -172,6 +172,9 @@ interface CardModalWrapperProps {
   /** Optional classes added alongside the `vui-card-modal` component class. */
   classname?: string;
 
+  /** The event to execute on clicking outside the modal component. */
+  bgClickHandler: (() => void) | undefined;
+
   /** Whether the modal is currently rendered. */
   show: boolean;
 
@@ -189,6 +192,7 @@ export const CardModalWrapper: React.FC<
     <Modal
       aria-labelledby={props.titleID}
       className={componentClassList}
+      onHide={props.bgClickHandler}
       scrollable
       show={props.show}
     >
@@ -330,7 +334,9 @@ export const CardModalPerformersSection: React.FC<
                   </span>
                 )}
                 <div>
-                  <a className="btn minimal mt-2" href={`/performers/${p.id}/`}>Read more</a>
+                  <a className="btn minimal mt-2" href={`/performers/${p.id}/`}>
+                    Read more
+                  </a>
                 </div>
               </div>
             </li>
