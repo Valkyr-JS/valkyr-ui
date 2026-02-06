@@ -221,7 +221,7 @@ PluginApi.patch.instead<ISceneCardProps>(
               abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
               continuePlaylist={stashConfig.interface.continuePlaylistDefault}
               footer={{
-                openHandler: () => handleOpenModal(),
+                openHandler: handleOpenModal,
                 pluginConfig,
                 setSection: setModalSection,
               }}

@@ -220,7 +220,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
             <GalleryCard
               abbreviateCounters={!!stashConfig.ui.abbreviateCounters}
               footer={{
-                openHandler: () => handleOpenModal(),
+                openHandler: handleOpenModal,
                 pluginConfig,
                 setSection: setModalSection,
               }}
