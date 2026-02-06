@@ -4,12 +4,12 @@ import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import PerformerList from ".";
 
 const performerData = [
-  { id: "1", gender: "FEMALE" as GenderEnum.Female, name: "Gabbie Carter" },
-  { id: "2", gender: "MALE" as GenderEnum.Male, name: "Xander Corvus" },
-  { id: "3", gender: "FEMALE" as GenderEnum.Female, name: "Angel Youngs" },
+  { id: "1", gender: "FEMALE" as GenderEnum, name: "Gabbie Carter" },
+  { id: "2", gender: "MALE" as GenderEnum, name: "Xander Corvus" },
+  { id: "3", gender: "FEMALE" as GenderEnum, name: "Angel Youngs" },
   {
     id: "4",
-    gender: "TRANSGENDER_FEMALE" as GenderEnum.TransgenderMale,
+    gender: "TRANSGENDER_FEMALE" as GenderEnum,
     name: "Emma Rose",
   },
   {
@@ -39,6 +39,98 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const FemaleWithColor: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    performers: [{ id: "1", gender: "FEMALE" as GenderEnum, name: "Female" }],
+    useGenderedColors: true,
+    userZoomIndex: 2,
+  },
+};
+
+export const IntersexWithColor: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    performers: [
+      { id: "1", gender: "INTERSEX" as GenderEnum, name: "Intersex" },
+    ],
+    useGenderedColors: true,
+    userZoomIndex: 2,
+  },
+};
+
+export const MaleWithColor: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    performers: [{ id: "2", gender: "MALE" as GenderEnum, name: "Male" }],
+    useGenderedColors: true,
+    userZoomIndex: 2,
+  },
+};
+
+export const NonBinaryWithColor: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    performers: [
+      { id: "3", gender: "NON_BINARY" as GenderEnum, name: "Non-binary" },
+    ],
+    useGenderedColors: false,
+    userZoomIndex: 2,
+  },
+};
+
+export const TransgenderFemaleWithColor: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    performers: [
+      {
+        id: "4",
+        gender: "TRANSGENDER_FEMALE" as GenderEnum,
+        name: "Transgender female",
+      },
+    ],
+    useGenderedColors: true,
+    userZoomIndex: 2,
+  },
+};
+
+export const TransgenderMaleWithColor: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    performers: [
+      {
+        id: "4",
+        gender: "TRANSGENDER_MALE" as GenderEnum,
+        name: "Transgender Male",
+      },
+    ],
+    useGenderedColors: true,
+    userZoomIndex: 2,
+  },
+};
+
+export const UnknownWithColor: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    performers: [
+      {
+        id: "4",
+        gender: "UNKNOWN" as GenderEnum,
+        name: "Unknown",
+      },
+    ],
+    useGenderedColors: true,
+    userZoomIndex: 2,
+  },
+};
 
 export const OnePerformer: Story = {
   args: {
@@ -131,8 +223,8 @@ export const GenderFilter: Story = {
     context: "card",
     currentZoomIndex: 3,
     genderSortFilter: [
-      "FEMALE" as GenderEnum.Female,
-      "TRANSGENDER_FEMALE" as GenderEnum.TransgenderMale,
+      "FEMALE" as GenderEnum,
+      "TRANSGENDER_FEMALE" as GenderEnum,
     ],
     performers: performerData,
     useGenderedColors: true,
