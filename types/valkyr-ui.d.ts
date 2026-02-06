@@ -165,6 +165,8 @@ interface ValkyrUiConfigMap {
 
   /** Enables closing card modals when clicking outside of the component. */
   general__closeModalOnOuterClick?: boolean;
+  /** Modals will always be rendered at the full height of the browser window. */
+  general__fullHeightModals?: boolean;
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;
 }

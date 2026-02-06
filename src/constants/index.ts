@@ -56,6 +56,7 @@ export const DEFAULT = {
   },
   GENERAL: {
     CLOSE_MODAL_ON_OUTER_CLICK: true,
+    FULL_HEIGHT_MODALS: false,
     LOCALE_DATE_FORMAT: false,
   },
 } as const;
