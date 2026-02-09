@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
+import {
+  createSceneCardID,
+  getFileIsPortrait,
+  getTitleFromObject,
+  makeSceneUrl,
+} from "@/helpers";
 import AspectRatio from "../data/AspectRatio";
 import AudioCodec from "../data/AudioCodec";
 import BitRate from "../data/BitRate";
@@ -585,10 +590,3 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     </CardModalContent>
   );
 };
-
-/* ---------------------------------------------------------------------------------------------- */
-/*                                             Helpers                                            */
-/* ---------------------------------------------------------------------------------------------- */
-
-/** Helper function to create consitently formatted scene IDs. */
-export const createSceneCardID = (stashID: string) => "sceneCard-" + stashID;

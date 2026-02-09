@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { LazyQueryResultTuple, OperationVariables } from "@apollo/client";
 import CardGrid from "@/components/cards/layouts/CardGrid";
-import SceneCard, {
-  createSceneCardID,
-  SceneCardModalContent,
-} from "@/components/cards/SceneCard";
+import SceneCard, { SceneCardModalContent } from "@/components/cards/SceneCard";
 import {
   CardModalNavigation,
   CardModalWrapper,
 } from "@/components/cards/layouts/CardModal";
-import { mergeConfig } from "@/helpers";
+import { createSceneCardID, mergeConfig } from "@/helpers";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<ISceneCardGrid>(
