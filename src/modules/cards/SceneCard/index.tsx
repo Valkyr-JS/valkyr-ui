@@ -94,7 +94,9 @@ PluginApi.patch.instead<ISceneCardGrid>(
                     if (
                       (!nextData?.tags.length && modalSection === "tags") ||
                       (!nextData?.performers.length &&
-                        modalSection === "performers")
+                        modalSection === "performers") ||
+                      (!nextData?.galleries.length &&
+                        modalSection === "galleries")
                     )
                       setModalSection("details");
 
@@ -115,7 +117,9 @@ PluginApi.patch.instead<ISceneCardGrid>(
                     if (
                       (!prevData?.tags.length && modalSection === "tags") ||
                       (!prevData?.performers.length &&
-                        modalSection === "performers")
+                        modalSection === "performers") ||
+                      (!prevData?.galleries.length &&
+                        modalSection === "galleries")
                     )
                       setModalSection("details");
 
