@@ -23,7 +23,6 @@ import FileData from "@/components/cards/layouts/FileData";
 import KeyData from "@/components/cards/layouts/KeyData";
 import ReleaseData from "@/components/cards/layouts/ReleaseData";
 import TopLine from "@/components/cards/layouts/TopLine";
-import { DEFAULT } from "@/constants";
 import { getTitleFromObject, makeSceneUrl } from "@/helpers";
 
 interface CardModalScenesSectionProps {
@@ -34,7 +33,7 @@ interface CardModalScenesSectionProps {
   object: GalleryDataFragment;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The list of scenes related to the object. */
   scenes: SlimSceneDataFragment[];
@@ -63,23 +62,17 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
     // breakpoint. The data will be available anyway under the file section.
     // Exceptions are duration and resolution which should always be available.
     const willRenderAspectRatio =
-      (props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
-        DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX) > -1;
+      props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex > -1;
     const willRenderAudioCodec =
-      (props.pluginConfig.cards__sceneCard__audioCodecZoomIndex ??
-        DEFAULT.CARDS.SCENE_CARD.AUDIO_CODEX_ZOOM_INDEX) > -1;
+      props.pluginConfig.cards__sceneCard__audioCodecZoomIndex > -1;
     const willRenderBitRate =
-      (props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
-        DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX) > -1;
+      props.pluginConfig.cards__sceneCard__bitRateZoomIndex > -1;
     const willRenderFileSize =
-      (props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
-        DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
+      props.pluginConfig.cards__sceneCard__fileSizeZoomIndex > -1;
     const willRenderFrameRate =
-      (props.pluginConfig.cards__sceneCard__frameRateZoomIndex ??
-        DEFAULT.CARDS.SCENE_CARD.FRAME_RATE_ZOOM_INDEX) > -1;
+      props.pluginConfig.cards__sceneCard__frameRateZoomIndex > -1;
     const willRenderVideoCodec =
-      (props.pluginConfig.cards__sceneCard__videoCodecZoomIndex ??
-        DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX) > -1;
+      props.pluginConfig.cards__sceneCard__videoCodecZoomIndex > -1;
 
     return {
       file: primaryFile,
@@ -149,8 +142,7 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
                       context="modal"
                       date={sc.date}
                       localeDateFormat={
-                        props.pluginConfig.general__localeDateFormat ??
-                        DEFAULT.GENERAL.LOCALE_DATE_FORMAT
+                        props.pluginConfig.general__localeDateFormat
                       }
                     />
                   </ReleaseData>
@@ -161,9 +153,7 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
                           context="modal"
                           duration={primaryFile.file.duration}
                           timestampPadding={
-                            props.pluginConfig
-                              .cards__shared__timestampPadding ??
-                            DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                            props.pluginConfig.cards__shared__timestampPadding
                           }
                         />
                         {primaryFile.args.willRenderFileSize && (
@@ -208,8 +198,7 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
                         <Resolution
                           asIcon={
                             props.pluginConfig
-                              .cards__sceneCard__resolutionAsIcon ??
-                            DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+                              .cards__sceneCard__resolutionAsIcon
                           }
                           context="modal"
                           resolution={[
@@ -227,16 +216,13 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
                   <PerformerList
                     context="modal"
                     genderSortFilter={
-                      props.pluginConfig
-                        .cards__shared__performerListSortFilter ??
-                      DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+                      props.pluginConfig.cards__shared__performerListSortFilter
                     }
                     max={undefined}
                     performers={sc.performers}
                     useGenderedColors={
                       props.pluginConfig
-                        .cards__shared__performerListGenderColors ??
-                      DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+                        .cards__shared__performerListGenderColors
                     }
                   />
                   <Director context="modal" director={sc.director} />
