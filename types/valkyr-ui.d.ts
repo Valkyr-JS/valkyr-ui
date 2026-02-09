@@ -78,10 +78,10 @@ interface ValkyrUiConfigMap {
 
   /** The zoom index at which to display the date on gallery cards. */
   cards__galleryCard__dateZoomIndex?: StashCardGridZoom;
-  /** The zoom index at which to display the details on gallery cards. */
-  cards__galleryCard__detailsZoomIndex?: StashCardGridZoom;
   /** The maximum number of lines to display for details on gallery cards. */
   cards__galleryCard__detailsMaxLines?: number;
+  /** The zoom index at which to display the details on gallery cards. */
+  cards__galleryCard__detailsZoomIndex?: StashCardGridZoom;
   /** Enables Valkyr UI gallery cards. */
   cards__galleryCard__enabled?: boolean;
   /** The zoom index at which to display the file size on gallery cards. */
@@ -120,10 +120,10 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__bitRateZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the date on scene cards. */
   cards__sceneCard__dateZoomIndex?: StashCardGridZoom;
-  /** The zoom index at which to display the details on scene cards. */
-  cards__sceneCard__detailsZoomIndex?: StashCardGridZoom;
   /** The maximum number of lines to display for details on scene cards. */
   cards__sceneCard__detailsMaxLines?: number;
+  /** The zoom index at which to display the details on scene cards. */
+  cards__sceneCard__detailsZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the director on scene cards. */
   cards__sceneCard__directorZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the duration on scene cards. */
