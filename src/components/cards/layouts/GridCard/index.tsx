@@ -12,7 +12,6 @@ import { useIntl } from "react-intl";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
-import { DEFAULT } from "@/constants";
 
 interface GridCardProps extends SelectableCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
@@ -34,7 +33,7 @@ interface GridCardProps extends SelectableCardProps {
   onMouseOver?: React.MouseEventHandler<HTMLDivElement>;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** A component used for displaying the object thumbnail. */
   thumbnail: React.ReactNode;
@@ -117,7 +116,7 @@ export interface CardFooterProps {
   openHandler: () => void;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The sections available to the modal */
   sections: CardModalSectionData[];
@@ -176,8 +175,7 @@ const CardFooter: React.FC<
           title={intl.formatMessage({ id: "tags" })}
         >
           <FontAwesomeIcon icon={faTag} />
-          {(props.pluginConfig.cards__shared__enableCounts ??
-          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+          {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "tags")?.[1]}
             </span>
@@ -193,8 +191,7 @@ const CardFooter: React.FC<
           title={intl.formatMessage({ id: "performers" })}
         >
           <FontAwesomeIcon icon={faUser} />
-          {(props.pluginConfig.cards__shared__enableCounts ??
-          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+          {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "performers")?.[1]}
             </span>
@@ -210,8 +207,7 @@ const CardFooter: React.FC<
           title={intl.formatMessage({ id: "scenes" })}
         >
           <FontAwesomeIcon icon={faCirclePlay} />
-          {(props.pluginConfig.cards__shared__enableCounts ??
-          DEFAULT.CARDS.SHARED.ENABLE_FOOTER_BUTTON_COUNTS) ? (
+          {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "scenes")?.[1]}
             </span>

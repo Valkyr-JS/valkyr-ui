@@ -1,6 +1,5 @@
 import React from "react";
 import cx from "classnames";
-import { DEFAULT } from "@/constants";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
@@ -39,7 +38,7 @@ interface GalleryCardProps extends SelectableCardProps {
   gallery: SlimGalleryDataFragment;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The user's Stash rating system configuration */
   ratingSystem?: RatingSystemOptions;
@@ -83,14 +82,6 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
           rating100={props.gallery.rating100}
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
-          thumbnailBackground={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
-            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE
-          }
-          thumbnailBackgroundStyle={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle ??
-            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_STYLE
-          }
           titleID={id}
           zoomIndex={props.zoomIndex}
         />
@@ -103,8 +94,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
             currentZoomIndex={props.zoomIndex}
             studio={props.gallery.studio}
             userZoomIndex={
-              props.pluginConfig.cards__galleryCard__studioZoomIndex ??
-              DEFAULT.CARDS.GALLERY_CARD.STUDIO_ZOOM_INDEX
+              props.pluginConfig.cards__galleryCard__studioZoomIndex
             }
           />
           <div className={userDataClass}>
@@ -114,8 +104,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
               rating100={props.gallery.rating100}
               ratingSystem={props.ratingSystem}
               userZoomIndex={
-                props.pluginConfig.cards__galleryCard__ratingIconZoomIndex ??
-                DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_ZOOM_INDEX
+                props.pluginConfig.cards__galleryCard__ratingIconZoomIndex
               }
             />
             <Organized
@@ -123,8 +112,7 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
               currentZoomIndex={props.zoomIndex}
               organized={props.gallery.organized}
               userZoomIndex={
-                props.pluginConfig.cards__galleryCard__organizedZoomIndex ??
-                DEFAULT.CARDS.GALLERY_CARD.ORGANIZED_ZOOM_INDEX
+                props.pluginConfig.cards__galleryCard__organizedZoomIndex
               }
             />
           </div>
@@ -155,7 +143,7 @@ interface GalleryCardBodyProps {
   gallery: SlimGalleryDataFragment;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The current zoom index. */
   zoomIndex?: StashCardGridZoom;
@@ -173,14 +161,8 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
             context="card"
             currentZoomIndex={props.zoomIndex}
             date={props.gallery.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-            userZoomIndex={
-              props.pluginConfig.cards__galleryCard__dateZoomIndex ??
-              DEFAULT.CARDS.GALLERY_CARD.DATE_ZOOM_INDEX
-            }
+            localeDateFormat={props.pluginConfig.general__localeDateFormat}
+            userZoomIndex={props.pluginConfig.cards__galleryCard__dateZoomIndex}
           />
         </ReleaseData>
         <FileData>
@@ -190,8 +172,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
               currentZoomIndex={props.zoomIndex}
               bytes={primaryFile.size}
               userZoomIndex={
-                props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
-                DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX
+                props.pluginConfig.cards__galleryCard__fileSizeZoomIndex
               }
             />
           )}
@@ -201,8 +182,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
             currentZoomIndex={props.zoomIndex}
             count={props.gallery.image_count}
             userZoomIndex={
-              props.pluginConfig.cards__galleryCard__imageCountZoomIndex ??
-              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COUNT_ZOOM_INDEX
+              props.pluginConfig.cards__galleryCard__imageCountZoomIndex
             }
           />
           <ImageCollectionIcon
@@ -211,8 +191,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
             isCollection={!primaryFile}
             userZoomIndex={
               props.pluginConfig
-                .cards__galleryCard__imageCollectionIconZoomIndex ??
-              DEFAULT.CARDS.GALLERY_CARD.IMAGE_COLLECTION_ICON_ZOOM_INDEX
+                .cards__galleryCard__imageCollectionIconZoomIndex
             }
           />
           {primaryFile && (
@@ -221,8 +200,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
               currentZoomIndex={props.zoomIndex}
               isZip={true} // If there is a primary file, it's always a zip. Loose image galleries don't have any files in the gallery data.
               userZoomIndex={
-                props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
-                DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX
+                props.pluginConfig.cards__galleryCard__zipIconZoomIndex
               }
             />
           )}
@@ -232,35 +210,23 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
         context="card"
         currentZoomIndex={props.zoomIndex}
         details={props.gallery.details}
-        maxLines={
-          props.pluginConfig.cards__galleryCard__detailsMaxLines ??
-          DEFAULT.CARDS.GALLERY_CARD.DETAILS_MAX_LINES
-        }
-        userZoomIndex={
-          props.pluginConfig.cards__galleryCard__detailsZoomIndex ??
-          DEFAULT.CARDS.GALLERY_CARD.DETAILS_ZOOM_INDEX
-        }
+        maxLines={props.pluginConfig.cards__galleryCard__detailsMaxLines}
+        userZoomIndex={props.pluginConfig.cards__galleryCard__detailsZoomIndex}
       />
       <CastCrew>
         <PerformerList
           context="card"
           currentZoomIndex={props.zoomIndex}
           genderSortFilter={
-            props.pluginConfig.cards__shared__performerListSortFilter ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+            props.pluginConfig.cards__shared__performerListSortFilter
           }
-          max={
-            props.pluginConfig.cards__shared__performerListMaxItems ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_MAX_ITEMS
-          }
+          max={props.pluginConfig.cards__shared__performerListMaxItems}
           performers={props.gallery.performers}
           useGenderedColors={
-            props.pluginConfig.cards__shared__performerListGenderColors ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+            props.pluginConfig.cards__shared__performerListGenderColors
           }
           userZoomIndex={
-            props.pluginConfig.cards__galleryCard__performerListZoomIndex ??
-            DEFAULT.CARDS.GALLERY_CARD.PERFORMER_LIST_ZOOM_INDEX
+            props.pluginConfig.cards__galleryCard__performerListZoomIndex
           }
         />
         <Photographer
@@ -268,8 +234,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
           currentZoomIndex={props.zoomIndex}
           photographer={props.gallery.photographer}
           userZoomIndex={
-            props.pluginConfig.cards__galleryCard__photographerZoomIndex ??
-            DEFAULT.CARDS.GALLERY_CARD.PHOTOGRAPHER_ZOOM_INDEX
+            props.pluginConfig.cards__galleryCard__photographerZoomIndex
           }
         />
       </CastCrew>
@@ -290,7 +255,7 @@ interface GalleryCardThumbnailProps {
   link: string;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The object's user rating out of 100 */
   rating100: Maybe<Scalars["Int"]["output"]> | undefined;
@@ -300,12 +265,6 @@ interface GalleryCardThumbnailProps {
 
   /** The link to the gallery cover thumbnail. */
   src: string;
-
-  /** Adds a blurred version of the thumbnail to the background. */
-  thumbnailBackground: boolean;
-
-  /** Adds user-defined CSS to the thumbnail background. */
-  thumbnailBackgroundStyle: string | null;
 
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
@@ -322,14 +281,17 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
   const coverClass = componentClass + "__thumbnail-cover";
   const coverBackgroundClass = coverClass + "--blurred-bg";
   const coverClassList = cx(coverClass, {
-    [coverBackgroundClass]: props.thumbnailBackground,
+    [coverBackgroundClass]:
+      props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage,
   });
 
   const coverStyles: React.CSSProperties = {
-    background: props.thumbnailBackgroundStyle
-      ? props.thumbnailBackgroundStyle
+    background: !!props.pluginConfig
+      .cards__galleryCard__thumbnailBackgroundStyle
+      ? props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle
       : undefined,
-    backgroundImage: props.thumbnailBackground
+    backgroundImage: props.pluginConfig
+      .cards__galleryCard__thumbnailBackgroundImage
       ? `url(${props.src})`
       : undefined,
   };
@@ -346,8 +308,7 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
           rating100={props.rating100}
           ratingSystem={props.ratingSystem}
           userZoomIndex={
-            props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex ??
-            DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_ZOOM_INDEX
+            props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex
           }
         />
       </a>
@@ -373,7 +334,7 @@ interface GalleryCardModalContentProps {
   navigation?: CardModalNavigation;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The user's Stash rating system configuration */
   ratingSystem?: RatingSystemOptions;
@@ -412,17 +373,13 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   // breakpoint. The data will be available anyway under the file section.
   const willRenderFileSize =
     primaryFile &&
-    (props.pluginConfig.cards__galleryCard__fileSizeZoomIndex ??
-      DEFAULT.CARDS.GALLERY_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__galleryCard__fileSizeZoomIndex > -1;
   const willRenderZipIcon =
-    primaryFile &&
-    (props.pluginConfig.cards__galleryCard__zipIconZoomIndex ??
-      DEFAULT.CARDS.GALLERY_CARD.ZIP_ICON_ZOOM_INDEX) > -1;
+    primaryFile && props.pluginConfig.cards__galleryCard__zipIconZoomIndex > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
-    (props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex ??
-      DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex > -1;
 
   return (
     <CardModalContent
@@ -441,14 +398,6 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           rating100={willRenderRatingBanner ? props.gallery.rating100 : 0}
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
-          thumbnailBackground={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage ??
-            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE
-          }
-          thumbnailBackgroundStyle={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle ??
-            DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_STYLE
-          }
           titleID={props.titleID}
         />
       }
@@ -475,8 +424,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       ) : props.section === "performers" ? (
         <CardModalPerformersSection
           genderSortFilter={
-            props.pluginConfig.cards__shared__performerListSortFilter ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+            props.pluginConfig.cards__shared__performerListSortFilter
           }
           object={props.gallery}
           performers={props.gallery.performers}
@@ -497,10 +445,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
               <Date
                 context="modal"
                 date={props.gallery.date}
-                localeDateFormat={
-                  props.pluginConfig.general__localeDateFormat ??
-                  DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-                }
+                localeDateFormat={props.pluginConfig.general__localeDateFormat}
               />
             </ReleaseData>
             <FileData>
@@ -529,14 +474,12 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
             <PerformerList
               context="modal"
               genderSortFilter={
-                props.pluginConfig.cards__shared__performerListSortFilter ??
-                DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+                props.pluginConfig.cards__shared__performerListSortFilter
               }
               max={undefined}
               performers={props.gallery.performers}
               useGenderedColors={
-                props.pluginConfig.cards__shared__performerListGenderColors ??
-                DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+                props.pluginConfig.cards__shared__performerListGenderColors
               }
             />
             <Photographer

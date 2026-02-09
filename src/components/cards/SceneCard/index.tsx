@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import cx from "classnames";
-import { DEFAULT } from "@/constants";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import AspectRatio from "../data/AspectRatio";
 import AudioCodec from "../data/AudioCodec";
@@ -49,7 +48,7 @@ interface SceneCardProps extends SelectableCardProps {
   index?: ISceneCardProps["index"];
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The scenes in the current query. */
   queue?: ISceneCardProps["queue"];
@@ -80,11 +79,9 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const primaryFile =
     props.scene.files.length > 0 ? props.scene.files[0] : undefined;
   const isPortrait = getFileIsPortrait(primaryFile);
-  const preview =
-    (props.pluginConfig.cards__sceneCard__previewsEnabled ??
-    DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
-      ? (props.scene.paths.preview ?? undefined)
-      : undefined;
+  const preview = props.pluginConfig.cards__sceneCard__previewsEnabled
+    ? (props.scene.paths.preview ?? undefined)
+    : undefined;
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -119,12 +116,10 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
           thumbnailBackground={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
-            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
           }
           thumbnailBackgroundStyle={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle ??
-            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_STYLE
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
           }
           titleID={id}
           zoomIndex={props.zoomIndex}
@@ -137,10 +132,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
             context="card"
             currentZoomIndex={props.zoomIndex}
             studio={props.scene.studio}
-            userZoomIndex={
-              props.pluginConfig.cards__sceneCard__studioZoomIndex ??
-              DEFAULT.CARDS.SCENE_CARD.STUDIO_ZOOM_INDEX
-            }
+            userZoomIndex={props.pluginConfig.cards__sceneCard__studioZoomIndex}
           />
           <div className={userDataClass}>
             <PlayCount
@@ -149,8 +141,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
               count={props.scene.play_count}
               currentZoomIndex={props.zoomIndex}
               userZoomIndex={
-                props.pluginConfig.cards__sceneCard__playCountZoomIndex ??
-                DEFAULT.CARDS.SCENE_CARD.PLAY_COUNT_ZOOM_INDEX
+                props.pluginConfig.cards__sceneCard__playCountZoomIndex
               }
             />
             <OCount
@@ -159,8 +150,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
               count={props.scene.o_counter}
               currentZoomIndex={props.zoomIndex}
               userZoomIndex={
-                props.pluginConfig.cards__sceneCard__oCountZoomIndex ??
-                DEFAULT.CARDS.SCENE_CARD.O_COUNT_ZOOM_INDEX
+                props.pluginConfig.cards__sceneCard__oCountZoomIndex
               }
             />
             <RatingIcon
@@ -169,8 +159,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
               rating100={props.scene.rating100}
               ratingSystem={props.ratingSystem}
               userZoomIndex={
-                props.pluginConfig.cards__sceneCard__ratingIconZoomIndex ??
-                DEFAULT.CARDS.SCENE_CARD.RATING_ICON_ZOOM_INDEX
+                props.pluginConfig.cards__sceneCard__ratingIconZoomIndex
               }
             />
             <Organized
@@ -178,8 +167,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
               currentZoomIndex={props.zoomIndex}
               organized={props.scene.organized}
               userZoomIndex={
-                props.pluginConfig.cards__sceneCard__organizedZoomIndex ??
-                DEFAULT.CARDS.SCENE_CARD.ORGANIZED_ZOOM_INDEX
+                props.pluginConfig.cards__sceneCard__organizedZoomIndex
               }
             />
           </div>
@@ -203,7 +191,7 @@ export default SceneCard;
 
 interface SceneCardBodyProps {
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The Stash scene data. */
   scene: SlimSceneDataFragment;
@@ -224,14 +212,8 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
             context="card"
             currentZoomIndex={props.zoomIndex}
             date={props.scene.date}
-            localeDateFormat={
-              props.pluginConfig.general__localeDateFormat ??
-              DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-            }
-            userZoomIndex={
-              props.pluginConfig.cards__sceneCard__dateZoomIndex ??
-              DEFAULT.CARDS.SCENE_CARD.DATE_ZOOM_INDEX
-            }
+            localeDateFormat={props.pluginConfig.general__localeDateFormat}
+            userZoomIndex={props.pluginConfig.cards__sceneCard__dateZoomIndex}
           />
         </ReleaseData>
         <FileData>
@@ -242,12 +224,10 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 currentZoomIndex={props.zoomIndex}
                 duration={primaryFile.duration}
                 timestampPadding={
-                  props.pluginConfig.cards__shared__timestampPadding ??
-                  DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                  props.pluginConfig.cards__shared__timestampPadding
                 }
                 userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__durationZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.DURATION_ZOOM_INDEX
+                  props.pluginConfig.cards__sceneCard__durationZoomIndex
                 }
               />
               <FileSize
@@ -255,8 +235,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 currentZoomIndex={props.zoomIndex}
                 bytes={primaryFile.size}
                 userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX
+                  props.pluginConfig.cards__sceneCard__fileSizeZoomIndex
                 }
               />
               <AspectRatio
@@ -264,8 +243,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 currentZoomIndex={props.zoomIndex}
                 resolution={[primaryFile.width, primaryFile.height]}
                 userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX
+                  props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex
                 }
               />
               <BitRate
@@ -273,8 +251,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 context="card"
                 currentZoomIndex={props.zoomIndex}
                 userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX
+                  props.pluginConfig.cards__sceneCard__bitRateZoomIndex
                 }
               />
               <VideoCodec
@@ -282,8 +259,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 codec={primaryFile.video_codec}
                 currentZoomIndex={props.zoomIndex}
                 userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__videoCodecZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX
+                  props.pluginConfig.cards__sceneCard__videoCodecZoomIndex
                 }
               />
               <AudioCodec
@@ -291,8 +267,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 codec={primaryFile.audio_codec}
                 currentZoomIndex={props.zoomIndex}
                 userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__audioCodecZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.AUDIO_CODEX_ZOOM_INDEX
+                  props.pluginConfig.cards__sceneCard__audioCodecZoomIndex
                 }
               />
               <FrameRate
@@ -300,21 +275,16 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 currentZoomIndex={props.zoomIndex}
                 rate={primaryFile.frame_rate}
                 userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__frameRateZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.FRAME_RATE_ZOOM_INDEX
+                  props.pluginConfig.cards__sceneCard__frameRateZoomIndex
                 }
               />
               <Resolution
-                asIcon={
-                  props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
-                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
-                }
+                asIcon={props.pluginConfig.cards__sceneCard__resolutionAsIcon}
                 context="card"
                 currentZoomIndex={props.zoomIndex}
                 resolution={[primaryFile.width, primaryFile.height]}
                 userZoomIndex={
-                  props.pluginConfig.cards__sceneCard__resolutionZoomIndex ??
-                  DEFAULT.CARDS.SCENE_CARD.RESOLUTION_ZOOM_INDEX
+                  props.pluginConfig.cards__sceneCard__resolutionZoomIndex
                 }
               />
             </>
@@ -324,8 +294,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
             currentZoomIndex={props.zoomIndex}
             interactive={props.scene.interactive}
             userZoomIndex={
-              props.pluginConfig.cards__sceneCard__interactiveZoomIndex ??
-              DEFAULT.CARDS.SCENE_CARD.INTERACTIVE_ZOOM_INDEX
+              props.pluginConfig.cards__sceneCard__interactiveZoomIndex
             }
           />
         </FileData>
@@ -334,45 +303,30 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
         context="card"
         currentZoomIndex={props.zoomIndex}
         details={props.scene.details}
-        maxLines={
-          props.pluginConfig.cards__sceneCard__detailsMaxLines ??
-          DEFAULT.CARDS.SCENE_CARD.DETAILS_MAX_LINES
-        }
-        userZoomIndex={
-          props.pluginConfig.cards__sceneCard__detailsZoomIndex ??
-          DEFAULT.CARDS.SCENE_CARD.DETAILS_ZOOM_INDEX
-        }
+        maxLines={props.pluginConfig.cards__sceneCard__detailsMaxLines}
+        userZoomIndex={props.pluginConfig.cards__sceneCard__detailsZoomIndex}
       />
       <CastCrew>
         <PerformerList
           context="card"
           currentZoomIndex={props.zoomIndex}
           genderSortFilter={
-            props.pluginConfig.cards__shared__performerListSortFilter ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+            props.pluginConfig.cards__shared__performerListSortFilter
           }
-          max={
-            props.pluginConfig.cards__shared__performerListMaxItems ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_MAX_ITEMS
-          }
+          max={props.pluginConfig.cards__shared__performerListMaxItems}
           performers={props.scene.performers}
           useGenderedColors={
-            props.pluginConfig.cards__shared__performerListGenderColors ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+            props.pluginConfig.cards__shared__performerListGenderColors
           }
           userZoomIndex={
-            props.pluginConfig.cards__sceneCard__performerListZoomIndex ??
-            DEFAULT.CARDS.SCENE_CARD.PERFORMER_LIST_ZOOM_INDEX
+            props.pluginConfig.cards__sceneCard__performerListZoomIndex
           }
         />
         <Director
           context="card"
           currentZoomIndex={props.zoomIndex}
           director={props.scene.director}
-          userZoomIndex={
-            props.pluginConfig.cards__sceneCard__directorZoomIndex ??
-            DEFAULT.CARDS.SCENE_CARD.DIRECTOR_ZOOM_INDEX
-          }
+          userZoomIndex={props.pluginConfig.cards__sceneCard__directorZoomIndex}
         />
       </CastCrew>
     </>
@@ -398,7 +352,7 @@ interface SceneCardThumbnailProps {
   link: string;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The path to the preview file. Disabled if `undefined`. */
   preview: string | undefined;
@@ -441,8 +395,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
 
   const preview =
     props.context === "card" &&
-    (props.pluginConfig.cards__sceneCard__previewsEnabled ??
-      DEFAULT.CARDS.SCENE_CARD.PREVIEWS_ENABLED)
+    props.pluginConfig.cards__sceneCard__previewsEnabled
       ? (props.preview ?? undefined)
       : undefined;
 
@@ -488,8 +441,7 @@ export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
           rating100={props.rating100}
           ratingSystem={props.ratingSystem}
           userZoomIndex={
-            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex ??
-            DEFAULT.CARDS.GALLERY_CARD.RATING_BANNER_ZOOM_INDEX
+            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
           }
         />
       </a>
@@ -519,7 +471,7 @@ interface SceneCardModalContentProps {
   navigation?: CardModalNavigation;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The scenes in the current query. */
   queue?: ISceneCardProps["queue"];
@@ -562,28 +514,21 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
   // breakpoint. The data will be available anyway under the file section.
   // Exceptions are duration and resolution which should always be available.
   const willRenderAspectRatio =
-    (props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex ??
-      DEFAULT.CARDS.SCENE_CARD.ASPECT_RATIO_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__sceneCard__aspectRatioZoomIndex > -1;
   const willRenderAudioCodec =
-    (props.pluginConfig.cards__sceneCard__audioCodecZoomIndex ??
-      DEFAULT.CARDS.SCENE_CARD.AUDIO_CODEX_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__sceneCard__audioCodecZoomIndex > -1;
   const willRenderBitRate =
-    (props.pluginConfig.cards__sceneCard__bitRateZoomIndex ??
-      DEFAULT.CARDS.SCENE_CARD.BIT_RATE_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__sceneCard__bitRateZoomIndex > -1;
   const willRenderFileSize =
-    (props.pluginConfig.cards__sceneCard__fileSizeZoomIndex ??
-      DEFAULT.CARDS.SCENE_CARD.FILE_SIZE_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__sceneCard__fileSizeZoomIndex > -1;
   const willRenderFrameRate =
-    (props.pluginConfig.cards__sceneCard__frameRateZoomIndex ??
-      DEFAULT.CARDS.SCENE_CARD.FRAME_RATE_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__sceneCard__frameRateZoomIndex > -1;
   const willRenderVideoCodec =
-    (props.pluginConfig.cards__sceneCard__videoCodecZoomIndex ??
-      DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__sceneCard__videoCodecZoomIndex > -1;
 
   // Only render one of the two rating options
   const willRenderRatingBanner =
-    (props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex ??
-      DEFAULT.CARDS.SCENE_CARD.RATING_BANNER_ZOOM_INDEX) > -1;
+    props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex > -1;
 
   const sections: CardModalSectionData[] = [["details"]];
   if (props.scene.performers.length)
@@ -610,12 +555,10 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
           thumbnailBackground={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage ??
-            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
           }
           thumbnailBackgroundStyle={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle ??
-            DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_STYLE
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
           }
           titleID={props.titleID}
         />
@@ -653,8 +596,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       ) : props.section === "performers" ? (
         <CardModalPerformersSection
           genderSortFilter={
-            props.pluginConfig.cards__shared__performerListSortFilter ??
-            DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+            props.pluginConfig.cards__shared__performerListSortFilter
           }
           object={props.scene}
           performers={props.scene.performers}
@@ -667,10 +609,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
               <Date
                 context="modal"
                 date={props.scene.date}
-                localeDateFormat={
-                  props.pluginConfig.general__localeDateFormat ??
-                  DEFAULT.GENERAL.LOCALE_DATE_FORMAT
-                }
+                localeDateFormat={props.pluginConfig.general__localeDateFormat}
               />
             </ReleaseData>
             <FileData>
@@ -680,8 +619,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                     context="modal"
                     duration={primaryFile.duration}
                     timestampPadding={
-                      props.pluginConfig.cards__shared__timestampPadding ??
-                      DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING
+                      props.pluginConfig.cards__shared__timestampPadding
                     }
                   />
                   {willRenderFileSize && (
@@ -713,8 +651,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                   )}
                   <Resolution
                     asIcon={
-                      props.pluginConfig.cards__sceneCard__resolutionAsIcon ??
-                      DEFAULT.CARDS.SCENE_CARD.RESOLUTION_AS_ICON
+                      props.pluginConfig.cards__sceneCard__resolutionAsIcon
                     }
                     context="modal"
                     resolution={[primaryFile.width, primaryFile.height]}
@@ -732,14 +669,12 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
             <PerformerList
               context="modal"
               genderSortFilter={
-                props.pluginConfig.cards__shared__performerListSortFilter ??
-                DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER
+                props.pluginConfig.cards__shared__performerListSortFilter
               }
               max={undefined}
               performers={props.scene.performers}
               useGenderedColors={
-                props.pluginConfig.cards__shared__performerListGenderColors ??
-                DEFAULT.CARDS.SHARED.PERFORMER_LIST_GENDER_COLORS
+                props.pluginConfig.cards__shared__performerListGenderColors
               }
             />
             <Director context="modal" director={props.scene.director} />

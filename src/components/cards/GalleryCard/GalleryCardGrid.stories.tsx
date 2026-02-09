@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
+import { mergeConfig } from "@/helpers";
 import CardGrid from "../layouts/CardGrid";
 import { zoomIndexArgType } from "../../../../.storybook/argTypes";
 import GalleryCard from "../GalleryCard";
@@ -38,10 +39,10 @@ const GalleryCards = [
     abbreviateCounters={false}
     footer={{
       openHandler: fn(),
-      pluginConfig: {},
+      pluginConfig: mergeConfig({}),
       setSection: fn(),
     }}
-    pluginConfig={{}}
+    pluginConfig={mergeConfig({})}
     gallery={g as SlimGalleryDataFragment}
   />
 ));
