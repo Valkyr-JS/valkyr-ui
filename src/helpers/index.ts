@@ -1,4 +1,6 @@
 export * from "./config";
+export * from "./ids";
+export * from "./stashIcons";
 
 /* -------------------------------------- convertRating100 -------------------------------------- */
 

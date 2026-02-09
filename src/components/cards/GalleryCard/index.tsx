@@ -1,5 +1,5 @@
 import React from "react";
-import { getTitleFromObject } from "@/helpers";
+import { createGalleryCardID, getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
 import FileSize from "../data/FileSize";
@@ -374,8 +374,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       ) : props.section === "scenes" ? (
         <CardModalScenesSection
           abbreviateCounters={props.abbreviateCounters}
-          pluginConfig={props.pluginConfig}
           object={props.gallery}
+          pluginConfig={props.pluginConfig}
           scenes={props.gallery.scenes}
           ratingSystem={props.ratingSystem}
         />
@@ -433,11 +433,3 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
     </CardModalContent>
   );
 };
-
-/* ---------------------------------------------------------------------------------------------- */
-/*                                             Helpers                                            */
-/* ---------------------------------------------------------------------------------------------- */
-
-/** Helper function to create consitently formatted gallery IDs. */
-export const createGalleryCardID = (stashID: string) =>
-  "galleryCard-" + stashID;

@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { LazyQueryResultTuple, OperationVariables } from "@apollo/client";
 import CardGrid from "@/components/cards/layouts/CardGrid";
-import SceneCard, {
-  createSceneCardID,
-  SceneCardModalContent,
-} from "@/components/cards/SceneCard";
+import SceneCard, { SceneCardModalContent } from "@/components/cards/SceneCard";
 import {
   CardModalNavigation,
   CardModalWrapper,
 } from "@/components/cards/layouts/CardModal";
-import { mergeConfig } from "@/helpers";
+import { createSceneCardID, mergeConfig } from "@/helpers";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<ISceneCardGrid>(
@@ -97,7 +94,9 @@ PluginApi.patch.instead<ISceneCardGrid>(
                     if (
                       (!nextData?.tags.length && modalSection === "tags") ||
                       (!nextData?.performers.length &&
-                        modalSection === "performers")
+                        modalSection === "performers") ||
+                      (!nextData?.galleries.length &&
+                        modalSection === "galleries")
                     )
                       setModalSection("details");
 
@@ -118,7 +117,9 @@ PluginApi.patch.instead<ISceneCardGrid>(
                     if (
                       (!prevData?.tags.length && modalSection === "tags") ||
                       (!prevData?.performers.length &&
-                        modalSection === "performers")
+                        modalSection === "performers") ||
+                      (!prevData?.galleries.length &&
+                        modalSection === "galleries")
                     )
                       setModalSection("details");
 

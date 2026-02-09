@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
+import {
+  createSceneCardID,
+  getFileIsPortrait,
+  getTitleFromObject,
+  makeSceneUrl,
+} from "@/helpers";
 import AspectRatio from "../data/AspectRatio";
 import AudioCodec from "../data/AudioCodec";
 import BitRate from "../data/BitRate";
@@ -20,6 +25,7 @@ import Studio from "../data/Studio";
 import VideoCodec from "../data/VideoCodec";
 import {
   CardModalContent,
+  CardModalGalleriesSection,
   CardModalNavigation,
   CardModalPerformersSection,
   CardModalTagsSection,
@@ -88,6 +94,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.galleries.length)
+    footerSections.push(["galleries", props.scene.galleries.length]);
   if (props.scene.performers.length)
     footerSections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length)
@@ -419,6 +427,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex > -1;
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.scene.galleries.length)
+    sections.push(["galleries", props.scene.galleries.length]);
   if (props.scene.performers.length)
     sections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length) sections.push(["tags", props.scene.tags.length]);
@@ -488,6 +498,14 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           }
           object={props.scene}
           performers={props.scene.performers}
+          ratingSystem={props.ratingSystem}
+        />
+      ) : props.section === "galleries" ? (
+        <CardModalGalleriesSection
+          abbreviateCounters={props.abbreviateCounters}
+          galleries={props.scene.galleries}
+          object={props.scene}
+          pluginConfig={props.pluginConfig}
           ratingSystem={props.ratingSystem}
         />
       ) : (
@@ -572,10 +590,3 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     </CardModalContent>
   );
 };
-
-/* ---------------------------------------------------------------------------------------------- */
-/*                                             Helpers                                            */
-/* ---------------------------------------------------------------------------------------------- */
-
-/** Helper function to create consitently formatted scene IDs. */
-export const createSceneCardID = (stashID: string) => "sceneCard-" + stashID;

@@ -1,18 +1,15 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleInfo,
-  faCirclePlay,
-  faTag,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
+import { getStashFaIcon } from "@/helpers";
 
+export { default as CardModalGalleriesSection } from "./sections/CardModalGalleriesSection";
 export { default as CardModalPerformersSection } from "./sections/CardModalPerformersSection";
 export { default as CardModalScenesSection } from "./sections/CardModalScenesSection";
 export { default as CardModalTagsSection } from "./sections/CardModalTagsSection";
@@ -70,6 +67,7 @@ export const CardModalContent: React.FC<
 > = (props) => {
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
+  const handleSetGalleriesSection = () => props.setSection("galleries");
   const handleSetPerformersSection = () => props.setSection("performers");
   const handleSetScenesSection = () => props.setSection("scenes");
   const handleSetTagsSection = () => props.setSection("tags");
@@ -104,7 +102,7 @@ export const CardModalContent: React.FC<
               onClick={handleSetTagsSection}
               title={intl.formatMessage({ id: "tags" })}
             >
-              <FontAwesomeIcon icon={faTag} />
+              <FontAwesomeIcon icon={getStashFaIcon("tag")} />
               {props.pluginConfig.cards__shared__enableCounts ? (
                 <span aria-hidden>
                   {props.sections.find((s) => s[0] === "tags")?.[1]}
@@ -119,7 +117,7 @@ export const CardModalContent: React.FC<
               onClick={handleSetPerformersSection}
               title={intl.formatMessage({ id: "performers" })}
             >
-              <FontAwesomeIcon icon={faUser} />
+              <FontAwesomeIcon icon={getStashFaIcon("performer")} />
               {props.pluginConfig.cards__shared__enableCounts ? (
                 <span aria-hidden>
                   {props.sections.find((s) => s[0] === "performers")?.[1]}
@@ -134,10 +132,25 @@ export const CardModalContent: React.FC<
               onClick={handleSetScenesSection}
               title={intl.formatMessage({ id: "scenes" })}
             >
-              <FontAwesomeIcon icon={faCirclePlay} />
+              <FontAwesomeIcon icon={getStashFaIcon("scene")} />
               {props.pluginConfig.cards__shared__enableCounts ? (
                 <span aria-hidden>
                   {props.sections.find((s) => s[0] === "scenes")?.[1]}
+                </span>
+              ) : null}
+            </button>
+          )}
+          {props.sections.find((s) => s[0] === "galleries") && (
+            <button
+              type="button"
+              className="minimal btn"
+              onClick={handleSetGalleriesSection}
+              title={intl.formatMessage({ id: "galleries" })}
+            >
+              <FontAwesomeIcon icon={getStashFaIcon("gallery")} />
+              {props.pluginConfig.cards__shared__enableCounts ? (
+                <span aria-hidden>
+                  {props.sections.find((s) => s[0] === "galleries")?.[1]}
                 </span>
               ) : null}
             </button>

@@ -482,6 +482,34 @@ export const NoTagsModalButton: Story = {
   },
 };
 
+export const GalleriesModalButton: Story = {
+  args: {
+    scene: fullData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const galleriesModalBtn = canvas.getByRole("button", {
+      name: "Galleries",
+    });
+    expect(galleriesModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoGalleriesModalButton: Story = {
+  args: {
+    scene: minimalData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const galleriesModalBtn = canvas.queryByRole("button", {
+      name: "Galleries",
+    });
+    expect(galleriesModalBtn).toBeNull();
+  },
+};
+
 export const DisableModalsWhenSelecting: Story = {
   args: {
     scene: fullData as SlimSceneDataFragment,

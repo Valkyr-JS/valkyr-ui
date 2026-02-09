@@ -1,10 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useIntl } from "react-intl";
 import TextUtils from "@/components/stash/utils/text";
 import GenderIcon from "@/components/stash/Performers/GenderIcon";
-import { convertRating100 } from "@/helpers";
+import { convertRating100, getStashFaIcon } from "@/helpers";
 
 interface CardModalPerformersSectionProps {
   /** An array of Gender enums in the order they should appear. Unlike the dard
@@ -48,7 +47,7 @@ const CardModalPerformersSection: React.FC<CardModalPerformersSectionProps> = (
     if (!ratingNum) return null;
     return (
       <span className={ratingClass}>
-        <FontAwesomeIcon icon={faStar} />
+        <FontAwesomeIcon icon={getStashFaIcon("rating")} />
         <span className="sr-only">{srRatingText(ratingNum)}</span>
         <span aria-hidden>{ratingNum}</span>
       </span>
@@ -122,7 +121,7 @@ const CardModalPerformersSection: React.FC<CardModalPerformersSectionProps> = (
                   {rating(ratingNum)}
                   {p.favorite && (
                     <span>
-                      <FontAwesomeIcon icon={faHeart} />
+                      <FontAwesomeIcon icon={getStashFaIcon("favorite")} />
                       <span className="sr-only">
                         {intl.formatMessage({ id: "performer_favorite" })}
                       </span>

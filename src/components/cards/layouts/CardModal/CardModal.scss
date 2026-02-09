@@ -5,6 +5,7 @@ $prefix: variables.$prefix;
 
 .vui-card-modal {
   &__body {
+    margin-top: 10px;
     grid-row: body-top / body-bottom;
   }
 
@@ -59,6 +60,7 @@ $prefix: variables.$prefix;
   /*                                            Sections                                            */
   /* ---------------------------------------------------------------------------------------------- */
 
+  &__gallery-section,
   &__performer-section,
   &__scene-section {
     & > ul {
@@ -84,6 +86,7 @@ $prefix: variables.$prefix;
     }
   }
 
+  &__gallery-image-wrapper,
   &__performer-image-wrapper,
   &__scene-image-wrapper {
     display: flex;
@@ -96,10 +99,31 @@ $prefix: variables.$prefix;
     }
   }
 
+  &__gallery-data-wrapper,
   &__performer-data-wrapper,
   &__scene-data-wrapper {
     @media (min-width: 400px) {
       padding-left: 10px;
+    }
+  }
+
+  &__user-data {
+    grid-column: user-data-start / user-data-end;
+
+    display: flex;
+    column-gap: $column-gap;
+    opacity: var(--#{$prefix}-card-top-line-opacity);
+  }
+
+  /* --------------------------------------- Gallery section -------------------------------------- */
+
+  &__gallery-data-wrapper {
+    display: grid;
+    grid-template-rows: [gallery-section-top top-line-top] max-content [top-line-bottom title-top] max-content [title-bottom key-data-top] max-content [key-data-bottom details-top] 1fr [details-bottom cast-crew-top] max-content [cast-crew-bottom gallery-section-bottom];
+
+    h6 {
+      grid-row: title-top / title-bottom;
+      overflow-wrap: anywhere;
     }
   }
 
@@ -137,13 +161,5 @@ $prefix: variables.$prefix;
       grid-row: title-top / title-bottom;
       overflow-wrap: anywhere;
     }
-  }
-
-  &__user-data {
-    grid-column: user-data-start / user-data-end;
-
-    display: flex;
-    column-gap: $column-gap;
-    opacity: var(--#{$prefix}-card-top-line-opacity);
   }
 }

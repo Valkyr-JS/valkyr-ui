@@ -1,8 +1,7 @@
 import React from "react";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useIntl } from "react-intl";
-import { getRenderData } from "@/helpers";
+import { getRenderData, getStashFaIcon } from "@/helpers";
 import "./PlayCount.scss";
 
 interface PlayCountProps {
@@ -39,7 +38,7 @@ const PlayCount: React.FC<
 
   return (
     <span className={componentClass}>
-      <FontAwesomeIcon icon={faEye} />
+      <FontAwesomeIcon icon={getStashFaIcon("playCount")} />
       <span className="sr-only">
         {intl.formatMessage({ id: "play_count" })}: {value}
       </span>

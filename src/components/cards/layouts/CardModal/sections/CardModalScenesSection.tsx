@@ -23,7 +23,7 @@ import FileData from "@/components/cards/layouts/FileData";
 import KeyData from "@/components/cards/layouts/KeyData";
 import ReleaseData from "@/components/cards/layouts/ReleaseData";
 import TopLine from "@/components/cards/layouts/TopLine";
-import { getTitleFromObject, makeSceneUrl } from "@/helpers";
+import { createSceneCardID, getTitleFromObject, makeSceneUrl } from "@/helpers";
 
 interface CardModalScenesSectionProps {
   /** Whether counter data should be abbreviated. */
@@ -96,7 +96,7 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
           const primaryFile = getPrimaryFileData(sc);
           const title = getTitleFromObject(sc);
           const sceneLink = makeSceneUrl({ scene: sc });
-          const titleID = title + "SceneSection";
+          const titleID = createSceneCardID(sc.id) + "SceneSection";
 
           return (
             <li key={sc.id}>
