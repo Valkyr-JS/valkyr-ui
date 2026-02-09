@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleInfo,
   faCirclePlay,
+  faImages,
   faTag,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -138,6 +139,11 @@ const CardFooter: React.FC<
     props.openHandler();
   };
 
+  const handleOpenGalleriesSection = () => {
+    props.setSection("galleries");
+    props.openHandler();
+  };
+
   const handleOpenPerformersSection = () => {
     props.setSection("performers");
     props.openHandler();
@@ -210,6 +216,22 @@ const CardFooter: React.FC<
           {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "scenes")?.[1]}
+            </span>
+          ) : null}
+        </button>
+      )}
+      {props.sections.find((s) => s[0] === "galleries") && (
+        <button
+          type="button"
+          className="minimal btn"
+          disabled={props.selectionProps.selecting}
+          onClick={handleOpenGalleriesSection}
+          title={intl.formatMessage({ id: "galleries" })}
+        >
+          <FontAwesomeIcon icon={faImages} />
+          {props.pluginConfig.cards__shared__enableCounts ? (
+            <span aria-hidden>
+              {props.sections.find((s) => s[0] === "galleries")?.[1]}
             </span>
           ) : null}
         </button>

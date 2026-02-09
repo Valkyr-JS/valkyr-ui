@@ -88,6 +88,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.galleries.length)
+    footerSections.push(["galleries", props.scene.galleries.length]);
   if (props.scene.performers.length)
     footerSections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length)
