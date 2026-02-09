@@ -5,6 +5,7 @@ $prefix: variables.$prefix;
 
 .vui-card-modal {
   &__body {
+    margin-top: 10px;
     grid-row: body-top / body-bottom;
   }
 
