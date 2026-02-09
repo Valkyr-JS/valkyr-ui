@@ -25,6 +25,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
+import CardModalFileInfoSection from "../layouts/CardModal/sections/CardModalFileInfoSection";
 
 interface GalleryCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
@@ -382,6 +383,11 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           pluginConfig={props.pluginConfig}
           scenes={props.gallery.scenes}
           ratingSystem={props.ratingSystem}
+        />
+      )  : props.section === "files" ? (
+        <CardModalFileInfoSection
+          abbreviateCounters={props.abbreviateCounters}
+          files={props.gallery.files}
         />
       ) : (
         <>
