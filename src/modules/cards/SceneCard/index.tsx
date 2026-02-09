@@ -9,7 +9,7 @@ import {
   CardModalNavigation,
   CardModalWrapper,
 } from "@/components/cards/layouts/CardModal";
-import { DEFAULT } from "@/constants";
+import { mergeConfig } from "@/helpers";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<ISceneCardGrid>(
@@ -18,7 +18,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-      const pluginConfig = stashConfig.plugins["valkyr-ui"] ?? {};
+      const pluginConfig = mergeConfig(stashConfig.plugins["valkyr-ui"]);
 
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSceneIndex, setModalSceneIndex] = useState(0);
@@ -78,11 +78,9 @@ PluginApi.patch.instead<ISceneCardGrid>(
       };
 
       /** Handle the click event outside of the modal when it is open. */
-      const handleModalOuterClick =
-        (pluginConfig.general__closeModalOnOuterClick ??
-        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK)
-          ? handleCloseModal
-          : undefined;
+      const handleModalOuterClick = pluginConfig.general__closeModalOnOuterClick
+        ? handleCloseModal
+        : undefined;
 
       const navigationProps: CardModalNavigation | undefined =
         props.scenes.length > 1
@@ -132,7 +130,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
             }
           : undefined;
 
-      if (pluginConfig?.cards__sceneCard__enabled ?? DEFAULT.CARDS.SCENE_CARD)
+      if (pluginConfig?.cards__sceneCard__enabled)
         return [
           <>
             <CardGrid
@@ -166,10 +164,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
             <CardModalWrapper
               bgClickHandler={handleModalOuterClick}
               classname="vui-scene-card-modal"
-              fullHeightModal={
-                pluginConfig.general__fullHeightModals ??
-                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
-              }
+              fullHeightModal={pluginConfig.general__fullHeightModals}
               show={modalOpen}
               titleID={titleID}
             >
@@ -202,7 +197,7 @@ PluginApi.patch.instead<ISceneCardProps>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-      const pluginConfig = stashConfig.plugins["valkyr-ui"] ?? {};
+      const pluginConfig = mergeConfig(stashConfig.plugins["valkyr-ui"]);
 
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSection, setModalSection] =
@@ -237,13 +232,11 @@ PluginApi.patch.instead<ISceneCardProps>(
       const handleCloseModal = () => setModalOpen(false);
 
       /** Handle the click event outside of the modal when it is open. */
-      const handleModalOuterClick =
-        (pluginConfig.general__closeModalOnOuterClick ??
-        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK)
-          ? handleCloseModal
-          : undefined;
+      const handleModalOuterClick = pluginConfig.general__closeModalOnOuterClick
+        ? handleCloseModal
+        : undefined;
 
-      if (pluginConfig?.cards__sceneCard__enabled ?? DEFAULT.CARDS.SCENE_CARD)
+      if (pluginConfig?.cards__sceneCard__enabled)
         return [
           <>
             <SceneCard
@@ -263,10 +256,7 @@ PluginApi.patch.instead<ISceneCardProps>(
             <CardModalWrapper
               bgClickHandler={handleModalOuterClick}
               classname="vui-scene-card-modal"
-              fullHeightModal={
-                pluginConfig.general__fullHeightModals ??
-                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
-              }
+              fullHeightModal={pluginConfig.general__fullHeightModals}
               show={modalOpen}
               titleID={titleID}
             >
