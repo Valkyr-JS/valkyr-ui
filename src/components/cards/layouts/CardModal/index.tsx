@@ -13,6 +13,7 @@ import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
 
+export { default as CardModalGalleriesSection } from "./sections/CardModalGalleriesSection";
 export { default as CardModalPerformersSection } from "./sections/CardModalPerformersSection";
 export { default as CardModalScenesSection } from "./sections/CardModalScenesSection";
 export { default as CardModalTagsSection } from "./sections/CardModalTagsSection";
@@ -70,6 +71,7 @@ export const CardModalContent: React.FC<
 > = (props) => {
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
+  const handleSetGalleriesSection = () => props.setSection("galleries");
   const handleSetPerformersSection = () => props.setSection("performers");
   const handleSetScenesSection = () => props.setSection("scenes");
   const handleSetTagsSection = () => props.setSection("tags");
@@ -138,6 +140,21 @@ export const CardModalContent: React.FC<
               {props.pluginConfig.cards__shared__enableCounts ? (
                 <span aria-hidden>
                   {props.sections.find((s) => s[0] === "scenes")?.[1]}
+                </span>
+              ) : null}
+            </button>
+          )}
+          {props.sections.find((s) => s[0] === "galleries") && (
+            <button
+              type="button"
+              className="minimal btn"
+              onClick={handleSetGalleriesSection}
+              title={intl.formatMessage({ id: "galleries" })}
+            >
+              <FontAwesomeIcon icon={faCirclePlay} />
+              {props.pluginConfig.cards__shared__enableCounts ? (
+                <span aria-hidden>
+                  {props.sections.find((s) => s[0] === "galleries")?.[1]}
                 </span>
               ) : null}
             </button>

@@ -20,6 +20,7 @@ import Studio from "../data/Studio";
 import VideoCodec from "../data/VideoCodec";
 import {
   CardModalContent,
+  CardModalGalleriesSection,
   CardModalNavigation,
   CardModalPerformersSection,
   CardModalTagsSection,
@@ -490,6 +491,14 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           }
           object={props.scene}
           performers={props.scene.performers}
+          ratingSystem={props.ratingSystem}
+        />
+      ) : props.section === "galleries" ? (
+        <CardModalGalleriesSection
+          abbreviateCounters={props.abbreviateCounters}
+          galleries={props.scene.galleries}
+          object={props.scene}
+          pluginConfig={props.pluginConfig}
           ratingSystem={props.ratingSystem}
         />
       ) : (

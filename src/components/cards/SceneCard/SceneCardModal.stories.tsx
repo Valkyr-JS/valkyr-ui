@@ -485,6 +485,41 @@ export const NoTagsSectionButton: Story = {
   },
 };
 
+export const GalleriesSection: Story = {
+  args: {
+    section: "galleries",
+    scene: fullData as SceneDataFragment,
+  },
+};
+
+export const GalleriesModalButton: Story = {
+  args: {
+    scene: fullData as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const galleriesModalBtn = canvas.getByRole("button", {
+      name: "Galleries",
+    });
+    expect(galleriesModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoGalleriesModalButton: Story = {
+  args: {
+    scene: minimalData as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const galleriesModalBtn = canvas.queryByRole("button", {
+      name: "Galleries",
+    });
+    expect(galleriesModalBtn).toBeNull();
+  },
+};
+
 export const Navigation: Story = {
   args: {
     navigation: {

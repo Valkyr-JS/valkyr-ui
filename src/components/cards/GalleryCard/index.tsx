@@ -374,8 +374,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       ) : props.section === "scenes" ? (
         <CardModalScenesSection
           abbreviateCounters={props.abbreviateCounters}
-          pluginConfig={props.pluginConfig}
           object={props.gallery}
+          pluginConfig={props.pluginConfig}
           scenes={props.gallery.scenes}
           ratingSystem={props.ratingSystem}
         />
