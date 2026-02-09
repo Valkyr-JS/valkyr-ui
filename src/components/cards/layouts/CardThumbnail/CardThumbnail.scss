@@ -1,0 +1,67 @@
+@use "sass:map";
+@use "sass:math";
+@use "../../../../src/scss/variables";
+
+$column-gap: variables.$column-gap;
+$prefix: variables.$prefix;
+$zoomIndexs: variables.$card-zoom-indices;
+$zoomThumbnailHeights: (
+  0: 180px,
+  1: 240px,
+  2: 360px,
+  3: 480px,
+);
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                             Shared                                             */
+/* ---------------------------------------------------------------------------------------------- */
+
+.vui-card-thumbnail {
+  width: 100%;
+
+  &__image-wrapper {
+    position: relative;
+
+    img {
+      height: auto;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    &--blurred-bg {
+      background-position: center;
+      background-size: cover;
+
+      img {
+        backdrop-filter: blur(10px);
+      }
+    }
+  }
+}
+
+// Generate thumbnail heights for each zoom index
+@each $zoom, $maxCardWidth in $zoomIndexs {
+  $height: map.get(
+    $map: $zoomThumbnailHeights,
+    $key: $zoom,
+  );
+
+  .vui-card-grid--zoom-#{$zoom} .vui-card-thumbnail__image-wrapper img {
+    height: $height;
+  }
+}
+
+// Max thumbnail height for card modals and non-grid cards
+.vui-card-thumbnail__image-wrapper img {
+  max-height: 480px;
+}
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                       Recommendation Row                                       */
+/* ---------------------------------------------------------------------------------------------- */
+
+.slick-slide .vui-card-thumbnail {
+  &__image-wrapper img {
+    height: 240px;
+  }
+}
