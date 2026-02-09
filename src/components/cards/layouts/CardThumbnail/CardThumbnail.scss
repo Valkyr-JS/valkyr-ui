@@ -114,8 +114,8 @@ $zoomThumbnailHeights: (
 /*                                       Recommendation Row                                       */
 /* ---------------------------------------------------------------------------------------------- */
 
-.slick-slide .vui-card-thumbnail {
-  &__image-wrapper img {
+.slick-slide {
+  .vui-card-thumbnail--simple-image .vui-card-thumbnail__image-wrapper img {
     height: 240px;
   }
 }
