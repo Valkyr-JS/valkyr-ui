@@ -17,15 +17,14 @@ $zoomThumbnailHeights: (
 /* ---------------------------------------------------------------------------------------------- */
 
 .vui-card-thumbnail {
+  position: relative;
   width: 100%;
 
   &__image-wrapper {
     position: relative;
 
     img {
-      height: auto;
       width: 100%;
-      object-fit: contain;
     }
 
     &--blurred-bg {
@@ -37,6 +36,47 @@ $zoomThumbnailHeights: (
       }
     }
   }
+
+  &--simple-image &__image-wrapper {
+    img {
+      height: auto;
+      object-fit: contain;
+
+      // Max thumbnail height for card modals and non-grid cards
+      max-height: 480px;
+    }
+  }
+
+  &--video-preview &__image-wrapper {
+    display: flex;
+    justify-content: center;
+
+    height: auto;
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    img,
+    video {
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    video {
+      position: absolute;
+      z-index: -1;
+      transition: z-index 0s;
+      transition-delay: 0.2s;
+    }
+  }
+
+  &--portrait {
+    img,
+    video {
+      object-fit: contain;
+    }
+  }
 }
 
 // Generate thumbnail heights for each zoom index
@@ -46,14 +86,12 @@ $zoomThumbnailHeights: (
     $key: $zoom,
   );
 
-  .vui-card-grid--zoom-#{$zoom} .vui-card-thumbnail__image-wrapper img {
+  .vui-card-grid--zoom-#{$zoom}
+    .vui-card-thumbnail--simple-image
+    .vui-card-thumbnail__image-wrapper
+    img {
     height: $height;
   }
-}
-
-// Max thumbnail height for card modals and non-grid cards
-.vui-card-thumbnail__image-wrapper img {
-  max-height: 480px;
 }
 
 /* ---------------------------------------------------------------------------------------------- */

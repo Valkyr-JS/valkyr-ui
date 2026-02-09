@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import cx from "classnames";
 import RatingBanner from "../../data/RatingBanner";
 
 const componentClass = "vui-card-thumbnail";
-const staticImageClass = componentClass + "--static-image";
+const componentPortraitClass = componentClass + "--portrait";
+const simpleImageClass = componentClass + "--simple-image";
+const videoPreviewClass = componentClass + "--video-preview";
 
 const imageWrapperClass = componentClass + "__image-wrapper";
 const imageWrapperBackgroundClass = imageWrapperClass + "--blurred-bg";
 
 /* ---------------------------------------------------------------------------------------------- */
-/*                                      StaticImageThumbnail                                      */
+/*                                      SimpleImageThumbnail                                      */
 /* ---------------------------------------------------------------------------------------------- */
 
-interface StaticImageThumbnailProps {
+interface SimpleImageThumbnailProps {
   /** Adds a blurred version of the scene thumbnail to the background. */
   backgroundImage: boolean;
 
@@ -45,15 +47,15 @@ interface StaticImageThumbnailProps {
   zoomIndex?: StashCardGridZoom;
 }
 
-export const StaticImageThumbnail: React.FC<StaticImageThumbnailProps> = (
+export const SimpleImageThumbnail: React.FC<SimpleImageThumbnailProps> = (
   props,
 ) => {
-  const componentClassList = cx(componentClass, staticImageClass);
+  const componentClassList = cx(componentClass, simpleImageClass);
   const imageWrapperClassList = cx(imageWrapperClass, {
     [imageWrapperBackgroundClass]: props.backgroundImage,
   });
 
-  const coverStyles: React.CSSProperties = {
+  const imageWrapperStyles: React.CSSProperties = {
     background: !!props.backgroundStyle ? props.backgroundStyle : undefined,
     backgroundImage: props.backgroundImage ? `url(${props.src})` : undefined,
   };
@@ -61,7 +63,7 @@ export const StaticImageThumbnail: React.FC<StaticImageThumbnailProps> = (
   return (
     <div className={componentClassList}>
       <a href={props.link} aria-labelledby={props.titleID}>
-        <div className={imageWrapperClassList} style={coverStyles}>
+        <div className={imageWrapperClassList} style={imageWrapperStyles}>
           <img loading="lazy" alt="" src={props.src} />
         </div>
         <RatingBanner
@@ -80,4 +82,69 @@ export const StaticImageThumbnail: React.FC<StaticImageThumbnailProps> = (
 /*                                      VideoPreviewThumbnail                                     */
 /* ---------------------------------------------------------------------------------------------- */
 
-interface VideoPreviewThumbnail extends StaticImageThumbnailProps {}
+interface VideoPreviewThumbnailProps extends SimpleImageThumbnailProps {
+  /** Whether a part of the card is currently being hovered over. */
+  cardIsHovered?: boolean;
+
+  /** Whether the video file is portrait-oriented or not. */
+  isPortrait: boolean;
+
+  /** The path to the video file. Disabled if `undefined`. */
+  videoSrc: string | undefined;
+}
+
+export const VideoPreviewThumbnail: React.FC<VideoPreviewThumbnailProps> = (
+  props,
+) => {
+  const componentClassList = cx(componentClass, videoPreviewClass, {
+    [componentPortraitClass]: props.isPortrait,
+  });
+  const imageWrapperClassList = cx(imageWrapperClass, {
+    [imageWrapperBackgroundClass]: props.backgroundImage,
+  });
+
+  const imageWrapperStyles: React.CSSProperties = {
+    background: !!props.backgroundStyle ? props.backgroundStyle : undefined,
+    backgroundImage: props.backgroundImage ? `url(${props.src})` : undefined,
+  };
+
+  const videoSrc = props.context === "card" ? props.videoSrc : undefined;
+
+  const videoEl = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (props.cardIsHovered) {
+      // Catch is necessary due to DOMException if user hovers before clicking on page
+      videoEl.current?.play().catch(() => {});
+    } else videoEl.current?.pause();
+  }, [props.cardIsHovered]);
+
+  return (
+    <div className={componentClassList}>
+      <a href={props.link} aria-labelledby={props.titleID}>
+        <div className={imageWrapperClassList} style={imageWrapperStyles}>
+          <img loading="lazy" alt="" src={props.src} />
+          {videoSrc && (
+            <video
+              data-testid="video-preview-thumbnail-video"
+              disableRemotePlayback
+              playsInline
+              muted
+              loop
+              preload="none"
+              ref={videoEl}
+              src={videoSrc}
+            />
+          )}
+        </div>
+        <RatingBanner
+          context={props.context}
+          currentZoomIndex={props.zoomIndex}
+          rating100={props.rating100}
+          ratingSystem={props.ratingSystem}
+          userZoomIndex={props.ratingBannerZoomIndex}
+        />
+      </a>
+    </div>
+  );
+};
