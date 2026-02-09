@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
@@ -9,7 +8,6 @@ import ImageCount from "../data/ImageCount";
 import Organized from "../data/Organized";
 import PerformerList from "../data/PerformerList";
 import Photographer from "../data/Photographer";
-import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
 import ZipIcon from "../data/ZipIcon";
@@ -20,6 +18,7 @@ import {
   CardModalScenesSection,
   CardModalTagsSection,
 } from "../layouts/CardModal";
+import { SimpleImageThumbnail } from "../layouts/CardThumbnail";
 import CastCrew from "../layouts/CastCrew";
 import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
@@ -75,11 +74,19 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       selected={props.selected}
       selecting={props.selecting}
       thumbnail={
-        <GalleryCardThumbnail
+        <SimpleImageThumbnail
+          backgroundImage={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
+          }
+          backgroundStyle={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
+          }
           context="card"
           link={galleryLink}
-          pluginConfig={props.pluginConfig}
           rating100={props.gallery.rating100}
+          ratingBannerZoomIndex={
+            props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex
+          }
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
           titleID={id}
@@ -243,80 +250,6 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
 };
 
 /* ---------------------------------------------------------------------------------------------- */
-/*                                Gallery card thumbnail component                                */
-/* ---------------------------------------------------------------------------------------------- */
-
-interface GalleryCardThumbnailProps {
-  /** Whether the component is being rendered in a card component or modal
-   * component. */
-  context: "card" | "modal";
-
-  /** The link to the object page. */
-  link: string;
-
-  /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiPluginConfig;
-
-  /** The object's user rating out of 100 */
-  rating100: Maybe<Scalars["Int"]["output"]> | undefined;
-
-  /** The user's Stash rating system configuration. */
-  ratingSystem?: RatingSystemOptions;
-
-  /** The link to the gallery cover thumbnail. */
-  src: string;
-
-  /** HTML ID used for aria labelling on the modal title. */
-  titleID: string;
-
-  /** The current zoom index. */
-  zoomIndex?: StashCardGridZoom;
-}
-
-export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
-  props,
-) => {
-  const componentClass = "vui-gallery-card";
-  const thumbnailClass = componentClass + "__thumbnail";
-  const coverClass = componentClass + "__thumbnail-cover";
-  const coverBackgroundClass = coverClass + "--blurred-bg";
-  const coverClassList = cx(coverClass, {
-    [coverBackgroundClass]:
-      props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage,
-  });
-
-  const coverStyles: React.CSSProperties = {
-    background: !!props.pluginConfig
-      .cards__galleryCard__thumbnailBackgroundStyle
-      ? props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle
-      : undefined,
-    backgroundImage: props.pluginConfig
-      .cards__galleryCard__thumbnailBackgroundImage
-      ? `url(${props.src})`
-      : undefined,
-  };
-
-  return (
-    <div className={thumbnailClass}>
-      <a href={props.link} aria-labelledby={props.titleID}>
-        <div className={coverClassList} style={coverStyles}>
-          <img loading="lazy" alt="" src={props.src} />
-        </div>
-        <RatingBanner
-          context={props.context}
-          currentZoomIndex={props.zoomIndex}
-          rating100={props.rating100}
-          ratingSystem={props.ratingSystem}
-          userZoomIndex={
-            props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex
-          }
-        />
-      </a>
-    </div>
-  );
-};
-
-/* ---------------------------------------------------------------------------------------------- */
 /*                                  Gallery card modal component                                  */
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -391,11 +324,19 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
       sections={sections}
       setSection={props.setSection}
       thumbnail={
-        <GalleryCardThumbnail
+        <SimpleImageThumbnail
+          backgroundImage={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
+          }
+          backgroundStyle={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
+          }
           context="modal"
           link={galleryLink}
-          pluginConfig={props.pluginConfig}
-          rating100={willRenderRatingBanner ? props.gallery.rating100 : 0}
+          rating100={props.gallery.rating100}
+          ratingBannerZoomIndex={
+            props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex
+          }
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
           titleID={props.titleID}

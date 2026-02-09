@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import cx from "classnames";
+import React, { useState } from "react";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import AspectRatio from "../data/AspectRatio";
 import AudioCodec from "../data/AudioCodec";
@@ -15,7 +14,6 @@ import OCount from "../data/OCount";
 import Organized from "../data/Organized";
 import PerformerList from "../data/PerformerList";
 import PlayCount from "../data/PlayCount";
-import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Resolution from "../data/Resolution";
 import Studio from "../data/Studio";
@@ -31,6 +29,10 @@ import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
+import {
+  SimpleImageThumbnail,
+  VideoPreviewThumbnail,
+} from "../layouts/CardThumbnail";
 import "./SceneCard.scss";
 
 interface SceneCardProps extends SelectableCardProps {
@@ -105,23 +107,26 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       selected={props.selected}
       selecting={props.selecting}
       thumbnail={
-        <SceneCardThumbnail
+        <VideoPreviewThumbnail
+          backgroundImage={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
+          }
+          backgroundStyle={
+            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
+          }
           cardIsHovered={isHovered}
           context="card"
           isPortrait={isPortrait}
           link={sceneLink}
-          pluginConfig={props.pluginConfig}
-          preview={preview}
+          previewsEnabled={props.pluginConfig.cards__sceneCard__previewsEnabled}
           rating100={props.scene.rating100}
+          ratingBannerZoomIndex={
+            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
+          }
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
-          thumbnailBackground={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
-          }
-          thumbnailBackgroundStyle={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
-          }
           titleID={id}
+          videoSrc={preview}
           zoomIndex={props.zoomIndex}
         />
       }
@@ -334,122 +339,6 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
 };
 
 /* ---------------------------------------------------------------------------------------------- */
-/*                                 Scene card thumbnail component                                 */
-/* ---------------------------------------------------------------------------------------------- */
-
-interface SceneCardThumbnailProps {
-  /** Whether the component is being rendered in a card component or modal
-   * component. */
-  context: "card" | "modal";
-
-  /** Whether a part of the card is currently being hovered over. */
-  cardIsHovered?: boolean;
-
-  /** Whether the scene is portrait-oriented or not. */
-  isPortrait: boolean;
-
-  /** The link to the object page. */
-  link: string;
-
-  /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiPluginConfig;
-
-  /** The path to the preview file. Disabled if `undefined`. */
-  preview: string | undefined;
-
-  /** The object's user rating out of 100 */
-  rating100: Maybe<Scalars["Int"]["output"]> | undefined;
-
-  /** The user's Stash rating system configuration. */
-  ratingSystem?: RatingSystemOptions;
-
-  /** The link to the scene cover thumbnail. */
-  src: string;
-
-  /** Adds a blurred version of the thumbnail to the background. */
-  thumbnailBackground: boolean;
-
-  /** Adds user-defined CSS to the thumbnail background. */
-  thumbnailBackgroundStyle: string | null;
-
-  /** HTML ID used for aria labelling on the modal title. */
-  titleID: string;
-
-  /** The current zoom index. */
-  zoomIndex?: StashCardGridZoom;
-}
-
-export const SceneCardThumbnail: React.FC<SceneCardThumbnailProps> = (
-  props,
-) => {
-  const componentClass = "vui-scene-card";
-  const thumbnailClass = componentClass + "__thumbnail";
-
-  const previewClass = componentClass + "__thumbnail-preview";
-  const previewBackgroundClass = previewClass + "--blurred-bg";
-  const previewPortraitClass = previewClass + "--portrait";
-  const previewClassList = cx(previewClass, {
-    [previewBackgroundClass]: props.thumbnailBackground,
-    [previewPortraitClass]: props.isPortrait,
-  });
-
-  const preview =
-    props.context === "card" &&
-    props.pluginConfig.cards__sceneCard__previewsEnabled
-      ? (props.preview ?? undefined)
-      : undefined;
-
-  const previewStyles: React.CSSProperties = {
-    background: props.thumbnailBackgroundStyle
-      ? props.thumbnailBackgroundStyle
-      : undefined,
-    backgroundImage: props.thumbnailBackground
-      ? `url(${props.src})`
-      : undefined,
-  };
-
-  const videoEl = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (props.cardIsHovered) {
-      // Catch is necessary due to DOMException if user hovers before clicking on page
-      videoEl.current?.play().catch(() => {});
-    } else videoEl.current?.pause();
-  }, [props.cardIsHovered]);
-
-  return (
-    <div className={thumbnailClass}>
-      <a href={props.link} aria-labelledby={props.titleID}>
-        <div className={previewClassList} style={previewStyles}>
-          <img loading="lazy" alt="" src={props.src} />
-          {preview && (
-            <video
-              data-testid="scene-card-preview"
-              disableRemotePlayback
-              playsInline
-              muted
-              loop
-              preload="none"
-              ref={videoEl}
-              src={preview}
-            />
-          )}
-        </div>
-        <RatingBanner
-          context={props.context}
-          currentZoomIndex={props.zoomIndex}
-          rating100={props.rating100}
-          ratingSystem={props.ratingSystem}
-          userZoomIndex={
-            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
-          }
-        />
-      </a>
-    </div>
-  );
-};
-
-/* ---------------------------------------------------------------------------------------------- */
 /*                                   Scene card modal component                                   */
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -508,7 +397,6 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
 
   const primaryFile =
     props.scene.files.length > 0 ? props.scene.files[0] : undefined;
-  const isPortrait = getFileIsPortrait(primaryFile);
 
   // Only render technical details if the user has enabled on cards them at any
   // breakpoint. The data will be available anyway under the file section.
@@ -545,21 +433,21 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       sections={sections}
       setSection={props.setSection}
       thumbnail={
-        <SceneCardThumbnail
-          context="modal"
-          isPortrait={isPortrait}
-          link={sceneLink}
-          pluginConfig={props.pluginConfig}
-          preview={props.scene.paths.preview ?? undefined}
-          rating100={willRenderRatingBanner ? props.scene.rating100 : null}
-          ratingSystem={props.ratingSystem}
-          src={props.scene.paths.screenshot as string}
-          thumbnailBackground={
+        <SimpleImageThumbnail
+          backgroundImage={
             props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
           }
-          thumbnailBackgroundStyle={
+          backgroundStyle={
             props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
           }
+          context="modal"
+          link={sceneLink}
+          rating100={props.scene.rating100}
+          ratingBannerZoomIndex={
+            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
+          }
+          ratingSystem={props.ratingSystem}
+          src={props.scene.paths.screenshot as string}
           titleID={props.titleID}
         />
       }
