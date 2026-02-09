@@ -131,7 +131,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
             }
           : undefined;
 
-      if (pluginConfig?.cards__galleryCard__enabled)
+      if (pluginConfig.cards__galleryCard__enabled)
         return [
           <>
             <CardGrid
@@ -231,7 +231,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
         ? handleCloseModal
         : undefined;
 
-      if (pluginConfig?.cards__galleryCard__enabled)
+      if (pluginConfig.cards__galleryCard__enabled)
         return [
           <>
             <GalleryCard

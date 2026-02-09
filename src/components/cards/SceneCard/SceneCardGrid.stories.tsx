@@ -43,7 +43,7 @@ const SceneCards = [
     abbreviateCounters={false}
     footer={{
       openHandler: fn(),
-      pluginConfig: {},
+      pluginConfig: mergeConfig({}),
       setSection: fn(),
     }}
     pluginConfig={mergeConfig({})}

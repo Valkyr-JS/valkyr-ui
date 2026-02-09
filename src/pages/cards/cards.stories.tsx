@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { mergeConfig } from "@/helpers";
 import CardsTab from "./";
 import { fn } from "storybook/test";
 import "../pages.scss";
@@ -12,7 +13,7 @@ const meta = {
   },
   args: {
     configUpdateHandler: fn(),
-    pluginConfig: {},
+    pluginConfig: mergeConfig({}),
   },
   tags: ["autodocs"],
   render: (args) => {

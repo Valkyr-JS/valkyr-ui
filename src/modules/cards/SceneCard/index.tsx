@@ -130,7 +130,7 @@ PluginApi.patch.instead<ISceneCardGrid>(
             }
           : undefined;
 
-      if (pluginConfig?.cards__sceneCard__enabled)
+      if (pluginConfig.cards__sceneCard__enabled)
         return [
           <>
             <CardGrid

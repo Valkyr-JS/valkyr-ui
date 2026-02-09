@@ -39,7 +39,7 @@ const GalleryCards = [
     abbreviateCounters={false}
     footer={{
       openHandler: fn(),
-      pluginConfig: {},
+      pluginConfig: mergeConfig({}),
       setSection: fn(),
     }}
     pluginConfig={mergeConfig({})}

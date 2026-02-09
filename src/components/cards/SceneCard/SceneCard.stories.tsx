@@ -31,7 +31,7 @@ const meta = {
     abbreviateCounters: false,
     footer: {
       openHandler: fn(),
-      pluginConfig: {},
+      pluginConfig: mergeConfig({}),
       setSection: fn(),
     },
     pluginConfig: mergeConfig({}),

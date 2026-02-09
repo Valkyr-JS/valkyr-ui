@@ -82,12 +82,6 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
           rating100={props.gallery.rating100}
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
-          thumbnailBackground={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage
-          }
-          thumbnailBackgroundStyle={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle
-          }
           titleID={id}
           zoomIndex={props.zoomIndex}
         />
@@ -272,12 +266,6 @@ interface GalleryCardThumbnailProps {
   /** The link to the gallery cover thumbnail. */
   src: string;
 
-  /** Adds a blurred version of the thumbnail to the background. */
-  thumbnailBackground: boolean;
-
-  /** Adds user-defined CSS to the thumbnail background. */
-  thumbnailBackgroundStyle: string | null;
-
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
 
@@ -293,14 +281,17 @@ export const GalleryCardThumbnail: React.FC<GalleryCardThumbnailProps> = (
   const coverClass = componentClass + "__thumbnail-cover";
   const coverBackgroundClass = coverClass + "--blurred-bg";
   const coverClassList = cx(coverClass, {
-    [coverBackgroundClass]: props.thumbnailBackground,
+    [coverBackgroundClass]:
+      props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage,
   });
 
   const coverStyles: React.CSSProperties = {
-    background: props.thumbnailBackgroundStyle
-      ? props.thumbnailBackgroundStyle
+    background: !!props.pluginConfig
+      .cards__galleryCard__thumbnailBackgroundStyle
+      ? props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle
       : undefined,
-    backgroundImage: props.thumbnailBackground
+    backgroundImage: props.pluginConfig
+      .cards__galleryCard__thumbnailBackgroundImage
       ? `url(${props.src})`
       : undefined,
   };
@@ -407,12 +398,6 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           rating100={willRenderRatingBanner ? props.gallery.rating100 : 0}
           ratingSystem={props.ratingSystem}
           src={props.gallery.paths.cover}
-          thumbnailBackground={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundImage
-          }
-          thumbnailBackgroundStyle={
-            props.pluginConfig.cards__galleryCard__thumbnailBackgroundStyle
-          }
           titleID={props.titleID}
         />
       }

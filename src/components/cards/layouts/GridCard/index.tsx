@@ -33,7 +33,7 @@ interface GridCardProps extends SelectableCardProps {
   onMouseOver?: React.MouseEventHandler<HTMLDivElement>;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** A component used for displaying the object thumbnail. */
   thumbnail: React.ReactNode;
@@ -116,7 +116,7 @@ export interface CardFooterProps {
   openHandler: () => void;
 
   /** The user's plugin configuration for Valkyr UI. */
-  pluginConfig: ValkyrUiConfigMap;
+  pluginConfig: ValkyrUiPluginConfig;
 
   /** The sections available to the modal */
   sections: CardModalSectionData[];
