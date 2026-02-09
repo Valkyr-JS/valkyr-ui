@@ -61,6 +61,9 @@ export const SimpleImageThumbnail: React.FC<SimpleImageThumbnailProps> = (
     backgroundImage: props.backgroundImage ? `url(${props.src})` : undefined,
   };
 
+  // Only render one of the two rating options
+  const willRenderRatingBanner = props.ratingBannerZoomIndex > -1;
+
   return (
     <div className={componentClassList}>
       <a href={props.link} aria-labelledby={props.titleID}>
@@ -70,7 +73,7 @@ export const SimpleImageThumbnail: React.FC<SimpleImageThumbnailProps> = (
         <RatingBanner
           context={props.context}
           currentZoomIndex={props.zoomIndex}
-          rating100={props.rating100}
+          rating100={willRenderRatingBanner ? props.rating100 : null}
           ratingSystem={props.ratingSystem}
           userZoomIndex={props.ratingBannerZoomIndex}
         />
@@ -113,8 +116,10 @@ export const VideoPreviewThumbnail: React.FC<VideoPreviewThumbnailProps> = (
   };
 
   const videoSrc = props.previewsEnabled ? props.videoSrc : undefined;
-
   const videoEl = useRef<HTMLVideoElement>(null);
+
+  // Only render one of the two rating options
+  const willRenderRatingBanner = props.ratingBannerZoomIndex > -1;
 
   useEffect(() => {
     if (props.cardIsHovered) {
@@ -144,7 +149,7 @@ export const VideoPreviewThumbnail: React.FC<VideoPreviewThumbnailProps> = (
         <RatingBanner
           context={props.context}
           currentZoomIndex={props.zoomIndex}
-          rating100={props.rating100}
+          rating100={willRenderRatingBanner ? props.rating100 : null}
           ratingSystem={props.ratingSystem}
           userZoomIndex={props.ratingBannerZoomIndex}
         />

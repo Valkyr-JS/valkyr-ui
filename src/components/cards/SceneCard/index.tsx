@@ -121,7 +121,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           previewsEnabled={props.pluginConfig.cards__sceneCard__previewsEnabled}
           rating100={props.scene.rating100}
           ratingBannerZoomIndex={
-            props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex
+            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
           }
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
@@ -444,7 +444,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           link={sceneLink}
           rating100={props.scene.rating100}
           ratingBannerZoomIndex={
-            props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex
+            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
           }
           ratingSystem={props.ratingSystem}
           src={props.scene.paths.screenshot as string}
