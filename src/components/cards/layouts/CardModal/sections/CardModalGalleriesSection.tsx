@@ -16,7 +16,7 @@ import FileData from "@/components/cards/layouts/FileData";
 import KeyData from "@/components/cards/layouts/KeyData";
 import ReleaseData from "@/components/cards/layouts/ReleaseData";
 import TopLine from "@/components/cards/layouts/TopLine";
-import { getTitleFromObject } from "@/helpers";
+import { createGalleryCardID, getTitleFromObject } from "@/helpers";
 
 interface CardModalGalleriesSectionProps {
   /** Whether counter data should be abbreviated. */
@@ -74,7 +74,7 @@ const CardModalGalleriesSection: React.FC<CardModalGalleriesSectionProps> = (
           const primaryFile = getPrimaryFileData(gl);
           const title = getTitleFromObject(gl);
           const galleryLink = `/galleries/${gl.id}`;
-          const titleID = title + "GalleriesSection";
+          const titleID = createGalleryCardID(gl.id) + "GalleriesSection";
 
           return (
             <li key={gl.id}>

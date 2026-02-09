@@ -1,5 +1,5 @@
 import React from "react";
-import { getTitleFromObject } from "@/helpers";
+import { createGalleryCardID, getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
 import FileSize from "../data/FileSize";
@@ -433,11 +433,3 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
     </CardModalContent>
   );
 };
-
-/* ---------------------------------------------------------------------------------------------- */
-/*                                             Helpers                                            */
-/* ---------------------------------------------------------------------------------------------- */
-
-/** Helper function to create consitently formatted gallery IDs. */
-export const createGalleryCardID = (stashID: string) =>
-  "galleryCard-" + stashID;
