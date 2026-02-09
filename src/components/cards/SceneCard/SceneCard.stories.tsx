@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
+import { mergeConfig } from "@/helpers";
 import { zoomIndexArgType } from "../../../../.storybook/argTypes";
 import SceneCard from ".";
 
@@ -33,7 +34,7 @@ const meta = {
       pluginConfig: {},
       setSection: fn(),
     },
-    pluginConfig: {},
+    pluginConfig: mergeConfig({}),
     selecting: false,
     zoomIndex: 1,
   },
@@ -135,7 +136,7 @@ export const FullDataDefaults: Story = {
 
 export const FullDataAllEnabled: Story = {
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__aspectRatioZoomIndex: 0,
       cards__sceneCard__audioCodecZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
@@ -148,7 +149,7 @@ export const FullDataAllEnabled: Story = {
       cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
       cards__sceneCard__videoCodecZoomIndex: 0,
-    },
+    }),
     scene: fullData as SlimSceneDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -261,14 +262,14 @@ export const FilelessData: Story = {
 
 export const MultiFile: Story = {
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__aspectRatioZoomIndex: 0,
       cards__sceneCard__audioCodecZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__fileSizeZoomIndex: 0,
       cards__sceneCard__frameRateZoomIndex: 0,
       cards__sceneCard__videoCodecZoomIndex: 0,
-    },
+    }),
     scene: multiFile as SlimSceneDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -357,7 +358,7 @@ export const PlayPreviewOnHover: Story = {
 
 export const Interactive: Story = {
   args: {
-    pluginConfig: { cards__sceneCard__interactiveZoomIndex: 0 },
+    pluginConfig: mergeConfig({ cards__sceneCard__interactiveZoomIndex: 0 }),
     scene: interactive as SlimSceneDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -372,9 +373,9 @@ export const Interactive: Story = {
 export const PortraitBackgroundImage: Story = {
   name: "Portrait thumbnail with background image",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__thumbnailBackgroundImage: true,
-    },
+    }),
     scene: portrait as SlimSceneDataFragment,
   },
 };
@@ -382,9 +383,9 @@ export const PortraitBackgroundImage: Story = {
 export const PortraitBackgroundStyle: Story = {
   name: "Portrait thumbnail with background style",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__thumbnailBackgroundStyle: "black",
-    },
+    }),
     scene: portrait as SlimSceneDataFragment,
   },
 };
@@ -392,9 +393,9 @@ export const PortraitBackgroundStyle: Story = {
 export const SquareBackgroundImage: Story = {
   name: "Square thumbnail with background image",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__thumbnailBackgroundImage: true,
-    },
+    }),
     scene: square as SlimSceneDataFragment,
   },
 };
@@ -402,9 +403,9 @@ export const SquareBackgroundImage: Story = {
 export const SquareBackgroundStyle: Story = {
   name: "Square thumbnail with background style",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__thumbnailBackgroundStyle: "black",
-    },
+    }),
     scene: square as SlimSceneDataFragment,
   },
 };

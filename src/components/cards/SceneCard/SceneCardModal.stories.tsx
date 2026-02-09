@@ -1,5 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { mergeConfig } from "@/helpers";
 import { expect, fn, within } from "storybook/test";
 import { SceneCardModalContent } from ".";
 
@@ -35,7 +36,7 @@ const meta = {
   args: {
     abbreviateCounters: false,
     closeHandler: fn(),
-    pluginConfig: {},
+    pluginConfig: mergeConfig({}),
     section: "details",
     setSection: fn(),
     titleID: "titleID",
@@ -135,7 +136,7 @@ export const FullDataDefaults: Story = {
 
 export const FullDataAllEnabled: Story = {
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__aspectRatioZoomIndex: 0,
       cards__sceneCard__audioCodecZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
@@ -143,7 +144,7 @@ export const FullDataAllEnabled: Story = {
       cards__sceneCard__frameRateZoomIndex: 0,
       cards__sceneCard__interactiveZoomIndex: 0,
       cards__sceneCard__videoCodecZoomIndex: 0,
-    },
+    }),
     scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -231,10 +232,10 @@ export const FullDataAllEnabled: Story = {
 
 export const RatingIconNotBanner: Story = {
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__ratingBannerZoomIndex: -1,
       cards__sceneCard__ratingIconZoomIndex: 0,
-    },
+    }),
     scene: fullData as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -273,14 +274,14 @@ export const FilelessData: Story = {
 
 export const MultiFile: Story = {
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__aspectRatioZoomIndex: 0,
       cards__sceneCard__audioCodecZoomIndex: 0,
       cards__sceneCard__bitRateZoomIndex: 0,
       cards__sceneCard__fileSizeZoomIndex: 0,
       cards__sceneCard__frameRateZoomIndex: 0,
       cards__sceneCard__videoCodecZoomIndex: 0,
-    },
+    }),
     scene: multiFile as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -348,7 +349,7 @@ export const MultiFile: Story = {
 
 export const Interactive: Story = {
   args: {
-    pluginConfig: { cards__sceneCard__interactiveZoomIndex: 0 },
+    pluginConfig: mergeConfig({ cards__sceneCard__interactiveZoomIndex: 0 }),
     scene: interactive as SceneDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -363,9 +364,9 @@ export const Interactive: Story = {
 export const PortraitBackgroundImage: Story = {
   name: "Portrait thumbnail with background image",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__thumbnailBackgroundImage: true,
-    },
+    }),
     scene: portrait as SceneDataFragment,
   },
 };
@@ -373,9 +374,9 @@ export const PortraitBackgroundImage: Story = {
 export const PortraitBackgroundStyle: Story = {
   name: "Portrait thumbnail with background style",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__thumbnailBackgroundStyle: "black",
-    },
+    }),
     scene: portrait as SceneDataFragment,
   },
 };
@@ -383,9 +384,9 @@ export const PortraitBackgroundStyle: Story = {
 export const SquareBackgroundImage: Story = {
   name: "Square thumbnail with background image",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__thumbnailBackgroundImage: true,
-    },
+    }),
     scene: square as SceneDataFragment,
   },
 };
@@ -393,9 +394,9 @@ export const SquareBackgroundImage: Story = {
 export const SquareBackgroundStyle: Story = {
   name: "Square thumbnail with background style",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__sceneCard__thumbnailBackgroundStyle: "black",
-    },
+    }),
     scene: square as SceneDataFragment,
   },
 };

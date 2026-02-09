@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
+import { mergeConfig } from "@/helpers";
 import CardGrid from "../layouts/CardGrid";
 import { zoomIndexArgType } from "../../../../.storybook/argTypes";
 import SceneCard from "../SceneCard";
@@ -45,7 +46,7 @@ const SceneCards = [
       pluginConfig: {},
       setSection: fn(),
     }}
-    pluginConfig={{}}
+    pluginConfig={mergeConfig({})}
     scene={s as SlimSceneDataFragment}
   />
 ));
