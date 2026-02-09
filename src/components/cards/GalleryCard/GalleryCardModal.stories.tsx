@@ -357,6 +357,41 @@ export const NoScenesSectionButton: Story = {
   },
 };
 
+export const FileInfoSection: Story = {
+  args: {
+    section: "files",
+    gallery: fullData as GalleryDataFragment,
+  },
+};
+
+export const FileInfoSectionButton: Story = {
+  args: {
+    gallery: fullData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fileInfoModalBtn = canvas.getByRole("button", {
+      name: "File Info",
+    });
+    expect(fileInfoModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoFileInfoSectionButton: Story = {
+  args: {
+    gallery: filelessData as GalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fileInfoModalBtn = canvas.queryByRole("button", {
+      name: "File Info",
+    });
+    expect(fileInfoModalBtn).toBeNull();
+  },
+};
+
 export const Navigation: Story = {
   args: {
     navigation: {
