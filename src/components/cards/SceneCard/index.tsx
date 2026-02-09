@@ -422,6 +422,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex > -1;
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.scene.galleries.length)
+    sections.push(["galleries", props.scene.galleries.length]);
   if (props.scene.performers.length)
     sections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length) sections.push(["tags", props.scene.tags.length]);

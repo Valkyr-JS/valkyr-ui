@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleInfo,
   faCirclePlay,
+  faImages,
   faTag,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -151,7 +152,7 @@ export const CardModalContent: React.FC<
               onClick={handleSetGalleriesSection}
               title={intl.formatMessage({ id: "galleries" })}
             >
-              <FontAwesomeIcon icon={faCirclePlay} />
+              <FontAwesomeIcon icon={faImages} />
               {props.pluginConfig.cards__shared__enableCounts ? (
                 <span aria-hidden>
                   {props.sections.find((s) => s[0] === "galleries")?.[1]}
