@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 import { getTitleFromObject } from "@/helpers";
 import Date from "../data/Date";
 import Details from "../data/Details";
@@ -9,7 +8,6 @@ import ImageCount from "../data/ImageCount";
 import Organized from "../data/Organized";
 import PerformerList from "../data/PerformerList";
 import Photographer from "../data/Photographer";
-import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
 import ZipIcon from "../data/ZipIcon";

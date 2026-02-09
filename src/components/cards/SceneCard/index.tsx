@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import cx from "classnames";
+import React, { useState } from "react";
 import { getFileIsPortrait, getTitleFromObject, makeSceneUrl } from "@/helpers";
 import AspectRatio from "../data/AspectRatio";
 import AudioCodec from "../data/AudioCodec";
@@ -15,7 +14,6 @@ import OCount from "../data/OCount";
 import Organized from "../data/Organized";
 import PerformerList from "../data/PerformerList";
 import PlayCount from "../data/PlayCount";
-import RatingBanner from "../data/RatingBanner";
 import RatingIcon from "../data/RatingIcon";
 import Resolution from "../data/Resolution";
 import Studio from "../data/Studio";
@@ -398,7 +396,6 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
 
   const primaryFile =
     props.scene.files.length > 0 ? props.scene.files[0] : undefined;
-  const isPortrait = getFileIsPortrait(primaryFile);
 
   // Only render technical details if the user has enabled on cards them at any
   // breakpoint. The data will be available anyway under the file section.
@@ -442,7 +439,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           backgroundStyle={
             props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
           }
-          context="card"
+          context="modal"
           link={sceneLink}
           rating100={props.scene.rating100}
           ratingBannerZoomIndex={
