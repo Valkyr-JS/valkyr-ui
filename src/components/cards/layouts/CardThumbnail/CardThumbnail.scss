@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "sass:math";
-@use "../../../../src/scss/variables";
+@use "../../../../../src/scss/variables";
 
 $column-gap: variables.$column-gap;
 $prefix: variables.$prefix;

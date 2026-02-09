@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import cx from "classnames";
 import RatingBanner from "../../data/RatingBanner";
+import "./CardThumbnail.scss";
 
 const componentClass = "vui-card-thumbnail";
 const componentPortraitClass = componentClass + "--portrait";
@@ -28,11 +29,11 @@ interface SimpleImageThumbnailProps {
   /** The link to the object page. */
   link: string;
 
-  /** The zoom index at which to display the rating banner on scene cards. */
-  ratingBannerZoomIndex: StashCardGridZoom;
-
   /** The object's user rating out of 100 */
   rating100: Maybe<Scalars["Int"]["output"]> | undefined;
+
+  /** The zoom index at which to display the rating banner on scene cards. */
+  ratingBannerZoomIndex: StashCardGridZoom;
 
   /** The user's Stash rating system configuration. */
   ratingSystem?: RatingSystemOptions;

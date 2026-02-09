@@ -4,13 +4,6 @@
 
 $column-gap: variables.$column-gap;
 $prefix: variables.$prefix;
-$zoomIndexs: variables.$card-zoom-indices;
-$zoomThumbnailHeights: (
-  0: 180px,
-  1: 240px,
-  2: 360px,
-  3: 480px,
-);
 
 /* ---------------------------------------------------------------------------------------------- */
 /*                                             Shared                                             */
@@ -34,29 +27,6 @@ $zoomThumbnailHeights: (
 }
 
 .vui-gallery-card {
-  &__thumbnail {
-    width: 100%;
-  }
-
-  &__thumbnail-cover {
-    position: relative;
-
-    img {
-      height: auto;
-      width: 100%;
-      object-fit: contain;
-    }
-
-    &--blurred-bg {
-      background-position: center;
-      background-size: cover;
-
-      img {
-        backdrop-filter: blur(10px);
-      }
-    }
-  }
-
   &__user-data {
     grid-column: user-data-start / user-data-end;
 
@@ -73,24 +43,6 @@ $zoomThumbnailHeights: (
   }
 }
 
-// Generate thumbnail heights for each zoom index
-@each $zoom, $maxCardWidth in $zoomIndexs {
-  $height: map.get(
-    $map: $zoomThumbnailHeights,
-    $key: $zoom,
-  );
-
-  .vui-card-grid--zoom-#{$zoom} .vui-gallery-card__thumbnail-cover img {
-    height: $height;
-  }
-}
-
-// Max thumbnail height for card modals and non-grid cards
-.vui-gallery-card__thumbnail-cover img,
-.vui-card-modal .vui-gallery-card__thumbnail-cover img {
-  max-height: 480px;
-}
-
 /* ---------------------------------------------------------------------------------------------- */
 /*                                           Card modal                                           */
 /* ---------------------------------------------------------------------------------------------- */
@@ -101,15 +53,5 @@ $zoomThumbnailHeights: (
       display: grid;
       grid-template-rows: [gallery-card-modal-body-top key-data-top] max-content [key-data-bottom details-top] max-content [details-bottom cast-crew-top] max-content [cast-crew-bottom gallery-card-modal-body-bottom];
     }
-  }
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-/*                                       Recommendation Row                                       */
-/* ---------------------------------------------------------------------------------------------- */
-
-.slick-slide .vui-gallery-card {
-  &__thumbnail-cover img {
-    height: 240px;
   }
 }
