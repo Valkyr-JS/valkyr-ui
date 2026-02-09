@@ -344,7 +344,9 @@ export const PlayPreviewOnHover: Story = {
 
     // Get the preview
     const card = canvas.getByTestId("grid-card");
-    const video = canvas.getByTestId<HTMLVideoElement>("scene-card-preview");
+    const video = canvas.getByTestId<HTMLVideoElement>(
+      "video-preview-thumbnail-video",
+    );
 
     // Trigger a hover event
     await userEvent.hover(card);

@@ -90,6 +90,9 @@ interface VideoPreviewThumbnailProps extends SimpleImageThumbnailProps {
   /** Whether the video file is portrait-oriented or not. */
   isPortrait: boolean;
 
+  /** Enables scene card previews. */
+  previewsEnabled: boolean;
+
   /** The path to the video file. Disabled if `undefined`. */
   videoSrc: string | undefined;
 }
@@ -109,7 +112,7 @@ export const VideoPreviewThumbnail: React.FC<VideoPreviewThumbnailProps> = (
     backgroundImage: props.backgroundImage ? `url(${props.src})` : undefined,
   };
 
-  const videoSrc = props.context === "card" ? props.videoSrc : undefined;
+  const videoSrc = props.previewsEnabled ? props.videoSrc : undefined;
 
   const videoEl = useRef<HTMLVideoElement>(null);
 

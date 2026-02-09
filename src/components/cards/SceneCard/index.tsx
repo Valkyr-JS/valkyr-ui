@@ -118,6 +118,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
           context="card"
           isPortrait={isPortrait}
           link={sceneLink}
+          previewsEnabled={props.pluginConfig.cards__sceneCard__previewsEnabled}
           rating100={props.scene.rating100}
           ratingBannerZoomIndex={
             props.pluginConfig.cards__galleryCard__ratingBannerZoomIndex
