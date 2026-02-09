@@ -30,63 +30,6 @@ $prefix: variables.$prefix;
 /* ---------------------------------------------------------------------------------------------- */
 
 .vui-scene-card {
-  &__thumbnail {
-    position: relative;
-    width: 100%;
-  }
-
-  &__thumbnail-preview {
-    display: flex;
-    justify-content: center;
-    position: relative;
-
-    height: auto;
-    width: 100%;
-
-    aspect-ratio: 16 / 9;
-
-    img,
-    video {
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      width: 100%;
-    }
-
-    video {
-      position: absolute;
-      z-index: -1;
-      transition: z-index 0s;
-      transition-delay: 0.2s;
-    }
-
-    &--blurred-bg {
-      background-position: center;
-      background-size: cover;
-
-      img {
-        backdrop-filter: blur(10px);
-      }
-    }
-
-    &--portrait {
-      img,
-      video {
-        object-fit: contain;
-      }
-    }
-  }
-
-  // Unhide preview on hover
-  &:hover &__thumbnail-preview video {
-    z-index: auto;
-  }
-
-  // Hide rating banner on hover
-  &:hover .vui-card-data__rating-banner {
-    opacity: 0;
-  }
-
   &__user-data {
     grid-column: user-data-start / user-data-end;
 

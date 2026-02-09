@@ -71,10 +71,26 @@ $zoomThumbnailHeights: (
     }
   }
 
-  &--portrait {
+  &--portrait &__image-wrapper {
     img,
     video {
       object-fit: contain;
+    }
+  }
+}
+
+.vui-grid-card,
+.vui-card-modal {
+  // Hide rating banner on hover
+  &:hover .vui-card-thumbnail--video-preview {
+    // Unhide preview on hover
+    video {
+      z-index: auto;
+    }
+
+    // Hide rating banner on hover
+    .vui-card-data__rating-banner {
+      opacity: 0;
     }
   }
 }
