@@ -33,8 +33,12 @@ PluginApi.patch.instead<IGalleryCardGrid>(
         OperationVariables
       > = PluginApi.GQL.useFindGalleryLazyQuery();
 
+      // Unlike scene card grids, gallery grids crash here if the galleries
+      // array is empty. Provide a fallback when required.
       const titleID =
-        createGalleryCardID(props.galleries[modalGalleryIndex].id) + "Modal";
+        createGalleryCardID(
+          props.galleries[modalGalleryIndex]?.id ?? "undefined",
+        ) + "Modal";
 
       /** Checks if full gallery data is missing, and updates it */
       const updateFullData = async (index: number) => {
