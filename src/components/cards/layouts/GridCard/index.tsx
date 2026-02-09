@@ -1,18 +1,13 @@
 import React, { PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleInfo,
-  faCirclePlay,
-  faImages,
-  faTag,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Card, Form } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
+import { getStashFaIcon } from "@/helpers";
 
 interface GridCardProps extends SelectableCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
@@ -180,7 +175,7 @@ const CardFooter: React.FC<
           onClick={handleOpenTagsSection}
           title={intl.formatMessage({ id: "tags" })}
         >
-          <FontAwesomeIcon icon={faTag} />
+          <FontAwesomeIcon icon={getStashFaIcon("tag")} />
           {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "tags")?.[1]}
@@ -196,7 +191,7 @@ const CardFooter: React.FC<
           onClick={handleOpenPerformersSection}
           title={intl.formatMessage({ id: "performers" })}
         >
-          <FontAwesomeIcon icon={faUser} />
+          <FontAwesomeIcon icon={getStashFaIcon("performer")} />
           {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "performers")?.[1]}
@@ -212,7 +207,7 @@ const CardFooter: React.FC<
           onClick={handleOpenScenesSection}
           title={intl.formatMessage({ id: "scenes" })}
         >
-          <FontAwesomeIcon icon={faCirclePlay} />
+          <FontAwesomeIcon icon={getStashFaIcon("scene")} />
           {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "scenes")?.[1]}
@@ -228,7 +223,7 @@ const CardFooter: React.FC<
           onClick={handleOpenGalleriesSection}
           title={intl.formatMessage({ id: "galleries" })}
         >
-          <FontAwesomeIcon icon={faImages} />
+          <FontAwesomeIcon icon={getStashFaIcon("gallery")} />
           {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "galleries")?.[1]}

@@ -1,8 +1,7 @@
 import React from "react";
-import { faBox } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useIntl } from "react-intl";
-import { getRenderData } from "@/helpers";
+import { getRenderData, getStashFaIcon } from "@/helpers";
 
 interface OrganizedProps {
   organized: boolean;
@@ -30,7 +29,7 @@ const Organized: React.FC<
 
   return (
     <span className={componentClass}>
-      <FontAwesomeIcon icon={faBox} />
+      <FontAwesomeIcon icon={getStashFaIcon("organized")} />
       <span className="sr-only">{intl.formatMessage({ id: "organized" })}</span>
     </span>
   );

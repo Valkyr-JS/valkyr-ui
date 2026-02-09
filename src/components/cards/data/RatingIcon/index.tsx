@@ -1,8 +1,7 @@
 import React from "react";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useIntl } from "react-intl";
-import { convertRating100, getRenderData } from "@/helpers";
+import { convertRating100, getRenderData, getStashFaIcon } from "@/helpers";
 import "./RatingIcon.scss";
 
 interface RatingIconProps {
@@ -43,7 +42,7 @@ const RatingIcon: React.FC<
 
   return (
     <span className={componentClass}>
-      <FontAwesomeIcon icon={faStar} />
+      <FontAwesomeIcon icon={getStashFaIcon("rating")} />
       <span className="sr-only">{srText}</span>
       <span aria-hidden>{ratingNum}</span>
     </span>
