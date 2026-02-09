@@ -9,7 +9,7 @@ import {
   CardModalNavigation,
   CardModalWrapper,
 } from "@/components/cards/layouts/CardModal";
-import { DEFAULT } from "@/constants";
+import { mergeConfig } from "@/helpers";
 const { PluginApi } = window;
 
 PluginApi.patch.instead<IGalleryCardGrid>(
@@ -18,7 +18,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-      const pluginConfig = stashConfig.plugins["valkyr-ui"] ?? {};
+      const pluginConfig = mergeConfig(stashConfig.plugins["valkyr-ui"]);
 
       const [modalOpen, setModalOpen] = useState(false);
       const [modalGalleryIndex, setModalGalleryIndex] = useState(0);
@@ -78,11 +78,9 @@ PluginApi.patch.instead<IGalleryCardGrid>(
       };
 
       /** Handle the click event outside of the modal when it is open. */
-      const handleModalOuterClick =
-        (pluginConfig.general__closeModalOnOuterClick ??
-        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK)
-          ? handleCloseModal
-          : undefined;
+      const handleModalOuterClick = pluginConfig.general__closeModalOnOuterClick
+        ? handleCloseModal
+        : undefined;
 
       const navigationProps: CardModalNavigation | undefined =
         props.galleries.length > 1
@@ -133,10 +131,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
             }
           : undefined;
 
-      if (
-        pluginConfig?.cards__galleryCard__enabled ??
-        DEFAULT.CARDS.GALLERY_CARD.ENABLED
-      )
+      if (pluginConfig?.cards__galleryCard__enabled)
         return [
           <>
             <CardGrid
@@ -165,10 +160,7 @@ PluginApi.patch.instead<IGalleryCardGrid>(
             <CardModalWrapper
               bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
-              fullHeightModal={
-                pluginConfig.general__fullHeightModals ??
-                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
-              }
+              fullHeightModal={pluginConfig.general__fullHeightModals}
               show={modalOpen}
               titleID={titleID}
             >
@@ -198,7 +190,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
     const qConfig = PluginApi.GQL.useConfigurationQuery();
     if (!qConfig.loading) {
       const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-      const pluginConfig = stashConfig.plugins["valkyr-ui"] ?? {};
+      const pluginConfig = mergeConfig(stashConfig.plugins["valkyr-ui"]);
 
       const [modalOpen, setModalOpen] = useState(false);
       const [modalSection, setModalSection] =
@@ -235,16 +227,11 @@ PluginApi.patch.instead<IGalleryCardProps>(
       const handleCloseModal = () => setModalOpen(false);
 
       /** Handle the click event outside of the modal when it is open. */
-      const handleModalOuterClick =
-        (pluginConfig.general__closeModalOnOuterClick ??
-        DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK)
-          ? handleCloseModal
-          : undefined;
+      const handleModalOuterClick = pluginConfig.general__closeModalOnOuterClick
+        ? handleCloseModal
+        : undefined;
 
-      if (
-        pluginConfig?.cards__galleryCard__enabled ??
-        DEFAULT.CARDS.GALLERY_CARD.ENABLED
-      )
+      if (pluginConfig?.cards__galleryCard__enabled)
         return [
           <>
             <GalleryCard
@@ -261,10 +248,7 @@ PluginApi.patch.instead<IGalleryCardProps>(
             <CardModalWrapper
               bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
-              fullHeightModal={
-                pluginConfig.general__fullHeightModals ??
-                DEFAULT.GENERAL.FULL_HEIGHT_MODALS
-              }
+              fullHeightModal={pluginConfig.general__fullHeightModals}
               show={modalOpen}
               titleID={titleID}
             >

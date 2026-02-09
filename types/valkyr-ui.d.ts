@@ -170,3 +170,7 @@ interface ValkyrUiConfigMap {
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;
 }
+
+/** The full plugin config, with defaults applied to any values not defined in
+ * the user's config. */
+type ValkyrUiPluginConfig = Required<ValkyrUiConfigMap>;

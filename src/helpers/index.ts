@@ -1,3 +1,5 @@
+export * from "./config";
+
 /* -------------------------------------- convertRating100 -------------------------------------- */
 
 /** Convert a Stash object `rating100` value to a Stash interface rating. */

@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
+import { mergeConfig } from "@/helpers";
 import { GalleryCardModalContent } from ".";
 
 // Mock data
@@ -33,7 +34,7 @@ const meta = {
   args: {
     abbreviateCounters: false,
     closeHandler: fn(),
-    pluginConfig: {},
+    pluginConfig: mergeConfig({}),
     section: "details",
     setSection: fn(),
     titleID: "titleID",
@@ -101,11 +102,11 @@ export const FullDataDefaults: Story = {
 
 export const FullDataAllEnabled: Story = {
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__fileSizeZoomIndex: 0,
       cards__galleryCard__imageCollectionIconZoomIndex: 0,
       cards__galleryCard__zipIconZoomIndex: 0,
-    },
+    }),
     gallery: fullData as GalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -163,10 +164,10 @@ export const FullDataAllEnabled: Story = {
 export const IsImageCollection: Story = {
   args: {
     gallery: square as GalleryDataFragment,
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__imageCollectionIconZoomIndex: 0,
       cards__galleryCard__zipIconZoomIndex: 0,
-    },
+    }),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -183,10 +184,10 @@ export const IsImageCollection: Story = {
 
 export const RatingIconNotBanner: Story = {
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__ratingBannerZoomIndex: -1,
       cards__galleryCard__ratingIconZoomIndex: 0,
-    },
+    }),
     gallery: fullData as GalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -213,9 +214,9 @@ export const FilelessData: Story = {
 export const PortraitBackgroundImage: Story = {
   name: "Portrait thumbnail with background image",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__thumbnailBackgroundImage: true,
-    },
+    }),
     gallery: portrait as GalleryDataFragment,
   },
 };
@@ -223,9 +224,9 @@ export const PortraitBackgroundImage: Story = {
 export const PortraitBackgroundStyle: Story = {
   name: "Portrait thumbnail with background style",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__thumbnailBackgroundStyle: "black",
-    },
+    }),
     gallery: portrait as GalleryDataFragment,
   },
 };

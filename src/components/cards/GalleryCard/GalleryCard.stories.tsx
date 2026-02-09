@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
+import { mergeConfig } from "@/helpers";
 import { zoomIndexArgType } from "../../../../.storybook/argTypes";
 import GalleryCard from ".";
 
@@ -31,7 +32,7 @@ const meta = {
       pluginConfig: {},
       setSection: fn(),
     },
-    pluginConfig: {},
+    pluginConfig: mergeConfig({}),
     selecting: false,
     zoomIndex: 1,
   },
@@ -101,14 +102,14 @@ export const FullDataDefaults: Story = {
 
 export const FullDataAllEnabled: Story = {
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__fileSizeZoomIndex: 0,
       cards__galleryCard__imageCollectionIconZoomIndex: 0,
       cards__galleryCard__performerListZoomIndex: 0,
       cards__galleryCard__photographerZoomIndex: 0,
       cards__galleryCard__ratingIconZoomIndex: 0,
       cards__galleryCard__zipIconZoomIndex: 0,
-    },
+    }),
     gallery: fullData as SlimGalleryDataFragment,
   },
   play: async ({ canvasElement }) => {
@@ -166,10 +167,10 @@ export const FullDataAllEnabled: Story = {
 export const IsImageCollection: Story = {
   args: {
     gallery: square as SlimGalleryDataFragment,
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__imageCollectionIconZoomIndex: 0,
       cards__galleryCard__zipIconZoomIndex: 0,
-    },
+    }),
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -199,9 +200,9 @@ export const FilelessData: Story = {
 export const PortraitBackgroundImage: Story = {
   name: "Portrait thumbnail with background image",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__thumbnailBackgroundImage: true,
-    },
+    }),
     gallery: portrait as SlimGalleryDataFragment,
   },
 };
@@ -209,9 +210,9 @@ export const PortraitBackgroundImage: Story = {
 export const PortraitBackgroundStyle: Story = {
   name: "Portrait thumbnail with background style",
   args: {
-    pluginConfig: {
+    pluginConfig: mergeConfig({
       cards__galleryCard__thumbnailBackgroundStyle: "black",
-    },
+    }),
     gallery: portrait as SlimGalleryDataFragment,
   },
 };

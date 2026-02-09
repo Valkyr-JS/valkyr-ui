@@ -1,7 +1,9 @@
 import { DEFAULT } from "@/constants";
 
 /** Returns the user's plugin config merged with default values. */
-export const mergeConfig = (userConfig: ValkyrUiConfigMap) => {
+export const mergeConfig = (
+  userConfig: ValkyrUiConfigMap | undefined,
+): ValkyrUiPluginConfig => {
   const defaultConfig = {
     // Cards - Shared
     cards__shared__enableCounts:
