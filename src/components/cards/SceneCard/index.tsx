@@ -40,6 +40,7 @@ import {
   VideoPreviewThumbnail,
 } from "../layouts/CardThumbnail";
 import "./SceneCard.scss";
+import CardModalFileInfoSection from "../layouts/CardModal/sections/CardModalFileInfoSection";
 
 interface SceneCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
@@ -94,6 +95,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.files.length)
+    footerSections.push(["files", props.scene.files.length]);
   if (props.scene.galleries.length)
     footerSections.push(["galleries", props.scene.galleries.length]);
   if (props.scene.performers.length)
@@ -427,6 +430,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex > -1;
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.scene.files.length)
+    sections.push(["files", props.scene.files.length]);
   if (props.scene.galleries.length)
     sections.push(["galleries", props.scene.galleries.length]);
   if (props.scene.performers.length)
@@ -507,6 +512,11 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           object={props.scene}
           pluginConfig={props.pluginConfig}
           ratingSystem={props.ratingSystem}
+        />
+      ) : props.section === "files" ? (
+        <CardModalFileInfoSection
+          abbreviateCounters={props.abbreviateCounters}
+          files={props.scene.files}
         />
       ) : (
         <>

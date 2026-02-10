@@ -384,7 +384,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           scenes={props.gallery.scenes}
           ratingSystem={props.ratingSystem}
         />
-      )  : props.section === "files" ? (
+      ) : props.section === "files" ? (
         <CardModalFileInfoSection
           abbreviateCounters={props.abbreviateCounters}
           files={props.gallery.files}
