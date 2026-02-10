@@ -40,7 +40,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
 
     return (
       <tr>
-        <th>{intl.formatMessage({ id: "duration" })}</th>
+        <th>{intl.formatMessage({ id: "dimensions" })}</th>
         <td>
           <span aria-hidden>{dimensions}</span>
           <span className="sr-only">{dimensionsSr}</span>
