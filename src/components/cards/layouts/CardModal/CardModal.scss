@@ -60,7 +60,7 @@ $prefix: variables.$prefix;
     .modal-header,
     .modal-body,
     .modal-footer {
-      background-color: var(--#{$prefix}-card-fileless-bg-color);
+      background-color: var(--#{$prefix}-card-fileless-bg);
     }
   }
 

@@ -75,7 +75,7 @@ const CssVariablesTab: React.FC = () => {
           <tbody>
             <tr>
               <th scope="row">
-                <code>--{prefix}-card-bg-color</code>
+                <code>--{prefix}-card-bg</code>
               </th>
               <td>The background color for cards and card modals.</td>
               <td>
@@ -93,7 +93,7 @@ const CssVariablesTab: React.FC = () => {
             </tr>
             <tr>
               <th scope="row">
-                <code>--{prefix}-card-resolution-icon-bg-color</code>
+                <code>--{prefix}-card-resolution-icon-bg</code>
               </th>
               <td>
                 The background color for the resolution icon on cards and card
@@ -111,7 +111,7 @@ const CssVariablesTab: React.FC = () => {
                 The font color for the resolution icon on cards and card modals.
               </td>
               <td>
-                <code>var(--{prefix}-card-bg-color)</code>
+                <code>var(--{prefix}-card-bg)</code>
               </td>
             </tr>
             <tr>
@@ -164,7 +164,7 @@ const CssVariablesTab: React.FC = () => {
             </tr>
             <tr>
               <th scope="row">
-                <code>--{prefix}-card-fileless-bg-color</code>
+                <code>--{prefix}-card-fileless-bg</code>
               </th>
               <td>
                 The background color for cards and card modals with no
@@ -201,7 +201,7 @@ const CssVariablesTab: React.FC = () => {
           <tbody>
             <tr>
               <th scope="row">
-                <code>--{prefix}-gender-color--female</code>
+                <code>--{prefix}-gender-female</code>
               </th>
               <td>
                 The font and background color used in various places to denote a
@@ -213,7 +213,7 @@ const CssVariablesTab: React.FC = () => {
             </tr>
             <tr>
               <th scope="row">
-                <code>--{prefix}-gender-color--intersex</code>
+                <code>--{prefix}-gender-intersex</code>
               </th>
               <td>
                 The font and background color used in various places to denote
@@ -225,7 +225,7 @@ const CssVariablesTab: React.FC = () => {
             </tr>
             <tr>
               <th scope="row">
-                <code>--{prefix}-gender-color--male</code>
+                <code>--{prefix}-gender-male</code>
               </th>
               <td>
                 The font and background color used in various places to denote a
@@ -237,7 +237,7 @@ const CssVariablesTab: React.FC = () => {
             </tr>
             <tr>
               <th scope="row">
-                <code>--{prefix}-gender-color--nonbinary</code>
+                <code>--{prefix}-gender-nonbinary</code>
               </th>
               <td>
                 The font and background color used in various places to denote a
@@ -249,7 +249,7 @@ const CssVariablesTab: React.FC = () => {
             </tr>
             <tr>
               <th scope="row">
-                <code>--{prefix}-gender-color--transfemale</code>
+                <code>--{prefix}-gender-transfemale</code>
               </th>
               <td>
                 The font and background color used in various places to denote a
@@ -261,7 +261,7 @@ const CssVariablesTab: React.FC = () => {
             </tr>
             <tr>
               <th scope="row">
-                <code>--{prefix}-gender-color--transmale</code>
+                <code>--{prefix}-gender-transmale</code>
               </th>
               <td>
                 The font and background color used in various places to denote a
@@ -273,7 +273,7 @@ const CssVariablesTab: React.FC = () => {
             </tr>
             <tr>
               <th scope="row">
-                <code>--{prefix}-gender-color--unknown</code>
+                <code>--{prefix}-gender-unknown</code>
               </th>
               <td>
                 The font and background color used in various places to denote a

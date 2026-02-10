@@ -2,6 +2,9 @@
 
 $prefix: variables.$prefix;
 
+// Variables for values used in Stash
+$stash-body-color: #f5f8fa;
+
 $stash-gender-female: #f38cac;
 $stash-gender-intersex: #c8a2c8;
 $stash-gender-male: #89cff0;
@@ -10,59 +13,61 @@ $stash-gender-transfemale: #c8a2c8;
 $stash-gender-transmale: #c8a2c8;
 $stash-gender-unknown: #f5f8fa;
 
-$stash-card-fileless: #26333d;
+$stash-card-bg: #30404d;
+$stash-card-fileless-bg: #26333d;
 
 :root {
-  --#{$prefix}-body-color: #f5f8fa;
+  --#{$prefix}-body-color: $stash-body-color;
   --#{$prefix}-link-color: var(--#{$prefix}-body-color);
   --#{$prefix}-title-color: var(--#{$prefix}-body-color);
   --#{$prefix}-code-color: #f391bd;
 
-  --#{$prefix}-card-bg-color: #30404d;
+  --#{$prefix}-card-bg: $stash-card-bg;
   --#{$prefix}-card-font-sm: 12px;
-  --#{$prefix}-card-resolution-icon-bg-color: var(--#{$prefix}-body-color);
-  --#{$prefix}-card-resolution-icon-color: var(--#{$prefix}-card-bg-color);
+  --#{$prefix}-card-resolution-icon-bg: var(--#{$prefix}-body-color);
+  --#{$prefix}-card-resolution-icon-color: var(--#{$prefix}-card-bg);
   --#{$prefix}-card-title-color: var(--#{$prefix}-title-color);
   --#{$prefix}-card-title-font-size: 1.25rem;
   --#{$prefix}-card-top-line-font-size: var(--#{$prefix}-cards-font-sm);
   --#{$prefix}-card-top-line-opacity: 0.8;
-  --#{$prefix}-card-fileless-bg-color: #{$stash-card-fileless};
+
+  --#{$prefix}-card-fileless-bg: #{$stash-card-fileless-bg};
 
   --#{$prefix}-card-modal-max-width: 640px;
 
-  --#{$prefix}-gender-color--female: #{$stash-gender-female};
-  --#{$prefix}-gender-color--intersex: #{$stash-gender-intersex};
-  --#{$prefix}-gender-color--male: #{$stash-gender-male};
-  --#{$prefix}-gender-color--nonbinary: #{$stash-gender-nonbinary};
-  --#{$prefix}-gender-color--transfemale: #{$stash-gender-transfemale};
-  --#{$prefix}-gender-color--transmale: #{$stash-gender-transmale};
-  --#{$prefix}-gender-color--unknown: #{$stash-gender-unknown};
+  --#{$prefix}-gender-female: #{$stash-gender-female};
+  --#{$prefix}-gender-intersex: #{$stash-gender-intersex};
+  --#{$prefix}-gender-male: #{$stash-gender-male};
+  --#{$prefix}-gender-nonbinary: #{$stash-gender-nonbinary};
+  --#{$prefix}-gender-transfemale: #{$stash-gender-transfemale};
+  --#{$prefix}-gender-transmale: #{$stash-gender-transmale};
+  --#{$prefix}-gender-unknown: #{$stash-gender-unknown};
 }
 
 .vui-color-female {
-  color: var(--#{$prefix}-gender-color--female) !important;
+  color: var(--#{$prefix}-gender-female) !important;
 }
 
 .vui-color-intersex {
-  color: var(--#{$prefix}-gender-color--intersex) !important;
+  color: var(--#{$prefix}-gender-intersex) !important;
 }
 
 .vui-color-male {
-  color: var(--#{$prefix}-gender-color--male) !important;
+  color: var(--#{$prefix}-gender-male) !important;
 }
 
 .vui-color-nonbinary {
-  color: var(--#{$prefix}-gender-color--nonbinary) !important;
+  color: var(--#{$prefix}-gender-nonbinary) !important;
 }
 
 .vui-color-transfemale {
-  color: var(--#{$prefix}-gender-color--transfemale) !important;
+  color: var(--#{$prefix}-gender-transfemale) !important;
 }
 
 .vui-color-transmale {
-  color: var(--#{$prefix}-gender-color--transmale) !important;
+  color: var(--#{$prefix}-gender-transmale) !important;
 }
 
 .vui-color-unknown {
-  color: var(--#{$prefix}-gender-color--unknown) !important;
+  color: var(--#{$prefix}-gender-unknown) !important;
 }
