@@ -388,6 +388,7 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
         <CardModalFileInfoSection
           abbreviateCounters={props.abbreviateCounters}
           files={props.gallery.files}
+          timestampPadding={props.pluginConfig.cards__shared__timestampPadding}
         />
       ) : (
         <>

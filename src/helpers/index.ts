@@ -1,3 +1,5 @@
+import TextUtils from "@/components/stash/utils/text";
+
 export * from "./config";
 export * from "./ids";
 export * from "./stashIcons";
@@ -194,3 +196,25 @@ export const fileSizeUnits: [string, string][] = [
   ["GB", "gigabytes"],
   ["TB", "terabytes"],
 ];
+
+/* ------------------------------- secondsToScreenreaderTimestamp ------------------------------- */
+
+/** Converts seconds to a screenreader-friendly duration string. */
+export const secondsToScreenreaderTimestamp = (seconds: number): string => {
+  const timestamp = TextUtils.secondsToTimestamp(seconds);
+
+  // Screen-reader text
+  const timeStampBreakdown = timestamp.split(":");
+  if (timeStampBreakdown.length == 2) timeStampBreakdown.unshift("0");
+  const timestampNumeric = timeStampBreakdown.map((s) => +s);
+  let srText = "";
+  if (timestampNumeric[0] !== 0)
+    srText += `${timestampNumeric[0]} hour${timestampNumeric[0] === 1 ? "" : "s"} `;
+  if (timestampNumeric[1] !== 0)
+    srText += `${timestampNumeric[1]} minute${timestampNumeric[1] === 1 ? "" : "s"} `;
+  if (timestampNumeric[2] !== 0)
+    srText += `${timestampNumeric[2]} second${timestampNumeric[2] === 1 ? "" : "s"} `;
+  srText = srText.trim();
+
+  return srText;
+};

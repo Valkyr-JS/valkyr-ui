@@ -517,6 +517,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
         <CardModalFileInfoSection
           abbreviateCounters={props.abbreviateCounters}
           files={props.scene.files}
+          timestampPadding={props.pluginConfig.cards__shared__timestampPadding}
         />
       ) : (
         <>

@@ -1,7 +1,13 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { FormattedDate, useIntl } from "react-intl";
-import { fileSizeUnits, roundBytes } from "@/helpers";
+import {
+  fileSizeUnits,
+  padTimestamps,
+  roundBytes,
+  secondsToScreenreaderTimestamp,
+} from "@/helpers";
+import TextUtils from "@/components/stash/utils/text";
 
 interface CardModalFileInfoSectionProps {
   /** Whether counter data should be abbreviated. */
@@ -9,6 +15,10 @@ interface CardModalFileInfoSectionProps {
 
   /** The object's files. */
   files: GalleryFileDataFragment[] | VideoFileDataFragment[];
+
+  /** Adds padding to timestamps to make all units double-figures and include
+   * hours. */
+  timestampPadding: boolean;
 }
 
 const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
@@ -17,6 +27,29 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
   const intl = useIntl();
   const componentClass = "vui-card-modal";
   const sectionClass = componentClass + "__file-info-section";
+
+  /* ------------------------------------------ Duration ------------------------------------------ */
+
+  const maybeRenderDuration = (
+    file: GalleryFileDataFragment | VideoFileDataFragment,
+  ) => {
+    if (!("duration" in file)) return null;
+    const timestamp = TextUtils.secondsToTimestamp(file.duration);
+    const timestampValue = props.timestampPadding
+      ? padTimestamps(timestamp)
+      : timestamp;
+    const timestampSr = secondsToScreenreaderTimestamp(file.duration);
+
+    return (
+      <tr>
+        <th>{intl.formatMessage({ id: "duration" })}</th>
+        <td>
+          <span aria-hidden>{timestampValue}</span>
+          <span className="sr-only">{timestampSr}</span>
+        </td>
+      </tr>
+    );
+  };
 
   /* ------------------------------------------ Component ----------------------------------------- */
 
@@ -85,6 +118,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                       </td>
                     </tr>
                   )}
+                  {maybeRenderDuration(f)}
                 </tbody>
               </Table>
             </li>

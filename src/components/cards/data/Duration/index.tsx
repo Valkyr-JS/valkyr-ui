@@ -1,7 +1,11 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import TextUtils from "@/components/stash/utils/text";
-import { getRenderData, padTimestamps } from "@/helpers";
+import {
+  getRenderData,
+  padTimestamps,
+  secondsToScreenreaderTimestamp,
+} from "@/helpers";
 
 interface DurationProps {
   /** The scene duration data. */
@@ -30,29 +34,20 @@ const Duration: React.FC<
 
   if (!data) return null;
 
-  const timestamp = TextUtils.secondsToTimestamp(props.duration);
+  const timestamp = TextUtils.secondsToTimestamp(data);
   const timestampValue = props.timestampPadding
     ? padTimestamps(timestamp)
     : timestamp;
-
-  // Screen-reader text
-  const timeStampBreakdown = timestamp.split(":");
-  if (timeStampBreakdown.length == 2) timeStampBreakdown.unshift("0");
-  const timestampNumeric = timeStampBreakdown.map((s) => +s);
-  let srText = intl.formatMessage({ id: "duration" }) + ": ";
-  if (timestampNumeric[0] !== 0)
-    srText += `${timestampNumeric[0]} hour${timestampNumeric[0] === 1 ? "" : "s"} `;
-  if (timestampNumeric[1] !== 0)
-    srText += `${timestampNumeric[1]} minute${timestampNumeric[1] === 1 ? "" : "s"} `;
-  if (timestampNumeric[2] !== 0)
-    srText += `${timestampNumeric[2]} second${timestampNumeric[2] === 1 ? "" : "s"} `;
-  srText = srText.trim();
+  const timestampSr =
+    intl.formatMessage({ id: "duration" }) +
+    ": " +
+    secondsToScreenreaderTimestamp(data);
 
   const componentClass = "vui-card-data__duration";
 
   return (
     <span className={componentClass}>
-      <span className="sr-only">{srText}</span>
+      <span className="sr-only">{timestampSr}</span>
       <span aria-hidden>{timestampValue}</span>
     </span>
   );
