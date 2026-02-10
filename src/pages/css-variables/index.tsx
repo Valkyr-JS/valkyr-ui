@@ -13,7 +13,7 @@ const CssVariablesTab: React.FC = () => {
         can be customised using Stash’s custom CSS feature found in Settings{" "}
         {">"} Interface {">"} Custom CSS. For example:
       </p>
-      <code>{`:root { --${prefix}-body-color: aquamarine; }`}</code>
+      <code>{`:root { --${prefix}-body-color: aquamarine; --${prefix}-card-title-font-size: 1.5rem; }`}</code>
       <SettingSection id="general" heading="Global">
         <Table striped className="vui-table">
           <thead>
