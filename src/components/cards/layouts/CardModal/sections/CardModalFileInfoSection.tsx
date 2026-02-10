@@ -71,8 +71,8 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
   ) => {
     if (!("height" in file)) return null;
 
-    const dimensions = file.height + " x " + file.width;
-    const dimensionsSr = file.height + " by " + file.width;
+    const dimensions = file.width + " x " + file.height;
+    const dimensionsSr = file.width + " by " + file.height;
 
     return (
       <tr>
