@@ -209,7 +209,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
         {props.files.map((f) => {
           return (
             <li key={f.id}>
-              <Table striped>
+              <Table striped className="vui-table">
                 <tbody>
                   {f.fingerprints.map((fp) => {
                     const heading =
@@ -221,7 +221,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                             ? intl.formatMessage({ id: "media_info.phash" })
                             : "Fingerprint";
                     return (
-                      <tr>
+                      <tr key={fp.type}>
                         <th>{heading}</th>
                         <td>{fp.value}</td>
                       </tr>

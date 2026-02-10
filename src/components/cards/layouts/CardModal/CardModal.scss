@@ -60,7 +60,7 @@ $prefix: variables.$prefix;
     .modal-header,
     .modal-body,
     .modal-footer {
-      background-color: var(--#{$prefix}-card-fileless-bg-color);
+      background-color: var(--#{$prefix}-card-fileless-bg);
     }
   }
 
@@ -128,25 +128,6 @@ $prefix: variables.$prefix;
     display: flex;
     column-gap: $column-gap;
     opacity: var(--#{$prefix}-card-top-line-opacity);
-  }
-
-  /* -------------------------------------- File info section ------------------------------------- */
-
-  &__file-info-section {
-    .table {
-      th,
-      td {
-        vertical-align: middle;
-      }
-
-      th {
-        border-top: 0;
-      }
-    }
-
-    .table-striped tr:nth-child(odd) td {
-      background: none;
-    }
   }
 
   /* --------------------------------------- Gallery section -------------------------------------- */

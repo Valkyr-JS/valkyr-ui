@@ -5,7 +5,7 @@ $prefix: variables.$prefix;
 .vui-card-data__resolution-icon {
   display: inline;
   padding: 0 4px;
-  background-color: var(--#{$prefix}-card-resolution-icon-bg-color);
+  background-color: var(--#{$prefix}-card-resolution-icon-bg);
   color: var(--#{$prefix}-card-resolution-icon-color);
   font-weight: 900;
   user-select: none;

@@ -4,8 +4,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, useLocation } from "react-router-dom";
 import { PLUGIN, ROUTE } from "@/constants";
 import { useConfigurePlugin } from "@/hooks";
-import GereralTab from "./general";
 import CardsTab from "./cards";
+import CssVariablesTab from "./css-variables";
+import GereralTab from "./general";
 import "./pages.scss";
 const { PluginApi } = window;
 const { LoadingIndicator } = PluginApi.components;
@@ -16,7 +17,7 @@ interface TabData {
   title: string;
 }
 
-const validTabs = ["general", "cards", "styling"] as const;
+const validTabs = ["general", "cards", "css-variables"] as const;
 type TabKey = (typeof validTabs)[number];
 
 const defaultTab: TabKey = "general";
@@ -70,6 +71,11 @@ const SettingsTabs: React.FC<{ tab: TabKey }> = ({ tab }) => {
         />
       ),
       title: "Cards",
+    },
+    {
+      key: "css-variables",
+      component: <CssVariablesTab />,
+      title: "CSS Variables",
     },
   ] as const;
 

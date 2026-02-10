@@ -34,10 +34,10 @@ $prefix: variables.$prefix;
   }
 
   padding: 0;
-  background-color: var(--#{$prefix}-card-bg-color);
+  background-color: var(--#{$prefix}-card-bg);
 
   &--fileless {
-    background-color: var(--#{$prefix}-card-fileless-bg-color);
+    background-color: var(--#{$prefix}-card-fileless-bg);
   }
 
   &__content {

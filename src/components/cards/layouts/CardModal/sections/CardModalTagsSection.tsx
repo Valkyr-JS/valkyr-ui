@@ -15,7 +15,7 @@ const CardModalTagsSection: React.FC<CardModalTagsSectionProps> = (props) => {
   return (
     <div>
       {props.tags.map((t) => {
-        return <TagLink tag={t} />;
+        return <TagLink key={t.id} tag={t} />;
       })}
     </div>
   );
