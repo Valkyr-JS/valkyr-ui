@@ -130,25 +130,6 @@ $prefix: variables.$prefix;
     opacity: var(--#{$prefix}-card-top-line-opacity);
   }
 
-  /* -------------------------------------- File info section ------------------------------------- */
-
-  &__file-info-section {
-    .table {
-      th,
-      td {
-        vertical-align: middle;
-      }
-
-      th {
-        border-top: 0;
-      }
-    }
-
-    .table-striped tr:nth-child(odd) td {
-      background: none;
-    }
-  }
-
   /* --------------------------------------- Gallery section -------------------------------------- */
 
   &__gallery-data-wrapper {

@@ -15,7 +15,7 @@ const CssVariablesTab: React.FC = () => {
       </p>
       <code>{`:root { --${prefix}-body-color: aquamarine; }`}</code>
       <SettingSection id="general" heading="Global">
-        <Table striped>
+        <Table striped className="vui-table">
           <thead>
             <tr>
               <th scope="col">CSS variable</th>
@@ -64,7 +64,7 @@ const CssVariablesTab: React.FC = () => {
         </Table>
       </SettingSection>
       <SettingSection id="general" heading="Cards">
-        <Table striped>
+        <Table striped className="vui-table">
           <thead>
             <tr>
               <th scope="col">CSS variable</th>
@@ -190,7 +190,7 @@ const CssVariablesTab: React.FC = () => {
         </Table>
       </SettingSection>
       <SettingSection id="general" heading="Gender colors">
-        <Table striped>
+        <Table striped className="vui-table">
           <thead>
             <tr>
               <th scope="col">CSS variable</th>

@@ -71,3 +71,19 @@ $stash-card-fileless-bg: #26333d;
 .vui-color-unknown {
   color: var(--#{$prefix}-gender-unknown) !important;
 }
+
+// Override some react-bootstrap table styles
+.vui-table {
+  th,
+  td {
+    vertical-align: middle;
+  }
+
+  th {
+    border-top: 0;
+  }
+}
+
+.table-striped tr:nth-child(odd) td {
+  background: none;
+}
