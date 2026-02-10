@@ -168,6 +168,10 @@ PluginApi.patch.instead<ISceneCardGrid>(
               bgClickHandler={handleModalOuterClick}
               classname="vui-scene-card-modal"
               fullHeightModal={pluginConfig.general__fullHeightModals}
+              isFileless={
+                (fullData[modalSceneIndex] as SceneDataFragment)?.files
+                  .length === 0
+              }
               show={modalOpen}
               titleID={titleID}
             >
@@ -260,6 +264,7 @@ PluginApi.patch.instead<ISceneCardProps>(
               bgClickHandler={handleModalOuterClick}
               classname="vui-scene-card-modal"
               fullHeightModal={pluginConfig.general__fullHeightModals}
+              isFileless={props.scene.files.length === 0}
               show={modalOpen}
               titleID={titleID}
             >

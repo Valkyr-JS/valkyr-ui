@@ -166,6 +166,12 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
               fullHeightModal={pluginConfig.general__fullHeightModals}
+              isFileless={
+                (fullData[modalGalleryIndex] as GalleryDataFragment)?.files
+                  .length === 0 &&
+                (fullData[modalGalleryIndex] as GalleryDataFragment)
+                  ?.image_count === 0
+              }
               show={modalOpen}
               titleID={titleID}
             >
@@ -254,6 +260,10 @@ PluginApi.patch.instead<IGalleryCardProps>(
               bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
               fullHeightModal={pluginConfig.general__fullHeightModals}
+              isFileless={
+                props.gallery.files.length === 0 &&
+                props.gallery.image_count === 0
+              }
               show={modalOpen}
               titleID={titleID}
             >

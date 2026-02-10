@@ -10,7 +10,7 @@ $stash-gender-transfemale: #c8a2c8;
 $stash-gender-transmale: #c8a2c8;
 $stash-gender-unknown: #f5f8fa;
 
-$stash-object-fileless: #26333d;
+$stash-card-fileless: #26333d;
 
 :root {
   --#{$prefix}-body-color: #f5f8fa;
@@ -25,7 +25,7 @@ $stash-object-fileless: #26333d;
   --#{$prefix}-card-title-font-size: 1.25rem;
   --#{$prefix}-card-top-line-font-size: var(--#{$prefix}-cards-font-sm);
   --#{$prefix}-card-top-line-opacity: 0.8;
-  --#{$prefix}-card-fileless-bg-color: $stash-object-fileless;
+  --#{$prefix}-card-fileless-bg-color: #{$stash-card-fileless};
 
   --#{$prefix}-card-modal-max-width: 640px;
 

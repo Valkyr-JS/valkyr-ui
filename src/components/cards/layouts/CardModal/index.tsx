@@ -222,6 +222,11 @@ interface CardModalWrapperProps {
    * content. */
   fullHeightModal: boolean;
 
+  /** Whether the object has no associated file. If it is not possible for the
+   * object to have an associated file, e.g. studios, tags, do NOT mark as
+   * fileless. */
+  isFileless?: boolean;
+
   /** Whether the modal is currently rendered. */
   show: boolean;
 
@@ -233,11 +238,13 @@ export const CardModalWrapper: React.FC<
   PropsWithChildren<CardModalWrapperProps>
 > = (props) => {
   const componentClass = "vui-card-modal";
+  const componentFilelessClass = componentClass + "--fileless";
   const componentHeightClass = componentClass + "--full-height";
   const componentClassList = cx(
     componentClass,
     {
       [componentHeightClass]: props.fullHeightModal,
+      [componentFilelessClass]: props.isFileless,
     },
     props.classname,
   );
