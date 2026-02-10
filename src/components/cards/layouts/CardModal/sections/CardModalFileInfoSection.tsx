@@ -40,7 +40,9 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                         ? intl.formatMessage({ id: "media_info.checksum" })
                         : fp.type === "oshash"
                           ? intl.formatMessage({ id: "media_info.hash" })
-                          : "Fingerprint";
+                          : fp.type === "phash"
+                            ? intl.formatMessage({ id: "media_info.phash" })
+                            : "Fingerprint";
                     return (
                       <tr>
                         <th>{heading}</th>
