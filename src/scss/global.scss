@@ -82,8 +82,12 @@ $stash-card-fileless-bg: #26333d;
   th {
     border-top: 0;
   }
+
+  tr:nth-child(odd) td {
+    background: none;
+  }
 }
 
-.table-striped tr:nth-child(odd) td {
-  background: none;
+.vui-copiable-text {
+  cursor: copy;
 }

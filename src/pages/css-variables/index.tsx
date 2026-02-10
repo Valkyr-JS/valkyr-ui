@@ -1,9 +1,19 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { SettingSection } from "@/components/stash/Settings/SettingSection";
 import { Table } from "react-bootstrap";
 
 const CssVariablesTab: React.FC = () => {
   const prefix = "valkyr-ui";
+
+  const copyToClipboard: React.MouseEventHandler = (e) => {
+    navigator.clipboard.writeText((e.target as HTMLElement).innerText);
+  };
+
+  const RowHeader: React.FC<PropsWithChildren> = (props) => (
+    <th scope="row" className="vui-copiable-text">
+      <code onClick={copyToClipboard}>{props.children}</code>
+    </th>
+  );
 
   return (
     <>
@@ -13,7 +23,14 @@ const CssVariablesTab: React.FC = () => {
         can be customised using Stash’s custom CSS feature found in Settings{" "}
         {">"} Interface {">"} Custom CSS. For example:
       </p>
-      <code>{`:root { --${prefix}-body-color: aquamarine; --${prefix}-card-title-font-size: 1.5rem; }`}</code>
+      <pre>
+        <code>{`:root { --${prefix}-body-color: aquamarine; --${prefix}-card-title-font-size: 1.5rem; }`}</code>
+      </pre>
+      <p>
+        Default settings either match native Stash settings, or are as close to
+        them as possible whilst remaining accessible.
+      </p>
+      <p>Click on a variable to copy it to the clipboard for naming accuracy.</p>
       <SettingSection id="general" heading="Global">
         <Table striped className="vui-table">
           <thead>
@@ -25,36 +42,28 @@ const CssVariablesTab: React.FC = () => {
           </thead>
           <tbody>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-body-color</code>
-              </th>
+              <RowHeader>--{prefix}-body-color</RowHeader>
               <td>The font color for most text.</td>
               <td>
                 <code>#f5f8fa</code>
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-link-color</code>
-              </th>
+              <RowHeader>--{prefix}-link-color</RowHeader>
               <td>The font color for most links.</td>
               <td>
                 <code>var(--{prefix}-body-color)</code>
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-title-color</code>
-              </th>
+              <RowHeader>--{prefix}-title-color</RowHeader>
               <td>The font color for most headings.</td>
               <td>
                 <code>var(--{prefix}-body-color)</code>
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-code-color</code>
-              </th>
+              <RowHeader>--{prefix}-code-color</RowHeader>
               <td>The font color for code snippets.</td>
               <td>
                 <code>#f391bd</code>
@@ -74,27 +83,21 @@ const CssVariablesTab: React.FC = () => {
           </thead>
           <tbody>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-bg</code>
-              </th>
+              <RowHeader>--{prefix}-card-bg</RowHeader>
               <td>The background color for cards and card modals.</td>
               <td>
                 <code>#30404d</code>
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-font-sm</code>
-              </th>
+              <RowHeader>--{prefix}-card-font-sm</RowHeader>
               <td>The font size used in places with smaller text.</td>
               <td>
                 <code>12px</code>
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-resolution-icon-bg</code>
-              </th>
+              <RowHeader>--{prefix}-card-resolution-icon-bg</RowHeader>
               <td>
                 The background color for the resolution icon on cards and card
                 modals.
@@ -104,9 +107,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-resolution-icon-color</code>
-              </th>
+              <RowHeader>--{prefix}-card-resolution-icon-color</RowHeader>
               <td>
                 The font color for the resolution icon on cards and card modals.
               </td>
@@ -115,9 +116,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-title-color</code>
-              </th>
+              <RowHeader>--{prefix}-card-title-color</RowHeader>
               <td>
                 The font color used for titles and headings on cards and card
                 modals.
@@ -127,9 +126,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-title-font-size</code>
-              </th>
+              <RowHeader>--{prefix}-card-title-font-size</RowHeader>
               <td>
                 The font size used for titles and headings on cards and card
                 modals.
@@ -139,9 +136,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-top-line-font-size</code>
-              </th>
+              <RowHeader>--{prefix}-card-top-line-font-size</RowHeader>
               <td>
                 The font size of data on the top line above the title on cards
                 and card modals.
@@ -151,9 +146,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-top-line-opacity</code>
-              </th>
+              <RowHeader>--{prefix}-card-top-line-opacity</RowHeader>
               <td>
                 The opacity of data on the top line above the title on cards and
                 card modals.
@@ -163,9 +156,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-fileless-bg</code>
-              </th>
+              <RowHeader>--{prefix}-card-fileless-bg</RowHeader>
               <td>
                 The background color for cards and card modals with no
                 associated file.
@@ -175,9 +166,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-card-modal-max-width</code>
-              </th>
+              <RowHeader>--{prefix}-card-modal-max-width</RowHeader>
               <td>
                 The maximum width of card modals at browser window sizes of
                 992px or larger.
@@ -200,9 +189,7 @@ const CssVariablesTab: React.FC = () => {
           </thead>
           <tbody>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-gender-female</code>
-              </th>
+              <RowHeader>--{prefix}-gender-female</RowHeader>
               <td>
                 The font and background color used in various places to denote a
                 female performer.
@@ -212,9 +199,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-gender-intersex</code>
-              </th>
+              <RowHeader>--{prefix}-gender-intersex</RowHeader>
               <td>
                 The font and background color used in various places to denote
                 an intersex performer.
@@ -224,9 +209,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-gender-male</code>
-              </th>
+              <RowHeader>--{prefix}-gender-male</RowHeader>
               <td>
                 The font and background color used in various places to denote a
                 male performer.
@@ -236,9 +219,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-gender-nonbinary</code>
-              </th>
+              <RowHeader>--{prefix}-gender-nonbinary</RowHeader>
               <td>
                 The font and background color used in various places to denote a
                 nonbinary performer.
@@ -248,9 +229,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-gender-transfemale</code>
-              </th>
+              <RowHeader>--{prefix}-gender-transfemale</RowHeader>
               <td>
                 The font and background color used in various places to denote a
                 transgender female performer.
@@ -260,9 +239,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-gender-transmale</code>
-              </th>
+              <RowHeader>--{prefix}-gender-transmale</RowHeader>
               <td>
                 The font and background color used in various places to denote a
                 transgender male performer.
@@ -272,9 +249,7 @@ const CssVariablesTab: React.FC = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">
-                <code>--{prefix}-gender-unknown</code>
-              </th>
+              <RowHeader>--{prefix}-gender-unknown</RowHeader>
               <td>
                 The font and background color used in various places to denote a
                 performer with no gender data.
