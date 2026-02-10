@@ -17,12 +17,12 @@ $stash-card-bg: #30404d;
 $stash-card-fileless-bg: #26333d;
 
 :root {
-  --#{$prefix}-body-color: $stash-body-color;
+  --#{$prefix}-body-color: #{$stash-body-color};
   --#{$prefix}-link-color: var(--#{$prefix}-body-color);
   --#{$prefix}-title-color: var(--#{$prefix}-body-color);
   --#{$prefix}-code-color: #f391bd;
 
-  --#{$prefix}-card-bg: $stash-card-bg;
+  --#{$prefix}-card-bg: #{$stash-card-bg};
   --#{$prefix}-card-font-sm: 12px;
   --#{$prefix}-card-resolution-icon-bg: var(--#{$prefix}-body-color);
   --#{$prefix}-card-resolution-icon-color: var(--#{$prefix}-card-bg);
