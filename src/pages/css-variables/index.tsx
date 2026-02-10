@@ -7,6 +7,13 @@ const CssVariablesTab: React.FC = () => {
 
   return (
     <>
+      <h1>CSS Variables</h1>
+      <p>
+        The following is a list of all CSS variables used in Valkyr UI. These
+        can be customised using Stash’s custom CSS feature found in Settings{" "}
+        {">"} Interface {">"} Custom CSS. For example:
+      </p>
+      <code>{`:root { --${prefix}-body-color: aquamarine; }`}</code>
       <SettingSection id="general" heading="Global">
         <Table striped>
           <thead>
