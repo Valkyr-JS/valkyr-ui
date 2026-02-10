@@ -71,6 +71,9 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       classname={componentClass}
       footer={footerProps}
       id={id}
+      isFileless={
+        props.gallery.files.length === 0 && props.gallery.image_count === 0
+      }
       link={galleryLink}
       onSelectedChanged={props.onSelectedChanged}
       pluginConfig={props.pluginConfig}

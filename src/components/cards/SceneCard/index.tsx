@@ -110,6 +110,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       classname={componentClass}
       footer={footerProps}
       id={id}
+      isFileless={props.scene.files.length === 0}
       link={sceneLink}
       onSelectedChanged={props.onSelectedChanged}
       onMouseOut={() => setIsHovered(false)}

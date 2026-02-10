@@ -20,6 +20,11 @@ interface GridCardProps extends SelectableCardProps {
   /** HTML ID used for aria labelling. */
   id: string;
 
+  /** Whether the object has no associated file. If it is not possible for the
+   * object to have an associated file, e.g. studios, tags, do NOT mark as
+   * fileless. */
+  isFileless?: boolean;
+
   /** The link to the object page. */
   link: string;
 
@@ -46,7 +51,10 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   const componentClass = "vui-grid-card";
   const bodyClass = componentClass + "__body";
   const contentClass = componentClass + "__content";
-  const componentClassList = cx(componentClass, props.classname);
+  const filelessClass = componentClass + "--fileless";
+  const componentClassList = cx(componentClass, props.classname, {
+    [filelessClass]: props.isFileless,
+  });
 
   /* ------------------------------------ Stash card selection ------------------------------------ */
 
