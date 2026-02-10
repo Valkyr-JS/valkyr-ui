@@ -221,7 +221,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                             ? intl.formatMessage({ id: "media_info.phash" })
                             : "Fingerprint";
                     return (
-                      <tr>
+                      <tr key={fp.type}>
                         <th>{heading}</th>
                         <td>{fp.value}</td>
                       </tr>
