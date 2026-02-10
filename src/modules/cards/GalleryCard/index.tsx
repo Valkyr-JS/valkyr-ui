@@ -101,7 +101,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                       (!nextData?.tags.length && modalSection === "tags") ||
                       (!nextData?.performers.length &&
                         modalSection === "performers") ||
-                      (!nextData?.scenes.length && modalSection === "scenes")
+                      (!nextData?.scenes.length && modalSection === "scenes") ||
+                      (!nextData?.files.length && modalSection === "files")
                     )
                       setModalSection("details");
                     // Open the modal
@@ -122,7 +123,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                       (!prevData?.tags.length && modalSection === "tags") ||
                       (!prevData?.performers.length &&
                         modalSection === "performers") ||
-                      (!prevData?.scenes.length && modalSection === "scenes")
+                      (!prevData?.scenes.length && modalSection === "scenes") ||
+                      (!prevData?.files.length && modalSection === "files")
                     )
                       setModalSection("details");
 
