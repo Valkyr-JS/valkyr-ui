@@ -3,8 +3,8 @@ import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 
 interface BitRateProps {
-  /** The file bit rate in bytes. */
-  bytes: VideoFile["bit_rate"];
+  /** The file bit rate in bits. */
+  bits: VideoFile["bit_rate"];
 }
 
 const BitRate: React.FC<
@@ -13,9 +13,9 @@ const BitRate: React.FC<
   const intl = useIntl();
   const data =
     props.context === "modal"
-      ? props.bytes
+      ? props.bits
       : getRenderData({
-          data: props.bytes,
+          data: props.bits,
           zoomIndex: {
             current: props.currentZoomIndex,
             user: props.userZoomIndex,

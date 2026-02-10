@@ -263,7 +263,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 }
               />
               <BitRate
-                bytes={primaryFile.bit_rate}
+                bits={primaryFile.bit_rate}
                 context="card"
                 currentZoomIndex={props.zoomIndex}
                 userZoomIndex={
@@ -549,7 +549,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                     />
                   )}
                   {willRenderBitRate && (
-                    <BitRate bytes={primaryFile.bit_rate} context="modal" />
+                    <BitRate bits={primaryFile.bit_rate} context="modal" />
                   )}
                   {willRenderVideoCodec && (
                     <VideoCodec

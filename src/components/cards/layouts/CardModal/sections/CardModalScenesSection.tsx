@@ -173,7 +173,7 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
                         )}
                         {primaryFile.args.willRenderBitRate && (
                           <BitRate
-                            bytes={primaryFile.file.bit_rate}
+                            bits={primaryFile.file.bit_rate}
                             context="modal"
                           />
                         )}
