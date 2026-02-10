@@ -294,6 +294,34 @@ export const NoPerformersModalButton: Story = {
   },
 };
 
+export const FilesModalButton: Story = {
+  args: {
+    gallery: fullData as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fileInfoModalBtn = canvas.getByRole("button", {
+      name: "File Info",
+    });
+    expect(fileInfoModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoFilesModalButton: Story = {
+  args: {
+    gallery: filelessData as SlimGalleryDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fileInfoModalBtn = canvas.queryByRole("button", {
+      name: "File Info",
+    });
+    expect(fileInfoModalBtn).toBeNull();
+  },
+};
+
 export const ScenesModalButton: Story = {
   args: {
     gallery: fullData as SlimGalleryDataFragment,

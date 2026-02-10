@@ -485,6 +485,41 @@ export const NoTagsSectionButton: Story = {
   },
 };
 
+export const FileInfoSection: Story = {
+  args: {
+    section: "files",
+    scene: fullData as SceneDataFragment,
+  },
+};
+
+export const FileInfoSectionButton: Story = {
+  args: {
+    scene: fullData as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fileInfoModalBtn = canvas.getByRole("button", {
+      name: "File Info",
+    });
+    expect(fileInfoModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoFileInfoSectionButton: Story = {
+  args: {
+    scene: filelessData as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fileInfoModalBtn = canvas.queryByRole("button", {
+      name: "File Info",
+    });
+    expect(fileInfoModalBtn).toBeNull();
+  },
+};
+
 export const GalleriesSection: Story = {
   args: {
     section: "galleries",

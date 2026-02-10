@@ -36,6 +36,10 @@ $prefix: variables.$prefix;
   padding: 0;
   background-color: var(--#{$prefix}-card-bg-color);
 
+  &--fileless {
+    background-color: var(--#{$prefix}-card-fileless-bg-color);
+  }
+
   &__content {
     display: grid;
     grid-template-rows: [content-top top-line-top] auto [top-line-bottom title-top] auto [title-bottom body-top] 1fr [body-bottom footer-top] auto [footer-bottom content-bottom];

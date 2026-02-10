@@ -13,7 +13,7 @@ const meta = {
     layout: "centered",
   },
   args: {
-    bytes: 12418801,
+    bits: 12418801,
   },
   argTypes: {
     ...dataComponentArgTypes,
@@ -78,7 +78,7 @@ export const EqualsZoomIndex: Story = {
 export const ZeroValue: Story = {
   args: {
     context: "card",
-    bytes: 0,
+    bits: 0,
     currentZoomIndex: 3,
     userZoomIndex: 2,
   },
@@ -143,7 +143,7 @@ export const ModalContext: Story = {
 export const ModalContextZeroValue: Story = {
   args: {
     context: "modal",
-    bytes: 0,
+    bits: 0,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

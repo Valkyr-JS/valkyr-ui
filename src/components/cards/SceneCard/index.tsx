@@ -40,6 +40,7 @@ import {
   VideoPreviewThumbnail,
 } from "../layouts/CardThumbnail";
 import "./SceneCard.scss";
+import CardModalFileInfoSection from "../layouts/CardModal/sections/CardModalFileInfoSection";
 
 interface SceneCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
@@ -94,6 +95,8 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.scene.files.length)
+    footerSections.push(["files", props.scene.files.length]);
   if (props.scene.galleries.length)
     footerSections.push(["galleries", props.scene.galleries.length]);
   if (props.scene.performers.length)
@@ -107,6 +110,7 @@ const SceneCard: React.FC<SceneCardProps> = (props) => {
       classname={componentClass}
       footer={footerProps}
       id={id}
+      isFileless={props.scene.files.length === 0}
       link={sceneLink}
       onSelectedChanged={props.onSelectedChanged}
       onMouseOut={() => setIsHovered(false)}
@@ -260,7 +264,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
                 }
               />
               <BitRate
-                bytes={primaryFile.bit_rate}
+                bits={primaryFile.bit_rate}
                 context="card"
                 currentZoomIndex={props.zoomIndex}
                 userZoomIndex={
@@ -427,6 +431,8 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex > -1;
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.scene.files.length)
+    sections.push(["files", props.scene.files.length]);
   if (props.scene.galleries.length)
     sections.push(["galleries", props.scene.galleries.length]);
   if (props.scene.performers.length)
@@ -508,6 +514,12 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
           pluginConfig={props.pluginConfig}
           ratingSystem={props.ratingSystem}
         />
+      ) : props.section === "files" ? (
+        <CardModalFileInfoSection
+          abbreviateCounters={props.abbreviateCounters}
+          files={props.scene.files}
+          timestampPadding={props.pluginConfig.cards__shared__timestampPadding}
+        />
       ) : (
         <>
           <KeyData>
@@ -538,7 +550,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
                     />
                   )}
                   {willRenderBitRate && (
-                    <BitRate bytes={primaryFile.bit_rate} context="modal" />
+                    <BitRate bits={primaryFile.bit_rate} context="modal" />
                   )}
                   {willRenderVideoCodec && (
                     <VideoCodec

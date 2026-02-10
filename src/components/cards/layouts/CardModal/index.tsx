@@ -8,6 +8,7 @@ import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./CardModal.scss";
 import { getStashFaIcon } from "@/helpers";
+import { faFileCircleInfo } from "@fortawesome/pro-solid-svg-icons";
 
 export { default as CardModalGalleriesSection } from "./sections/CardModalGalleriesSection";
 export { default as CardModalPerformersSection } from "./sections/CardModalPerformersSection";
@@ -67,6 +68,7 @@ export const CardModalContent: React.FC<
 > = (props) => {
   const intl = useIntl();
   const handleSetDetailsSection = () => props.setSection("details");
+  const handleSetFileInfoSection = () => props.setSection("files");
   const handleSetGalleriesSection = () => props.setSection("galleries");
   const handleSetPerformersSection = () => props.setSection("performers");
   const handleSetScenesSection = () => props.setSection("scenes");
@@ -155,6 +157,21 @@ export const CardModalContent: React.FC<
               ) : null}
             </button>
           )}
+          {props.sections.find((s) => s[0] === "files") && (
+            <button
+              type="button"
+              className="minimal btn"
+              onClick={handleSetFileInfoSection}
+              title={intl.formatMessage({ id: "file_info" })}
+            >
+              <FontAwesomeIcon icon={faFileCircleInfo} />
+              {props.pluginConfig.cards__shared__enableCounts ? (
+                <span aria-hidden>
+                  {props.sections.find((s) => s[0] === "files")?.[1]}
+                </span>
+              ) : null}
+            </button>
+          )}
         </div>
         <div className={footerButtonsContainerClass}>
           {props.navigation ? (
@@ -205,6 +222,11 @@ interface CardModalWrapperProps {
    * content. */
   fullHeightModal: boolean;
 
+  /** Whether the object has no associated file. If it is not possible for the
+   * object to have an associated file, e.g. studios, tags, do NOT mark as
+   * fileless. */
+  isFileless?: boolean;
+
   /** Whether the modal is currently rendered. */
   show: boolean;
 
@@ -216,11 +238,13 @@ export const CardModalWrapper: React.FC<
   PropsWithChildren<CardModalWrapperProps>
 > = (props) => {
   const componentClass = "vui-card-modal";
+  const componentFilelessClass = componentClass + "--fileless";
   const componentHeightClass = componentClass + "--full-height";
   const componentClassList = cx(
     componentClass,
     {
       [componentHeightClass]: props.fullHeightModal,
+      [componentFilelessClass]: props.isFileless,
     },
     props.classname,
   );

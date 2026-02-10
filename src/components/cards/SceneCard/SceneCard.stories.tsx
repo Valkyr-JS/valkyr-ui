@@ -482,6 +482,34 @@ export const NoTagsModalButton: Story = {
   },
 };
 
+export const FilesModalButton: Story = {
+  args: {
+    scene: fullData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fileInfoModalBtn = canvas.getByRole("button", {
+      name: "File Info",
+    });
+    expect(fileInfoModalBtn).toBeInTheDocument();
+  },
+};
+
+export const NoFilesModalButton: Story = {
+  args: {
+    scene: filelessData as SlimSceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fileInfoModalBtn = canvas.queryByRole("button", {
+      name: "File Info",
+    });
+    expect(fileInfoModalBtn).toBeNull();
+  },
+};
+
 export const GalleriesModalButton: Story = {
   args: {
     scene: fullData as SlimSceneDataFragment,

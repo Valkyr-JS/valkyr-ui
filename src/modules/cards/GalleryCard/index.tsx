@@ -101,7 +101,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                       (!nextData?.tags.length && modalSection === "tags") ||
                       (!nextData?.performers.length &&
                         modalSection === "performers") ||
-                      (!nextData?.scenes.length && modalSection === "scenes")
+                      (!nextData?.scenes.length && modalSection === "scenes") ||
+                      (!nextData?.files.length && modalSection === "files")
                     )
                       setModalSection("details");
                     // Open the modal
@@ -122,7 +123,8 @@ PluginApi.patch.instead<IGalleryCardGrid>(
                       (!prevData?.tags.length && modalSection === "tags") ||
                       (!prevData?.performers.length &&
                         modalSection === "performers") ||
-                      (!prevData?.scenes.length && modalSection === "scenes")
+                      (!prevData?.scenes.length && modalSection === "scenes") ||
+                      (!prevData?.files.length && modalSection === "files")
                     )
                       setModalSection("details");
 
@@ -164,6 +166,12 @@ PluginApi.patch.instead<IGalleryCardGrid>(
               bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
               fullHeightModal={pluginConfig.general__fullHeightModals}
+              isFileless={
+                (fullData[modalGalleryIndex] as GalleryDataFragment)?.files
+                  .length === 0 &&
+                (fullData[modalGalleryIndex] as GalleryDataFragment)
+                  ?.image_count === 0
+              }
               show={modalOpen}
               titleID={titleID}
             >
@@ -252,6 +260,10 @@ PluginApi.patch.instead<IGalleryCardProps>(
               bgClickHandler={handleModalOuterClick}
               classname="vui-gallery-card-modal"
               fullHeightModal={pluginConfig.general__fullHeightModals}
+              isFileless={
+                props.gallery.files.length === 0 &&
+                props.gallery.image_count === 0
+              }
               show={modalOpen}
               titleID={titleID}
             >

@@ -1,10 +1,11 @@
 type CardModalSection =
   | "details"
+  | "files"
   | "galleries"
   | "performers"
   | "scenes"
   | "tags";
-  
+
 type CardModalSectionData = [CardModalSection] | [CardModalSection, number];
 
 type DataComponentProps<T = unknown> = T & {

@@ -56,10 +56,19 @@ $prefix: variables.$prefix;
     }
   }
 
+  &--fileless {
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+      background-color: var(--#{$prefix}-card-fileless-bg-color);
+    }
+  }
+
   /* ---------------------------------------------------------------------------------------------- */
   /*                                            Sections                                            */
   /* ---------------------------------------------------------------------------------------------- */
 
+  &__file-info-section,
   &__gallery-section,
   &__performer-section,
   &__scene-section {
@@ -78,7 +87,13 @@ $prefix: variables.$prefix;
         border-bottom: 1px solid white;
         margin-bottom: 10px;
       }
+    }
+  }
 
+  &__gallery-section,
+  &__performer-section,
+  &__scene-section {
+    & > ul > li {
       @media (min-width: 400px) {
         display: grid;
         grid-template-columns: [performer-section-start performer-section-item-image-start] 160px [performer-section-item-image-end performer-section-item-data-start] 1fr [performer-section-item-data-end performer-section-end];
@@ -113,6 +128,25 @@ $prefix: variables.$prefix;
     display: flex;
     column-gap: $column-gap;
     opacity: var(--#{$prefix}-card-top-line-opacity);
+  }
+
+  /* -------------------------------------- File info section ------------------------------------- */
+
+  &__file-info-section {
+    .table {
+      th,
+      td {
+        vertical-align: middle;
+      }
+
+      th {
+        border-top: 0;
+      }
+    }
+
+    .table-striped tr:nth-child(odd) td {
+      background: none;
+    }
   }
 
   /* --------------------------------------- Gallery section -------------------------------------- */

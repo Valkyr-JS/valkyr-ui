@@ -25,6 +25,7 @@ import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
 import "./GalleryCard.scss";
+import CardModalFileInfoSection from "../layouts/CardModal/sections/CardModalFileInfoSection";
 
 interface GalleryCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
@@ -55,6 +56,8 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
   const title = getTitleFromObject(props.gallery);
 
   const footerSections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.files.length)
+    footerSections.push(["files", props.gallery.files.length]);
   if (props.gallery.performers.length)
     footerSections.push(["performers", props.gallery.performers.length]);
   if (props.gallery.scenes.length)
@@ -68,6 +71,9 @@ const GalleryCard: React.FC<GalleryCardProps> = (props) => {
       classname={componentClass}
       footer={footerProps}
       id={id}
+      isFileless={
+        props.gallery.files.length === 0 && props.gallery.image_count === 0
+      }
       link={galleryLink}
       onSelectedChanged={props.onSelectedChanged}
       pluginConfig={props.pluginConfig}
@@ -292,6 +298,8 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
   const title = getTitleFromObject(props.gallery);
 
   const sections: CardModalSectionData[] = [["details"]];
+  if (props.gallery.files.length)
+    sections.push(["files", props.gallery.files.length]);
   if (props.gallery.performers.length)
     sections.push(["performers", props.gallery.performers.length]);
   if (props.gallery.scenes.length)
@@ -378,6 +386,12 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
           pluginConfig={props.pluginConfig}
           scenes={props.gallery.scenes}
           ratingSystem={props.ratingSystem}
+        />
+      ) : props.section === "files" ? (
+        <CardModalFileInfoSection
+          abbreviateCounters={props.abbreviateCounters}
+          files={props.gallery.files}
+          timestampPadding={props.pluginConfig.cards__shared__timestampPadding}
         />
       ) : (
         <>

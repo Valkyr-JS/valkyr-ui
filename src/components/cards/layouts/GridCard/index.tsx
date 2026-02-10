@@ -8,6 +8,7 @@ import CardTitle from "../Title";
 import TopLine from "../TopLine";
 import "./GridCard.scss";
 import { getStashFaIcon } from "@/helpers";
+import { faFileCircleInfo } from "@fortawesome/pro-solid-svg-icons";
 
 interface GridCardProps extends SelectableCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
@@ -18,6 +19,11 @@ interface GridCardProps extends SelectableCardProps {
 
   /** HTML ID used for aria labelling. */
   id: string;
+
+  /** Whether the object has no associated file. If it is not possible for the
+   * object to have an associated file, e.g. studios, tags, do NOT mark as
+   * fileless. */
+  isFileless?: boolean;
 
   /** The link to the object page. */
   link: string;
@@ -45,7 +51,10 @@ const GridCard: React.FC<PropsWithChildren<GridCardProps>> = (props) => {
   const componentClass = "vui-grid-card";
   const bodyClass = componentClass + "__body";
   const contentClass = componentClass + "__content";
-  const componentClassList = cx(componentClass, props.classname);
+  const filelessClass = componentClass + "--fileless";
+  const componentClassList = cx(componentClass, props.classname, {
+    [filelessClass]: props.isFileless,
+  });
 
   /* ------------------------------------ Stash card selection ------------------------------------ */
 
@@ -131,6 +140,11 @@ const CardFooter: React.FC<
 
   const handleOpenDetailsSection = () => {
     props.setSection("details");
+    props.openHandler();
+  };
+
+  const handleOpenFileInfoSection = () => {
+    props.setSection("files");
     props.openHandler();
   };
 
@@ -227,6 +241,22 @@ const CardFooter: React.FC<
           {props.pluginConfig.cards__shared__enableCounts ? (
             <span aria-hidden>
               {props.sections.find((s) => s[0] === "galleries")?.[1]}
+            </span>
+          ) : null}
+        </button>
+      )}
+      {props.sections.find((s) => s[0] === "files") && (
+        <button
+          type="button"
+          className="minimal btn"
+          disabled={props.selectionProps.selecting}
+          onClick={handleOpenFileInfoSection}
+          title={intl.formatMessage({ id: "file_info" })}
+        >
+          <FontAwesomeIcon icon={faFileCircleInfo} />
+          {props.pluginConfig.cards__shared__enableCounts ? (
+            <span aria-hidden>
+              {props.sections.find((s) => s[0] === "files")?.[1]}
             </span>
           ) : null}
         </button>

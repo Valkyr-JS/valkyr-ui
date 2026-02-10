@@ -1,3 +1,5 @@
+import TextUtils from "@/components/stash/utils/text";
+
 export * from "./config";
 export * from "./ids";
 export * from "./stashIcons";
@@ -168,4 +170,51 @@ export const padTimestamps = (timestamp: string): string => {
     .join(":");
 
   return timestamp;
+};
+
+/* ----------------------------------------- roundBytes ----------------------------------------- */
+
+/** Round a value of bytes to the nearest two digits. The `divisions` arg tracks
+ * how many times it has been divided, i.e. the unit to be used. */
+export const roundBytes = (
+  value: number,
+  divisions: number = 0,
+): [number, number] => {
+  if (value < 1024 || divisions === 4) {
+    // Round to two decimal places
+    return [Math.round(value * 100) / 100, divisions];
+  }
+
+  const nextValue = value / 1024;
+  return roundBytes(nextValue, divisions + 1);
+};
+
+export const fileSizeUnits: [string, string][] = [
+  ["B", "bytes"],
+  ["KB", "kilobytes"],
+  ["MB", "megabytes"],
+  ["GB", "gigabytes"],
+  ["TB", "terabytes"],
+];
+
+/* ------------------------------- secondsToScreenreaderTimestamp ------------------------------- */
+
+/** Converts seconds to a screenreader-friendly duration string. */
+export const secondsToScreenreaderTimestamp = (seconds: number): string => {
+  const timestamp = TextUtils.secondsToTimestamp(seconds);
+
+  // Screen-reader text
+  const timeStampBreakdown = timestamp.split(":");
+  if (timeStampBreakdown.length == 2) timeStampBreakdown.unshift("0");
+  const timestampNumeric = timeStampBreakdown.map((s) => +s);
+  let srText = "";
+  if (timestampNumeric[0] !== 0)
+    srText += `${timestampNumeric[0]} hour${timestampNumeric[0] === 1 ? "" : "s"} `;
+  if (timestampNumeric[1] !== 0)
+    srText += `${timestampNumeric[1]} minute${timestampNumeric[1] === 1 ? "" : "s"} `;
+  if (timestampNumeric[2] !== 0)
+    srText += `${timestampNumeric[2]} second${timestampNumeric[2] === 1 ? "" : "s"} `;
+  srText = srText.trim();
+
+  return srText;
 };
