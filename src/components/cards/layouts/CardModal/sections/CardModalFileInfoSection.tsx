@@ -171,6 +171,21 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
     );
   };
 
+  /* ----------------------------------------- Video codec ---------------------------------------- */
+
+  const maybeRenderVideoCodec = (
+    file: GalleryFileDataFragment | VideoFileDataFragment,
+  ) => {
+    if (!("video_codec" in file)) return null;
+
+    return (
+      <tr>
+        <th>{intl.formatMessage({ id: "media_info.video_codec" })}</th>
+        <td>{file.video_codec}</td>
+      </tr>
+    );
+  };
+
   /* ------------------------------------------ Component ----------------------------------------- */
 
   return (
@@ -204,6 +219,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                   {maybeRenderDuration(f)}
                   {maybeRenderFrameRate(f)}
                   {maybeRenderBitRate(f)}
+                  {maybeRenderVideoCodec(f)}
                 </tbody>
               </Table>
             </li>
