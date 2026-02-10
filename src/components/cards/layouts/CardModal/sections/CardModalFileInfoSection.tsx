@@ -1,6 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-import { FormattedDate } from "react-intl";
+import { FormattedDate, useIntl } from "react-intl";
+import { fileSizeUnits, roundBytes } from "@/helpers";
 
 interface CardModalFileInfoSectionProps {
   /** Whether counter data should be abbreviated. */
@@ -13,6 +14,7 @@ interface CardModalFileInfoSectionProps {
 const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
   props,
 ) => {
+  const intl = useIntl();
   const componentClass = "vui-card-modal";
   const sectionClass = componentClass + "__file-info-section";
 
@@ -22,17 +24,41 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
     <div className={sectionClass}>
       <ul>
         {props.files.map((f) => {
-          console.log(f);
+          const [fileSize, divisions] = roundBytes(f.size);
+
           return (
             <li key={f.id}>
               <Table striped>
                 <tbody>
+                  {f.fingerprints.map((fp) => {
+                    const heading =
+                      fp.type === "md5"
+                        ? intl.formatMessage({ id: "media_info.checksum" })
+                        : "Fingerprint";
+                    return (
+                      <tr>
+                        <th>{heading}</th>
+                        <td>{fp.value}</td>
+                      </tr>
+                    );
+                  })}
                   <tr>
-                    <th>Path</th>
+                    <th>{intl.formatMessage({ id: "path" })}</th>
                     <td>{f.path}</td>
                   </tr>
                   <tr>
-                    <th>File modification time</th>
+                    <th>{intl.formatMessage({ id: "filesize" })}</th>
+                    <td>
+                      <span aria-hidden>
+                        {fileSize} {fileSizeUnits[divisions][0]}
+                      </span>
+                      <span className="sr-only">
+                        {fileSize} {fileSizeUnits[divisions][1]}
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>{intl.formatMessage({ id: "file_mod_time" })}</th>
                     <td>
                       <FormattedDate
                         value={f.mod_time}

@@ -169,3 +169,28 @@ export const padTimestamps = (timestamp: string): string => {
 
   return timestamp;
 };
+
+/* ----------------------------------------- roundBytes ----------------------------------------- */
+
+/** Round a value of bytes to the nearest two digits. The `divisions` arg tracks
+ * how many times it has been divided, i.e. the unit to be used. */
+export const roundBytes = (
+  value: number,
+  divisions: number = 0,
+): [number, number] => {
+  if (value < 1024 || divisions === 4) {
+    // Round to two decimal places
+    return [Math.round(value * 100) / 100, divisions];
+  }
+
+  const nextValue = value / 1024;
+  return roundBytes(nextValue, divisions + 1);
+};
+
+export const fileSizeUnits: [string, string][] = [
+  ["B", "bytes"],
+  ["KB", "kilobytes"],
+  ["MB", "megabytes"],
+  ["GB", "gigabytes"],
+  ["TB", "terabytes"],
+];
