@@ -28,6 +28,21 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
   const componentClass = "vui-card-modal";
   const sectionClass = componentClass + "__file-info-section";
 
+  /* ----------------------------------------- Audio codec ---------------------------------------- */
+
+  const maybeRenderAudioCodec = (
+    file: GalleryFileDataFragment | VideoFileDataFragment,
+  ) => {
+    if (!("audio_codec" in file)) return null;
+
+    return (
+      <tr>
+        <th>{intl.formatMessage({ id: "media_info.audio_codec" })}</th>
+        <td>{file.audio_codec}</td>
+      </tr>
+    );
+  };
+
   /* ------------------------------------------ Bit rate ------------------------------------------ */
 
   const maybeRenderBitRate = (
@@ -220,6 +235,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                   {maybeRenderFrameRate(f)}
                   {maybeRenderBitRate(f)}
                   {maybeRenderVideoCodec(f)}
+                  {maybeRenderAudioCodec(f)}
                 </tbody>
               </Table>
             </li>
