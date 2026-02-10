@@ -23,14 +23,18 @@ const CssVariablesTab: React.FC = () => {
         can be customised using Stash’s custom CSS feature found in Settings{" "}
         {">"} Interface {">"} Custom CSS. For example:
       </p>
-      <pre>
-        <code>{`:root { --${prefix}-body-color: aquamarine; --${prefix}-card-title-font-size: 1.5rem; }`}</code>
+      <pre className="vui-code-block vui-copiable-text">
+        <code
+          onClick={copyToClipboard}
+        >{`:root {\n  --${prefix}-body-color: aquamarine;\n  --${prefix}-card-title-font-size: 1.5rem;\n}`}</code>
       </pre>
       <p>
         Default settings either match native Stash settings, or are as close to
         them as possible whilst remaining accessible.
       </p>
-      <p>Click on a variable to copy it to the clipboard for naming accuracy.</p>
+      <p>
+        Click on a variable to copy it to the clipboard for naming accuracy.
+      </p>
       <SettingSection id="general" heading="Global">
         <Table striped className="vui-table">
           <thead>
