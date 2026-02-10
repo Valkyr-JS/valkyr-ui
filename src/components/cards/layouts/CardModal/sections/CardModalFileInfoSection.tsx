@@ -26,6 +26,10 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
         {props.files.map((f) => {
           const [fileSize, divisions] = roundBytes(f.size);
 
+          const dimensions = "height" in f ? f.height + " x " + f.width : null;
+          const dimensionsSr =
+            "height" in f ? f.height + " by " + f.width : null;
+
           return (
             <li key={f.id}>
               <Table striped>
@@ -70,6 +74,15 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                       />
                     </td>
                   </tr>
+                  {!!dimensions && (
+                    <tr>
+                      <th>{intl.formatMessage({ id: "dimensions" })}</th>
+                      <td>
+                        <span aria-hidden>{dimensions}</span>
+                        <span className="sr-only">{dimensionsSr}</span>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
             </li>
