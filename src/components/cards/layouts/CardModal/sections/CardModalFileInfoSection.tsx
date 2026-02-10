@@ -114,6 +114,29 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
     );
   };
 
+  /* ----------------------------------------- Frame rate ----------------------------------------- */
+
+  const maybeRenderFrameRate = (
+    file: GalleryFileDataFragment | VideoFileDataFragment,
+  ) => {
+    if (!("frame_rate" in file)) return null;
+
+    // Round to two decimal places - probably unnecessary, but why not.
+    const rate = Math.round(file.frame_rate * 100) / 100;
+
+    return (
+      <tr>
+        <th>{intl.formatMessage({ id: "framerate" })}</th>
+        <td>
+          <span className="sr-only">{rate} frames per second</span>
+          <span aria-hidden>
+            {intl.formatMessage({ id: "frames_per_second" }, { value: rate })}
+          </span>
+        </td>
+      </tr>
+    );
+  };
+
   /* -------------------------------------------- Path -------------------------------------------- */
 
   const maybeRenderPath = (
@@ -158,6 +181,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                   {maybeRenderModTime(f)}
                   {maybeRenderDimensions(f)}
                   {maybeRenderDuration(f)}
+                  {maybeRenderFrameRate(f)}
                 </tbody>
               </Table>
             </li>
