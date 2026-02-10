@@ -1,3 +1,7 @@
+@use "../scss/variables";
+
+$prefix: variables.$prefix;
+
 #valkyr-ui-settings-menu-container {
   @media (min-width: 576px) {
     position: fixed;
@@ -5,6 +9,10 @@
 }
 
 #valkyr-ui-settings-container {
+  code {
+    color: var(--#{$prefix}-code-color);
+  }
+
   .tab-content {
     max-width: 780px;
   }

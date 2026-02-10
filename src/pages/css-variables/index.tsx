@@ -44,6 +44,15 @@ const CssVariablesTab: React.FC = () => {
                 <code>var(--{prefix}-body-color)</code>
               </td>
             </tr>
+            <tr>
+              <th scope="row">
+                <code>--{prefix}-code-color</code>
+              </th>
+              <td>The font color for code snippets.</td>
+              <td>
+                <code>#f391bd</code>
+              </td>
+            </tr>
           </tbody>
         </Table>
       </SettingSection>
