@@ -28,6 +28,27 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
   const componentClass = "vui-card-modal";
   const sectionClass = componentClass + "__file-info-section";
 
+  /* ------------------------------------------ Bit rate ------------------------------------------ */
+
+  const maybeRenderBitRate = (
+    file: GalleryFileDataFragment | VideoFileDataFragment,
+  ) => {
+    if (!("bit_rate" in file)) return null;
+
+    // Round to two decimal places
+    const mbps = Math.round(file.bit_rate / 10000) / 100;
+
+    return (
+      <tr>
+        <th>{intl.formatMessage({ id: "bitrate" })}</th>
+        <td>
+          <span className="sr-only">{mbps} megabits per second</span>
+          <span aria-hidden>{mbps} mbps</span>
+        </td>
+      </tr>
+    );
+  };
+
   /* ----------------------------------------- Dimensions ----------------------------------------- */
 
   const maybeRenderDimensions = (
@@ -182,6 +203,7 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                   {maybeRenderDimensions(f)}
                   {maybeRenderDuration(f)}
                   {maybeRenderFrameRate(f)}
+                  {maybeRenderBitRate(f)}
                 </tbody>
               </Table>
             </li>
