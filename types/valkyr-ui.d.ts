@@ -170,6 +170,9 @@ interface ValkyrUiConfigMap {
   /** The zoom index at which to display the video codec on scene cards. */
   cards__sceneCard__videoCodecZoomIndex?: StashCardGridZoom;
 
+  /** Applies a custom color palette to improve accessibility for colorblind
+   * users. Applies only to Valkyr UI modules, not to Stash as a whole.  */
+  general__accessibleColorPalette?: boolean;
   /** Enables closing card modals when clicking outside of the component. */
   general__closeModalOnOuterClick?: boolean;
   /** Modals will always be rendered at the full height of the browser window. */

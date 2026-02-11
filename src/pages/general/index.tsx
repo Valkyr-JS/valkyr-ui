@@ -7,6 +7,29 @@ import { DEFAULT } from "@/constants";
 const GeneralTab: React.FC<SettingsTabProps> = (props) => {
   const componentClassname = "vui-form-group";
 
+  const AccessiblePalette = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.general__accessibleColorPalette ??
+        DEFAULT.GENERAL.ACCESSIBLE_COLOR_PALETTE,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Enable accessible color palette"
+        subHeading="Applies a custom color palette to improve accessibility for colorblind users. This applies only to Valkyr UI modules, not to Stash as a whole."
+        id="valkyr-ui-general__accessibleColorPalette"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            general__accessibleColorPalette: newState,
+          });
+        }}
+      />
+    );
+  };
+
   const CloseModalOnOuterClick = () => {
     const [checked, setChecked] = useState(
       props.pluginConfig.general__closeModalOnOuterClick ??
@@ -79,6 +102,7 @@ const GeneralTab: React.FC<SettingsTabProps> = (props) => {
   return (
     <Form.Group className={componentClassname}>
       <SettingSection id="general" heading="General settings">
+        <AccessiblePalette />
         <CloseModalOnOuterClick />
         <FullHeightModals />
         <LocaleDateFormatting />

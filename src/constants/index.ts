@@ -55,6 +55,7 @@ export const DEFAULT = {
     },
   },
   GENERAL: {
+    ACCESSIBLE_COLOR_PALETTE: false,
     CLOSE_MODAL_ON_OUTER_CLICK: true,
     FULL_HEIGHT_MODALS: false,
     LOCALE_DATE_FORMAT: false,

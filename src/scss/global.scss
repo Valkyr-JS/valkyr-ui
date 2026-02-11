@@ -44,6 +44,14 @@ $stash-card-fileless-bg: #26333d;
   --#{$prefix}-gender-unknown: #{$stash-gender-unknown};
 }
 
+.vui-accessible-palette {
+  --#{$prefix}-accessible-dark: #131c19;
+  --#{$prefix}-accessible-mid-dark: #1b2b2b;
+  --#{$prefix}-accessible-mid: #394b59;
+  --#{$prefix}-accessible-mid-light: #717481;
+  --#{$prefix}-accessible-light: #9694a0;
+}
+
 .vui-color-female {
   color: var(--#{$prefix}-gender-female) !important;
 }

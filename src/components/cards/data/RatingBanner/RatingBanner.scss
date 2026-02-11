@@ -1,5 +1,14 @@
+@use "../../../../scss//variables";
+
+$prefix: variables.$prefix;
+
 .vui-card-data {
   &__rating-banner {
     opacity: 1;
   }
+}
+
+.vui-accessible-palette .rating-banner {
+  background: var(--#{$prefix}-accessible-light);
+  color: black;
 }
