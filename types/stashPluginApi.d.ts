@@ -1105,7 +1105,10 @@ declare namespace PluginApi {
       target: PatchableComponentNames,
       fn: (props: T, _: unknown, Original: React.JSX) => React.JSX.Element[],
     ): void;
-    function after(target: PatchableComponentNames, fn: Function): void;
+    function after<T>(
+      target: PatchableComponentNames,
+      fn: (props: T, _: unknown, Original: React.JSX) => React.JSX,
+    ): void;
   }
   namespace register {
     function route(path: string, component: React.FC<any>): void;
