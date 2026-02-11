@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react-vite";
+import { withThemeByClassName } from "@storybook/addon-themes";
 import { WithIntlProvider } from "./decorators";
 
 // Stash app CSS bundle - v0.30.1
@@ -7,7 +8,16 @@ import "../src/scss/global.scss";
 import "./overrides.css";
 
 const preview: Preview = {
-  decorators: [WithIntlProvider],
+  decorators: [
+    WithIntlProvider,
+    withThemeByClassName({
+      themes: {
+        Stash: "",
+        "VUI accessible": "vui-accessible-palette",
+      },
+      defaultTheme: "VUI accessible",
+    }),
+  ],
   parameters: {
     controls: {
       matchers: {
