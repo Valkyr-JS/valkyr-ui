@@ -99,6 +99,7 @@ export const mergeConfig = (
       DEFAULT.CARDS.SCENE_CARD.VIDEO_CODEX_ZOOM_INDEX,
 
     // General
+    general__accessibleColorPalette: DEFAULT.GENERAL.ACCESSIBLE_COLOR_PALETTE,
     general__closeModalOnOuterClick: DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK,
     general__fullHeightModals: DEFAULT.GENERAL.FULL_HEIGHT_MODALS,
     general__localeDateFormat: DEFAULT.GENERAL.LOCALE_DATE_FORMAT,
