@@ -4,8 +4,9 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Modal } from "react-bootstrap";
 import { useIntl } from "react-intl";
-import CardTitle from "../Title";
-import TopLine from "../TopLine";
+import CardTitle from "@/components/cards/layouts/Title";
+import TopLine from "@/components/cards/layouts/TopLine";
+import Tooltip from "@/components/shared/Tooltip";
 import "./CardModal.scss";
 import { getStashFaIcon } from "@/helpers";
 import { faFileCircleInfo } from "@fortawesome/pro-solid-svg-icons";
@@ -88,89 +89,95 @@ export const CardModalContent: React.FC<
       <Modal.Footer>
         <div>
           {props.sections.find((s) => s[0] === "details") && (
-            <button
-              type="button"
-              className="minimal btn"
-              onClick={handleSetDetailsSection}
-              title={intl.formatMessage({ id: "details" })}
-            >
-              <FontAwesomeIcon icon={faCircleInfo} />
-            </button>
+            <Tooltip title={intl.formatMessage({ id: "details" })}>
+              <button
+                type="button"
+                className="minimal btn"
+                onClick={handleSetDetailsSection}
+              >
+                <FontAwesomeIcon icon={faCircleInfo} />
+              </button>
+            </Tooltip>
           )}
           {props.sections.find((s) => s[0] === "tags") && (
-            <button
-              type="button"
-              className="minimal btn"
-              onClick={handleSetTagsSection}
-              title={intl.formatMessage({ id: "tags" })}
-            >
-              <FontAwesomeIcon icon={getStashFaIcon("tag")} />
-              {props.pluginConfig.cards__shared__enableCounts ? (
-                <span aria-hidden>
-                  {props.sections.find((s) => s[0] === "tags")?.[1]}
-                </span>
-              ) : null}
-            </button>
+            <Tooltip title={intl.formatMessage({ id: "tags" })}>
+              <button
+                type="button"
+                className="minimal btn"
+                onClick={handleSetTagsSection}
+              >
+                <FontAwesomeIcon icon={getStashFaIcon("tag")} />
+                {props.pluginConfig.cards__shared__enableCounts ? (
+                  <span aria-hidden>
+                    {props.sections.find((s) => s[0] === "tags")?.[1]}
+                  </span>
+                ) : null}
+              </button>
+            </Tooltip>
           )}
           {props.sections.find((s) => s[0] === "performers") && (
-            <button
-              type="button"
-              className="minimal btn"
-              onClick={handleSetPerformersSection}
-              title={intl.formatMessage({ id: "performers" })}
-            >
-              <FontAwesomeIcon icon={getStashFaIcon("performer")} />
-              {props.pluginConfig.cards__shared__enableCounts ? (
-                <span aria-hidden>
-                  {props.sections.find((s) => s[0] === "performers")?.[1]}
-                </span>
-              ) : null}
-            </button>
+            <Tooltip title={intl.formatMessage({ id: "performers" })}>
+              <button
+                type="button"
+                className="minimal btn"
+                onClick={handleSetPerformersSection}
+              >
+                <FontAwesomeIcon icon={getStashFaIcon("performer")} />
+                {props.pluginConfig.cards__shared__enableCounts ? (
+                  <span aria-hidden>
+                    {props.sections.find((s) => s[0] === "performers")?.[1]}
+                  </span>
+                ) : null}
+              </button>
+            </Tooltip>
           )}
           {props.sections.find((s) => s[0] === "scenes") && (
-            <button
-              type="button"
-              className="minimal btn"
-              onClick={handleSetScenesSection}
-              title={intl.formatMessage({ id: "scenes" })}
-            >
-              <FontAwesomeIcon icon={getStashFaIcon("scene")} />
-              {props.pluginConfig.cards__shared__enableCounts ? (
-                <span aria-hidden>
-                  {props.sections.find((s) => s[0] === "scenes")?.[1]}
-                </span>
-              ) : null}
-            </button>
+            <Tooltip title={intl.formatMessage({ id: "scenes" })}>
+              <button
+                type="button"
+                className="minimal btn"
+                onClick={handleSetScenesSection}
+              >
+                <FontAwesomeIcon icon={getStashFaIcon("scene")} />
+                {props.pluginConfig.cards__shared__enableCounts ? (
+                  <span aria-hidden>
+                    {props.sections.find((s) => s[0] === "scenes")?.[1]}
+                  </span>
+                ) : null}
+              </button>
+            </Tooltip>
           )}
           {props.sections.find((s) => s[0] === "galleries") && (
-            <button
-              type="button"
-              className="minimal btn"
-              onClick={handleSetGalleriesSection}
-              title={intl.formatMessage({ id: "galleries" })}
-            >
-              <FontAwesomeIcon icon={getStashFaIcon("gallery")} />
-              {props.pluginConfig.cards__shared__enableCounts ? (
-                <span aria-hidden>
-                  {props.sections.find((s) => s[0] === "galleries")?.[1]}
-                </span>
-              ) : null}
-            </button>
+            <Tooltip title={intl.formatMessage({ id: "galleries" })}>
+              <button
+                type="button"
+                className="minimal btn"
+                onClick={handleSetGalleriesSection}
+              >
+                <FontAwesomeIcon icon={getStashFaIcon("gallery")} />
+                {props.pluginConfig.cards__shared__enableCounts ? (
+                  <span aria-hidden>
+                    {props.sections.find((s) => s[0] === "galleries")?.[1]}
+                  </span>
+                ) : null}
+              </button>
+            </Tooltip>
           )}
           {props.sections.find((s) => s[0] === "files") && (
-            <button
-              type="button"
-              className="minimal btn"
-              onClick={handleSetFileInfoSection}
-              title={intl.formatMessage({ id: "file_info" })}
-            >
-              <FontAwesomeIcon icon={faFileCircleInfo} />
-              {props.pluginConfig.cards__shared__enableCounts ? (
-                <span aria-hidden>
-                  {props.sections.find((s) => s[0] === "files")?.[1]}
-                </span>
-              ) : null}
-            </button>
+            <Tooltip title={intl.formatMessage({ id: "file_info" })}>
+              <button
+                type="button"
+                className="minimal btn"
+                onClick={handleSetFileInfoSection}
+              >
+                <FontAwesomeIcon icon={faFileCircleInfo} />
+                {props.pluginConfig.cards__shared__enableCounts ? (
+                  <span aria-hidden>
+                    {props.sections.find((s) => s[0] === "files")?.[1]}
+                  </span>
+                ) : null}
+              </button>
+            </Tooltip>
           )}
         </div>
         <div className={footerButtonsContainerClass}>
