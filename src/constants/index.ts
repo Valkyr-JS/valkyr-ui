@@ -60,6 +60,9 @@ export const DEFAULT = {
     FULL_HEIGHT_MODALS: false,
     LOCALE_DATE_FORMAT: false,
   },
+  UI: {
+    TOOLTIP_POSITION: "bottom",
+  },
 } as const;
 
 export const PLUGIN = {

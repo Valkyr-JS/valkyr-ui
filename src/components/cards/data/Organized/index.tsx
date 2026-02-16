@@ -1,6 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { OverlayTrigger, Tooltip as BsTooltip } from "react-bootstrap";
 import { useIntl } from "react-intl";
+import { DEFAULT } from "@/constants";
 import { getRenderData, getStashFaIcon } from "@/helpers";
 
 interface OrganizedProps {
@@ -27,11 +29,26 @@ const Organized: React.FC<
 
   const componentClass = "vui-card-data__organized";
 
+  // Use an empty string as the tooltip ID to satisfy required prop, but stop
+  // `aria-describedby`. This is not needed due to the `.sr-only` text.
+  const tooltipID = "";
+
   return (
-    <span className={componentClass}>
-      <FontAwesomeIcon icon={getStashFaIcon("organized")} />
-      <span className="sr-only">{intl.formatMessage({ id: "organized" })}</span>
-    </span>
+    <OverlayTrigger
+      overlay={
+        <BsTooltip id={tooltipID}>
+          {intl.formatMessage({ id: "organized" })}
+        </BsTooltip>
+      }
+      placement={DEFAULT.UI.TOOLTIP_POSITION}
+    >
+      <span className={componentClass}>
+        <FontAwesomeIcon icon={getStashFaIcon("organized")} />
+        <span className="sr-only">
+          {intl.formatMessage({ id: "organized" })}
+        </span>
+      </span>
+    </OverlayTrigger>
   );
 };
 
