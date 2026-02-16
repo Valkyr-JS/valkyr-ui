@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useIntl } from "react-intl";
+import Tooltip from "@/components/shared/Tooltip";
 import { getRenderData, getStashFaIcon } from "@/helpers";
 import "./PlayCount.scss";
 
@@ -37,13 +38,16 @@ const PlayCount: React.FC<
     props.abbreviate && data > 1000 ? Math.round(data / 100) / 10 + "k" : data;
 
   return (
-    <span className={componentClass}>
+    <Tooltip
+      componentClassList={componentClass}
+      title={intl.formatMessage({ id: "play_count" })}
+    >
       <FontAwesomeIcon icon={getStashFaIcon("playCount")} />
       <span className="sr-only">
         {intl.formatMessage({ id: "play_count" })}: {value}
       </span>
       <span aria-hidden>{value}</span>
-    </span>
+    </Tooltip>
   );
 };
 
