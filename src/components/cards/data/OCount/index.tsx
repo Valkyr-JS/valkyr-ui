@@ -1,6 +1,7 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
+import Tooltip from "@/components/shared/Tooltip";
 import SweatDrops from "@/components/stash/Shared/SweatDrops";
 import "./OCount.scss";
 
@@ -37,13 +38,16 @@ const OCount: React.FC<
     props.abbreviate && data > 1000 ? Math.round(data / 100) / 10 + "k" : data;
 
   return (
-    <span className={componentClass}>
+    <Tooltip
+      componentClassList={componentClass}
+      title={intl.formatMessage({ id: "o_count" })}
+    >
       <SweatDrops />
       <span className="sr-only">
         {intl.formatMessage({ id: "o_count" })}: {value}
       </span>
       <span aria-hidden>{value}</span>
-    </span>
+    </Tooltip>
   );
 };
 
