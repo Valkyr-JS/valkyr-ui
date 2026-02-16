@@ -96,6 +96,9 @@ export const CardModalContent: React.FC<
                 onClick={handleSetDetailsSection}
               >
                 <FontAwesomeIcon icon={faCircleInfo} />
+                <span className="sr-only">
+                  {intl.formatMessage({ id: "details" })}
+                </span>
               </button>
             </Tooltip>
           )}
@@ -107,6 +110,9 @@ export const CardModalContent: React.FC<
                 onClick={handleSetTagsSection}
               >
                 <FontAwesomeIcon icon={getStashFaIcon("tag")} />
+                <span className="sr-only">
+                  {intl.formatMessage({ id: "tags" })}
+                </span>
                 {props.pluginConfig.cards__shared__enableCounts ? (
                   <span aria-hidden>
                     {props.sections.find((s) => s[0] === "tags")?.[1]}
@@ -122,7 +128,10 @@ export const CardModalContent: React.FC<
                 className="minimal btn"
                 onClick={handleSetPerformersSection}
               >
-                <FontAwesomeIcon icon={getStashFaIcon("performer")} />
+                <FontAwesomeIcon icon={getStashFaIcon("performer")} />{" "}
+                <span className="sr-only">
+                  {intl.formatMessage({ id: "performers" })}
+                </span>
                 {props.pluginConfig.cards__shared__enableCounts ? (
                   <span aria-hidden>
                     {props.sections.find((s) => s[0] === "performers")?.[1]}
@@ -138,7 +147,10 @@ export const CardModalContent: React.FC<
                 className="minimal btn"
                 onClick={handleSetScenesSection}
               >
-                <FontAwesomeIcon icon={getStashFaIcon("scene")} />
+                <FontAwesomeIcon icon={getStashFaIcon("scene")} />{" "}
+                <span className="sr-only">
+                  {intl.formatMessage({ id: "scenes" })}
+                </span>
                 {props.pluginConfig.cards__shared__enableCounts ? (
                   <span aria-hidden>
                     {props.sections.find((s) => s[0] === "scenes")?.[1]}
@@ -154,7 +166,10 @@ export const CardModalContent: React.FC<
                 className="minimal btn"
                 onClick={handleSetGalleriesSection}
               >
-                <FontAwesomeIcon icon={getStashFaIcon("gallery")} />
+                <FontAwesomeIcon icon={getStashFaIcon("gallery")} />{" "}
+                <span className="sr-only">
+                  {intl.formatMessage({ id: "galleries" })}
+                </span>
                 {props.pluginConfig.cards__shared__enableCounts ? (
                   <span aria-hidden>
                     {props.sections.find((s) => s[0] === "galleries")?.[1]}
@@ -170,7 +185,10 @@ export const CardModalContent: React.FC<
                 className="minimal btn"
                 onClick={handleSetFileInfoSection}
               >
-                <FontAwesomeIcon icon={faFileCircleInfo} />
+                <FontAwesomeIcon icon={faFileCircleInfo} />{" "}
+                <span className="sr-only">
+                  {intl.formatMessage({ id: "file_info" })}
+                </span>
                 {props.pluginConfig.cards__shared__enableCounts ? (
                   <span aria-hidden>
                     {props.sections.find((s) => s[0] === "files")?.[1]}

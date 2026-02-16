@@ -180,6 +180,9 @@ const CardFooter: React.FC<
             onClick={handleOpenDetailsSection}
           >
             <FontAwesomeIcon icon={faCircleInfo} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "details" })}
+            </span>
           </button>
         </Tooltip>
       )}
@@ -192,6 +195,9 @@ const CardFooter: React.FC<
             onClick={handleOpenTagsSection}
           >
             <FontAwesomeIcon icon={getStashFaIcon("tag")} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "tags" })}
+            </span>
             {props.pluginConfig.cards__shared__enableCounts ? (
               <span aria-hidden>
                 {props.sections.find((s) => s[0] === "tags")?.[1]}
@@ -209,6 +215,9 @@ const CardFooter: React.FC<
             onClick={handleOpenPerformersSection}
           >
             <FontAwesomeIcon icon={getStashFaIcon("performer")} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "performers" })}
+            </span>
             {props.pluginConfig.cards__shared__enableCounts ? (
               <span aria-hidden>
                 {props.sections.find((s) => s[0] === "performers")?.[1]}
@@ -226,6 +235,9 @@ const CardFooter: React.FC<
             onClick={handleOpenScenesSection}
           >
             <FontAwesomeIcon icon={getStashFaIcon("scene")} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "scenes" })}
+            </span>
             {props.pluginConfig.cards__shared__enableCounts ? (
               <span aria-hidden>
                 {props.sections.find((s) => s[0] === "scenes")?.[1]}
@@ -243,6 +255,9 @@ const CardFooter: React.FC<
             onClick={handleOpenGalleriesSection}
           >
             <FontAwesomeIcon icon={getStashFaIcon("gallery")} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "galleries" })}
+            </span>
             {props.pluginConfig.cards__shared__enableCounts ? (
               <span aria-hidden>
                 {props.sections.find((s) => s[0] === "galleries")?.[1]}
@@ -260,6 +275,9 @@ const CardFooter: React.FC<
             onClick={handleOpenFileInfoSection}
           >
             <FontAwesomeIcon icon={faFileCircleInfo} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "file_info" })}
+            </span>
             {props.pluginConfig.cards__shared__enableCounts ? (
               <span aria-hidden>
                 {props.sections.find((s) => s[0] === "files")?.[1]}
