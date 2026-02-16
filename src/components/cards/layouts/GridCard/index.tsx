@@ -4,11 +4,12 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import { Card, Form } from "react-bootstrap";
 import { useIntl } from "react-intl";
-import CardTitle from "../Title";
-import TopLine from "../TopLine";
-import "./GridCard.scss";
+import CardTitle from "@/components/cards/layouts/Title";
+import TopLine from "@/components/cards/layouts/TopLine";
+import Tooltip from "@/components/shared/Tooltip";
 import { getStashFaIcon } from "@/helpers";
 import { faFileCircleInfo } from "@fortawesome/pro-solid-svg-icons";
+import "./GridCard.scss";
 
 interface GridCardProps extends SelectableCardProps {
   /** Optional classes added alongside the `vui-grid-card` component class. */
@@ -171,95 +172,119 @@ const CardFooter: React.FC<
   return (
     <div className={footerClass}>
       {props.sections.find((s) => s[0] === "details") && (
-        <button
-          type="button"
-          className="minimal btn"
-          disabled={props.selectionProps.selecting}
-          onClick={handleOpenDetailsSection}
-          title={intl.formatMessage({ id: "details" })}
-        >
-          <FontAwesomeIcon icon={faCircleInfo} />
-        </button>
+        <Tooltip title={intl.formatMessage({ id: "details" })}>
+          <button
+            type="button"
+            className="minimal btn"
+            disabled={props.selectionProps.selecting}
+            onClick={handleOpenDetailsSection}
+          >
+            <FontAwesomeIcon icon={faCircleInfo} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "details" })}
+            </span>
+          </button>
+        </Tooltip>
       )}
       {props.sections.find((s) => s[0] === "tags") && (
-        <button
-          type="button"
-          className="minimal btn"
-          disabled={props.selectionProps.selecting}
-          onClick={handleOpenTagsSection}
-          title={intl.formatMessage({ id: "tags" })}
-        >
-          <FontAwesomeIcon icon={getStashFaIcon("tag")} />
-          {props.pluginConfig.cards__shared__enableCounts ? (
-            <span aria-hidden>
-              {props.sections.find((s) => s[0] === "tags")?.[1]}
+        <Tooltip title={intl.formatMessage({ id: "tags" })}>
+          <button
+            type="button"
+            className="minimal btn"
+            disabled={props.selectionProps.selecting}
+            onClick={handleOpenTagsSection}
+          >
+            <FontAwesomeIcon icon={getStashFaIcon("tag")} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "tags" })}
             </span>
-          ) : null}
-        </button>
+            {props.pluginConfig.cards__shared__enableCounts ? (
+              <span aria-hidden>
+                {props.sections.find((s) => s[0] === "tags")?.[1]}
+              </span>
+            ) : null}
+          </button>
+        </Tooltip>
       )}
       {props.sections.find((s) => s[0] === "performers") && (
-        <button
-          type="button"
-          className="minimal btn"
-          disabled={props.selectionProps.selecting}
-          onClick={handleOpenPerformersSection}
-          title={intl.formatMessage({ id: "performers" })}
-        >
-          <FontAwesomeIcon icon={getStashFaIcon("performer")} />
-          {props.pluginConfig.cards__shared__enableCounts ? (
-            <span aria-hidden>
-              {props.sections.find((s) => s[0] === "performers")?.[1]}
+        <Tooltip title={intl.formatMessage({ id: "performers" })}>
+          <button
+            type="button"
+            className="minimal btn"
+            disabled={props.selectionProps.selecting}
+            onClick={handleOpenPerformersSection}
+          >
+            <FontAwesomeIcon icon={getStashFaIcon("performer")} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "performers" })}
             </span>
-          ) : null}
-        </button>
+            {props.pluginConfig.cards__shared__enableCounts ? (
+              <span aria-hidden>
+                {props.sections.find((s) => s[0] === "performers")?.[1]}
+              </span>
+            ) : null}
+          </button>
+        </Tooltip>
       )}
       {props.sections.find((s) => s[0] === "scenes") && (
-        <button
-          type="button"
-          className="minimal btn"
-          disabled={props.selectionProps.selecting}
-          onClick={handleOpenScenesSection}
-          title={intl.formatMessage({ id: "scenes" })}
-        >
-          <FontAwesomeIcon icon={getStashFaIcon("scene")} />
-          {props.pluginConfig.cards__shared__enableCounts ? (
-            <span aria-hidden>
-              {props.sections.find((s) => s[0] === "scenes")?.[1]}
+        <Tooltip title={intl.formatMessage({ id: "scenes" })}>
+          <button
+            type="button"
+            className="minimal btn"
+            disabled={props.selectionProps.selecting}
+            onClick={handleOpenScenesSection}
+          >
+            <FontAwesomeIcon icon={getStashFaIcon("scene")} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "scenes" })}
             </span>
-          ) : null}
-        </button>
+            {props.pluginConfig.cards__shared__enableCounts ? (
+              <span aria-hidden>
+                {props.sections.find((s) => s[0] === "scenes")?.[1]}
+              </span>
+            ) : null}
+          </button>
+        </Tooltip>
       )}
       {props.sections.find((s) => s[0] === "galleries") && (
-        <button
-          type="button"
-          className="minimal btn"
-          disabled={props.selectionProps.selecting}
-          onClick={handleOpenGalleriesSection}
-          title={intl.formatMessage({ id: "galleries" })}
-        >
-          <FontAwesomeIcon icon={getStashFaIcon("gallery")} />
-          {props.pluginConfig.cards__shared__enableCounts ? (
-            <span aria-hidden>
-              {props.sections.find((s) => s[0] === "galleries")?.[1]}
+        <Tooltip title={intl.formatMessage({ id: "galleries" })}>
+          <button
+            type="button"
+            className="minimal btn"
+            disabled={props.selectionProps.selecting}
+            onClick={handleOpenGalleriesSection}
+          >
+            <FontAwesomeIcon icon={getStashFaIcon("gallery")} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "galleries" })}
             </span>
-          ) : null}
-        </button>
+            {props.pluginConfig.cards__shared__enableCounts ? (
+              <span aria-hidden>
+                {props.sections.find((s) => s[0] === "galleries")?.[1]}
+              </span>
+            ) : null}
+          </button>
+        </Tooltip>
       )}
       {props.sections.find((s) => s[0] === "files") && (
-        <button
-          type="button"
-          className="minimal btn"
-          disabled={props.selectionProps.selecting}
-          onClick={handleOpenFileInfoSection}
-          title={intl.formatMessage({ id: "file_info" })}
-        >
-          <FontAwesomeIcon icon={faFileCircleInfo} />
-          {props.pluginConfig.cards__shared__enableCounts ? (
-            <span aria-hidden>
-              {props.sections.find((s) => s[0] === "files")?.[1]}
+        <Tooltip title={intl.formatMessage({ id: "file_info" })}>
+          <button
+            type="button"
+            className="minimal btn"
+            disabled={props.selectionProps.selecting}
+            onClick={handleOpenFileInfoSection}
+          >
+            <FontAwesomeIcon icon={faFileCircleInfo} />
+            <span className="sr-only">
+              {intl.formatMessage({ id: "file_info" })}
             </span>
-          ) : null}
-        </button>
+            {props.pluginConfig.cards__shared__enableCounts ? (
+              <span aria-hidden>
+                {props.sections.find((s) => s[0] === "files")?.[1]}
+              </span>
+            ) : null}
+          </button>
+        </Tooltip>
       )}
     </div>
   );

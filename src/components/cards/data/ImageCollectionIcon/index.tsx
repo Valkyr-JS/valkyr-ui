@@ -1,6 +1,7 @@
 import React from "react";
 import { faImageStack } from "@fortawesome/pro-solid-svg-icons/faImageStack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Tooltip from "@/components/shared/Tooltip";
 import { getRenderData } from "@/helpers";
 import "./ImageCollectionIcon.scss";
 
@@ -30,10 +31,10 @@ const ImageCollectionIcon: React.FC<
   const componentClass = "vui-card-data__image-collection-icon";
 
   return (
-    <span className={componentClass}>
+    <Tooltip componentClassList={componentClass} title="Image collection">
       <FontAwesomeIcon icon={faImageStack} />
       <span className="sr-only">Image collection</span>
-    </span>
+    </Tooltip>
   );
 };
 

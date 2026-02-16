@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useIntl } from "react-intl";
+import Tooltip from "@/components/shared/Tooltip";
 import { getRenderData, getStashFaIcon } from "@/helpers";
 
 interface OrganizedProps {
@@ -28,10 +29,13 @@ const Organized: React.FC<
   const componentClass = "vui-card-data__organized";
 
   return (
-    <span className={componentClass}>
+    <Tooltip
+      componentClassList={componentClass}
+      title={intl.formatMessage({ id: "organized" })}
+    >
       <FontAwesomeIcon icon={getStashFaIcon("organized")} />
       <span className="sr-only">{intl.formatMessage({ id: "organized" })}</span>
-    </span>
+    </Tooltip>
   );
 };
 

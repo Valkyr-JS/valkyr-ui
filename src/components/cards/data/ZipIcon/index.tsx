@@ -1,6 +1,7 @@
 import React from "react";
 import { faFileZip } from "@fortawesome/pro-solid-svg-icons/faFileZip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Tooltip from "@/components/shared/Tooltip";
 import { getRenderData } from "@/helpers";
 import "./ZipIcon.scss";
 
@@ -29,10 +30,10 @@ const ZipIcon: React.FC<
   const componentClass = "vui-card-data__zip-icon";
 
   return (
-    <span className={componentClass}>
+    <Tooltip componentClassList={componentClass} title="ZIP file">
       <FontAwesomeIcon icon={faFileZip} />
       <span className="sr-only">ZIP file</span>
-    </span>
+    </Tooltip>
   );
 };
 
