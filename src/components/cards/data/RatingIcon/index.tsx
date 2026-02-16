@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useIntl } from "react-intl";
+import Tooltip from "@/components/shared/Tooltip";
 import { convertRating100, getRenderData, getStashFaIcon } from "@/helpers";
 import "./RatingIcon.scss";
 
@@ -41,11 +42,14 @@ const RatingIcon: React.FC<
       : `${intl.formatMessage({ id: "rating" })}: ${ratingNum} stars`;
 
   return (
-    <span className={componentClass}>
+    <Tooltip
+      componentClassList={componentClass}
+      title={intl.formatMessage({ id: "rating" })}
+    >
       <FontAwesomeIcon icon={getStashFaIcon("rating")} />
       <span className="sr-only">{srText}</span>
       <span aria-hidden>{ratingNum}</span>
-    </span>
+    </Tooltip>
   );
 };
 
