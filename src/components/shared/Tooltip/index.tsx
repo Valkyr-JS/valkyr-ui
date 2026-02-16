@@ -15,6 +15,7 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
 
   return (
     <OverlayTrigger
+      delay={200}
       overlay={<BsTooltip id={tooltipID}>{props.title}</BsTooltip>}
       placement={props.placement ?? DEFAULT.UI.TOOLTIP_POSITION}
     >
