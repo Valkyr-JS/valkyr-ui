@@ -1100,7 +1100,10 @@ declare namespace PluginApi {
     };
   }
   namespace patch {
-    function before(target: PatchableComponentNames, fn: Function): void;
+    function before<T>(
+      target: PatchableComponentNames,
+      fn: (props: T) => [T],
+    ): void;
     function instead<T>(
       target: PatchableComponentNames,
       fn: (props: T, _: unknown, Original: React.JSX) => React.JSX.Element[],

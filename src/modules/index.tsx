@@ -14,18 +14,22 @@ import { mergeConfig } from "@/helpers";
 
 const { PluginApi } = window;
 
-PluginApi.patch.after<PropsWithChildren>(
+PluginApi.patch.before<PropsWithChildren>(
   "MainNavBar.MenuItems",
-  function (_props, _, Original) {
-    const qConfig = PluginApi.GQL.useConfigurationQuery();
-    const stashConfig: ExtendedConfigResult = qConfig.data.configuration;
-    const pluginConfig = mergeConfig(stashConfig.plugins["valkyr-ui"]);
-    const accessiblePaletteClass = "vui-accessible-palette";
+  function (props) {
+    console.log("props: ", props);
+    const { data, loading } = PluginApi.GQL.useConfigurationQuery();
+    if (!loading && data) {
+      const stashConfig: ExtendedConfigResult = data.configuration;
+      const pluginConfig = mergeConfig(stashConfig.plugins["valkyr-ui"]);
+      const accessiblePaletteClass = "vui-accessible-palette";
 
-    pluginConfig.general__accessibleColorPalette
-      ? document.body.classList.add(accessiblePaletteClass)
-      : document.body.classList.remove(accessiblePaletteClass);
+      pluginConfig.general__accessibleColorPalette
+        ? document.body.classList.add(accessiblePaletteClass)
+        : document.body.classList.remove(accessiblePaletteClass);
+      return [props];
+    }
 
-    return Original;
+    return [props];
   },
 );
