@@ -42,6 +42,8 @@ export const mergeConfig = (
       DEFAULT.CARDS.GALLERY_CARD.RATING_ICON_ZOOM_INDEX,
     cards__galleryCard__studioZoomIndex:
       DEFAULT.CARDS.GALLERY_CARD.STUDIO_ZOOM_INDEX,
+    cards__galleryCard__tagListZoomIndex:
+      DEFAULT.CARDS.GALLERY_CARD.TAG_LIST_ZOOM_INDEX,
     cards__galleryCard__thumbnailBackgroundImage:
       DEFAULT.CARDS.GALLERY_CARD.THUMBNAIL_BACKGROUND_IMAGE,
     cards__galleryCard__thumbnailBackgroundStyle:
@@ -91,6 +93,8 @@ export const mergeConfig = (
       DEFAULT.CARDS.SCENE_CARD.RESOLUTION_ZOOM_INDEX,
     cards__sceneCard__studioZoomIndex:
       DEFAULT.CARDS.SCENE_CARD.STUDIO_ZOOM_INDEX,
+    cards__sceneCard__tagListZoomIndex:
+      DEFAULT.CARDS.SCENE_CARD.TAG_LIST_ZOOM_INDEX,
     cards__sceneCard__thumbnailBackgroundImage:
       DEFAULT.CARDS.SCENE_CARD.THUMBNAIL_BACKGROUND_IMAGE,
     cards__sceneCard__thumbnailBackgroundStyle:

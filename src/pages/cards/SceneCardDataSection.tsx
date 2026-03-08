@@ -440,6 +440,25 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const TagListZoomIndex = () => (
+    <NumberSetting
+      heading="Tag list"
+      id="valkyr-ui-cards__sceneCard__tagListZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__sceneCard__tagListZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__sceneCard__tagListZoomIndex ??
+        DEFAULT.CARDS.SCENE_CARD.TAG_LIST_ZOOM_INDEX
+      }
+    />
+  );
+
   const ThumbnailBackgroundStyle = () => {
     const initialValue =
       props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle ??
@@ -524,6 +543,7 @@ const SceneCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <RatingIconZoomIndex />
         <ResolutionZoomIndex />
         <StudioZoomIndex />
+        <TagListZoomIndex />
         <VideoCodecZoomIndex />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Thumbnails" }}>
