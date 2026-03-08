@@ -11,6 +11,7 @@ import "./CardModal.scss";
 import { getStashFaIcon } from "@/helpers";
 import { faFileCircleInfo } from "@fortawesome/pro-solid-svg-icons";
 
+export { default as CardModalFileInfoSection } from "./sections/CardModalFileInfoSection";
 export { default as CardModalGalleriesSection } from "./sections/CardModalGalleriesSection";
 export { default as CardModalPerformersSection } from "./sections/CardModalPerformersSection";
 export { default as CardModalScenesSection } from "./sections/CardModalScenesSection";
