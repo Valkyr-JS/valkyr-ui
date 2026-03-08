@@ -112,6 +112,8 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__ratingIconZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the studio link on gallery cards. */
   cards__galleryCard__studioZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the performer tag on gallery cards. */
+  cards__galleryCard__tagListZoomIndex?: StashCardGridZoom;
   /** Adds a blurred version of the gallery thumbnail to the background. */
   cards__galleryCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */
@@ -163,6 +165,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__resolutionZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the studio link on scene cards. */
   cards__sceneCard__studioZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the performer tag on scene cards. */
+  cards__sceneCard__tagListZoomIndex?: StashCardGridZoom;
   /** Adds a blurred version of the scene thumbnail to the background. */
   cards__sceneCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */
