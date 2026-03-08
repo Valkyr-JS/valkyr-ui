@@ -2,7 +2,7 @@ import React from "react";
 import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 import { TagLink } from "@/components/apiComponents";
-import "./TagList.scss"
+import "./TagList.scss";
 
 interface TagData {
   id: Tag["id"];
@@ -33,6 +33,13 @@ const TagList: React.FC<
 
   if (!data?.length) return null;
 
+  /* ------------------------------------------- Sorting ------------------------------------------ */
+
+  // Sort tags by sort name or name.
+  const tagSorter = (a: TagData, b: TagData) =>
+    (a.sortName ?? a.name).localeCompare(b.sortName ?? b.name);
+  const sortedTags = data.sort(tagSorter);
+
   /* ------------------------------------------ Component ----------------------------------------- */
 
   const componentClass = "vui-card-data__tag-list";
@@ -42,7 +49,7 @@ const TagList: React.FC<
     <div className={componentClass}>
       <span className="sr-only">{intl.formatMessage({ id: "tags" })}:</span>
       <ul>
-        {data.map((t) => {
+        {sortedTags.map((t) => {
           return (
             <li key={t.id} className={itemClass}>
               <TagLink key={t.id} tag={t} />
