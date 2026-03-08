@@ -81,10 +81,12 @@ const PerformerList: React.FC<
 
   /* ------------------------------------------ Overflow ------------------------------------------ */
 
+  const overflowTextClass = "vui-card-data__performer-list-overflow-text";
+
   const visibleList = !!props.max ? sortedList.slice(0, props.max) : sortedList;
   const numCutPerformers = sortedList.length - visibleList.length;
   const overflowText = numCutPerformers ? (
-    <span> and {numCutPerformers} more</span>
+    <span className={overflowTextClass}> and {numCutPerformers} more</span>
   ) : null;
 
   /* ------------------------------------------ Component ----------------------------------------- */

@@ -15,4 +15,8 @@ $prefix: variables.$prefix;
       display: inline;
     }
   }
+
+  &__tag-list-overflow-text {
+    display: inline-block;
+  }
 }

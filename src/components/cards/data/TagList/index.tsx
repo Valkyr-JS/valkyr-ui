@@ -45,9 +45,13 @@ const TagList: React.FC<
 
   /* ------------------------------------------ Overflow ------------------------------------------ */
 
+  const overflowTextClass = "vui-card-data__tag-list-overflow-text";
+
   const visibleList = !!props.max ? sortedTags.slice(0, props.max) : sortedTags;
   const numCutTags = sortedTags.length - visibleList.length;
-  const overflowText = numCutTags ? <span>and {numCutTags} more</span> : null;
+  const overflowText = numCutTags ? (
+    <span className={overflowTextClass}>and {numCutTags} more</span>
+  ) : null;
 
   /* ------------------------------------------ Component ----------------------------------------- */
 
