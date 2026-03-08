@@ -1,4 +1,4 @@
-import { TagLink } from "@/components/apiComponents";
+import { getTagLinkComponent } from "@/components/apiComponents";
 import React from "react";
 
 interface CardModalTagsSectionProps {
@@ -6,11 +6,13 @@ interface CardModalTagsSectionProps {
 }
 
 const CardModalTagsSection: React.FC<CardModalTagsSectionProps> = (props) => {
+  const TagLink = getTagLinkComponent();
+
   return (
     <div>
-      {props.tags.map((t) => (
-        <TagLink key={t.id} tag={t} />
-      ))}
+      {props.tags.map((t) => {
+        return <TagLink key={t.id} tag={t} />;
+      })}
     </div>
   );
 };

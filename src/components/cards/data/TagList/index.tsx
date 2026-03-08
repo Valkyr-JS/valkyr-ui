@@ -1,7 +1,7 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
-import { TagLink } from "@/components/apiComponents";
+import { getTagLinkComponent } from "@/components/apiComponents";
 import "./TagList.scss";
 
 interface TagData {
@@ -42,6 +42,7 @@ const TagList: React.FC<
 
   /* ------------------------------------------ Component ----------------------------------------- */
 
+  const TagLink = getTagLinkComponent();
   const componentClass = "vui-card-data__tag-list";
   const itemClass = "vui-card-data__tag-list-item";
 
