@@ -53,6 +53,7 @@ export const DEFAULT = {
       PERFORMER_LIST_GENDER_COLORS: false,
       PERFORMER_LIST_MAX_ITEMS: 5,
       PERFORMER_LIST_SORT_FILTER: [] as GenderEnum[],
+      TAG_LIST_MAX_ITEMS: 5,
       TIMESTAMP_PADDING: false,
     },
   },
