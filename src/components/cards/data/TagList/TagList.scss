@@ -1,0 +1,13 @@
+@use "../../../../scss/variables";
+
+$prefix: variables.$prefix;
+
+.vui-card-data {
+  &__tag-list {
+    ul {
+    }
+
+    li {
+    }
+  }
+}
