@@ -43,6 +43,12 @@ const TagList: React.FC<
     (a.sortName ?? a.name).localeCompare(b.sortName ?? b.name);
   const sortedTags = data.sort(tagSorter);
 
+  /* ------------------------------------------ Overflow ------------------------------------------ */
+
+  const visibleList = !!props.max ? sortedTags.slice(0, props.max) : sortedTags;
+  const numCutTags = sortedTags.length - visibleList.length;
+  const overflowText = numCutTags ? <span>and {numCutTags} more</span> : null;
+
   /* ------------------------------------------ Component ----------------------------------------- */
 
   const TagLink = getTagLinkComponent();
@@ -53,7 +59,7 @@ const TagList: React.FC<
     <div className={componentClass}>
       <span className="sr-only">{intl.formatMessage({ id: "tags" })}:</span>
       <ul>
-        {sortedTags.map((t) => {
+        {visibleList.map((t) => {
           return (
             <li key={t.id} className={itemClass}>
               <TagLink key={t.id} tag={t} />
@@ -61,6 +67,7 @@ const TagList: React.FC<
           );
         })}
       </ul>
+      {overflowText}
     </div>
   );
 };

@@ -43,6 +43,11 @@ export const DefaultMax: Story = {
 
     const tags = canvas.queryAllByRole("listitem");
     await expect(tags.length).toEqual(DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS);
+
+    const overflowText = canvas.queryByText(
+      `and ${tagCount - DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS} more`,
+    );
+    await expect(overflowText).toBeInTheDocument();
   },
 };
 
@@ -58,6 +63,11 @@ export const MaxZero: Story = {
 
     const tags = canvas.queryAllByRole("listitem");
     await expect(tags.length).toEqual(tagCount);
+
+    const overflowText = canvas.queryByText(
+      `and ${tagCount - DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS} more`,
+    );
+    await expect(overflowText).not.toBeInTheDocument();
   },
 };
 
