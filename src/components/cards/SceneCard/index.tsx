@@ -22,25 +22,27 @@ import PlayCount from "../data/PlayCount";
 import RatingIcon from "../data/RatingIcon";
 import Resolution from "../data/Resolution";
 import Studio from "../data/Studio";
+import TagList from "../data/TagList";
 import VideoCodec from "../data/VideoCodec";
 import {
   CardModalContent,
   CardModalGalleriesSection,
+  CardModalFileInfoSection,
   CardModalNavigation,
   CardModalPerformersSection,
   CardModalTagsSection,
 } from "../layouts/CardModal";
+import {
+  SimpleImageThumbnail,
+  VideoPreviewThumbnail,
+} from "../layouts/CardThumbnail";
 import CastCrew from "../layouts/CastCrew";
 import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
-import {
-  SimpleImageThumbnail,
-  VideoPreviewThumbnail,
-} from "../layouts/CardThumbnail";
+import Tags from "../layouts/Tags";
 import "./SceneCard.scss";
-import CardModalFileInfoSection from "../layouts/CardModal/sections/CardModalFileInfoSection";
 
 interface SceneCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
@@ -221,6 +223,8 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
   const primaryFile =
     props.scene.files.length > 0 ? props.scene.files[0] : undefined;
 
+  const tagData = props.scene.tags.map((t) => ({ id: t.id, name: t.name }));
+
   return (
     <>
       <KeyData>
@@ -346,6 +350,15 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
           userZoomIndex={props.pluginConfig.cards__sceneCard__directorZoomIndex}
         />
       </CastCrew>
+      <Tags>
+        <TagList
+          context="card"
+          currentZoomIndex={props.zoomIndex}
+          max={props.pluginConfig.cards__shared__tagListMaxItems}
+          tags={tagData}
+          userZoomIndex={props.pluginConfig.cards__sceneCard__tagListZoomIndex}
+        />
+      </Tags>
     </>
   );
 };

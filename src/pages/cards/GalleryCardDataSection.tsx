@@ -239,6 +239,25 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const TagListZoomIndex = () => (
+    <NumberSetting
+      heading="Tag list"
+      id="valkyr-ui-cards__galleryCard__tagListZoomIndex"
+      onChange={(v) => {
+        if (v === -1 || v === 0 || v === 1 || v === 2 || v === 3) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__galleryCard__tagListZoomIndex: v,
+          });
+        }
+      }}
+      value={
+        props.pluginConfig.cards__galleryCard__tagListZoomIndex ??
+        DEFAULT.CARDS.GALLERY_CARD.TAG_LIST_ZOOM_INDEX
+      }
+    />
+  );
+
   const ZipIconZoomIndex = () => (
     <NumberSetting
       heading="Zip folder icon"
@@ -340,6 +359,7 @@ const GalleryCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <RatingBannerZoomIndex />
         <RatingIconZoomIndex />
         <StudioZoomIndex />
+        <TagListZoomIndex />
         <ZipIconZoomIndex />
       </SettingGroup>
       <SettingGroup collapsible settingProps={{ heading: "Thumbnails" }}>

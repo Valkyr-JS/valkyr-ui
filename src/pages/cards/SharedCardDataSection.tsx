@@ -107,7 +107,7 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
                 "TRANSGENDER_FEMALE",
                 "INTERSEX",
                 "NON_BINARY",
-                "UNKNOWN"
+                "UNKNOWN",
               ]}
               value={value ?? []}
               setValue={(v) => setValue(v as GenderEnum[])}
@@ -142,6 +142,26 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
     />
   );
 
+  const TagListMaxItems = () => (
+    <NumberSetting
+      heading="Tag list max list length"
+      id="valkyr-ui-cards__shared__tagListMaxItems"
+      onChange={(v) => {
+        if (v >= 0 && Number.isInteger(v)) {
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            cards__shared__tagListMaxItems: v,
+          });
+        }
+      }}
+      subHeading="Sets the maximum number of tags displayed in the tag list. Cards will display 'and X more' if more tags are featured. Set to 0 for no limit."
+      value={
+        props.pluginConfig.cards__shared__tagListMaxItems ??
+        DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS
+      }
+    />
+  );
+
   return (
     <SettingSection id="cards-shared" heading="Shared card settings">
       <FooterCountsEnabled />
@@ -153,6 +173,7 @@ const SharedCardDataSection: React.FC<SettingsTabProps> = (props) => {
         <PerformerListMaxItems />
         <PerformerListSortFilter />
       </SettingGroup>
+      <TagListMaxItems />
       <PadTimestamps />
     </SettingSection>
   );

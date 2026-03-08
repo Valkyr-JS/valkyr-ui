@@ -39,4 +39,8 @@ $prefix: variables.$prefix;
       color: inherit;
     }
   }
+
+  &__performer-list-overflow-text {
+    display: inline-block;
+  }
 }

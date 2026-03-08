@@ -41,7 +41,7 @@ $prefix: variables.$prefix;
   .vui-grid-card {
     &__body {
       display: grid;
-      grid-template-rows: [scene-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom cast-crew-top] auto [cast-crew-bottom scene-body-bottom];
+      grid-template-rows: [scene-body-top key-data-top] auto [key-data-bottom details-top] 1fr [details-bottom cast-crew-top] auto [cast-crew-bottom tags-top] auto [tags-bottom scene-body-bottom];
     }
   }
 }

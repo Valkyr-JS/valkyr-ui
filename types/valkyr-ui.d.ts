@@ -79,6 +79,9 @@ interface ValkyrUiConfigMap {
   /** Sets which genders are visible in the performer list, and the order they
    * appear in. Leave undefined to sort names alphabetically. */
   cards__shared__performerListSortFilter?: GenderEnum[];
+  /** The number of tags that will be listed before being cut off with `+ X
+   * more`. */
+  cards__shared__tagListMaxItems?: number;
   /** Adds padding to timestamps to make all units double-figures and include
    * hours. */
   cards__shared__timestampPadding?: boolean;
@@ -112,6 +115,8 @@ interface ValkyrUiConfigMap {
   cards__galleryCard__ratingIconZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the studio link on gallery cards. */
   cards__galleryCard__studioZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the performer tag on gallery cards. */
+  cards__galleryCard__tagListZoomIndex?: StashCardGridZoom;
   /** Adds a blurred version of the gallery thumbnail to the background. */
   cards__galleryCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */
@@ -163,6 +168,8 @@ interface ValkyrUiConfigMap {
   cards__sceneCard__resolutionZoomIndex?: StashCardGridZoom;
   /** The zoom index at which to display the studio link on scene cards. */
   cards__sceneCard__studioZoomIndex?: StashCardGridZoom;
+  /** The zoom index at which to display the performer tag on scene cards. */
+  cards__sceneCard__tagListZoomIndex?: StashCardGridZoom;
   /** Adds a blurred version of the scene thumbnail to the background. */
   cards__sceneCard__thumbnailBackgroundImage?: boolean;
   /** Adds user-defined CSS to the thumbnail background. */

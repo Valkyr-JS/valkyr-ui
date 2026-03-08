@@ -1,3 +1,4 @@
+import { getTagLinkComponent } from "@/components/apiComponents";
 import React from "react";
 
 interface CardModalTagsSectionProps {
@@ -5,12 +6,7 @@ interface CardModalTagsSectionProps {
 }
 
 const CardModalTagsSection: React.FC<CardModalTagsSectionProps> = (props) => {
-  // Simple tag fallback for when plugin API isn't available, e.g. storybook
-  const TagLink = window.PluginApi?.components
-    ? window.PluginApi?.components.TagLink
-    : (props: { tag: { id: string; name: string } }) => (
-        <span className="tag-item">{props.tag.name}</span>
-      );
+  const TagLink = getTagLinkComponent();
 
   return (
     <div>
