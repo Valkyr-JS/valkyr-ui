@@ -1,7 +1,8 @@
 import React from "react";
 
 /**
- * Simple tag fallback for when plugin API isn't available, e.g. storybook.
+ * Returns the TagLink component from the plugin API, with a fallback if the API
+ * isn't available - e.g. in Storybook.
  */
 export const TagLink = window.PluginApi?.components
   ? window.PluginApi?.components.TagLink
