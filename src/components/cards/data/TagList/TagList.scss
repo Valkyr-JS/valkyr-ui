@@ -5,9 +5,16 @@ $prefix: variables.$prefix;
 .vui-card-data {
   &__tag-list {
     ul {
+      list-style: none;
+      margin-bottom: 0;
+      padding-left: 0;
+
+      display: flex;
+      flex-wrap: wrap;
     }
 
     li {
+      display: inline;
     }
   }
 }

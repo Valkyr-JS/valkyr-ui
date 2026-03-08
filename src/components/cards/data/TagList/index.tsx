@@ -2,6 +2,7 @@ import React from "react";
 import { useIntl } from "react-intl";
 import { getRenderData } from "@/helpers";
 import { TagLink } from "@/components/apiComponents";
+import "./TagList.scss"
 
 interface TagData {
   id: Tag["id"];
