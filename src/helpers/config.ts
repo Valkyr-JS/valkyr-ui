@@ -14,6 +14,7 @@ export const mergeConfig = (
       DEFAULT.CARDS.SHARED.PERFORMER_LIST_MAX_ITEMS,
     cards__shared__performerListSortFilter:
       DEFAULT.CARDS.SHARED.PERFORMER_LIST_SORT_FILTER,
+    cards__shared__tagListMaxItems: DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS,
     cards__shared__timestampPadding: DEFAULT.CARDS.SHARED.TIMESTAMP_PADDING,
 
     // Cards - Gallery

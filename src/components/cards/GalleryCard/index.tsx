@@ -259,6 +259,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
         <TagList
           context="card"
           currentZoomIndex={props.zoomIndex}
+          max={props.pluginConfig.cards__shared__tagListMaxItems}
           tags={tagData}
           userZoomIndex={
             props.pluginConfig.cards__galleryCard__tagListZoomIndex

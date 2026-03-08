@@ -11,6 +11,9 @@ interface TagData {
 }
 
 interface TagListProps {
+  /** The maximum number of tags to show in the list before being cut off. */
+  max: number;
+
   /** The list of tags */
   tags: TagData[];
 }

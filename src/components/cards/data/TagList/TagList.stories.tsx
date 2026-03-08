@@ -3,6 +3,7 @@ import { expect, within } from "storybook/test";
 import { dataComponentArgTypes } from "../../../../../.storybook/argTypes";
 import TagList from ".";
 import fullData from "../../../../../mocks/galleries/fullData.json";
+import { DEFAULT } from "@/constants";
 
 const tagData = fullData.tags.map((t) => ({
   id: t.id,
@@ -19,6 +20,7 @@ const meta = {
     layout: "centered",
   },
   args: {
+    max: DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS,
     tags: tagData,
   },
   argTypes: {
@@ -29,6 +31,35 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const DefaultMax: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tags = canvas.queryAllByRole("listitem");
+    await expect(tags.length).toEqual(DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS);
+  },
+};
+
+export const MaxZero: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    max: 0,
+    userZoomIndex: 2,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const tags = canvas.queryAllByRole("listitem");
+    await expect(tags.length).toEqual(tagCount);
+  },
+};
 
 export const AboveZoomIndex: Story = {
   args: {
