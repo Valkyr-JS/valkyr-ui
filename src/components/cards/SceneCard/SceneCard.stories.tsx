@@ -128,6 +128,10 @@ export const FullDataDefaults: Story = {
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
 
+    // Tag list should NOT render
+    const tags = canvas.queryByText("Tags:");
+    await expect(tags).not.toBeInTheDocument();
+
     // Video codec should NOT render
     const videoCodec = canvas.queryByText("Video Codec: h264");
     await expect(videoCodec).toBeNull();
@@ -148,6 +152,7 @@ export const FullDataAllEnabled: Story = {
       cards__sceneCard__performerListZoomIndex: 0,
       cards__sceneCard__playCountZoomIndex: 0,
       cards__sceneCard__ratingIconZoomIndex: 0,
+      cards__sceneCard__tagListZoomIndex: 0,
       cards__sceneCard__videoCodecZoomIndex: 0,
     }),
     scene: fullData as SlimSceneDataFragment,
@@ -228,6 +233,10 @@ export const FullDataAllEnabled: Story = {
     // Studio should render
     const studio = canvas.getByText("Studio: Tushy");
     await expect(studio).toBeInTheDocument();
+
+    // Tag list should render
+    const tags = canvas.queryByText("Tags:");
+    await expect(tags).toBeInTheDocument();
 
     // Video codec should render
     const videoCodec = canvas.getByText("Video Codec: h264");

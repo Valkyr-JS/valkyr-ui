@@ -10,9 +10,11 @@ import PerformerList from "../data/PerformerList";
 import Photographer from "../data/Photographer";
 import RatingIcon from "../data/RatingIcon";
 import Studio from "../data/Studio";
+import TagList from "../data/TagList";
 import ZipIcon from "../data/ZipIcon";
 import {
   CardModalContent,
+  CardModalFileInfoSection,
   CardModalNavigation,
   CardModalPerformersSection,
   CardModalScenesSection,
@@ -24,8 +26,8 @@ import FileData from "../layouts/FileData";
 import GridCard, { CardFooterProps } from "../layouts/GridCard";
 import KeyData from "../layouts/KeyData";
 import ReleaseData from "../layouts/ReleaseData";
+import Tags from "../layouts/Tags";
 import "./GalleryCard.scss";
-import CardModalFileInfoSection from "../layouts/CardModal/sections/CardModalFileInfoSection";
 
 interface GalleryCardProps extends SelectableCardProps {
   /** Whether counter data should be abbreviated. */
@@ -166,6 +168,8 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
   const primaryFile =
     props.gallery.files.length > 0 ? props.gallery.files[0] : undefined;
 
+  const tagData = props.gallery.tags.map((t) => ({ id: t.id, name: t.name }));
+
   return (
     <>
       <KeyData>
@@ -251,6 +255,16 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
           }
         />
       </CastCrew>
+      <Tags>
+        <TagList
+          context="card"
+          currentZoomIndex={props.zoomIndex}
+          tags={tagData}
+          userZoomIndex={
+            props.pluginConfig.cards__galleryCard__tagListZoomIndex
+          }
+        />
+      </Tags>
     </>
   );
 };
