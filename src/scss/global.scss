@@ -9,8 +9,8 @@ $stash-gender-female: #f38cac;
 $stash-gender-intersex: #c8a2c8;
 $stash-gender-male: #89cff0;
 $stash-gender-nonbinary: #c8a2c8;
-$stash-gender-transfemale: #c8a2c8;
-$stash-gender-transmale: #c8a2c8;
+$stash-gender-transfemale: $stash-gender-female;
+$stash-gender-transmale: $stash-gender-male;
 $stash-gender-unknown: #f5f8fa;
 
 $stash-card-bg: #30404d;

@@ -1,5 +1,5 @@
 import postcss from "rollup-plugin-postcss";
-import terser from '@rollup/plugin-terser';
+import terser from "@rollup/plugin-terser";
 import common from "./rollup.config.common.mjs";
 import * as pkg from "./package.json" with { type: "json" };
 
@@ -10,7 +10,7 @@ const prodConfig = {
   plugins: [
     ...common.plugins,
     postcss({ extract: pluginID + ".css", minimize: true, sourceMap: false }),
-    terser()
+    terser({ compress: { drop_console: true } }),
   ],
 };
 

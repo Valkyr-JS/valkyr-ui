@@ -1,30 +1,52 @@
-# Stash Plugin Template
+# Valkyr UI
 
-A template for creating plugins for Stash using the native plugin API.
+Valkyr UI is a user interface plugin for [Stash](https://github.com/stashapp/stash/) featuring modifications and additions to a variety of components. It is highly customisable, with an in-depth configuration menu that allows you to use just the parts you want.
 
-## Bundling
+## Installation
 
-This template uses [rollup.js](https://rollupjs.org/) to bundle code. Files are output to the `dist` folder.
+|                      |                |                                                                   |
+| -------------------- | -------------- | ----------------------------------------------------------------- |
+| :placard:            | **Summary**    | A modular, customisable redesign of the Stash user interface.     |
+| :link:               | **Repository** | https://github.com/Valkyr-JS/valkyr-ui                            |
+| :information_source: | **Source URL** | https://valkyr-js.github.io/stash-plugins/index.yml               |
+| :open_book:          | **Install**    | [How to install a plugin](https://discourse.stashapp.cc/t/-/1015) |
 
-It's unlikely that any of the configurations need to be changed for the majority of plugins. Output files are generated with the same name as the repository. The YAML source file is generated separately, with the name, description, version and url all taken from the `package.json` file.
+## Features
 
-Your plugin settings are written in the `src/components/settings.json`. This is converted to YAML as part of the bundling process.
+- Customisable scene cards and gallery cards, with more card types to follow.
+- Card data can be customised to be visible from a certain zoom level and up, allowing you to display essential data at low zoom and more data at higher zoom levels.
+- Cards can be expanded into modal popups to provide more information without leaving the page.
+- An accessible color palette for modified components.
+- A dedicated configuration page.
 
-Output is written to the `dist` folder by default. This can be changed by setting the `STASH_PLUGIN_DEST` environment variable to the desired output directory.
+## Requirements
 
-## Using the Plugin API
+To use this plugin you must be running Stash version 0.31.0 or higher. No other dependencies are required.
 
-The Stash plugin API can be accessed via `window.pluginApi` (see `src/main.tsx` for an example). The API exposes several libraries used by Stash, which are referenced as peer dependencies by this template. They can be imported into your files as normal, but will not be bundled into the plugin in order to reduce output size and avoid conflicts.
+## Installation
 
-### Font Awesome
-The free regular and solid Font Awesome libraries are accessible via the plugin API, but `@fortawesome/react-fontawesome` is not. Instead, the `FontAwesomeIcon` component is accessible as `FontAwesomeIcon = window.pluginApi.components.Icon` - the package does not need to be installed.
+1. In Stash go to Settings > Plugins.
+2. Under _Available Plugins_ click the _Add source_ button.
+3. Fill out the fields in the popup form. The Name and Local Path fields can be whatever you like, but the Source URL needs to match the URL below. I recommend the following;
+   - Name: Valkyr-JS
+   - Source URL: https://valkyr-js.github.io/stash-plugins/index.yml
+   - Local path: Valkyr-JS
+4. Click confirm and you should see a new line under _Available Plugins_ called "Valkyr-JS" (or whatever you entered for Name in the popup). Click this and you'll see my available plugins.
+5. Check the _Valkyr UI_ checkbox and click Install in the top right of _Avaialable Plugins_.
+6. Go to the scenes page or home page and you should see the cards styled differently. You may need to refresh the page to see the changes.
 
-## Scripts
+## Configuration
 
-| Script       | Description                                                           |
-| ------------ | --------------------------------------------------------------------- |
-| `build`      | Generates a minified production bundle using Webpack.                 |
-| `build:yaml` | Generates the YAML source file for the plugin.                        |
-| `dev`        | Generates a development bundle using Webpack.                         |
-| `start`      | Same as watch.                                                        |
-| `watch`      | Generates a development bundle using Webpack and watches for changes. NOTE: The yaml file is not updated by this script. |
+The plugin configuration is found at `/plugins/valkyr-ui`. For example, if your Stash is hosted at `http://localhost:9999`, you will find the configuration page at `http://localhost:9999/plugins/valkyr-ui`.
+
+Changes are saved immediately, however please note that you may need to refresh the page before you are able to see the changes in the app. This is due to how Stash caches data.
+
+## Screenshots
+
+![Scene card grid](./readme-assets/scene-grid-001.JPG)
+![Scene card modal data](./readme-assets/scene-card-modal-data-001.JPG)
+![Scene card modal galleries](./readme-assets/scene-card-modal-galleries-001.JPG)
+
+## Feedback
+
+Please raise bugs [via GitHub](https://github.com/Valkyr-JS/valkyr-ui/issues). If you have any questions, requests, or any other kind of feedback, please leave a comment on the thread on the [Stash Discourse](https://discourse.stashapp.cc/c/plugins/18/none).
