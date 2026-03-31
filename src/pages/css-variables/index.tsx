@@ -240,7 +240,7 @@ const CssVariablesTab: React.FC = () => {
                 transgender female performer.
               </td>
               <td>
-                <code>#c8a2c8</code>
+                <code>#f38cac</code>
               </td>
             </tr>
             <tr>
@@ -250,7 +250,7 @@ const CssVariablesTab: React.FC = () => {
                 transgender male performer.
               </td>
               <td>
-                <code>#c8a2c8</code>
+                <code>#89cff0</code>
               </td>
             </tr>
             <tr>
