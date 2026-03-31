@@ -214,11 +214,15 @@ const CardModalFileInfoSection: React.FC<CardModalFileInfoSectionProps> = (
                   {f.fingerprints.map((fp) => {
                     const heading =
                       fp.type === "md5"
-                        ? intl.formatMessage({ id: "media_info.checksum" })
+                        ? intl.formatMessage({ id: "media_info.md5" })
                         : fp.type === "oshash"
-                          ? intl.formatMessage({ id: "media_info.hash" })
+                          ? intl.formatMessage({
+                              id: "media_info.oshash_meaning",
+                            })
                           : fp.type === "phash"
-                            ? intl.formatMessage({ id: "media_info.phash" })
+                            ? intl.formatMessage({
+                                id: "media_info.phash_meaning",
+                              })
                             : "Fingerprint";
                     return (
                       <tr key={fp.type}>
