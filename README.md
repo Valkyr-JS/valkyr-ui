@@ -8,7 +8,7 @@ Valkyr UI is a user interface plugin for [Stash](https://github.com/stashapp/sta
 | -------------------- | -------------- | ----------------------------------------------------------------- |
 | :placard:            | **Summary**    | A modular, customisable redesign of the Stash user interface.     |
 | :link:               | **Repository** | https://github.com/Valkyr-JS/valkyr-ui                            |
-| :information_source: | **Source URL** | https://valkyr-js.github.io/stash-plugins/index.yml               |
+| :information_source: | **Source URL** | https://valkyr-js.github.io/stash-plugins/main/index.yml               |
 | :open_book:          | **Install**    | [How to install a plugin](https://discourse.stashapp.cc/t/-/1015) |
 
 ## Features
@@ -29,7 +29,7 @@ To use this plugin you must be running Stash version 0.31.0 or higher. No other 
 2. Under _Available Plugins_ click the _Add source_ button.
 3. Fill out the fields in the popup form. The Name and Local Path fields can be whatever you like, but the Source URL needs to match the URL below. I recommend the following;
    - Name: Valkyr-JS
-   - Source URL: https://valkyr-js.github.io/stash-plugins/index.yml
+   - Source URL: https://valkyr-js.github.io/stash-plugins/main/index.yml
    - Local path: Valkyr-JS
 4. Click confirm and you should see a new line under _Available Plugins_ called "Valkyr-JS" (or whatever you entered for Name in the popup). Click this and you'll see my available plugins.
 5. Check the _Valkyr UI_ checkbox and click Install in the top right of _Avaialable Plugins_.
