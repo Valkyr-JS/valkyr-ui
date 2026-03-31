@@ -49,4 +49,4 @@ Changes are saved immediately, however please note that you may need to refresh 
 
 ## Feedback
 
-Please raise bugs [via GitHub](https://github.com/Valkyr-JS/valkyr-ui/issues). If you have any questions, requests, or any other kind of feedback, please leave a comment on the thread on the [Stash Discourse](https://discourse.stashapp.cc/c/plugins/18/none).
+Please raise bugs [via GitHub](https://github.com/Valkyr-JS/valkyr-ui/issues). If you have any questions, requests, or any other kind of feedback, please leave a comment on [the thread on the Stash Discourse](https://discourse.stashapp.cc/t/valkyr-ui/6453).
