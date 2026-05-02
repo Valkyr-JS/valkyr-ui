@@ -1,3 +1,8 @@
+module "*.scss" {
+  const content: Record<string, string>;
+  export default content;
+}
+
 type CardModalSection =
   | "details"
   | "files"
