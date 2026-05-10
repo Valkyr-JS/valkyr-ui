@@ -47,6 +47,7 @@ $zoomThumbnailHeights: (
     }
   }
 
+  &--video &__image-wrapper,
   &--video-preview &__image-wrapper {
     display: flex;
     justify-content: center;
@@ -62,7 +63,9 @@ $zoomThumbnailHeights: (
       object-fit: cover;
       object-position: top;
     }
+  }
 
+  &--video-preview &__image-wrapper {
     video {
       position: absolute;
       z-index: -1;

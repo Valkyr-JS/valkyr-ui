@@ -35,6 +35,7 @@ import {
 import {
   SimpleImageThumbnail,
   VideoPreviewThumbnail,
+  VideoThumbnail,
 } from "../layouts/CardThumbnail";
 import CastCrew from "../layouts/CastCrew";
 import FileData from "../layouts/FileData";
@@ -404,6 +405,9 @@ interface SceneCardModalContentProps {
 
   /** HTML ID used for aria labelling on the modal title. */
   titleID: string;
+
+  /** The current zoom index. */
+  zoomIndex?: StashCardGridZoom;
 }
 
 export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
@@ -422,6 +426,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
 
   const primaryFile =
     props.scene.files.length > 0 ? props.scene.files[0] : undefined;
+  const isPortrait = getFileIsPortrait(primaryFile);
 
   // Only render technical details if the user has enabled on cards them at any
   // breakpoint. The data will be available anyway under the file section.
@@ -452,6 +457,51 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
     sections.push(["performers", props.scene.performers.length]);
   if (props.scene.tags.length) sections.push(["tags", props.scene.tags.length]);
 
+  /* ------------------------------------------ Thumbnail ----------------------------------------- */
+
+  const thumbnail = !!props.scene.custom_fields["trailer_url"] ? (
+    <VideoThumbnail
+      backgroundImage={
+        props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
+      }
+      backgroundStyle={
+        props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
+      }
+      context="modal"
+      isPortrait={isPortrait}
+      link={sceneLink}
+      rating100={props.scene.rating100}
+      ratingBannerZoomIndex={
+        props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
+      }
+      ratingSystem={props.ratingSystem}
+      src={props.scene.paths.screenshot as string}
+      titleID={props.titleID}
+      videoSrc={props.scene.custom_fields["trailer_url"] as string}
+      zoomIndex={props.zoomIndex}
+    />
+  ) : (
+    <SimpleImageThumbnail
+      backgroundImage={
+        props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
+      }
+      backgroundStyle={
+        props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
+      }
+      context="modal"
+      link={sceneLink}
+      rating100={props.scene.rating100}
+      ratingBannerZoomIndex={
+        props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
+      }
+      ratingSystem={props.ratingSystem}
+      src={props.scene.paths.screenshot as string}
+      titleID={props.titleID}
+    />
+  );
+
+  /* ------------------------------------------ Component ----------------------------------------- */
+
   return (
     <CardModalContent
       closeHandler={props.closeHandler}
@@ -461,25 +511,7 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
       section={props.section}
       sections={sections}
       setSection={props.setSection}
-      thumbnail={
-        <SimpleImageThumbnail
-          backgroundImage={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundImage
-          }
-          backgroundStyle={
-            props.pluginConfig.cards__sceneCard__thumbnailBackgroundStyle
-          }
-          context="modal"
-          link={sceneLink}
-          rating100={props.scene.rating100}
-          ratingBannerZoomIndex={
-            props.pluginConfig.cards__sceneCard__ratingBannerZoomIndex
-          }
-          ratingSystem={props.ratingSystem}
-          src={props.scene.paths.screenshot as string}
-          titleID={props.titleID}
-        />
-      }
+      thumbnail={thumbnail}
       title={title}
       titleID={props.titleID}
       topLine={

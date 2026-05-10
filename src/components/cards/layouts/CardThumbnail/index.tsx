@@ -7,6 +7,7 @@ const componentClass = "vui-card-thumbnail";
 const componentPortraitClass = componentClass + "--portrait";
 const simpleImageClass = componentClass + "--simple-image";
 const videoPreviewClass = componentClass + "--video-preview";
+const videoClass = componentClass + "--video";
 
 const imageWrapperClass = componentClass + "__image-wrapper";
 const imageWrapperBackgroundClass = imageWrapperClass + "--blurred-bg";
@@ -154,6 +155,59 @@ export const VideoPreviewThumbnail: React.FC<VideoPreviewThumbnailProps> = (
           userZoomIndex={props.ratingBannerZoomIndex}
         />
       </a>
+    </div>
+  );
+};
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                         VideoThumbnail                                         */
+/* ---------------------------------------------------------------------------------------------- */
+
+interface VideoThumbnailProps extends SimpleImageThumbnailProps {
+  /** Whether the video file is portrait-oriented or not. */
+  isPortrait: boolean;
+
+  /** The path to the video file. Disabled if `undefined`. */
+  videoSrc: string | undefined;
+}
+
+export const VideoThumbnail: React.FC<VideoThumbnailProps> = (props) => {
+  const componentClassList = cx(componentClass, videoClass, {
+    [componentPortraitClass]: props.isPortrait,
+  });
+  const imageWrapperClassList = cx(imageWrapperClass, {
+    [imageWrapperBackgroundClass]: props.backgroundImage,
+  });
+
+  const imageWrapperStyles: React.CSSProperties = {
+    background: !!props.backgroundStyle ? props.backgroundStyle : undefined,
+    backgroundImage: props.backgroundImage ? `url(${props.src})` : undefined,
+  };
+
+  const videoEl = useRef<HTMLVideoElement>(null);
+
+  // Only render one of the two rating options
+  const willRenderRatingBanner = props.ratingBannerZoomIndex > -1;
+
+  return (
+    <div className={componentClassList}>
+      <div className={imageWrapperClassList} style={imageWrapperStyles}>
+        <video
+          data-testid="video-thumbnail"
+          playsInline
+          ref={videoEl}
+          src={props.videoSrc}
+          controls
+          poster={props.src}
+        />
+      </div>
+      <RatingBanner
+        context={props.context}
+        currentZoomIndex={props.zoomIndex}
+        rating100={willRenderRatingBanner ? props.rating100 : null}
+        ratingSystem={props.ratingSystem}
+        userZoomIndex={props.ratingBannerZoomIndex}
+      />
     </div>
   );
 };

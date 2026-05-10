@@ -632,21 +632,8 @@ export const WithTrailer: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const playTrailerButton = canvas.getByRole("button", {
-      name: "Play trailer",
-    });
-    expect(playTrailerButton).toBeInTheDocument();
-
     // Get the trailer
-    const video = canvas.getByTestId<HTMLVideoElement>("video-trailer");
-    expect(video.paused).toBeTruthy();
-
-    // Trigger a click event on the play trailer button
-    await userEvent.click(playTrailerButton);
-    expect(video.paused).toBeFalsy();
-
-    // Trigger a click event on the video
-    await userEvent.click(video);
+    const video = canvas.getByTestId<HTMLVideoElement>("video-thumbnail");
     expect(video.paused).toBeTruthy();
   },
 };
@@ -658,9 +645,7 @@ export const WithoutTrailer: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const playTrailerButton = canvas.queryByRole("button", {
-      name: "Play trailer",
-    });
-    expect(playTrailerButton).not.toBeInTheDocument();
+    const video = canvas.queryByTestId<HTMLVideoElement>("video-thumbnail");
+    expect(video).not.toBeInTheDocument();
   },
 };
