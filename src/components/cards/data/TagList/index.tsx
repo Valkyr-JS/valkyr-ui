@@ -22,17 +22,17 @@ const TagList: React.FC<
   DataComponentProps<TagListProps> | DataComponentModalProps<TagListProps>
 > = (props) => {
   const intl = useIntl();
+  const isModalContext = props.context === "modal";
 
-  const data =
-    props.context === "modal"
-      ? props.tags
-      : getRenderData({
-          data: props.tags,
-          zoomIndex: {
-            current: props.currentZoomIndex,
-            user: props.userZoomIndex,
-          },
-        });
+  const data = isModalContext
+    ? props.tags
+    : getRenderData({
+        data: props.tags,
+        zoomIndex: {
+          current: props.currentZoomIndex,
+          user: props.userZoomIndex,
+        },
+      });
 
   if (!data?.length) return null;
 
@@ -47,7 +47,10 @@ const TagList: React.FC<
 
   const overflowTextClass = "vui-card-data__tag-list-overflow-text";
 
-  const visibleList = !!props.max ? sortedTags.slice(0, props.max) : sortedTags;
+  const visibleList =
+    !!props.max && !isModalContext
+      ? sortedTags.slice(0, props.max)
+      : sortedTags;
   const numCutTags = sortedTags.length - visibleList.length;
   const overflowText = numCutTags ? (
     <span className={overflowTextClass}>and {numCutTags} more</span>
