@@ -203,6 +203,8 @@ interface SceneDataFragment {
     mime_type: SceneStreamEndpoint["mime_type"];
     label: SceneStreamEndpoint["label"];
   }>;
+
+  custom_fields: Performer["custom_fields"];
 }
 
 interface SceneMarkerDataFragment {

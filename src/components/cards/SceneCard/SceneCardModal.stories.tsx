@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { mergeConfig } from "@/helpers";
-import { expect, fn, within } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { SceneCardModalContent } from ".";
 
 // Mock data
@@ -12,6 +12,7 @@ import minimalData from "../../../../mocks/scenes/minimalData.json";
 import multiFile from "../../../../mocks/scenes/multiFile.json";
 import portrait from "../../../../mocks/scenes/portrait.json";
 import square from "../../../../mocks/scenes/square.json";
+import withTrailer from "../../../../mocks/scenes/withTrailer.json";
 
 const meta = {
   title: "Components/Cards/Scene card modal content",
@@ -621,5 +622,45 @@ export const NavigationNextDisabled: Story = {
       name: "Next",
     });
     expect(nextButton).toBeDisabled();
+  },
+};
+
+export const WithTrailer: Story = {
+  args: {
+    scene: withTrailer as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const playTrailerButton = canvas.getByRole("button", {
+      name: "Play trailer",
+    });
+    expect(playTrailerButton).toBeInTheDocument();
+
+    // Get the trailer
+    const video = canvas.getByTestId<HTMLVideoElement>("video-trailer");
+    expect(video.paused).toBeTruthy();
+
+    // Trigger a click event on the play trailer button
+    await userEvent.click(playTrailerButton);
+    expect(video.paused).toBeFalsy();
+
+    // Trigger a click event on the video
+    await userEvent.click(video);
+    expect(video.paused).toBeTruthy();
+  },
+};
+
+export const WithoutTrailer: Story = {
+  args: {
+    scene: minimalData as SceneDataFragment,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const playTrailerButton = canvas.queryByRole("button", {
+      name: "Play trailer",
+    });
+    expect(playTrailerButton).not.toBeInTheDocument();
   },
 };
