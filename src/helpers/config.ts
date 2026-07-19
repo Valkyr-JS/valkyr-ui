@@ -108,6 +108,7 @@ export const mergeConfig = (
     general__closeModalOnOuterClick: DEFAULT.GENERAL.CLOSE_MODAL_ON_OUTER_CLICK,
     general__fullHeightModals: DEFAULT.GENERAL.FULL_HEIGHT_MODALS,
     general__localeDateFormat: DEFAULT.GENERAL.LOCALE_DATE_FORMAT,
+    general__longTextMarkdown: DEFAULT.GENERAL.LONG_TEXT_MARKDOWN,
   };
 
   const mergedConfig = Object.assign(defaultConfig, userConfig);
