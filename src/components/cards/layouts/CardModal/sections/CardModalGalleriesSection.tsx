@@ -132,7 +132,11 @@ const CardModalGalleriesSection: React.FC<CardModalGalleriesSectionProps> = (
                     )}
                   </FileData>
                 </KeyData>
-                <Details context="modal" details={gl.details} />
+                <Details
+                  context="modal"
+                  details={gl.details}
+                  markdownEnabled={props.pluginConfig.general__longTextMarkdown}
+                />
                 <CastCrew>
                   <PerformerList
                     context="modal"

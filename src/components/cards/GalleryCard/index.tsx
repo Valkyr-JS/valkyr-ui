@@ -227,6 +227,7 @@ const GalleryCardBody: React.FC<GalleryCardBodyProps> = (props) => {
         context="card"
         currentZoomIndex={props.zoomIndex}
         details={props.gallery.details}
+        markdownEnabled={props.pluginConfig.general__longTextMarkdown}
         maxLines={props.pluginConfig.cards__galleryCard__detailsMaxLines}
         userZoomIndex={props.pluginConfig.cards__galleryCard__detailsZoomIndex}
       />
@@ -439,7 +440,11 @@ export const GalleryCardModalContent: React.FC<GalleryCardModalContentProps> = (
               )}
             </FileData>
           </KeyData>
-          <Details context="modal" details={props.gallery.details} />
+          <Details
+            context="modal"
+            details={props.gallery.details}
+            markdownEnabled={props.pluginConfig.general__longTextMarkdown}
+          />
           <CastCrew>
             <PerformerList
               context="modal"
