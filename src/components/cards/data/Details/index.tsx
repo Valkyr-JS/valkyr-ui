@@ -1,6 +1,5 @@
 import React from "react";
-import markdownit from "markdown-it";
-import parse from "html-react-parser";
+import Markdown from 'markdown-to-jsx'
 import { getRenderData } from "@/helpers";
 import "./Details.scss";
 
@@ -33,7 +32,7 @@ const Details: React.FC<
   if (!data) return null;
 
   const formattedData = props.markdownEnabled
-    ? parse(markdownit().render(data))
+    ? <Markdown>{data}</Markdown>
     : data;
 
   const componentClass = "vui-card-data__details";
