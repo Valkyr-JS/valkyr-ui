@@ -50,6 +50,7 @@
     "@storybook/addon-themes": "^10.3.6",
     "@storybook/addon-vitest": "^10.3.6",
     "@storybook/react-vite": "^10.3.6",
+    "@types/markdown-it": "^14.1.2",
     "@types/mousetrap": "^1.6.15",
     "@types/react": "^18.3.3",
     "@types/react-bootstrap": "^0.32.36",
@@ -80,6 +81,7 @@
     "@fortawesome/pro-solid-svg-icons": "^7.1.0",
     "classnames": "^2.5.1",
     "dotenv": "^17.4.2",
+    "html-react-parser": "^6.1.5",
     "markdown-it": "^14.3.0",
     "react-router-bootstrap": "^0.25.0"
   }

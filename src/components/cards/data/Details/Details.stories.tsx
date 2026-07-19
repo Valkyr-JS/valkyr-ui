@@ -14,6 +14,7 @@ const meta = {
   },
   args: {
     details: detailsText,
+    markdownEnabled: false,
   },
   argTypes: {
     ...dataComponentArgTypes,
@@ -47,6 +48,18 @@ export const MaxLines0: Story = {
     context: "card",
     currentZoomIndex: 3,
     maxLines: 0,
+    userZoomIndex: 2,
+  },
+};
+
+export const WithMarkdown: Story = {
+  args: {
+    context: "card",
+    currentZoomIndex: 3,
+    details:
+      "This text has [Markdown formatting](https://www.markdownguide.org/) which can be _really_ useful.",
+    maxLines: 3,
+    markdownEnabled: true,
     userZoomIndex: 2,
   },
 };
