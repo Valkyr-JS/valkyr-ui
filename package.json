@@ -74,7 +74,7 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vitest": "^4.0.16",
-    "write-yaml-file": "^5.0.0"
+    "write-yaml-file": "^6.0.0"
   },
   "dependencies": {
     "@fortawesome/pro-solid-svg-icons": "^7.1.0",
