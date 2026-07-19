@@ -211,7 +211,11 @@ const CardModalScenesSection: React.FC<CardModalScenesSectionProps> = (
                     <Interactive context="modal" interactive={sc.interactive} />
                   </FileData>
                 </KeyData>
-                <Details context="modal" details={sc.details} />
+                <Details
+                  context="modal"
+                  details={sc.details}
+                  markdownEnabled={props.pluginConfig.general__longTextMarkdown}
+                />
                 <CastCrew>
                   <PerformerList
                     context="modal"

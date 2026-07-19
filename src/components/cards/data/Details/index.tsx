@@ -1,10 +1,13 @@
 import React from "react";
+import Markdown from "markdown-to-jsx";
 import { getRenderData } from "@/helpers";
 import "./Details.scss";
 
 interface DetailsProps {
   /** The details data. */
   details?: Maybe<string>;
+  /** Whether Markdown formatting is enabled. */
+  markdownEnabled: boolean;
 }
 
 interface DetailsCardProps extends DetailsProps {
@@ -32,7 +35,11 @@ const Details: React.FC<
 
   // Modal details can be rendered in full
   if (props.context === "modal")
-    return <div className={componentClass}>{data}</div>;
+    return (
+      <div className={componentClass}>
+        {props.markdownEnabled ? <Markdown>{data}</Markdown> : data}
+      </div>
+    );
 
   // Card details should be limited to the user's defined maxiumum
   const maxLengthStyles: React.CSSProperties = {
@@ -41,7 +48,16 @@ const Details: React.FC<
 
   return (
     <div className={componentClass}>
-      <div style={maxLengthStyles}>{data}</div>
+      {props.markdownEnabled ? (
+        <Markdown
+          options={{ forceWrapper: true, wrapper: "div" }}
+          style={maxLengthStyles}
+        >
+          {data}
+        </Markdown>
+      ) : (
+        <div style={maxLengthStyles}>{data}</div>
+      )}
     </div>
   );
 };

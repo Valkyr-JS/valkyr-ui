@@ -99,6 +99,29 @@ const GeneralTab: React.FC<SettingsTabProps> = (props) => {
     );
   };
 
+  const LongTextMarkdown = () => {
+    const [checked, setChecked] = useState(
+      props.pluginConfig.general__longTextMarkdown ??
+        DEFAULT.GENERAL.LONG_TEXT_MARKDOWN,
+    );
+    return (
+      <BooleanSetting
+        checked={checked}
+        heading="Markdown for text blocks"
+        subHeading="Enables Markdown formatting for long text blocks, such as scene details."
+        id="valkyr-ui-general__longTextMarkdown"
+        onChange={() => {
+          const newState = !checked;
+          setChecked(newState);
+          props.configUpdateHandler({
+            ...props.pluginConfig,
+            general__longTextMarkdown: newState,
+          });
+        }}
+      />
+    );
+  };
+
   return (
     <Form.Group className={componentClassname}>
       <SettingSection id="general" heading="General settings">
@@ -106,6 +129,7 @@ const GeneralTab: React.FC<SettingsTabProps> = (props) => {
         <CloseModalOnOuterClick />
         <FullHeightModals />
         <LocaleDateFormatting />
+        <LongTextMarkdown />
       </SettingSection>
     </Form.Group>
   );

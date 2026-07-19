@@ -324,6 +324,7 @@ const SceneCardBody: React.FC<SceneCardBodyProps> = (props) => {
         context="card"
         currentZoomIndex={props.zoomIndex}
         details={props.scene.details}
+        markdownEnabled={props.pluginConfig.general__longTextMarkdown}
         maxLines={props.pluginConfig.cards__sceneCard__detailsMaxLines}
         userZoomIndex={props.pluginConfig.cards__sceneCard__detailsZoomIndex}
       />
@@ -595,7 +596,11 @@ export const SceneCardModalContent: React.FC<SceneCardModalContentProps> = (
               />
             </FileData>
           </KeyData>
-          <Details context="modal" details={props.scene.details} />
+          <Details
+            context="modal"
+            details={props.scene.details}
+            markdownEnabled={props.pluginConfig.general__longTextMarkdown}
+          />
           <CastCrew>
             <PerformerList
               context="modal"

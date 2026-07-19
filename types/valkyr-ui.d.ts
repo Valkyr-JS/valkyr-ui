@@ -191,6 +191,8 @@ interface ValkyrUiConfigMap {
   general__fullHeightModals?: boolean;
   /** Format the date according to the user's Stash language setting. */
   general__localeDateFormat?: boolean;
+  /** Enable markdown for long text blocks, such as scene details. */
+  general__longTextMarkdown?: boolean;
 }
 
 /** The full plugin config, with defaults applied to any values not defined in

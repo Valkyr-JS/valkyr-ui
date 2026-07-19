@@ -80,6 +80,7 @@
     "@fortawesome/pro-solid-svg-icons": "^7.1.0",
     "classnames": "^2.5.1",
     "dotenv": "^17.4.2",
+    "markdown-to-jsx": "^9.8.2",
     "react-router-bootstrap": "^0.25.0"
   }
 }

@@ -62,6 +62,7 @@ export const DEFAULT = {
     CLOSE_MODAL_ON_OUTER_CLICK: true,
     FULL_HEIGHT_MODALS: false,
     LOCALE_DATE_FORMAT: false,
+    LONG_TEXT_MARKDOWN: false,
   },
   UI: {
     TOOLTIP_POSITION: "bottom",
