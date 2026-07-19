@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
-    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-replace": "^6.0.3",
     "@rollup/plugin-terser": "^1.0.0",
@@ -60,26 +60,26 @@
     "@vitest/browser-playwright": "^4.0.16",
     "@vitest/coverage-v8": "^4.0.16",
     "playwright": "^1.57.0",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.20",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intl": "^6.8.9",
-    "rollup": "^4.54.0",
+    "rollup": "^4.62.2",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-delete": "^3.0.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "sass": "^1.97.1",
+    "sass": "^1.101.0",
     "storybook": "^10.3.6",
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vitest": "^4.0.16",
-    "write-yaml-file": "^5.0.0"
+    "write-yaml-file": "^6.0.0"
   },
   "dependencies": {
     "@fortawesome/pro-solid-svg-icons": "^7.1.0",
     "classnames": "^2.5.1",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.4.2",
     "react-router-bootstrap": "^0.25.0"
   }
 }
