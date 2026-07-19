@@ -81,7 +81,7 @@ export const AboveZoomIndex: Story = {
     const canvas = within(canvasElement);
 
     const tags = canvas.queryAllByRole("listitem");
-    await expect(tags.length).toEqual(tagCount);
+    await expect(tags.length).toEqual(DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS);
   },
 };
 
@@ -109,7 +109,7 @@ export const EqualsZoomIndex: Story = {
     const canvas = within(canvasElement);
 
     const tags = canvas.queryAllByRole("listitem");
-    await expect(tags.length).toEqual(tagCount);
+    await expect(tags.length).toEqual(DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS);
   },
 };
 
@@ -137,7 +137,7 @@ export const WithoutZoomData: Story = {
     const canvas = within(canvasElement);
 
     const tags = canvas.queryAllByRole("listitem");
-    await expect(tags.length).toEqual(tagCount);
+    await expect(tags.length).toEqual(DEFAULT.CARDS.SHARED.TAG_LIST_MAX_ITEMS);
   },
 };
 
